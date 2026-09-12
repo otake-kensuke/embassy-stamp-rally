@@ -467,6 +467,12 @@ textarea {
   background: #fff;
 }
 
+.sheet-actions button.primary-action {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
 @media (min-width: 720px) {
   .app-shell {
     min-height: auto;
