@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>大使館スタンプラリー Companion</title>
+    <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --ink: #1f2528;
+  --muted: #657075;
+  --line: #d9ddd8;
+  --accent: #176b63;
+  --accent-dark: #0e514b;
+  --warm: #b85c38;
+  --focus: #f5c542;
+  --shadow: 0 16px 40px rgba(31, 37, 40, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  width: min(100%, 680px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--bg);
+  padding: max(12px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+}
+
+.icon-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 22px;
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.hero-panel,
+.next-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  padding: 22px;
+  margin: 18px 0;
+}
+
+.hero-panel h2 {
+  margin-bottom: 12px;
+  font-size: 44px;
+}
+
+.large-percent {
+  margin: 10px 0 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.progress-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e3e5df;
+}
+
+.progress-track div {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 160ms ease;
+}
+
+.action-list {
+  display: grid;
+  gap: 12px;
+}
+
+.nav-button,
+.settings-actions button,
+.file-button {
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  padding: 14px 16px;
+}
+
+.nav-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-button span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nav-button strong {
+  font-size: 18px;
+}
+
+.nav-button.primary,
+.primary-action {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.day-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin: 12px 0;
+}
+
+.day-summary h2 {
+  margin-bottom: 0;
+  font-size: 22px;
+}
+
+.day-summary strong {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.next-panel {
+  padding: 20px;
+}
+
+.next-panel.complete {
+  background: #eef6f1;
+}
+
+.next-label {
+  margin-bottom: 8px;
+  color: var(--warm);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.next-panel h3 {
+  margin-bottom: 8px;
+  font-size: clamp(30px, 9vw, 46px);
+  line-height: 1.08;
+}
+
+.next-panel p {
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.map-button,
+.complete-button,
+.fab-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  border-radius: 8px;
+  border: 0;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.map-button {
+  background: var(--ink);
+  color: #fff;
+}
+
+.map-button[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.up-next {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.up-next div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.up-next span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.complete-button,
+.fab-button,
+.settings-actions button {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.complete-button:disabled {
+  background: #a7b3ae;
+}
+
+.route-details {
+  margin: 16px 0;
+}
+
+.route-details summary {
+  min-height: 48px;
+  padding: 12px 2px;
+  color: var(--accent-dark);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.route-list {
+  display: grid;
+  gap: 10px;
+}
+
+.route-row {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.route-row.current {
+  border-color: var(--focus);
+}
+
+.route-order {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: #edf0eb;
+  font-weight: 800;
+}
+
+.route-row p {
+  margin: 6px 0 0 38px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.row-actions {
+  display: grid;
+  grid-template-columns: 1fr 118px;
+  gap: 8px;
+}
+
+.row-actions button,
+.row-actions select {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 8px;
+}
+
+.fab-button {
+  position: sticky;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  margin-top: 18px;
+  box-shadow: var(--shadow);
+}
+
+.timeline {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.timeline-item time {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.timeline-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.empty-state,
+.status-message {
+  color: var(--muted);
+}
+
+.memo-field {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+  font-weight: 800;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 12px;
+  resize: vertical;
+}
+
+.settings-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.file-button {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-weight: 800;
+}
+
+.file-button input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+}
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 37, 40, 0.34);
+}
+
+.bottom-sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: min(100%, 680px);
+  margin: 0 auto;
+  padding: 10px 16px max(18px, env(safe-area-inset-bottom));
+  border-radius: 8px 8px 0 0;
+  background: var(--surface);
+  box-shadow: 0 -16px 40px rgba(31, 37, 40, 0.2);
+}
+
+.sheet-handle {
+  width: 44px;
+  height: 5px;
+  margin: 0 auto 14px;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.category-grid button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.category-grid button.selected {
+  border-color: var(--accent);
+  background: #e5f0ec;
+  font-weight: 800;
+}
+
+.sheet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sheet-actions button {
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+@media (min-width: 720px) {
+  .app-shell {
+    min-height: auto;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .route-row {
+    grid-template-columns: 1fr 300px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .row-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button" id="backButton" type="button" aria-label="戻る">←</button>
+        <div>
+          <p class="eyebrow">Prototype v0.1</p>
+          <h1 id="screenTitle">大使館ラリー</h1>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
+          <div class="hero-panel">
+            <p class="eyebrow">全体進捗</p>
+            <h2 id="homeHeading"><span id="homeProgress">0 / 5</span></h2>
+            <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
+            <p class="large-percent" id="homePercent">0%</p>
+          </div>
+
+          <div class="action-list">
+            <button class="nav-button primary" data-screen="day" type="button">
+              <span>NEXT DAY</span>
+              <strong>Day 1を開く</strong>
+            </button>
+            <button class="nav-button" data-screen="review" type="button">
+              <span>時系列</span>
+              <strong>振り返り</strong>
+            </button>
+            <button class="nav-button" data-screen="settings" type="button">
+              <span>保存と復元</span>
+              <strong>設定</strong>
+            </button>
+          </div>
+        </section>
+
+        <section class="screen" id="dayScreen" aria-labelledby="dayHeading">
+          <div class="day-summary">
+            <div>
+              <p class="eyebrow">Day 1</p>
+              <h2 id="dayHeading">今日の巡回</h2>
+            </div>
+            <strong id="dayProgress">0 / 5</strong>
+          </div>
+
+          <article class="next-panel" id="nextPanel">
+            <p class="next-label">NEXT</p>
+            <h3 id="nextEmbassyName">未取得はありません</h3>
+            <p id="nextAddress">おつかれさまでした。</p>
+            <a class="map-button" id="mapButton" target="_blank" rel="noopener">地図を開く</a>
+          </article>
+
+          <div class="up-next">
+            <div><span>次</span><strong id="nextOne">-</strong></div>
+            <div><span>その次</span><strong id="nextTwo">-</strong></div>
+          </div>
+
+          <button class="complete-button" id="acquireButton" type="button">✓ 取得済み</button>
+
+          <details class="route-details">
+            <summary>今日のルートを見る</summary>
+            <div id="routeList" class="route-list"></div>
+          </details>
+
+          <button class="fab-button" id="openLogSheet" type="button">＋記録</button>
+        </section>
+
+        <section class="screen" id="reviewScreen" aria-labelledby="reviewHeading">
+          <h2 id="reviewHeading">Day 1 振り返り</h2>
+          <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section class="screen" id="settingsScreen" aria-labelledby="settingsHeading">
+          <h2 id="settingsHeading">設定</h2>
+          <label class="memo-field">
+            <span>メモ</span>
+            <textarea id="memoInput" rows="4" placeholder="次回の持ち物や気づき"></textarea>
+          </label>
+          <div class="settings-actions">
+            <button id="exportButton" type="button">バックアップを書き出す</button>
+            <label class="file-button">
+              バックアップから復元
+              <input id="importInput" type="file" accept="application/json">
+            </label>
+          </div>
+          <p class="status-message" id="settingsMessage" role="status"></p>
+        </section>
+      </main>
+    </div>
+
+    <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+    <section class="bottom-sheet" id="logSheet" aria-labelledby="logSheetTitle" hidden>
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h2 id="logSheetTitle">＋記録</h2>
+      <div class="category-grid" id="categoryGrid"></div>
+      <textarea id="logText" rows="4" placeholder="街歩き中のメモ"></textarea>
+      <div class="sheet-actions">
+        <button id="closeLogSheet" type="button">閉じる</button>
+        <button id="saveLog" class="primary-action" type="button">保存</button>
+      </div>
+    </section>
+
+    <script>
+const EMBASSY_MASTER = [
+  {
+    id: "peru",
+    country: "ペルー",
+    embassyName: "ペルー大使館",
+    day: 1,
+    order: 1,
+    address: "東京都渋谷区広尾",
+    googleMapsQuery: "ペルー大使館 東京都"
+  },
+  {
+    id: "czech",
+    country: "チェコ",
+    embassyName: "チェコ大使館",
+    day: 1,
+    order: 2,
+    address: "東京都渋谷区広尾",
+    googleMapsQuery: "チェコ大使館 東京都"
+  },
+  {
+    id: "croatia",
+    country: "クロアチア",
+    embassyName: "クロアチア大使館",
+    day: 1,
+    order: 3,
+    address: "東京都渋谷区広尾",
+    googleMapsQuery: "クロアチア大使館 東京都"
+  },
+  {
+    id: "oman",
+    country: "オマーン",
+    embassyName: "オマーン大使館",
+    day: 1,
+    order: 4,
+    address: "東京都渋谷区広尾",
+    googleMapsQuery: "オマーン大使館 東京都"
+  },
+  {
+    id: "switzerland",
+    country: "スイス",
+    embassyName: "スイス大使館",
+    day: 1,
+    order: 5,
+    address: "東京都港区南麻布",
+    googleMapsQuery: "スイス大使館 東京都"
+  }
+];
+
+    </script>
+    <script>
+const STORAGE_KEY = "embassyStampRally.appState";
+const DATA_VERSION = "1.0";
+
+function createInitialState() {
+  const embassies = {};
+  EMBASSY_MASTER.forEach((embassy) => {
+    embassies[embassy.id] = {
+      status: "unvisited",
+      acquiredAt: null,
+      updatedAt: null
+    };
+  });
+
+  return {
+    dataVersion: DATA_VERSION,
+    embassies,
+    manualNextId: null,
+    walkLogs: [],
+    memo: "",
+    settings: {
+      activeDay: 1
+    }
+  };
+}
+
+function normalizeState(rawState) {
+  const base = createInitialState();
+  if (!rawState || rawState.dataVersion !== DATA_VERSION) return base;
+
+  const normalized = {
+    ...base,
+    ...rawState,
+    embassies: { ...base.embassies, ...(rawState.embassies || {}) },
+    settings: { ...base.settings, ...(rawState.settings || {}) },
+    walkLogs: Array.isArray(rawState.walkLogs) ? rawState.walkLogs : []
+  };
+
+  EMBASSY_MASTER.forEach((embassy) => {
+    normalized.embassies[embassy.id] = {
+      ...base.embassies[embassy.id],
+      ...(rawState.embassies && rawState.embassies[embassy.id] ? rawState.embassies[embassy.id] : {})
+    };
+  });
+
+  return normalized;
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return createInitialState();
+    return normalizeState(JSON.parse(saved));
+  } catch (error) {
+    console.warn("Saved state could not be loaded.", error);
+    return createInitialState();
+  }
+}
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizeState(state)));
+}
+
+function validateImportState(candidate) {
+  if (!candidate || typeof candidate !== "object") {
+    return "JSONの形式が正しくありません。";
+  }
+  if (candidate.dataVersion !== DATA_VERSION) {
+    return `dataVersionが${DATA_VERSION}ではありません。`;
+  }
+  if (!candidate.embassies || typeof candidate.embassies !== "object") {
+    return "大使館データが見つかりません。";
+  }
+  if (candidate.walkLogs && !Array.isArray(candidate.walkLogs)) {
+    return "記録データの形式が正しくありません。";
+  }
+  return "";
+}
+
+    </script>
+    <script>
+function createBackupFileName(now = new Date()) {
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  return `embassy-rally-backup-${yyyy}-${mm}-${dd}.json`;
+}
+
+function downloadBackup(state) {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = createBackupFileName();
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
+function readBackupFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        resolve(JSON.parse(String(reader.result)));
+      } catch (error) {
+        reject(new Error("JSONファイルとして読み込めません。"));
+      }
+    };
+    reader.onerror = () => reject(new Error("ファイルを読み込めません。"));
+    reader.readAsText(file);
+  });
+}
+
+    </script>
+    <script>
+const CATEGORIES = ["食事", "寄り道", "発見", "休憩", "メモ"];
+
+let state = loadState();
+let activeScreen = "home";
+let selectedCategory = "メモ";
+
+const $ = (selector) => document.querySelector(selector);
+
+function clearChildren(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
+function dayEmbassies() {
+  return EMBASSY_MASTER.filter((embassy) => embassy.day === state.settings.activeDay)
+    .sort((a, b) => a.order - b.order);
+}
+
+function embassyStatus(id) {
+  return state.embassies[id] || { status: "unvisited", acquiredAt: null };
+}
+
+function isNextCandidate(id) {
+  const status = embassyStatus(id).status;
+  return status === "unvisited" || status === "check";
+}
+
+function acquiredCount() {
+  return dayEmbassies().filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+}
+
+function getNextEmbassy() {
+  const embassies = dayEmbassies();
+  if (state.manualNextId) {
+    const manual = embassies.find((embassy) => embassy.id === state.manualNextId);
+    if (manual && isNextCandidate(manual.id)) return manual;
+  }
+  return embassies.find((embassy) => isNextCandidate(embassy.id)) || null;
+}
+
+function followingEmbassies(current) {
+  const remaining = dayEmbassies().filter((embassy) => {
+    return embassy.id !== (current && current.id) && isNextCandidate(embassy.id);
+  });
+  if (!current) return remaining.slice(0, 2);
+
+  const later = remaining.filter((embassy) => embassy.order > current.order);
+  const earlier = remaining.filter((embassy) => embassy.order < current.order);
+  return [...later, ...earlier].slice(0, 2);
+}
+
+function formatTime(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("ja-JP", { hour: "2-digit", minute: "2-digit" }).format(new Date(value));
+}
+
+function persist() {
+  saveState(state);
+  render();
+}
+
+function setScreen(screen) {
+  activeScreen = screen;
+  document.querySelectorAll(".screen").forEach((section) => {
+    section.classList.toggle("active", section.id === `${screen}Screen`);
+  });
+  $("#backButton").style.visibility = screen === "home" ? "hidden" : "visible";
+  $("#screenTitle").textContent = {
+    home: "大使館ラリー",
+    day: "Day 1",
+    review: "振り返り",
+    settings: "設定"
+  }[screen];
+  render();
+}
+
+function renderProgress() {
+  const total = dayEmbassies().length;
+  const done = acquiredCount();
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  $("#homeProgress").textContent = `${done} / ${total}`;
+  $("#homePercent").textContent = `${percent}%`;
+  $("#homeProgressBar").style.width = `${percent}%`;
+  $("#dayProgress").textContent = `${done} / ${total}`;
+}
+
+function renderDay() {
+  const current = getNextEmbassy();
+  const following = followingEmbassies(current);
+  const panel = $("#nextPanel");
+
+  panel.classList.toggle("complete", !current);
+  $("#nextEmbassyName").textContent = current ? current.embassyName : "Day 1 完了";
+  $("#nextAddress").textContent = current ? current.address : "すべて取得済みです。";
+  $("#mapButton").href = current ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}` : "#";
+  $("#mapButton").setAttribute("aria-disabled", current ? "false" : "true");
+  $("#nextOne").textContent = following[0] ? following[0].embassyName : "-";
+  $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
+  $("#acquireButton").disabled = !current;
+  $("#acquireButton").textContent = current ? "✓ 取得済み" : "完了";
+
+  const routeList = $("#routeList");
+  clearChildren(routeList);
+
+  dayEmbassies().forEach((embassy) => {
+    const status = embassyStatus(embassy.id);
+    const isCurrent = current && current.id === embassy.id;
+    const row = document.createElement("div");
+    row.className = `route-row${isCurrent ? " current" : ""}`;
+
+    const info = document.createElement("div");
+    const order = document.createElement("span");
+    order.className = "route-order";
+    order.textContent = embassy.order;
+    const name = document.createElement("strong");
+    name.textContent = embassy.embassyName;
+    const statusText = document.createElement("p");
+    statusText.textContent = status.status === "acquired" ? `取得 ${formatTime(status.acquiredAt)}` : "未取得";
+    info.append(order, name, statusText);
+
+    const actions = document.createElement("div");
+    actions.className = "row-actions";
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.dataset.next = embassy.id;
+    nextButton.disabled = !isNextCandidate(embassy.id);
+    nextButton.textContent = "ここをNEXTにする";
+
+    const select = document.createElement("select");
+    select.dataset.status = embassy.id;
+    select.setAttribute("aria-label", `${embassy.embassyName}の状態`);
+    [
+      ["unvisited", "未取得"],
+      ["acquired", "取得済み"],
+      ["check", "要確認"],
+      ["skipped", "スキップ"]
+    ].forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      option.selected = status.status === value;
+      select.append(option);
+    });
+    actions.append(nextButton, select);
+    row.append(info, actions);
+    routeList.append(row);
+  });
+}
+
+function renderTimeline() {
+  const acquiredEvents = dayEmbassies()
+    .map((embassy) => ({ embassy, status: embassyStatus(embassy.id) }))
+    .filter((entry) => entry.status.status === "acquired" && entry.status.acquiredAt)
+    .map((entry) => ({
+      timestamp: entry.status.acquiredAt,
+      title: entry.embassy.embassyName,
+      body: "✓ 取得"
+    }));
+
+  const logEvents = state.walkLogs.map((log) => ({
+    timestamp: log.timestamp,
+    title: log.category || "メモ",
+    body: log.text || ""
+  }));
+
+  const events = [...acquiredEvents, ...logEvents]
+    .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+  const timeline = $("#timeline");
+  clearChildren(timeline);
+
+  if (!events.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "まだ記録がありません。";
+    timeline.append(empty);
+    return;
+  }
+
+  events.forEach((event) => {
+    const item = document.createElement("article");
+    item.className = "timeline-item";
+    const time = document.createElement("time");
+    time.textContent = formatTime(event.timestamp);
+    const body = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = event.title;
+    const text = document.createElement("p");
+    text.textContent = event.body;
+    body.append(title, text);
+    item.append(time, body);
+    timeline.append(item);
+  });
+}
+
+function renderCategories() {
+  const categoryGrid = $("#categoryGrid");
+  clearChildren(categoryGrid);
+  CATEGORIES.forEach((category) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.classList.toggle("selected", category === selectedCategory);
+    button.dataset.category = category;
+    button.textContent = category;
+    categoryGrid.append(button);
+  });
+}
+
+function render() {
+  renderProgress();
+  renderDay();
+  renderTimeline();
+  renderCategories();
+  $("#memoInput").value = state.memo || "";
+}
+
+function setEmbassyStatus(id, nextStatus) {
+  const current = embassyStatus(id);
+  if (current.status === "acquired" && nextStatus === "unvisited") {
+    const ok = confirm("取得済みを未取得に戻しますか？");
+    if (!ok) {
+      render();
+      return;
+    }
+  }
+
+  state.embassies[id] = {
+    ...current,
+    status: nextStatus,
+    acquiredAt: nextStatus === "acquired" ? (current.acquiredAt || new Date().toISOString()) : null,
+    updatedAt: new Date().toISOString()
+  };
+
+  if (state.manualNextId === id && !isNextCandidate(id)) {
+    state.manualNextId = null;
+  }
+  persist();
+}
+
+function openSheet() {
+  $("#sheetBackdrop").hidden = false;
+  $("#logSheet").hidden = false;
+  $("#logText").focus();
+}
+
+function closeSheet() {
+  $("#sheetBackdrop").hidden = true;
+  $("#logSheet").hidden = true;
+  $("#logText").value = "";
+}
+
+document.addEventListener("click", (event) => {
+  const nav = event.target.closest("[data-screen]");
+  if (nav) setScreen(nav.dataset.screen);
+
+  const nextButton = event.target.closest("[data-next]");
+  if (nextButton) {
+    state.manualNextId = nextButton.dataset.next;
+    persist();
+  }
+
+  const categoryButton = event.target.closest("[data-category]");
+  if (categoryButton) {
+    selectedCategory = categoryButton.dataset.category;
+    renderCategories();
+  }
+});
+
+document.addEventListener("change", (event) => {
+  const statusInput = event.target.closest("[data-status]");
+  if (statusInput) setEmbassyStatus(statusInput.dataset.status, statusInput.value);
+});
+
+$("#backButton").addEventListener("click", () => setScreen("home"));
+$("#acquireButton").addEventListener("click", () => {
+  const current = getNextEmbassy();
+  if (current) setEmbassyStatus(current.id, "acquired");
+});
+$("#openLogSheet").addEventListener("click", openSheet);
+$("#closeLogSheet").addEventListener("click", closeSheet);
+$("#sheetBackdrop").addEventListener("click", closeSheet);
+$("#saveLog").addEventListener("click", () => {
+  const text = $("#logText").value.trim();
+  if (!text && !selectedCategory) return;
+  state.walkLogs.push({
+    id: `log-${Date.now()}`,
+    category: selectedCategory,
+    text,
+    timestamp: new Date().toISOString()
+  });
+  persist();
+  closeSheet();
+});
+$("#memoInput").addEventListener("input", (event) => {
+  state.memo = event.target.value;
+  saveState(state);
+});
+$("#exportButton").addEventListener("click", () => downloadBackup(state));
+$("#importInput").addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const candidate = await readBackupFile(file);
+    const error = validateImportState(candidate);
+    if (error) {
+      $("#settingsMessage").textContent = error;
+      return;
+    }
+    state = normalizeState(candidate);
+    saveState(state);
+    $("#settingsMessage").textContent = "復元しました。";
+    persist();
+  } catch (error) {
+    $("#settingsMessage").textContent = error.message;
+  } finally {
+    event.target.value = "";
+  }
+});
+
+setScreen("home");
+
+    </script>
+  </body>
+</html>
+

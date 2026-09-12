@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>大使館スタンプラリー Companion</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button" id="backButton" type="button" aria-label="戻る">←</button>
+        <div>
+          <p class="eyebrow">Prototype v0.1</p>
+          <h1 id="screenTitle">大使館ラリー</h1>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
+          <div class="hero-panel">
+            <p class="eyebrow">全体進捗</p>
+            <h2 id="homeHeading"><span id="homeProgress">0 / 5</span></h2>
+            <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
+            <p class="large-percent" id="homePercent">0%</p>
+          </div>
+
+          <div class="action-list">
+            <button class="nav-button primary" data-screen="day" type="button">
+              <span>NEXT DAY</span>
+              <strong>Day 1を開く</strong>
+            </button>
+            <button class="nav-button" data-screen="review" type="button">
+              <span>時系列</span>
+              <strong>振り返り</strong>
+            </button>
+            <button class="nav-button" data-screen="settings" type="button">
+              <span>保存と復元</span>
+              <strong>設定</strong>
+            </button>
+          </div>
+        </section>
+
+        <section class="screen" id="dayScreen" aria-labelledby="dayHeading">
+          <div class="day-summary">
+            <div>
+              <p class="eyebrow">Day 1</p>
+              <h2 id="dayHeading">今日の巡回</h2>
+            </div>
+            <strong id="dayProgress">0 / 5</strong>
+          </div>
+
+          <article class="next-panel" id="nextPanel">
+            <p class="next-label">NEXT</p>
+            <h3 id="nextEmbassyName">未取得はありません</h3>
+            <p id="nextAddress">おつかれさまでした。</p>
+            <a class="map-button" id="mapButton" target="_blank" rel="noopener">地図を開く</a>
+          </article>
+
+          <div class="up-next">
+            <div><span>次</span><strong id="nextOne">-</strong></div>
+            <div><span>その次</span><strong id="nextTwo">-</strong></div>
+          </div>
+
+          <button class="complete-button" id="acquireButton" type="button">✓ 取得済み</button>
+
+          <details class="route-details">
+            <summary>今日のルートを見る</summary>
+            <div id="routeList" class="route-list"></div>
+          </details>
+
+          <button class="fab-button" id="openLogSheet" type="button">＋記録</button>
+        </section>
+
+        <section class="screen" id="reviewScreen" aria-labelledby="reviewHeading">
+          <h2 id="reviewHeading">Day 1 振り返り</h2>
+          <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section class="screen" id="settingsScreen" aria-labelledby="settingsHeading">
+          <h2 id="settingsHeading">設定</h2>
+          <label class="memo-field">
+            <span>メモ</span>
+            <textarea id="memoInput" rows="4" placeholder="次回の持ち物や気づき"></textarea>
+          </label>
+          <div class="settings-actions">
+            <button id="exportButton" type="button">バックアップを書き出す</button>
+            <label class="file-button">
+              バックアップから復元
+              <input id="importInput" type="file" accept="application/json">
+            </label>
+          </div>
+          <p class="status-message" id="settingsMessage" role="status"></p>
+        </section>
+      </main>
+    </div>
+
+    <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+    <section class="bottom-sheet" id="logSheet" aria-labelledby="logSheetTitle" hidden>
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h2 id="logSheetTitle">＋記録</h2>
+      <div class="category-grid" id="categoryGrid"></div>
+      <textarea id="logText" rows="4" placeholder="街歩き中のメモ"></textarea>
+      <div class="sheet-actions">
+        <button id="closeLogSheet" type="button">閉じる</button>
+        <button id="saveLog" class="primary-action" type="button">保存</button>
+      </div>
+    </section>
+
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/backup.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
