@@ -3,6 +3,7 @@ const CATEGORIES = ["食事", "寄り道", "発見", "休憩", "メモ"];
 let state = loadState();
 let activeScreen = "home";
 let selectedCategory = "メモ";
+let toastTimer = null;
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -250,6 +251,17 @@ function closeSheet() {
   $("#logText").value = "";
 }
 
+function showToast(message) {
+  const toast = $("#toastMessage");
+  toast.textContent = message;
+  toast.hidden = false;
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => {
+    toast.hidden = true;
+    toast.textContent = "";
+  }, 2000);
+}
+
 document.addEventListener("click", (event) => {
   const nav = event.target.closest("[data-screen]");
   if (nav) setScreen(nav.dataset.screen);
@@ -291,6 +303,7 @@ $("#saveLog").addEventListener("click", () => {
   });
   persist();
   closeSheet();
+  showToast("記録を保存しました");
 });
 $("#memoInput").addEventListener("input", (event) => {
   state.memo = event.target.value;
