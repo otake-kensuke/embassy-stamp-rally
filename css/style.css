@@ -473,6 +473,27 @@ textarea {
   color: #fff;
 }
 
+.toast-message {
+  position: fixed;
+  right: 16px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 10;
+  width: min(calc(100% - 32px), 420px);
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow);
+  font-weight: 800;
+  text-align: center;
+}
+
+.toast-message[hidden] {
+  display: none;
+}
+
 @media (min-width: 720px) {
   .app-shell {
     min-height: auto;
