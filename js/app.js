@@ -63,6 +63,8 @@ function persist() {
 
 function setScreen(screen) {
   activeScreen = screen;
+  state.settings.lastScreen = screen === "day" ? "day" : "home";
+  saveState(state);
   document.querySelectorAll(".screen").forEach((section) => {
     section.classList.toggle("active", section.id === `${screen}Screen`);
   });
@@ -331,4 +333,4 @@ $("#importInput").addEventListener("change", async (event) => {
   }
 });
 
-setScreen("home");
+setScreen(state.settings.lastScreen === "day" ? "day" : "home");

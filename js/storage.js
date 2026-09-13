@@ -18,7 +18,8 @@ function createInitialState() {
     walkLogs: [],
     memo: "",
     settings: {
-      activeDay: 1
+      activeDay: 1,
+      lastScreen: "home"
     }
   };
 }
