@@ -51,9 +51,9 @@ Prototypeの技術検証は完了しています。
 - v0.2: `＋記録` 保存後Toast
 - v0.3: Day画面復元
 - v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
-- v0.5: 正式Day1〜10 157件データ統合
+- v0.5: 正式Day1〜10 157件データ統合、PC検証PASS、iPhone実機検証PASS
 
-次のGateは、正式Day1〜10 157件のiPhone実機検証です。GitHub Pagesへ反映後、ユーザー側で確認します。
+次のGateは、実際のスタンプラリーで使用開始する前の運用準備です。新機能追加ではなく、公開状態、バックアップ手順、当日運用手順、既知Issueの確認を優先します。
 
 ## 開発時の確認
 
@@ -77,6 +77,6 @@ node -e "const http=require('http'),fs=require('fs'),path=require('path');const 
 ## 現時点の制約
 
 - 現在の実装データは正式Day1〜10 157件
-- Day10のアフガニスタンはPrimary Source上でMap欄が `要確認`
+- Day10のアフガニスタンはPrimary Source上でMap欄が `要確認` のため、アプリでは `地図要確認` として無効表示します
 - 写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は未実装
 - 写真はiPhone写真アプリで管理し、Webアプリ内には保存しません
