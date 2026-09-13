@@ -1,0 +1,88 @@
+{
+  "source": "C:\\Users\\k_ota\\OneDrive\\Documents\\家族共有ファイル\\旅行\\embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx",
+  "total": 157,
+  "expectedTotal": 157,
+  "countsByDay": {
+    "Day1": 13,
+    "Day2": 14,
+    "Day3": 19,
+    "Day4": 18,
+    "Day5": 16,
+    "Day6": 16,
+    "Day7": 22,
+    "Day8": 21,
+    "Day9": 10,
+    "Day10": 8
+  },
+  "expectedCountsByDay": {
+    "Day1": 13,
+    "Day2": 14,
+    "Day3": 19,
+    "Day4": 18,
+    "Day5": 16,
+    "Day6": 16,
+    "Day7": 22,
+    "Day8": 21,
+    "Day9": 10,
+    "Day10": 8
+  },
+  "uniqueIdCount": 157,
+  "day1IdsPreserved": true,
+  "validGoogleMapsCount": 156,
+  "missingGoogleMapsCount": 1,
+  "focusRows": [
+    {
+      "id": "embassy-ハイチ",
+      "day": 7,
+      "order": 13,
+      "country": "ハイチ",
+      "embassyName": "ハイチ大使館",
+      "address": "〒106-0044 東京都港区東麻布1-10-11",
+      "hasGoogleMapsQuery": true
+    },
+    {
+      "id": "embassy-ジブチ",
+      "day": 8,
+      "order": 2,
+      "country": "ジブチ",
+      "embassyName": "ジブチ大使館",
+      "address": "〒141-0001 東京都品川区北品川5-13-1",
+      "hasGoogleMapsQuery": true
+    },
+    {
+      "id": "embassy-ボツワナ",
+      "day": 8,
+      "order": 7,
+      "country": "ボツワナ",
+      "embassyName": "ボツワナ大使館",
+      "address": "〒141-0022 東京都品川区東五反田3-18-6",
+      "hasGoogleMapsQuery": true
+    },
+    {
+      "id": "embassy-コートジボワール",
+      "day": 8,
+      "order": 8,
+      "country": "コートジボワール",
+      "embassyName": "コートジボワール大使館",
+      "address": "〒141-0021 東京都品川区上大崎3-8-5",
+      "hasGoogleMapsQuery": true
+    },
+    {
+      "id": "embassy-モーリタニア",
+      "day": 8,
+      "order": 21,
+      "country": "モーリタニア",
+      "embassyName": "モーリタニア大使館",
+      "address": "〒153-0053 東京都目黒区五本木1-16-17",
+      "hasGoogleMapsQuery": true
+    }
+  ],
+  "issues": [
+    {
+      "type": "missing_google_maps_query",
+      "id": "embassy-アフガニスタン",
+      "country": "アフガニスタン",
+      "sourceMap": "要確認"
+    }
+  ]
+}

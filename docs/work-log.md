@@ -33,11 +33,21 @@ This file records only important project milestones. It is not a detailed daily 
 - PC-side validation passed.
 - iPhone Safari validation passed.
 
+## v0.5
+
+- Japanese-localized `AGENTS.md` and made it the ongoing project rule file.
+- Reflected PM decisions for Day1-10 switching, restart behavior, `localStorage` versioning, ID design, version display, `prototype/` and `release/`, and Google Maps validation.
+- Extracted official Day1-10 157-entry data mechanically from `embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx`.
+- Added Home-screen Day1-10 selection while preserving the NEXT-centered Day screen.
+- Kept `dataVersion: "1.0"` and preserved existing Day1 IDs.
+- Added data extraction tooling and v0.5 validation docs.
+- PC-side validation passed.
+- Day10 Afghanistan remains a source-data issue because the Primary Source Map field is `要確認`.
+
 ## Current Next Gate
 
-- Prepare the Day1-10 official 157-entry rollout plan.
-- Resolve PM judgment items before implementing all 157 entries.
-- Do not change the NEXT-centered UI, GitHub Pages structure, or `localStorage` approach without PM approval.
+- Upload v0.5 to GitHub Pages and validate on iPhone Safari.
+- Confirm representative Google Maps links for each Day and the five重点確認 entries.
 
 ## Project Management Setup
 

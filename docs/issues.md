@@ -8,11 +8,11 @@ Status: OPEN
 
 `prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
 
-### Day1-10 Official 157-entry Rollout PM Decisions
+### Afghanistan Google Maps Query
 
 Status: OPEN
 
-Before implementing all 157 entries, PM judgment is required for Day switching, data migration behavior, version naming, and release file handling. See `docs/implementation-plan-157.md`.
+Primary Source marks Day10 Afghanistan as `要確認` rather than a normal Google Maps URL. The app does not infer a map query and shows the map button as disabled for this entry.
 
 ## Closed Issues
 
@@ -44,6 +44,28 @@ Result:
 - Confirmed `取得済み` auto-NEXT.
 - Confirmed manual NEXT via `今日のルートを見る` -> `ここをNEXTにする`.
 - Confirmed Google Maps, route list, `＋記録`, review timeline, `localStorage`, and JSON Backup / Restore.
+
+### Day1-10 Official 157-entry Rollout PM Decisions
+
+Status: CLOSED
+
+Result:
+
+- PM decisions were finalized and reflected in `AGENTS.md` and `docs/implementation-plan-157.md`.
+- v0.5 implementation may proceed under those decisions.
+
+### Official Day1-10 157-entry Integration
+
+Status: CLOSED
+
+Result:
+
+- Extracted 157 entries mechanically from the Primary Source.
+- Day counts match expected counts.
+- Existing Day1 IDs are preserved.
+- Added Home-screen Day1-10 selection.
+- Kept `localStorage` `dataVersion: "1.0"`.
+- PC validation passed.
 
 ### OneDrive HTML Preview
 
