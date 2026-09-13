@@ -1,47 +1,80 @@
-# 大使館スタンプラリー Companion App Prototype v0.1
+# 大使館スタンプラリー Companion App
 
-東京都内の駐日大使館デジタルスタンプラリーを巡るときに使う、個人用のCompanion App技術検証版です。公式スタンプラリーを置き換えるものではなく、次に行く大使館の確認、Google Maps起動、取得状態と街歩き記録の保存、JSONバックアップ/復元が単一HTMLで成立するかを確認します。
+東京都内の駐日大使館デジタルスタンプラリーを巡るための個人用Companion Appです。公式スタンプラリーを置き換えるものではなく、次に行く大使館の確認、Google Maps起動、取得状態管理、街歩き記録、振り返り、JSON Backup / Restoreを支援します。
 
-## 起動方法
+## 現在の公開方式
 
-PCでは `index.html` をブラウザで開きます。iPhone実機検証では `prototype/embassy-rally-prototype.html` をOneDriveまたはiCloud Driveに置き、ファイルアプリなどから開きます。
+正式採用方式は以下です。
 
-GitHub Pagesで確認する場合は、リポジトリのルートを公開元にし、`index.html` をエントリーポイントとして使います。公開後は `https://<GitHubユーザー名>.github.io/<リポジトリ名>/` から開きます。
+```text
+GitHub Pages
+↓
+iPhone Safari
+↓
+HTML / CSS / Vanilla JavaScript
+↓
+localStorage
+```
 
-## フォルダ構成
+GitHub Pagesでは、リポジトリのルートにある `index.html` を公開エントリーポイントとして使います。公開URLはGitHub Pages設定で管理します。
 
-- `index.html`: 開発用の分割版エントリ
+## 基本構成
+
+- `index.html`: GitHub Pages公開用エントリ
 - `css/style.css`: 画面スタイル
-- `js/app.js`: UIとNEXTロジック
-- `js/data.js`: Prototype用Day1データ
-- `js/storage.js`: localStorage保存、復元データ検証
-- `js/backup.js`: JSONバックアップ書き出し/読み込み
+- `js/app.js`: UI、NEXTロジック、画面復元
+- `js/data.js`: 現在のPrototype用Day1データ
+- `js/storage.js`: `localStorage` 保存、復元データ検証
+- `js/backup.js`: JSON Backup / Restore
 - `data/embassy-master.json`: 将来拡張を想定した大使館マスター
-- `docs/app-design-v0.1.md`: 設計メモ
-- `docs/test-plan-v0.1.md`: 実機確認計画
-- `docs/issues.md`: 制約と確認事項
-- `prototype/embassy-rally-prototype.html`: 単一HTML版
-- `release/embassy-rally-v0.1.html`: 配布確認用コピー
-- `.nojekyll`: GitHub PagesでJekyll処理を行わず静的ファイルとして公開するためのファイル
+- `docs/`: 設計、テスト計画、Issue、作業履歴
+- `prototype/`: 単一HTML版
+- `release/`: 配布確認用HTML
+- `.nojekyll`: GitHub PagesでJekyll処理を行わないためのファイル
+- `AGENTS.md`: 今後のCodex実装担当向けプロジェクト指示書
 
 ## 保存方式
 
-個人データはブラウザの `localStorage` に `embassyStampRally.appState` として保存します。保存データには `dataVersion: "1.0"` を含め、画面コードやマスターデータとユーザーデータを分離しています。
+個人データは各iPhone Safariの `localStorage` に `embassyStampRally.appState` として保存します。夫婦間・端末間の同期は行いません。
 
-保存対象は大使館ごとの状態、取得日時、手動NEXT、街歩き記録、メモ、設定です。
+保存データには `dataVersion: "1.0"` を含めます。保存対象は大使館ごとの状態、取得日時、手動NEXT、街歩き記録、メモ、設定です。
 
-## JSONバックアップ
+## Backup / Restore
 
 設定画面から現在の保存状態をJSONファイルとして書き出せます。復元時はJSON形式と `dataVersion` を確認し、不正データの場合は既存の保存状態を上書きしません。
 
-## iPhone実機テスト手順
+## 現在の開発段階
 
-1. `prototype/embassy-rally-prototype.html` をOneDriveまたはiCloud Driveに配置します。
-2. iPhoneのファイルアプリからHTMLを開きます。
-3. Day 1画面でNEXTがスクロールなしに読めることを確認します。
-4. 地図ボタン、取得済み、記録、振り返り、バックアップ、復元を確認します。
-5. HTMLを閉じて再度開き、状態が残るか確認します。
+Prototypeの技術検証は完了しています。
+
+- v0.1: GitHub Pages + iPhone Safari + `localStorage` 方式成立
+- v0.2: `＋記録` 保存後Toast
+- v0.3: Day画面復元
+
+次のGateは、正式Day1 13件の実データ統合です。157件全体への展開は、Day1 13件検証PASS後に行います。
+
+## 開発時の確認
+
+PCではローカルHTTP配信で `index.html` を確認します。依存パッケージやnpmビルドは不要です。
+
+例:
+
+```text
+node -e "const http=require('http'),fs=require('fs'),path=require('path');const root=process.cwd();const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8'};http.createServer((req,res)=>{const url=new URL(req.url,'http://localhost');let p=decodeURIComponent(url.pathname);if(p==='/' )p='/index.html';const file=path.join(root,p);fs.readFile(file,(err,data)=>{if(err){res.writeHead(404);return res.end('not found')}res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream'});res.end(data)})}).listen(8000,'127.0.0.1',()=>console.log('http://127.0.0.1:8000/'))"
+```
+
+## Docs
+
+- `AGENTS.md`: Codex実装担当向けの基本方針
+- `docs/work-log.md`: 重要な変更履歴
+- `docs/issues.md`: Open/Closed Issue
+- `docs/app-design-v*.md`: バージョン別設計
+- `docs/test-plan-v*.md`: バージョン別テスト計画
+- `docs/release-notes-v*.md`: 検証結果
 
 ## 現時点の制約
 
-Day1の仮データ5件のみです。住所の正確性検証、写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は含めていません。OneDrive/iCloud Driveから直接開いた場合の `localStorage` 永続性は環境差があるため、実機で重点確認が必要です。
+- 現在の実装データはPrototype用Day1データ
+- 正式な157件データ投入は未実施
+- 写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は未実装
+- 写真はiPhone写真アプリで管理し、Webアプリ内には保存しません
