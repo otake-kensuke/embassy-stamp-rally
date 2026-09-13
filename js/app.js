@@ -13,6 +13,14 @@ function clearChildren(element) {
   }
 }
 
+function dayNumbers() {
+  return [...new Set(EMBASSY_MASTER.map((embassy) => embassy.day))].sort((a, b) => a - b);
+}
+
+function allAcquiredCount() {
+  return EMBASSY_MASTER.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+}
+
 function dayEmbassies() {
   return EMBASSY_MASTER.filter((embassy) => embassy.day === state.settings.activeDay)
     .sort((a, b) => a.order - b.order);
@@ -71,7 +79,7 @@ function setScreen(screen) {
   $("#backButton").style.visibility = screen === "home" ? "hidden" : "visible";
   $("#screenTitle").textContent = {
     home: "大使館ラリー",
-    day: "Day 1",
+    day: `Day ${state.settings.activeDay}`,
     review: "振り返り",
     settings: "設定"
   }[screen];
@@ -79,13 +87,43 @@ function setScreen(screen) {
 }
 
 function renderProgress() {
-  const total = dayEmbassies().length;
-  const done = acquiredCount();
+  const total = EMBASSY_MASTER.length;
+  const done = allAcquiredCount();
   const percent = total ? Math.round((done / total) * 100) : 0;
+  const dayTotal = dayEmbassies().length;
+  const dayDone = acquiredCount();
   $("#homeProgress").textContent = `${done} / ${total}`;
   $("#homePercent").textContent = `${percent}%`;
   $("#homeProgressBar").style.width = `${percent}%`;
-  $("#dayProgress").textContent = `${done} / ${total}`;
+  $("#dayProgress").textContent = `${dayDone} / ${dayTotal}`;
+}
+
+function dayProgress(day) {
+  const embassies = EMBASSY_MASTER.filter((embassy) => embassy.day === day);
+  const done = embassies.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+  return { done, total: embassies.length };
+}
+
+function renderHomeDays() {
+  const dayGrid = $("#dayGrid");
+  clearChildren(dayGrid);
+
+  dayNumbers().forEach((day) => {
+    const progress = dayProgress(day);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "day-button";
+    button.classList.toggle("current", day === state.settings.activeDay);
+    button.dataset.day = day;
+
+    const label = document.createElement("span");
+    label.textContent = `${progress.done} / ${progress.total}`;
+    const title = document.createElement("strong");
+    title.textContent = `Day ${day}`;
+
+    button.append(label, title);
+    dayGrid.append(button);
+  });
 }
 
 function renderDay() {
@@ -94,10 +132,15 @@ function renderDay() {
   const panel = $("#nextPanel");
 
   panel.classList.toggle("complete", !current);
-  $("#nextEmbassyName").textContent = current ? current.embassyName : "Day 1 完了";
+  $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日の巡回`;
+  $("#reviewHeading").textContent = `Day ${state.settings.activeDay} 振り返り`;
+  $("#nextEmbassyName").textContent = current ? current.embassyName : `Day ${state.settings.activeDay} 完了`;
   $("#nextAddress").textContent = current ? current.address : "すべて取得済みです。";
-  $("#mapButton").href = current ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}` : "#";
-  $("#mapButton").setAttribute("aria-disabled", current ? "false" : "true");
+  const hasMapQuery = current && current.googleMapsQuery;
+  $("#dayEyebrow").textContent = `Day ${state.settings.activeDay}`;
+  $("#mapButton").href = hasMapQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}` : "#";
+  $("#mapButton").textContent = hasMapQuery ? "地図を開く" : "地図要確認";
+  $("#mapButton").setAttribute("aria-disabled", hasMapQuery ? "false" : "true");
   $("#nextOne").textContent = following[0] ? following[0].embassyName : "-";
   $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
   $("#acquireButton").disabled = !current;
@@ -161,11 +204,13 @@ function renderTimeline() {
       body: "✓ 取得"
     }));
 
-  const logEvents = state.walkLogs.map((log) => ({
-    timestamp: log.timestamp,
-    title: log.category || "メモ",
-    body: log.text || ""
-  }));
+  const logEvents = state.walkLogs
+    .filter((log) => !log.day || log.day === state.settings.activeDay)
+    .map((log) => ({
+      timestamp: log.timestamp,
+      title: log.category || "メモ",
+      body: log.text || ""
+    }));
 
   const events = [...acquiredEvents, ...logEvents]
     .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
@@ -212,10 +257,17 @@ function renderCategories() {
 
 function render() {
   renderProgress();
+  renderHomeDays();
   renderDay();
   renderTimeline();
   renderCategories();
   $("#memoInput").value = state.memo || "";
+}
+
+function setActiveDay(day) {
+  state.settings.activeDay = day;
+  saveState(state);
+  setScreen("day");
 }
 
 function setEmbassyStatus(id, nextStatus) {
@@ -268,6 +320,9 @@ document.addEventListener("click", (event) => {
   const nav = event.target.closest("[data-screen]");
   if (nav) setScreen(nav.dataset.screen);
 
+  const dayButton = event.target.closest("[data-day]");
+  if (dayButton) setActiveDay(Number(dayButton.dataset.day));
+
   const nextButton = event.target.closest("[data-next]");
   if (nextButton) {
     state.manualNextId = nextButton.dataset.next;
@@ -299,6 +354,7 @@ $("#saveLog").addEventListener("click", () => {
   if (!text && !selectedCategory) return;
   state.walkLogs.push({
     id: `log-${Date.now()}`,
+    day: state.settings.activeDay,
     category: selectedCategory,
     text,
     timestamp: new Date().toISOString()

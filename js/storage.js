@@ -43,6 +43,11 @@ function normalizeState(rawState) {
     };
   });
 
+  const validDays = new Set(EMBASSY_MASTER.map((embassy) => embassy.day));
+  if (!validDays.has(normalized.settings.activeDay)) {
+    normalized.settings.activeDay = 1;
+  }
+
   return normalized;
 }
 
