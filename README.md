@@ -23,10 +23,9 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `index.html`: GitHub Pages公開用エントリ
 - `css/style.css`: 画面スタイル
 - `js/app.js`: UI、NEXTロジック、画面復元
-- `js/data.js`: 現在のPrototype用Day1データ
+- `js/data.js`: 現在のDay1データ
 - `js/storage.js`: `localStorage` 保存、復元データ検証
 - `js/backup.js`: JSON Backup / Restore
-- `data/embassy-master.json`: 将来拡張を想定した大使館マスター
 - `docs/`: 設計、テスト計画、Issue、作業履歴
 - `prototype/`: 単一HTML版
 - `release/`: 配布確認用HTML
@@ -50,8 +49,9 @@ Prototypeの技術検証は完了しています。
 - v0.1: GitHub Pages + iPhone Safari + `localStorage` 方式成立
 - v0.2: `＋記録` 保存後Toast
 - v0.3: Day画面復元
+- v0.4: 正式Day1 13件データ統合
 
-次のGateは、正式Day1 13件の実データ統合です。157件全体への展開は、Day1 13件検証PASS後に行います。
+次のGateは、正式Day1 13件のiPhone実機検証です。157件全体への展開は、Day1 13件検証PASS後に行います。
 
 ## 開発時の確認
 
@@ -74,7 +74,7 @@ node -e "const http=require('http'),fs=require('fs'),path=require('path');const 
 
 ## 現時点の制約
 
-- 現在の実装データはPrototype用Day1データ
+- 現在の実装データは正式Day1 13件のみ
 - 正式な157件データ投入は未実施
 - 写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は未実装
 - 写真はiPhone写真アプリで管理し、Webアプリ内には保存しません
