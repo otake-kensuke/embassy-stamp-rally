@@ -14,6 +14,12 @@ Status: OPEN
 
 Primary Source marks Day10 Afghanistan as `要確認` rather than a normal Google Maps URL. The app does not infer a map query and shows the map button as disabled for this entry.
 
+Current behavior:
+
+- PC validation passed.
+- iPhone Safari validation passed.
+- App shows `地図要確認` and disables the map link.
+
 ## Closed Issues
 
 ### Official Day1 13-entry Data Integration
@@ -66,6 +72,24 @@ Result:
 - Added Home-screen Day1-10 selection.
 - Kept `localStorage` `dataVersion: "1.0"`.
 - PC validation passed.
+- iPhone Safari validation passed.
+
+### v0.5 iPhone Real-device Validation
+
+Status: CLOSED
+
+Result:
+
+- Day1-10 display and switching passed.
+- NEXT / 次 / その次 passed for each Day.
+- Day restore after Safari restart passed.
+- `取得済み` auto-NEXT passed.
+- Manual NEXT passed.
+- Representative Google Maps checks passed for each Day.
+- Five address-change focus entries passed.
+- Afghanistan `地図要確認` behavior passed.
+- `＋記録` / review timeline passed.
+- JSON Backup / Restore passed.
 
 ### OneDrive HTML Preview
 

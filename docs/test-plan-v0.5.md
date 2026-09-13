@@ -79,6 +79,21 @@ Status: PASS WITH SOURCE ISSUE
 10. Safariを閉じて再度開いても最後のDayと状態が残る
 11. JSON Backup / Restoreが動作する
 
+## iPhone実機確認結果
+
+Status: PASS
+
+- Day1〜10表示／切替: PASS
+- 各DayのNEXT／次／その次: PASS
+- Safari再起動後のDay復元: PASS
+- 取得済み後の自動NEXT: PASS
+- 手動NEXT: PASS
+- 各Day代表地点のGoogle Maps: PASS
+- 住所変更5件のGoogle Maps: PASS
+- アフガニスタン `地図要確認`: PASS
+- `＋記録`／振り返り: PASS
+- JSON Backup / Restore: PASS
+
 ## 重点確認5件
 
 - Côte d’Ivoire / コートジボワール

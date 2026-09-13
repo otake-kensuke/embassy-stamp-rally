@@ -42,12 +42,16 @@ This file records only important project milestones. It is not a detailed daily 
 - Kept `dataVersion: "1.0"` and preserved existing Day1 IDs.
 - Added data extraction tooling and v0.5 validation docs.
 - PC-side validation passed.
+- iPhone Safari validation passed.
+- Day10 Afghanistan `地図要確認` behavior passed on iPhone Safari.
 - Day10 Afghanistan remains a source-data issue because the Primary Source Map field is `要確認`.
 
 ## Current Next Gate
 
-- Upload v0.5 to GitHub Pages and validate on iPhone Safari.
-- Confirm representative Google Maps links for each Day and the five重点確認 entries.
+- Prepare for real stamp rally use.
+- Confirm GitHub Pages is showing the latest v0.5 files before the event.
+- Confirm backup/export and restore procedure before the event.
+- Keep unresolved Issues visible and do not add new features until operational preparation is complete.
 
 ## Project Management Setup
 
