@@ -23,12 +23,13 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `index.html`: GitHub Pages公開用エントリ
 - `css/style.css`: 画面スタイル
 - `js/app.js`: UI、NEXTロジック、画面復元
-- `js/data.js`: 現在のDay1データ
+- `js/data.js`: 現在のDay1〜10正式データ
 - `js/storage.js`: `localStorage` 保存、復元データ検証
 - `js/backup.js`: JSON Backup / Restore
 - `docs/`: 設計、テスト計画、Issue、作業履歴
 - `prototype/`: 単一HTML版
 - `release/`: 配布確認用HTML
+- `tools/extract-embassy-master.py`: Primary Sourceから `js/data.js` を生成する抽出スクリプト
 - `.nojekyll`: GitHub PagesでJekyll処理を行わないためのファイル
 - `AGENTS.md`: 今後のCodex実装担当向けプロジェクト指示書
 
@@ -50,8 +51,9 @@ Prototypeの技術検証は完了しています。
 - v0.2: `＋記録` 保存後Toast
 - v0.3: Day画面復元
 - v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
+- v0.5: 正式Day1〜10 157件データ統合
 
-次のGateは、Day1〜10・正式157件展開の実装計画とPM判断です。157件実装は、計画と判断事項を確認してから行います。
+次のGateは、正式Day1〜10 157件のiPhone実機検証です。GitHub Pagesへ反映後、ユーザー側で確認します。
 
 ## 開発時の確認
 
@@ -74,7 +76,7 @@ node -e "const http=require('http'),fs=require('fs'),path=require('path');const 
 
 ## 現時点の制約
 
-- 現在の実装データは正式Day1 13件のみ
-- 正式な157件データ投入は未実施
+- 現在の実装データは正式Day1〜10 157件
+- Day10のアフガニスタンはPrimary Source上でMap欄が `要確認`
 - 写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は未実装
 - 写真はiPhone写真アプリで管理し、Webアプリ内には保存しません

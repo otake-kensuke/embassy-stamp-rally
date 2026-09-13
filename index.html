@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>大使館スタンプラリー Companion</title>
-    <link rel="stylesheet" href="css/style.css?v=0.4.0">
+    <link rel="stylesheet" href="css/style.css?v=0.5.0">
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <button class="icon-button" id="backButton" type="button" aria-label="戻る">←</button>
         <div>
-          <p class="eyebrow">Prototype v0.1</p>
+          <p class="eyebrow">Companion App</p>
           <h1 id="screenTitle">大使館ラリー</h1>
         </div>
       </header>
@@ -20,16 +20,14 @@
         <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
           <div class="hero-panel">
             <p class="eyebrow">全体進捗</p>
-            <h2 id="homeHeading"><span id="homeProgress">0 / 13</span></h2>
+            <h2 id="homeHeading"><span id="homeProgress">0 / 157</span></h2>
             <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
             <p class="large-percent" id="homePercent">0%</p>
           </div>
 
+          <div class="day-grid" id="dayGrid"></div>
+
           <div class="action-list">
-            <button class="nav-button primary" data-screen="day" type="button">
-              <span>NEXT DAY</span>
-              <strong>Day 1を開く</strong>
-            </button>
             <button class="nav-button" data-screen="review" type="button">
               <span>時系列</span>
               <strong>振り返り</strong>
@@ -44,7 +42,7 @@
         <section class="screen" id="dayScreen" aria-labelledby="dayHeading">
           <div class="day-summary">
             <div>
-              <p class="eyebrow">Day 1</p>
+              <p class="eyebrow" id="dayEyebrow">Day 1</p>
               <h2 id="dayHeading">今日の巡回</h2>
             </div>
             <strong id="dayProgress">0 / 13</strong>
@@ -109,9 +107,9 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.4.0"></script>
-    <script src="js/storage.js?v=0.4.0"></script>
-    <script src="js/backup.js?v=0.4.0"></script>
-    <script src="js/app.js?v=0.4.0"></script>
+    <script src="js/data.js?v=0.5.0"></script>
+    <script src="js/storage.js?v=0.5.0"></script>
+    <script src="js/backup.js?v=0.5.0"></script>
+    <script src="js/app.js?v=0.5.0"></script>
   </body>
 </html>

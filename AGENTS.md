@@ -1,22 +1,22 @@
 # AGENTS.md
 
-## Project Purpose
+## プロジェクトの目的
 
-This app is a personal Companion App for visiting embassies during the digital stamp rally for foreign embassies in Japan. It does not replace the official stamp rally.
+このアプリは、東京都内の駐日大使館デジタルスタンプラリーを巡るための個人用Companion Appです。公式スタンプラリーを置き換えるものではありません。
 
-Main roles:
+主な役割:
 
-- Day1-10 route support
-- NEXT embassy display
-- Google Maps integration
-- Manual acquisition status management
-- Walk logs
-- Timeline review
+- Day1〜10の巡回支援
+- NEXT大使館の表示
+- Google Maps連携
+- 取得状態の手動管理
+- 街歩き記録
+- 時系列の振り返り
 - JSON Backup / Restore
 
-## Current Architecture
+## 現在のアーキテクチャ
 
-Adopted architecture:
+採用済みの構成:
 
 - GitHub Pages
 - iPhone Safari
@@ -26,166 +26,216 @@ Adopted architecture:
 - `localStorage`
 - JSON Backup / Restore
 
-Do not use:
+使用しないもの:
 
 - Supabase
 - Firebase
 - Vercel
 - React
 - Next.js
-- External database
-- Login
-- Cloud sync
+- 外部データベース
+- ログイン
+- クラウド同期
 
-Personal data:
+個人データ:
 
-- Stored in each iPhone's `localStorage`
-- No sync between partners/devices
+- 各iPhoneの `localStorage` に保存する
+- 夫婦間、端末間の同期は行わない
 
-Photos:
+写真:
 
-- Managed in the iPhone Photos app
-- Not stored in this web app
+- iPhoneの写真アプリで管理する
+- このWebアプリ内には保存しない
 
-## Historical Decision
+## 過去の判断
 
-The project originally considered running a single HTML file directly from OneDrive or iCloud Drive.
+当初は、単一HTMLファイルをOneDriveまたはiCloud Driveから直接開く方式も検討した。
 
-iPhone real-device test result:
+iPhone実機テスト結果:
 
-- HTML display: possible
-- Google Maps external link: FAIL
+- HTML表示: 可能
+- Google Maps外部リンク: FAIL
 - `localStorage`: FAIL
-- `＋記録` save: FAIL
-- Script error occurred
+- `＋記録` 保存: FAIL
+- Script error発生
 
-Decision:
+判断:
 
-The OneDrive/iCloud direct HTML execution approach is discontinued.
+OneDrive/iCloud DriveからHTMLを直接実行する方式は廃止する。
 
-The project changed to GitHub Pages + iPhone Safari, and real-device testing confirmed that this approach works. Do not return to the OneDrive/iCloud direct execution approach.
+プロジェクトはGitHub Pages + iPhone Safari方式へ移行し、実機テストで成立を確認済み。この方式へ戻さない。
 
-## UX Principle
+## UX原則
 
-Most important principle:
+最重要原則:
 
 「当日利用時はNEXT中心の1画面構成。詳細情報・全ルート・記録履歴は必要時に展開する。」
 
-Additional principles:
+補足原則:
 
-- iPhone portrait orientation
-- Outdoor use
-- One-handed operation
-- NEXT should be visible without scrolling
-- Main actions should take 1-2 taps
-- Do not shrink text to cram information
-- Inputs should mostly be optional
-- Records should be editable later
+- iPhone縦持ちを前提にする
+- 屋外利用を前提にする
+- 片手操作を前提にする
+- NEXTはスクロールなしで見えることを重視する
+- 主要操作は1〜2タップで完了できるようにする
+- 情報を詰め込むために文字を小さくしない
+- 入力はできるだけ任意にする
+- 記録は後から編集できる設計を目指す
 
-## Primary Data Source
+## Primary Source
 
-The primary source for the official 157 embassy dataset is:
+正式157件データのPrimary Sourceは次のファイルです。
 
 ```text
 embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx
 ```
 
-When importing official data, use this master file as the source of truth.
+正式データを取り込む場合は、このマスターを唯一の正とする。
 
-Do not infer or modify country names, addresses, Day assignments, or visit order. If the master and implementation data conflict, do not silently fix the data. Report it as an Issue and ask for PM judgment.
+国名、住所、Day割当、巡回順を推測で変更しない。Primary Sourceと実装データが矛盾する場合は、黙って修正せず、Issueとして記録しPM判断を求める。
 
-## Current Development Stage
+## 現在の開発段階
 
-Prototype technical validation is complete.
+Prototypeの技術検証は完了しています。
 
 v0.1:
 
-- GitHub Pages + iPhone Safari + `localStorage` approach validated
+- GitHub Pages + iPhone Safari + `localStorage` 方式を検証済み
 
 v0.2:
 
-- Added toast after saving `＋記録`
+- `＋記録` 保存後のToastを追加
 
 v0.3:
 
-- Added Day screen restore
+- Day画面復元を追加
 
 v0.4:
 
-- Integrated official Day1 13-entry real dataset
-- PC validation passed
-- iPhone Safari validation passed
+- 正式Day1 13件データを統合
+- PC検証PASS
+- iPhone Safari実機検証PASS
 
 Next Gate:
 
-- Plan Day1-10 official 157-entry rollout
-- Resolve PM judgment items before implementation
+- v0.5としてDay1〜10・正式157件統合を実施する
+- 実装後、PC検証まで行い、GitHub Pagesへ反映できる状態で停止する
+- iPhone実機確認はユーザー側で行う
 
-Do not expand to all 157 entries until the rollout plan and PM judgment items are confirmed.
+## v0.5 PM決定事項
 
-## Codex Can Decide
+### Day1〜10切替
 
-Codex may proceed autonomously with the following, as long as existing specifications are preserved:
+- ホーム画面からDay1〜10を選択する
+- Day画面は現在のNEXT中心UIを維持する
 
-- Minor bug fixes
-- Code cleanup
-- Minor UI improvements
-- Responsive adjustments
-- Tests
-- Documentation updates
-- Data conversion
-- Normal GitHub Pages updates
-- Implementation that follows existing specifications
+### 再起動時
 
-## PM Approval Required
+- 最後に見ていたDayを復元する
 
-Do not change the following without PM approval:
+### `localStorage` dataVersion
 
-- Basic app purpose
-- Basic screen structure
-- NEXT-centered UI principle
-- `localStorage` storage approach
-- External service additions
-- Cloud database introduction
-- Authentication
-- Partner/device sync
-- Photo management approach
-- Official stamp site integration approach
-- Day1-10 route structure
-- Large new features
-- Primary Source data changes
-- Hosting change away from GitHub Pages
+- 今回は `"1.0"` を維持する
+- 保存データ構造変更時にversion upを検討する
 
-If needed, organize the topic as an Issue and request PM judgment.
+### Day1既存進捗
 
-## Start-of-Work Procedure
+- 既存Day1 13件の進捗を引き継ぐ
+- 既存IDは変更しない
 
-At the start of a new Codex session, review at least:
+### ID設計
+
+- 既存Day1 IDを維持する
+- 新規144件は安定した人間可読IDとする
+- Day番号や巡回順変更でIDが変わらない設計にする
+
+### バージョン表示
+
+- UI上の `Prototype v0.1` 表記は廃止方向
+- 開発Versionは `docs/work-log.md` で管理する
+- アプリ画面に開発Versionを強調表示しない
+
+### `prototype/` と `release/`
+
+- 今回は削除しない
+- ただし157件統合時の再生成は必須としない
+- GitHub Pages本体を優先する
+- 役割整理は157件統合後に再判断する
+
+### Google Maps検証
+
+- 全157件についてCodex側でURL/住所生成を機械チェックする
+- iPhone実機では各Dayの代表地点を確認する
+- 特に住所変更履歴のある以下5件は重点確認する
+  - Côte d’Ivoire
+  - Botswana
+  - Mauritania
+  - Haiti
+  - Djibouti
+
+## Codexが判断してよいこと
+
+既存仕様を守る範囲で、Codexは次の作業を自律的に進めてよい。
+
+- 軽微なバグ修正
+- コード整理
+- 軽微なUI改善
+- レスポンシブ調整
+- テスト
+- ドキュメント更新
+- データ変換
+- 通常のGitHub Pages更新
+- 既存仕様に沿った実装
+
+## PM承認が必要なこと
+
+次の変更はPM承認なしに行わない。
+
+- アプリの基本目的
+- 基本画面構成
+- NEXT中心UI原則
+- `localStorage` 保存方式
+- 外部サービス追加
+- クラウドデータベース導入
+- 認証
+- 夫婦間、端末間同期
+- 写真管理方針
+- 公式スタンプサイト連携方針
+- Day1〜10ルート構造
+- 大きな新機能
+- Primary Sourceデータの変更
+- GitHub Pages以外へのホスティング変更
+
+必要な場合は、Issueとして整理してPM判断を求める。
+
+## 作業開始時の手順
+
+新しいCodexセッションの開始時は、少なくとも次を確認する。
 
 1. `AGENTS.md`
 2. `README.md`
 3. `docs/app-design-v0.1.md`
 4. `docs/issues.md`
 5. `docs/work-log.md`
-6. Relevant test plans as needed
+6. 必要に応じて関連するテスト計画
 
-If implementation and documentation conflict, do not decide unilaterally which one is correct. Ask or record the discrepancy as an Issue.
+実装とドキュメントが矛盾する場合は、どちらが正しいかを独断で決めない。質問するか、Issueとして記録する。
 
-## End-of-Work Procedure
+## 作業終了時の手順
 
-At the end of work, generally perform:
+作業終了時は、原則として次を行う。
 
-1. Required tests
-2. Documentation updates
-3. `docs/work-log.md` updates
-4. `docs/issues.md` review/update
-5. Git diff/status check when Git is available
+1. 必要なテスト
+2. ドキュメント更新
+3. `docs/work-log.md` 更新
+4. `docs/issues.md` 確認、更新
+5. Gitが利用可能な場合はgit diff/status確認
 
-Final report should include:
+完了報告には次を含める。
 
-- Work performed
-- Changed files
-- Test results
-- Unresolved Issues
-- Next Action
-- Items requiring PM judgment
+- 実施内容
+- 変更ファイル
+- テスト結果
+- 未解決Issue
+- 次Action
+- PM判断が必要な事項
