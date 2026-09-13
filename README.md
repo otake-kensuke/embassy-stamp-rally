@@ -49,9 +49,9 @@ Prototypeの技術検証は完了しています。
 - v0.1: GitHub Pages + iPhone Safari + `localStorage` 方式成立
 - v0.2: `＋記録` 保存後Toast
 - v0.3: Day画面復元
-- v0.4: 正式Day1 13件データ統合
+- v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
 
-次のGateは、正式Day1 13件のiPhone実機検証です。157件全体への展開は、Day1 13件検証PASS後に行います。
+次のGateは、Day1〜10・正式157件展開の実装計画とPM判断です。157件実装は、計画と判断事項を確認してから行います。
 
 ## 開発時の確認
 

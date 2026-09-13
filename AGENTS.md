@@ -110,11 +110,18 @@ v0.3:
 
 - Added Day screen restore
 
+v0.4:
+
+- Integrated official Day1 13-entry real dataset
+- PC validation passed
+- iPhone Safari validation passed
+
 Next Gate:
 
-- Integrate official Day1 13-entry real dataset
+- Plan Day1-10 official 157-entry rollout
+- Resolve PM judgment items before implementation
 
-Do not expand to all 157 entries until Day1 13-entry validation passes.
+Do not expand to all 157 entries until the rollout plan and PM judgment items are confirmed.
 
 ## Codex Can Decide
 
