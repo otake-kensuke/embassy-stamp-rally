@@ -1,16 +1,61 @@
 # Issues
 
-- 大使館データはDay1の仮データ5件のみ。
-- 住所は正確性検証の対象外。
-- OneDrive/iCloud Driveから直接開いた場合の `localStorage` 永続性は実機確認が必要。
-- iOSのHTMLプレビュー環境によってはダウンロードやファイル選択の挙動がSafariと異なる可能性がある。
-- 写真、GPS、公式API、ログイン、クラウド同期、自動ルート最適化は未実装。
+## Open Issues
 
-## v0.2改善候補
+### Official Day1 13-entry Data Integration
 
-- 対応済み: `＋記録` で保存した直後に保存完了が分かりにくい問題は、v0.2で `記録を保存しました` のトースト表示を追加して解消した。
+Status: OPEN
 
-## 次の改善候補
+Next action is to integrate the official Day1 13-entry dataset using the primary source:
 
-- Safari再起動後はホーム画面から始まる。取得状態や記録は残るためv0.1/v0.2仕様としては正常だが、最後に開いていた画面を復元するか検討する。
-- Dayデータを5件より少し増やし、件数が増えた時のNEXT表示、ルート一覧、振り返りの使い勝手を確認する。
+```text
+embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx
+```
+
+Do not infer or alter country names, addresses, Day assignments, or route order. If the master and implementation conflict, report the discrepancy before changing data.
+
+### Prototype / Release Folder Role
+
+Status: OPEN
+
+`prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
+
+## Closed Issues
+
+### OneDrive HTML Preview
+
+Status: CLOSED
+
+Result:
+
+- HTML display was possible on iPhone.
+- Google Maps external link failed.
+- `localStorage` persistence failed.
+- `＋記録` save failed.
+- Script error occurred.
+
+Decision:
+
+- Discontinue OneDrive/iCloud direct HTML execution.
+- Adopt GitHub Pages + iPhone Safari.
+- Do not return to the OneDrive/iCloud direct execution approach.
+
+### Save Completion Feedback
+
+Status: CLOSED
+
+Result:
+
+- `＋記録` save completion was unclear in v0.1.
+- v0.2 added the `記録を保存しました` toast.
+- iPhone Safari test passed.
+
+### Day Screen Restore
+
+Status: CLOSED
+
+Result:
+
+- Safari restart/reopen previously returned to Home even after using Day.
+- v0.3 added Day screen restore with `settings.lastScreen`.
+- iPhone Safari test passed.
