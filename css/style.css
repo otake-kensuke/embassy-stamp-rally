@@ -132,7 +132,15 @@ h1 {
   gap: 12px;
 }
 
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 12px;
+}
+
 .nav-button,
+.day-button,
 .settings-actions button,
 .file-button {
   min-height: 58px;
@@ -151,14 +159,34 @@ h1 {
   gap: 12px;
 }
 
+.day-button {
+  display: grid;
+  gap: 4px;
+}
+
 .nav-button span {
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
 }
 
+.day-button span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .nav-button strong {
   font-size: 18px;
+}
+
+.day-button strong {
+  font-size: 18px;
+}
+
+.day-button.current {
+  border-color: var(--accent);
+  background: #e5f0ec;
 }
 
 .nav-button.primary,
@@ -510,6 +538,10 @@ textarea {
 }
 
 @media (max-width: 390px) {
+  .day-grid {
+    grid-template-columns: 1fr;
+  }
+
   .category-grid {
     grid-template-columns: repeat(3, 1fr);
   }
