@@ -2,17 +2,11 @@
 
 ## Open Issues
 
-### Official Day1 13-entry Data Integration
+### Day1 13-entry iPhone Validation
 
 Status: OPEN
 
-Next action is to integrate the official Day1 13-entry dataset using the primary source:
-
-```text
-embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx
-```
-
-Do not infer or alter country names, addresses, Day assignments, or route order. If the master and implementation conflict, report the discrepancy before changing data.
+GitHub Pages upload and iPhone Safari validation are still required for the Day1 13-entry dataset.
 
 ### Prototype / Release Folder Role
 
@@ -21,6 +15,22 @@ Status: OPEN
 `prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
 
 ## Closed Issues
+
+### Official Day1 13-entry Data Integration
+
+Status: CLOSED
+
+Result:
+
+- Integrated the official Day1 13-entry dataset using the primary source:
+
+```text
+embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx
+```
+
+- Did not expand to all 157 entries.
+- Kept `dataVersion: "1.0"` and the existing `EMBASSY_MASTER` shape.
+- PC-side validation passed.
 
 ### OneDrive HTML Preview
 

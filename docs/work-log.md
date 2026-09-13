@@ -25,9 +25,17 @@ This file records only important project milestones. It is not a detailed daily 
 - Returning to Home stores `settings.lastScreen = "home"`.
 - Confirmed on iPhone Safari that Day restore works.
 
+## v0.4
+
+- Replaced the Prototype 5-entry Day1 data with the official Day1 13-entry dataset from `embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx`.
+- Kept the existing GitHub Pages, HTML/CSS/Vanilla JavaScript, `localStorage`, NEXT-centered UI, and JSON Backup / Restore structure.
+- Regenerated the single HTML prototype and release files.
+- PC-side validation passed.
+- iPhone Safari validation is the next gate.
+
 ## Current Next Gate
 
-- Integrate the official Day1 13-entry real dataset.
+- Upload v0.4 files to GitHub Pages and validate the official Day1 13-entry dataset on iPhone Safari.
 - Do not proceed to all 157 entries until Day1 13-entry validation passes.
 
 ## Project Management Setup
