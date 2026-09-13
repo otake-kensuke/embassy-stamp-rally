@@ -31,12 +31,13 @@ This file records only important project milestones. It is not a detailed daily 
 - Kept the existing GitHub Pages, HTML/CSS/Vanilla JavaScript, `localStorage`, NEXT-centered UI, and JSON Backup / Restore structure.
 - Regenerated the single HTML prototype and release files.
 - PC-side validation passed.
-- iPhone Safari validation is the next gate.
+- iPhone Safari validation passed.
 
 ## Current Next Gate
 
-- Upload v0.4 files to GitHub Pages and validate the official Day1 13-entry dataset on iPhone Safari.
-- Do not proceed to all 157 entries until Day1 13-entry validation passes.
+- Prepare the Day1-10 official 157-entry rollout plan.
+- Resolve PM judgment items before implementing all 157 entries.
+- Do not change the NEXT-centered UI, GitHub Pages structure, or `localStorage` approach without PM approval.
 
 ## Project Management Setup
 

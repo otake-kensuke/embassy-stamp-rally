@@ -33,6 +33,20 @@
 9. Safariを閉じて再度開いても状態が残る
 10. JSON Backup / Restore
 
+## iPhone実機確認結果
+
+Status: PASS
+
+- Day1 13件表示を確認
+- NEXT / 次 / その次を確認
+- `取得済み` 後の自動NEXTを確認
+- `今日のルートを見る` から `ここをNEXTにする` を押し、手動NEXTが正常動作することを確認
+- Google Maps起動を確認
+- 今日のルート一覧を確認
+- `＋記録` と振り返りを確認
+- `localStorage` による状態保持を確認
+- JSON Backup / Restoreを確認
+
 ## PC確認結果
 
 Status: PASS

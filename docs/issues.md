@@ -2,17 +2,17 @@
 
 ## Open Issues
 
-### Day1 13-entry iPhone Validation
-
-Status: OPEN
-
-GitHub Pages upload and iPhone Safari validation are still required for the Day1 13-entry dataset.
-
 ### Prototype / Release Folder Role
 
 Status: OPEN
 
 `prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
+
+### Day1-10 Official 157-entry Rollout PM Decisions
+
+Status: OPEN
+
+Before implementing all 157 entries, PM judgment is required for Day switching, data migration behavior, version naming, and release file handling. See `docs/implementation-plan-157.md`.
 
 ## Closed Issues
 
@@ -31,6 +31,19 @@ embassy_stamp_rally_157攻略表_住所マスター確定版_20260906.xlsx
 - Did not expand to all 157 entries.
 - Kept `dataVersion: "1.0"` and the existing `EMBASSY_MASTER` shape.
 - PC-side validation passed.
+
+### Day1 13-entry iPhone Validation
+
+Status: CLOSED
+
+Result:
+
+- iPhone Safari real-device validation passed.
+- Confirmed Day1 13-entry display.
+- Confirmed NEXT / 次 / その次.
+- Confirmed `取得済み` auto-NEXT.
+- Confirmed manual NEXT via `今日のルートを見る` -> `ここをNEXTにする`.
+- Confirmed Google Maps, route list, `＋記録`, review timeline, `localStorage`, and JSON Backup / Restore.
 
 ### OneDrive HTML Preview
 
