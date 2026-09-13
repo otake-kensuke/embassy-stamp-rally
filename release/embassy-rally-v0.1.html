@@ -474,6 +474,33 @@ textarea {
   background: #fff;
 }
 
+.sheet-actions button.primary-action {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.toast-message {
+  position: fixed;
+  right: 16px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 10;
+  width: min(calc(100% - 32px), 420px);
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow);
+  font-weight: 800;
+  text-align: center;
+}
+
+.toast-message[hidden] {
+  display: none;
+}
+
 @media (min-width: 720px) {
   .app-shell {
     min-height: auto;
@@ -602,6 +629,8 @@ textarea {
       </div>
     </section>
 
+    <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
+
     <script>
 const EMBASSY_MASTER = [
   {
@@ -673,7 +702,8 @@ function createInitialState() {
     walkLogs: [],
     memo: "",
     settings: {
-      activeDay: 1
+      activeDay: 1,
+      lastScreen: "home"
     }
   };
 }
@@ -774,6 +804,7 @@ const CATEGORIES = ["食事", "寄り道", "発見", "休憩", "メモ"];
 let state = loadState();
 let activeScreen = "home";
 let selectedCategory = "メモ";
+let toastTimer = null;
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -833,6 +864,8 @@ function persist() {
 
 function setScreen(screen) {
   activeScreen = screen;
+  state.settings.lastScreen = screen === "day" ? "day" : "home";
+  saveState(state);
   document.querySelectorAll(".screen").forEach((section) => {
     section.classList.toggle("active", section.id === `${screen}Screen`);
   });
@@ -1021,6 +1054,17 @@ function closeSheet() {
   $("#logText").value = "";
 }
 
+function showToast(message) {
+  const toast = $("#toastMessage");
+  toast.textContent = message;
+  toast.hidden = false;
+  window.clearTimeout(toastTimer);
+  toastTimer = window.setTimeout(() => {
+    toast.hidden = true;
+    toast.textContent = "";
+  }, 2000);
+}
+
 document.addEventListener("click", (event) => {
   const nav = event.target.closest("[data-screen]");
   if (nav) setScreen(nav.dataset.screen);
@@ -1062,6 +1106,7 @@ $("#saveLog").addEventListener("click", () => {
   });
   persist();
   closeSheet();
+  showToast("記録を保存しました");
 });
 $("#memoInput").addEventListener("input", (event) => {
   state.memo = event.target.value;
@@ -1089,7 +1134,7 @@ $("#importInput").addEventListener("change", async (event) => {
   }
 });
 
-setScreen("home");
+setScreen(state.settings.lastScreen === "day" ? "day" : "home");
 
     </script>
   </body>
