@@ -59,15 +59,21 @@ This file records only important project milestones. It is not a detailed daily 
 ## v0.6.1
 
 - Changed guide character rendering from CSS background images to normal image elements so missing GitHub uploads are easier to detect and cache behavior is clearer.
-- Updated cache-busting query strings from `v=0.6.0` to `v=0.6.1`.
 - Confirmed locally that the home and Day screen guide characters render.
 - Clarified that `次` and `その次` are information rows, not buttons.
 
+## v0.6.3
+
+- Reworked the Home screen to be much closer to the reference image: sky background, speech bubbles, central title, guide characters, stamp globe, and skyline-style lower band.
+- Updated the Day screen header and large NEXT card styling while preserving the existing NEXT-centered behavior.
+- Added screen-change scroll reset so each screen opens from the top.
+- Updated cache-busting query strings to `v=0.6.3`.
+- PC validation passed.
+
 ## Current Next Gate
 
-- Upload v0.6 files to GitHub Pages.
-- Upload the v0.6.1 image assets and updated HTML/CSS to GitHub Pages.
-- Confirm the v0.6.1 UI and `＋記録` scroll behavior on iPhone Safari.
+- Upload the v0.6.3 files to GitHub Pages.
+- Confirm the v0.6.3 UI and `＋記録` scroll behavior on iPhone Safari.
 - After v0.6 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup

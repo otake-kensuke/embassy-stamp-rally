@@ -47,6 +47,7 @@ Result:
 - PC validation passed.
 - iPhone Safari validation is pending after GitHub Pages update.
 - v0.6.1 changed guide characters from CSS background images to normal image elements to make GitHub upload/cache issues easier to catch.
+- v0.6.3 reworked the Home screen to be much closer to the reference image and added screen-change scroll reset.
 
 ### Official Day1 13-entry Data Integration
 
