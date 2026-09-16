@@ -46,6 +46,7 @@ Result:
 - Preserved official 157-entry data, Day1-10 structure, NEXT-centered flow, Google Maps behavior, JSON Backup / Restore, and `dataVersion: "1.0"`.
 - PC validation passed.
 - iPhone Safari validation is pending after GitHub Pages update.
+- v0.6.1 changed guide characters from CSS background images to normal image elements to make GitHub upload/cache issues easier to catch.
 
 ### Official Day1 13-entry Data Integration
 
