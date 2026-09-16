@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.6.1">
+    <link rel="stylesheet" href="css/style.css?v=0.6.3">
   </head>
   <body>
     <div class="app-shell">
@@ -19,15 +19,30 @@
       <main>
         <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
           <div class="hero-panel">
-            <div class="home-guide-scene" aria-hidden="true">
-              <img class="guide-character guide-character-man" src="assets/guide-man.png?v=0.6.1" alt="">
-              <div class="home-globe">STAMP</div>
-              <img class="guide-character guide-character-woman" src="assets/guide-woman.png?v=0.6.1" alt="">
+            <div class="home-hero-art">
+              <div class="cloud cloud-one"></div>
+              <div class="cloud cloud-two"></div>
+              <p class="bubble bubble-left">世界を<br>めぐろう!</p>
+              <p class="bubble bubble-right">次は<br>どこへ?</p>
+              <div class="hero-brand">
+                <div class="brand-globe" aria-hidden="true">◎</div>
+                <h2 id="homeHeading">大使館スタンプラリー</h2>
+                <p>世界とつながる 東京散歩</p>
+                <small>Embassy Stamp Rally</small>
+              </div>
+              <div class="home-guide-scene" aria-hidden="true">
+                <img class="guide-character guide-character-man" src="assets/guide-man.png?v=0.6.3" alt="">
+                <div class="home-globe">STAMP</div>
+                <img class="guide-character guide-character-woman" src="assets/guide-woman.png?v=0.6.3" alt="">
+              </div>
+              <div class="home-skyline" aria-hidden="true"></div>
             </div>
-            <p class="eyebrow">全体進捗</p>
-            <h2 id="homeHeading"><span id="homeProgress">0 / 157</span></h2>
-            <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
-            <p class="large-percent" id="homePercent">0%</p>
+            <div class="home-progress-card">
+              <p class="eyebrow">取得状況</p>
+              <strong id="homeProgress">0 / 157</strong>
+              <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
+              <p class="large-percent" id="homePercent">0%</p>
+            </div>
           </div>
 
           <div class="day-grid" id="dayGrid"></div>
@@ -54,7 +69,7 @@
           </div>
 
           <article class="next-panel" id="nextPanel">
-            <img class="day-guide guide-character guide-character-woman" src="assets/guide-woman.png?v=0.6.1" alt="" aria-hidden="true">
+            <img class="day-guide guide-character guide-character-woman" src="assets/guide-woman.png?v=0.6.3" alt="" aria-hidden="true">
             <p class="next-label">NEXT</p>
             <h3 id="nextEmbassyName">未取得はありません</h3>
             <p id="nextAddress">おつかれさまでした。</p>
@@ -113,9 +128,9 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.6.1"></script>
-    <script src="js/storage.js?v=0.6.1"></script>
-    <script src="js/backup.js?v=0.6.1"></script>
-    <script src="js/app.js?v=0.6.1"></script>
+    <script src="js/data.js?v=0.6.3"></script>
+    <script src="js/storage.js?v=0.6.3"></script>
+    <script src="js/backup.js?v=0.6.3"></script>
+    <script src="js/app.js?v=0.6.3"></script>
   </body>
 </html>
