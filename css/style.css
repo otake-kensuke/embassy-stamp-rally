@@ -105,11 +105,11 @@ h1 {
 
 .hero-panel {
   overflow: hidden;
-  padding: 16px 18px 22px;
+  padding: 14px 18px 22px;
   margin: 18px 0;
   background:
-    linear-gradient(180deg, rgba(223, 245, 255, 0.86), rgba(255, 255, 255, 0.94) 54%),
-    linear-gradient(90deg, rgba(22, 133, 87, 0.08), rgba(103, 200, 242, 0.12));
+    linear-gradient(180deg, rgba(196, 238, 255, 0.92), rgba(255, 255, 255, 0.95) 58%),
+    linear-gradient(90deg, rgba(22, 133, 87, 0.1), rgba(103, 200, 242, 0.16));
 }
 
 .hero-panel h2 {
@@ -120,11 +120,12 @@ h1 {
 
 .home-guide-scene {
   display: grid;
-  grid-template-columns: 104px 1fr 104px;
+  grid-template-columns: 104px minmax(80px, 1fr) 104px;
   align-items: end;
   gap: 8px;
-  min-height: 168px;
-  margin: -4px -6px 10px;
+  min-height: 154px;
+  margin: 0 -6px 12px;
+  border-bottom: 6px solid rgba(22, 133, 87, 0.12);
 }
 
 .home-globe {
@@ -132,8 +133,8 @@ h1 {
   justify-self: center;
   display: grid;
   place-items: center;
-  width: 112px;
-  height: 112px;
+  width: 104px;
+  height: 104px;
   border: 8px solid rgba(22, 133, 87, 0.22);
   border-radius: 999px;
   background:
@@ -146,23 +147,22 @@ h1 {
 }
 
 .guide-character {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  display: block;
+  object-fit: cover;
   border-radius: 8px;
 }
 
 .guide-character-man {
   width: 96px;
-  height: 180px;
-  background-image: url("../assets/guide-man.png");
+  height: 168px;
+  object-position: center bottom;
 }
 
 .guide-character-woman {
   justify-self: end;
   width: 84px;
-  height: 180px;
-  background-image: url("../assets/guide-woman.png");
+  height: 168px;
+  object-position: center bottom;
 }
 
 .large-percent {
@@ -312,6 +312,8 @@ h1 {
   top: 12px;
   width: 42px;
   height: 90px;
+  object-fit: cover;
+  object-position: center bottom;
   opacity: 0.96;
   pointer-events: none;
 }
