@@ -3,22 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>大使館スタンプラリー Companion</title>
-    <link rel="stylesheet" href="css/style.css?v=0.5.0">
+    <title>大使館スタンプラリー</title>
+    <link rel="stylesheet" href="css/style.css?v=0.6.0">
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <button class="icon-button" id="backButton" type="button" aria-label="戻る">←</button>
         <div>
-          <p class="eyebrow">Companion App</p>
-          <h1 id="screenTitle">大使館ラリー</h1>
+          <p class="eyebrow">世界とつながる 東京散歩</p>
+          <h1 id="screenTitle">大使館スタンプラリー</h1>
         </div>
       </header>
 
       <main>
         <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
           <div class="hero-panel">
+            <div class="home-guide-scene" aria-hidden="true">
+              <div class="guide-character guide-character-man"></div>
+              <div class="home-globe">STAMP</div>
+              <div class="guide-character guide-character-woman"></div>
+            </div>
             <p class="eyebrow">全体進捗</p>
             <h2 id="homeHeading"><span id="homeProgress">0 / 157</span></h2>
             <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
@@ -49,6 +54,7 @@
           </div>
 
           <article class="next-panel" id="nextPanel">
+            <div class="day-guide guide-character guide-character-woman" aria-hidden="true"></div>
             <p class="next-label">NEXT</p>
             <h3 id="nextEmbassyName">未取得はありません</h3>
             <p id="nextAddress">おつかれさまでした。</p>
@@ -107,9 +113,9 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.5.0"></script>
-    <script src="js/storage.js?v=0.5.0"></script>
-    <script src="js/backup.js?v=0.5.0"></script>
-    <script src="js/app.js?v=0.5.0"></script>
+    <script src="js/data.js?v=0.6.0"></script>
+    <script src="js/storage.js?v=0.6.0"></script>
+    <script src="js/backup.js?v=0.6.0"></script>
+    <script src="js/app.js?v=0.6.0"></script>
   </body>
 </html>

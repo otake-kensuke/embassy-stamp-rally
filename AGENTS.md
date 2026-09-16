@@ -123,15 +123,24 @@ v0.5:
 - iPhone Safari実機検証PASS
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認` のため、アプリでは `地図要確認` として無効表示する
 
+v0.6:
+
+- UI/UX改善として、アプリ名称、配色、案内役キャラクター表示を更新
+- `＋記録` ボタンのスクロール中の不自然な残留を修正
+- 正式157件データ、Day1〜10構成、NEXT中心UI、`localStorage` 構造、`dataVersion: "1.0"` は変更しない
+- PC検証PASS
+- iPhone Safari実機確認待ち
+
 現在の状態:
 
-- 実地運用待ち / STANDBY
+- v0.6 GitHub Pages反映・iPhone Safari実機確認待ち
 - v0.5は実装、PC検証、iPhone Safari実機検証まですべて完了
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- 実際のスタンプラリーで使用した後の実地運用レビュー
+- v0.6をGitHub Pagesへ反映した後のiPhone Safari実機確認
+- v0.6確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
 - 新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認する
 
 ## v0.5 PM決定事項

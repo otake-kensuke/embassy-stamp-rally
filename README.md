@@ -52,10 +52,11 @@ Prototypeの技術検証は完了しています。
 - v0.3: Day画面復元
 - v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
 - v0.5: 正式Day1〜10 157件データ統合、PC検証PASS、iPhone実機検証PASS
+- v0.6: UI/UX改善、`＋記録` スクロール位置Bug Fix、PC検証PASS、iPhone実機確認待ち
 
-現在の状態は、実地運用待ち / STANDBYです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
+現在の状態は、v0.6 GitHub Pages反映・iPhone Safari実機確認待ちです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
 
-次のGateは、実際のスタンプラリーで使用した後の実地運用レビューです。新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認します。
+次のGateは、v0.6をGitHub Pagesへ反映した後のiPhone Safari実機確認です。v0.6確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進みます。
 
 ## 開発時の確認
 
