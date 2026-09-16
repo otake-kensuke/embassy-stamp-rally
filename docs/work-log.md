@@ -46,12 +46,21 @@ This file records only important project milestones. It is not a detailed daily 
 - Day10 Afghanistan `地図要確認` behavior passed on iPhone Safari.
 - Day10 Afghanistan remains a source-data issue because the Primary Source Map field is `要確認`.
 
+## v0.6
+
+- Updated the visible app name to `大使館スタンプラリー` and subtitle to `世界とつながる 東京散歩`.
+- Refreshed the UI palette to green, sky blue, and cream while keeping the NEXT-centered Day screen.
+- Added guide character image assets based on the user-provided source image.
+- Fixed the Day screen `＋記録` scroll-position issue by removing sticky positioning from the button.
+- Kept official 157-entry data, Day1-10 structure, `localStorage` structure, `dataVersion: "1.0"`, Google Maps behavior, Afghanistan `地図要確認`, and JSON Backup / Restore unchanged.
+- PC-side validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
 ## Current Next Gate
 
-- Prepare for real stamp rally use.
-- Confirm GitHub Pages is showing the latest v0.5 files before the event.
-- Confirm backup/export and restore procedure before the event.
-- Keep unresolved Issues visible and do not add new features until operational preparation is complete.
+- Upload v0.6 files to GitHub Pages.
+- Confirm the v0.6 UI and `＋記録` scroll behavior on iPhone Safari.
+- After v0.6 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup
 

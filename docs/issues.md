@@ -22,6 +22,31 @@ Current behavior:
 
 ## Closed Issues
 
+### v0.6 `＋記録` Scroll Position
+
+Status: CLOSED
+
+Result:
+
+- Cause: the Day screen `＋記録` button used `position: sticky`, which could remain in an unnatural mid-screen position while the long route list was expanded and scrolled on iPhone Safari.
+- Fix: changed the button back to normal document flow so it no longer follows or remains mid-scroll.
+- PC validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
+### v0.6 UI/UX Refresh
+
+Status: CLOSED
+
+Result:
+
+- Updated displayed app title to `大使館スタンプラリー`.
+- Added subtitle `世界とつながる 東京散歩`.
+- Shifted colors to a brighter green, sky blue, and cream palette.
+- Added guide character assets derived from the user-provided image.
+- Preserved official 157-entry data, Day1-10 structure, NEXT-centered flow, Google Maps behavior, JSON Backup / Restore, and `dataVersion: "1.0"`.
+- PC validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
 ### Official Day1 13-entry Data Integration
 
 Status: CLOSED
