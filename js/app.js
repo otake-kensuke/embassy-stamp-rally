@@ -71,8 +71,10 @@ function persist() {
 
 function setScreen(screen) {
   activeScreen = screen;
+  document.body.dataset.screen = screen;
   state.settings.lastScreen = screen === "day" ? "day" : "home";
   saveState(state);
+  window.scrollTo({ top: 0, left: 0 });
   document.querySelectorAll(".screen").forEach((section) => {
     section.classList.toggle("active", section.id === `${screen}Screen`);
   });
