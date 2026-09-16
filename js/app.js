@@ -78,7 +78,7 @@ function setScreen(screen) {
   });
   $("#backButton").style.visibility = screen === "home" ? "hidden" : "visible";
   $("#screenTitle").textContent = {
-    home: "大使館ラリー",
+    home: "大使館スタンプラリー",
     day: `Day ${state.settings.activeDay}`,
     review: "振り返り",
     settings: "設定"
