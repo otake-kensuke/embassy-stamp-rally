@@ -190,6 +190,7 @@ function renderDay() {
     let routeMapControl;
     if (embassy.googleMapsQuery) {
       routeMapControl = document.createElement("a");
+      routeMapControl.className = "route-map-link";
       routeMapControl.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(embassy.googleMapsQuery)}`;
       routeMapControl.target = "_blank";
       routeMapControl.rel = "noopener";
@@ -201,6 +202,7 @@ function renderDay() {
     }
     const nextButton = document.createElement("button");
     nextButton.type = "button";
+    nextButton.className = "route-next-button";
     nextButton.dataset.next = embassy.id;
     nextButton.disabled = !isNextCandidate(embassy.id);
     nextButton.textContent = "ここをNEXTにする";
