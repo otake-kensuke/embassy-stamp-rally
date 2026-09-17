@@ -72,7 +72,7 @@ function persist() {
 function setScreen(screen) {
   activeScreen = screen;
   document.body.dataset.screen = screen;
-  state.settings.lastScreen = screen === "day" ? "day" : "home";
+  state.settings.lastScreen = screen === "day" || screen === "route" ? "day" : "home";
   saveState(state);
   window.scrollTo({ top: 0, left: 0 });
   document.querySelectorAll(".screen").forEach((section) => {
@@ -81,7 +81,9 @@ function setScreen(screen) {
   $("#backButton").style.visibility = screen === "home" ? "hidden" : "visible";
   $("#screenTitle").textContent = {
     home: "大使館スタンプラリー",
+    days: "Day一覧",
     day: `Day ${state.settings.activeDay}`,
+    route: "今日のルート",
     review: "振り返り",
     settings: "設定"
   }[screen];
@@ -98,6 +100,7 @@ function renderProgress() {
   $("#homePercent").textContent = `${percent}%`;
   $("#homeProgressBar").style.width = `${percent}%`;
   $("#dayProgress").textContent = `${dayDone} / ${dayTotal}`;
+  $("#routeProgress").textContent = `${dayDone} / ${dayTotal}`;
 }
 
 function dayProgress(day) {
@@ -114,16 +117,27 @@ function renderHomeDays() {
     const progress = dayProgress(day);
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "day-button";
+    button.className = `day-button day-tone-${day}`;
     button.classList.toggle("current", day === state.settings.activeDay);
     button.dataset.day = day;
+    button.setAttribute("aria-current", day === state.settings.activeDay ? "true" : "false");
 
-    const label = document.createElement("span");
-    label.textContent = `${progress.done} / ${progress.total}`;
+    const number = document.createElement("span");
+    number.className = "day-number";
+    number.textContent = day;
+    const copy = document.createElement("span");
+    copy.className = "day-copy";
     const title = document.createElement("strong");
     title.textContent = `Day ${day}`;
+    const label = document.createElement("span");
+    label.textContent = `${progress.done} / ${progress.total} 件`;
+    copy.append(title, label);
+    const arrow = document.createElement("span");
+    arrow.className = "day-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "›";
 
-    button.append(label, title);
+    button.append(number, copy, arrow);
     dayGrid.append(button);
   });
 }
@@ -135,6 +149,7 @@ function renderDay() {
 
   panel.classList.toggle("complete", !current);
   $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日の巡回`;
+  $("#routeHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
   $("#reviewHeading").textContent = `Day ${state.settings.activeDay} 振り返り`;
   $("#nextEmbassyName").textContent = current ? current.embassyName : `Day ${state.settings.activeDay} 完了`;
   $("#nextAddress").textContent = current ? current.address : "すべて取得済みです。";
@@ -165,10 +180,25 @@ function renderDay() {
     name.textContent = embassy.embassyName;
     const statusText = document.createElement("p");
     statusText.textContent = status.status === "acquired" ? `取得 ${formatTime(status.acquiredAt)}` : "未取得";
-    info.append(order, name, statusText);
+    const address = document.createElement("p");
+    address.className = "route-address";
+    address.textContent = embassy.address;
+    info.append(order, name, statusText, address);
 
     const actions = document.createElement("div");
     actions.className = "row-actions";
+    let routeMapControl;
+    if (embassy.googleMapsQuery) {
+      routeMapControl = document.createElement("a");
+      routeMapControl.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(embassy.googleMapsQuery)}`;
+      routeMapControl.target = "_blank";
+      routeMapControl.rel = "noopener";
+      routeMapControl.textContent = "地図を開く";
+    } else {
+      routeMapControl = document.createElement("span");
+      routeMapControl.className = "disabled-map";
+      routeMapControl.textContent = "地図要確認";
+    }
     const nextButton = document.createElement("button");
     nextButton.type = "button";
     nextButton.dataset.next = embassy.id;
@@ -190,7 +220,7 @@ function renderDay() {
       option.selected = status.status === value;
       select.append(option);
     });
-    actions.append(nextButton, select);
+    actions.append(routeMapControl, nextButton, select);
     row.append(info, actions);
     routeList.append(row);
   });
@@ -319,7 +349,7 @@ function showToast(message) {
 }
 
 document.addEventListener("click", (event) => {
-  const nav = event.target.closest("[data-screen]");
+  const nav = event.target.closest("button[data-screen]");
   if (nav) setScreen(nav.dataset.screen);
 
   const dayButton = event.target.closest("[data-day]");
@@ -343,7 +373,16 @@ document.addEventListener("change", (event) => {
   if (statusInput) setEmbassyStatus(statusInput.dataset.status, statusInput.value);
 });
 
-$("#backButton").addEventListener("click", () => setScreen("home"));
+$("#backButton").addEventListener("click", () => {
+  const destination = {
+    days: "home",
+    day: "days",
+    route: "day",
+    review: "home",
+    settings: "home"
+  }[activeScreen] || "home";
+  setScreen(destination);
+});
 $("#acquireButton").addEventListener("click", () => {
   const current = getNextEmbassy();
   if (current) setEmbassyStatus(current.id, "acquired");
