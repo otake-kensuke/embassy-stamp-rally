@@ -1076,3 +1076,634 @@ textarea {
     height: 76px;
   }
 }
+
+/* v0.6.1 Responsive & Visual Polish */
+
+body {
+  font-weight: 500;
+}
+
+.topbar {
+  min-height: 62px;
+  margin-bottom: 12px;
+  padding-bottom: 9px;
+}
+
+.topbar .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.topbar h1 {
+  font-size: clamp(24px, 6.7vw, 31px);
+  font-weight: 800;
+}
+
+.icon-button {
+  width: 44px;
+  height: 44px;
+}
+
+.hero-panel {
+  height: 252px;
+  margin-bottom: 10px;
+}
+
+.hero-brand {
+  display: grid;
+  grid-template-columns: 34px minmax(0, auto) 38px;
+  gap: 7px;
+  padding: max(10px, env(safe-area-inset-top)) 10px 0;
+}
+
+.brand-globe {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  object-fit: contain;
+}
+
+.hero-brand h2 {
+  font-size: clamp(23px, 6.5vw, 34px);
+  font-weight: 850;
+}
+
+.hero-brand p {
+  margin-top: 1px;
+  font-size: clamp(12px, 3.3vw, 16px);
+  font-weight: 750;
+}
+
+.hero-brand small {
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.brand-stamp {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid var(--coral);
+  border-radius: 50%;
+  color: var(--coral);
+  font-size: 7px;
+  font-weight: 900;
+  transform: rotate(8deg);
+}
+
+.brand-stamp::after {
+  position: absolute;
+  right: -12px;
+  bottom: 5px;
+  width: 15px;
+  height: 8px;
+  content: "";
+  border-top: 2px solid var(--coral);
+  border-bottom: 2px solid var(--coral);
+}
+
+.home-guide-scene {
+  bottom: 24px;
+  grid-template-columns: minmax(82px, 1fr) minmax(58px, 76px) minmax(78px, 1fr);
+  height: 150px;
+  padding: 0 8px;
+}
+
+.guide-character-man {
+  width: 98px;
+  height: 114px;
+}
+
+.guide-character-woman {
+  width: 92px;
+  height: 112px;
+}
+
+.home-globe {
+  width: min(20vw, 76px);
+  height: min(20vw, 76px);
+  margin-bottom: 17px;
+}
+
+.bubble {
+  top: 1px;
+  min-width: 58px;
+  min-height: 35px;
+  padding: 5px 7px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.cloud-one {
+  left: 12px;
+  top: 68px;
+  transform: scale(0.72);
+}
+
+.cloud-two {
+  right: 11px;
+  top: 78px;
+  transform: scale(0.56);
+}
+
+.hero-plane {
+  top: 67px;
+  font-size: 22px;
+}
+
+.home-skyline {
+  height: 56px;
+  background: url("../assets/tokyo-skyline.png?v=0.6.1-polish") center bottom / cover no-repeat;
+  clip-path: none;
+}
+
+.home-progress-card {
+  gap: 5px 12px;
+  margin-bottom: 9px;
+  padding: 11px 13px;
+}
+
+.home-progress-card .eyebrow {
+  margin-bottom: 1px;
+  font-size: 11px;
+}
+
+.home-progress-card strong {
+  font-size: clamp(34px, 9vw, 46px);
+  font-weight: 800;
+}
+
+.large-percent {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.progress-track {
+  height: 8px;
+}
+
+.home-menu {
+  gap: 0;
+  padding: 6px 10px;
+}
+
+.nav-button {
+  grid-template-columns: 34px 1fr 18px;
+  min-height: 48px;
+  padding: 6px 7px;
+}
+
+.nav-button strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nav-icon {
+  position: relative;
+  width: 31px;
+  height: 31px;
+  color: var(--green);
+}
+
+.icon-days::before {
+  width: 15px;
+  height: 17px;
+  border: 2px solid currentColor;
+  background: repeating-linear-gradient(to bottom, transparent 0 3px, currentColor 3px 4px);
+  content: "";
+}
+
+.icon-route::before {
+  width: 13px;
+  height: 13px;
+  border: 2px solid currentColor;
+  border-radius: 50% 50% 50% 0;
+  content: "";
+  transform: rotate(-45deg);
+}
+
+.icon-route::after {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.icon-record::before {
+  width: 15px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  background: repeating-linear-gradient(to bottom, transparent 0 4px, currentColor 4px 5px);
+  content: "";
+}
+
+.icon-record::after {
+  position: absolute;
+  left: 6px;
+  width: 2px;
+  height: 14px;
+  background: #e8f6ee;
+  content: "";
+}
+
+.icon-backup::before {
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+  content: "↓";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.home-footer-copy {
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.section-heading {
+  margin-bottom: 9px;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 1px;
+}
+
+.section-heading h2 {
+  margin-bottom: 2px;
+  font-size: 24px;
+}
+
+.section-heading > p:last-child {
+  font-size: 14px;
+}
+
+.day-list {
+  gap: 7px;
+}
+
+.day-button {
+  grid-template-columns: 38px 1fr 18px;
+  gap: 10px;
+  min-height: 58px;
+  padding: 7px 12px;
+}
+
+.day-number {
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+}
+
+.day-copy strong {
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.day-copy span {
+  font-size: 12px;
+}
+
+.day-summary,
+.route-heading {
+  margin: 6px 0 8px;
+}
+
+.day-summary .eyebrow,
+.route-heading .eyebrow {
+  margin-bottom: 1px;
+  font-size: 11px;
+}
+
+.day-summary h2,
+.route-heading h2 {
+  font-size: clamp(21px, 6vw, 27px);
+  font-weight: 780;
+}
+
+.day-summary > strong,
+.route-heading > strong {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.next-panel {
+  padding: 13px 14px 10px;
+}
+
+.next-label {
+  margin-bottom: 3px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.next-panel h3 {
+  margin-bottom: 4px;
+  font-size: clamp(24px, 7.4vw, 30px);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.next-panel p {
+  margin-bottom: 9px;
+  font-size: clamp(13px, 3.7vw, 15px);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.map-button {
+  min-height: 46px;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.map-button::before {
+  width: 11px;
+  height: 11px;
+  margin-right: 8px;
+  border: 2px solid currentColor;
+  border-radius: 50% 50% 50% 0;
+  content: "";
+  transform: rotate(-45deg);
+}
+
+.up-next {
+  gap: 0;
+  margin: 8px 0 0;
+  padding-top: 3px;
+  border-top: 1px solid var(--line);
+}
+
+.up-next div {
+  grid-template-columns: 53px 1fr;
+  min-height: 31px;
+  padding: 4px 2px;
+  border: 0;
+  border-bottom: 1px solid #eaf0ec;
+  border-radius: 0;
+  background: transparent;
+}
+
+.up-next div:last-child {
+  border-bottom: 0;
+}
+
+.up-next span {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.up-next strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.complete-button {
+  min-height: 50px;
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.day-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.route-button,
+.fab-button {
+  display: flex;
+  gap: 7px;
+  min-height: 46px;
+  margin: 0;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.route-button {
+  border: 1px solid var(--green);
+}
+
+.fab-button {
+  position: static;
+  border: 1px solid var(--green);
+}
+
+.button-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+}
+
+.day-guide-note {
+  position: relative;
+  display: block;
+  min-height: 0;
+  height: 0;
+  margin: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.day-guide-note p {
+  position: absolute;
+  top: 8px;
+  right: 48px;
+  width: 90px;
+  margin: 0;
+  padding: 6px 8px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.day-guide-note .guide-character-woman {
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  width: 48px;
+  height: 66px;
+}
+
+.route-list {
+  gap: 8px;
+}
+
+.route-row {
+  gap: 8px;
+  padding: 10px;
+}
+
+.route-order {
+  width: 27px;
+  height: 27px;
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.route-row strong {
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.route-row p {
+  margin: 3px 0 0 34px;
+  font-size: 12px;
+  font-weight: 450;
+}
+
+.row-actions {
+  gap: 6px;
+}
+
+.row-actions a,
+.row-actions button,
+.row-actions select,
+.disabled-map {
+  min-height: 44px;
+  padding: 6px 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.route-map-link::before {
+  margin-right: 5px;
+  content: "●";
+  font-size: 9px;
+}
+
+.route-next-button::before {
+  margin-right: 5px;
+  color: var(--green);
+  content: "◆";
+  font-size: 8px;
+}
+
+.timeline-item {
+  padding: 11px;
+}
+
+@media (min-width: 720px) {
+  .hero-panel {
+    height: 292px;
+  }
+
+  .home-guide-scene {
+    height: 180px;
+  }
+
+  .guide-character-man,
+  .guide-character-woman {
+    height: 144px;
+  }
+
+  .home-globe {
+    width: 94px;
+    height: 94px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-panel {
+    height: 242px;
+  }
+
+  .home-guide-scene {
+    height: 142px;
+  }
+
+  .guide-character-man {
+    height: 108px;
+  }
+
+  .guide-character-woman {
+    height: 106px;
+  }
+
+  .home-globe {
+    width: 68px;
+    height: 68px;
+  }
+}
+
+@media (max-width: 350px) {
+  .hero-panel {
+    height: 224px;
+  }
+
+  .hero-brand {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .brand-globe {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-stamp,
+  .hero-brand small,
+  .bubble {
+    display: none;
+  }
+
+  .hero-brand h2 {
+    font-size: 21px;
+  }
+
+  .hero-brand p {
+    font-size: 11px;
+  }
+
+  .home-guide-scene {
+    grid-template-columns: 1fr 58px 1fr;
+    height: 132px;
+  }
+
+  .guide-character-man,
+  .guide-character-woman {
+    height: 98px;
+  }
+
+  .home-globe {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 14px;
+  }
+
+  .cloud-one,
+  .cloud-two {
+    top: 58px;
+  }
+
+  .hero-plane {
+    top: 57px;
+  }
+
+  .next-panel h3 {
+    font-size: 24px;
+  }
+
+  .day-actions {
+    gap: 6px;
+  }
+
+  .route-button,
+  .fab-button {
+    font-size: 13px;
+  }
+
+  .day-guide-note p {
+    display: none;
+  }
+}
