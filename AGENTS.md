@@ -129,19 +129,28 @@ v0.6:
 - アプリ名称、配色、背景透過の案内役キャラクター表示を更新
 - `＋記録` ボタンのスクロール中の不自然な残留を修正
 - 正式157件データ、Day1〜10構成、NEXT中心UI、`localStorage` 構造、`dataVersion: "1.0"` は変更しない
+- iPhone Safari実機レビューを実施し、情報密度とAsset活用に改善余地があることを確認
+
+v0.6.1 Responsive & Visual Polish:
+
+- v0.6の機能、正式157件データ、保存構造を維持したままiPhone向け情報密度を調整
+- Heroを短縮し、地球、スタンプ風モチーフ、東京の街並みを追加
+- Day一覧、Day / NEXT、今日のルートを狭い画面向けに再調整
+- NEXT画面は主要情報と操作を1画面内で確認しやすい構成へ変更
+- `＋記録` は通常のコンテンツフローを維持
 - PC検証PASS
 - iPhone Safari実機確認待ち
 
 現在の状態:
 
-- v0.6 GitHub Pages反映・iPhone Safari実機確認待ち
+- v0.6.1 Responsive & Visual PolishはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
 - v0.5は実装、PC検証、iPhone Safari実機検証まですべて完了
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.6をGitHub Pagesへ反映した後のiPhone Safari実機確認
-- v0.6確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
+- v0.6.1をGitHub Pagesへ反映した後のiPhone Safari実機確認
+- v0.6.1確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
 - 新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認する
 
 ## v0.5 PM決定事項

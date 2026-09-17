@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.6.4">
+    <link rel="stylesheet" href="css/style.css?v=0.6.1-polish">
   </head>
   <body>
     <div class="app-shell">
@@ -24,23 +24,24 @@
             <span class="hero-plane" aria-hidden="true">✈</span>
 
             <div class="hero-brand">
-              <span class="brand-globe" aria-hidden="true">◎</span>
+              <img class="brand-globe" src="assets/hero-globe.png?v=0.6.1-polish" alt="" aria-hidden="true">
               <div>
                 <h2 id="homeHeading">大使館スタンプラリー</h2>
                 <p>世界とつながる 東京散歩</p>
                 <small>Embassy Stamp Rally</small>
               </div>
+              <span class="brand-stamp" aria-hidden="true">STAMP</span>
             </div>
 
             <div class="home-guide-scene" aria-hidden="true">
               <div class="guide-slot">
                 <span class="bubble">世界を<br>めぐろう!</span>
-                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.6.4" alt="">
+                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.6.1-polish" alt="">
               </div>
-              <img class="home-globe" src="assets/hero-globe.png?v=0.6.4" alt="">
+              <img class="home-globe" src="assets/hero-globe.png?v=0.6.1-polish" alt="">
               <div class="guide-slot">
                 <span class="bubble">次は<br>どこへ?</span>
-                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.4" alt="">
+                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.1-polish" alt="">
               </div>
             </div>
             <div class="home-skyline" aria-hidden="true"></div>
@@ -57,22 +58,22 @@
 
           <nav class="home-menu" aria-label="メインメニュー">
             <button class="nav-button" data-screen="days" type="button">
-              <span class="nav-icon" aria-hidden="true">▤</span>
+              <span class="nav-icon icon-days" aria-hidden="true"></span>
               <strong>Day一覧からはじめる</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
             <button class="nav-button" data-screen="route" type="button">
-              <span class="nav-icon" aria-hidden="true">⌖</span>
+              <span class="nav-icon icon-route" aria-hidden="true"></span>
               <strong>今日のルートを見る</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
             <button class="nav-button" data-screen="review" type="button">
-              <span class="nav-icon" aria-hidden="true">▥</span>
+              <span class="nav-icon icon-record" aria-hidden="true"></span>
               <strong>記録を見る</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
             <button class="nav-button" data-screen="settings" type="button">
-              <span class="nav-icon" aria-hidden="true">⇩</span>
+              <span class="nav-icon icon-backup" aria-hidden="true"></span>
               <strong>バックアップ / 復元</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
@@ -104,26 +105,28 @@
             <h3 id="nextEmbassyName">未取得はありません</h3>
             <p id="nextAddress">おつかれさまでした。</p>
             <a class="map-button" id="mapButton" target="_blank" rel="noopener">地図を開く</a>
+            <div class="up-next">
+              <div><span>次</span><strong id="nextOne">-</strong></div>
+              <div><span>その次</span><strong id="nextTwo">-</strong></div>
+            </div>
           </article>
-
-          <div class="up-next">
-            <div><span>次</span><strong id="nextOne">-</strong></div>
-            <div><span>その次</span><strong id="nextTwo">-</strong></div>
-          </div>
 
           <button class="complete-button" id="acquireButton" type="button">✓ 取得済み</button>
 
-          <button class="route-button" data-screen="route" type="button">
-            <span aria-hidden="true">⌖</span>
-            今日のルートを見る
-            <span aria-hidden="true">›</span>
-          </button>
-
-          <button class="fab-button" id="openLogSheet" type="button">＋記録</button>
+          <div class="day-actions">
+            <button class="route-button" data-screen="route" type="button">
+              <span class="button-icon icon-route" aria-hidden="true"></span>
+              今日のルート
+            </button>
+            <button class="fab-button" id="openLogSheet" type="button">
+              <span class="button-icon icon-record" aria-hidden="true"></span>
+              ＋記録
+            </button>
+          </div>
 
           <div class="day-guide-note" aria-hidden="true">
             <p>次の大使館へ<br>行ってみよう!</p>
-            <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.4" alt="">
+            <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.1-polish" alt="">
           </div>
         </section>
 
@@ -175,9 +178,9 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.6.4"></script>
-    <script src="js/storage.js?v=0.6.4"></script>
-    <script src="js/backup.js?v=0.6.4"></script>
-    <script src="js/app.js?v=0.6.4"></script>
+    <script src="js/data.js?v=0.6.1-polish"></script>
+    <script src="js/storage.js?v=0.6.1-polish"></script>
+    <script src="js/backup.js?v=0.6.1-polish"></script>
+    <script src="js/app.js?v=0.6.1-polish"></script>
   </body>
 </html>
