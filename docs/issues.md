@@ -48,6 +48,13 @@ Result:
 - iPhone Safari validation is pending after GitHub Pages update.
 - v0.6.1 changed guide characters from CSS background images to normal image elements to make GitHub upload/cache issues easier to catch.
 - v0.6.3 reworked the Home screen to be much closer to the reference image and added screen-change scroll reset.
+- v0.6.4 replaced the draft UI with the approved four-screen Design Target structure.
+- Replaced rectangular character crops with independent transparent PNG assets.
+- Removed the central `STAMP` treatment and separated title, speech bubbles, and guide characters.
+- Added a dedicated Day list and Today's route screen while preserving v0.5 data and NEXT behavior.
+- 390x844 and 320px PC browser validation passed without horizontal overflow or content overlap.
+- Day7 long-route scrolling passed without `＋記録` residual display.
+- iPhone Safari validation remains pending after GitHub Pages update.
 
 ### Official Day1 13-entry Data Integration
 

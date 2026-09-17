@@ -70,10 +70,24 @@ This file records only important project milestones. It is not a detailed daily 
 - Updated cache-busting query strings to `v=0.6.3`.
 - PC validation passed.
 
+## v0.6.4 Final Implementation
+
+- Rebuilt the v0.6 UI against the approved four-screen Design Target instead of extending the previous draft design.
+- Added separate Home, Day list, Today's route, and Day / NEXT views while preserving the v0.5 data and NEXT behavior.
+- Removed the large central `STAMP` treatment.
+- Rebuilt the Home Hero with sky, clouds, a small airplane, a city silhouette, guide characters, and an earth illustration.
+- Replaced rectangular source-image crops with independent transparent PNG assets for the male character, female character, and earth.
+- Kept all UI text, progress, embassy names, and buttons in HTML/CSS.
+- Moved the long route list to its own screen and kept `＋記録` in normal document flow on the Day / NEXT screen.
+- Added Google Maps and manual NEXT controls to each route row.
+- Verified 390x844 and 320px mobile layouts without horizontal overflow or title/character overlap.
+- Re-ran data, storage, NEXT, route, record, review, restore, Afghanistan, and `dataVersion: "1.0"` regression checks; PC validation passed.
+- iPhone Safari validation remains pending after GitHub Pages update.
+
 ## Current Next Gate
 
-- Upload the v0.6.3 files to GitHub Pages.
-- Confirm the v0.6.3 UI and `＋記録` scroll behavior on iPhone Safari.
+- Upload the v0.6.4 Final Implementation files to GitHub Pages.
+- Confirm the v0.6.4 UI, Day7 / Day8 route scrolling, and `＋記録` behavior on iPhone Safari.
 - After v0.6 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup
