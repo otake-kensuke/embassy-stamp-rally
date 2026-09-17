@@ -52,7 +52,7 @@ Prototypeの技術検証は完了しています。
 - v0.3: Day画面復元
 - v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
 - v0.5: 正式Day1〜10 157件データ統合、PC検証PASS、iPhone実機検証PASS
-- v0.6: UI/UX改善、`＋記録` スクロール位置Bug Fix、PC検証PASS、iPhone実機確認待ち
+- v0.6: Design Targetに沿った4画面UI、背景透過キャラクターAsset、`＋記録` スクロール位置Bug Fix、PC検証PASS、iPhone実機確認待ち
 
 現在の状態は、v0.6 GitHub Pages反映・iPhone Safari実機確認待ちです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
 
