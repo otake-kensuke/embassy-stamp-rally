@@ -2,6 +2,12 @@
 
 ## Open Issues
 
+### v0.6.1 iPhone Safari Real-device Validation
+
+Status: OPEN
+
+v0.6.1 Responsive & Visual PolishはPC検証まで完了。GitHub Pages反映後、320〜430px相当のiPhone Safari縦画面でHero、Day一覧、Day / NEXT、今日のルート、Day7 / Day8のスクロールを確認する。
+
 ### Prototype / Release Folder Role
 
 Status: OPEN
@@ -21,6 +27,20 @@ Current behavior:
 - App shows `地図要確認` and disables the map link.
 
 ## Closed Issues
+
+### v0.6.1 Responsive & Visual Polish
+
+Status: CLOSED (PC)
+
+Result:
+
+- Shortened the Home Hero and added earth, stamp, cloud, airplane, and Tokyo skyline visual language.
+- Replaced abstract menu symbols with map/list, location, record, and backup icons.
+- Reduced Day list, NEXT, and route screen spacing without changing functionality.
+- Moved `次` / `その次` into the NEXT card and placed route / record actions in two columns.
+- Preserved normal-flow `＋記録` behavior.
+- PC browser validation passed at 320, 375, 390, and 430px widths.
+- iPhone Safari validation remains an open Gate.
 
 ### v0.6 `＋記録` Scroll Position
 

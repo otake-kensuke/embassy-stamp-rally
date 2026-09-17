@@ -57,13 +57,35 @@ Result: PASS
 - Day10 Afghanistanの `地図要確認`、リンクなし: PASS
 - ユーザー入力・復元値を `innerHTML` へ埋め込む箇所なし: PASS
 
+## v0.6.1 Responsive & Visual Polish PC確認
+
+Result: PASS
+
+- 320 / 375 / 390 / 430px幅で横スクロールなし: PASS
+- Hero高さ224〜242px、タイトル・人物・地球・吹き出しの重なりなし: PASS
+- 東京の街並みAsset表示: PASS
+- Homeの主要メニュー操作領域48px: PASS
+- Day一覧で390x844表示時にDay1〜Day10を確認可能: PASS
+- Day / NEXTで390x844表示時に主要操作が約482px以内: PASS
+- 320px幅で長い大使館名が折り返され、主要操作が約494px以内: PASS
+- NEXT名24〜30px、地図ボタン46px: PASS
+- `取得済み` 全幅、`今日のルート` / `＋記録` 2列表示: PASS
+- 今日のルートのGoogle Maps / 手動NEXT / 状態操作領域44px以上: PASS
+- Day7 22件、Day8 21件のルート生成とスクロール可能な高さ: PASS
+- Day7 / Day8で表示中のsticky/fixed要素なし、`＋記録` 残留なし: PASS
+- 手動NEXT、取得済みからの自動NEXT、進捗更新: PASS
+- 記録保存Toast、約2秒後非表示、振り返り表示: PASS
+- 再読み込み後のDayとNEXT復元: PASS
+- 正式157件、Day別件数、ID重複、巡回順、Google Maps、Afghanistan: PASS
+- `dataVersion: "1.0"`、旧Day1進捗、JSON Backup / Restore互換: PASS
+
 ## iPhone Safari実機確認項目
 
 GitHub Pages反映後、ユーザー側で確認する。
 
 - ホーム画面で新タイトルとサブタイトルが見やすい
 - 案内役キャラクターが表示される
-- `assets/guide-man.png` と `assets/guide-woman.png` がGitHubへアップロードされている
+- `assets/guide-man-clean.png`、`assets/guide-woman-clean.png`、`assets/hero-globe.png`、`assets/tokyo-skyline.png` がGitHubへアップロードされている
 - ホーム画面が参考画像の印象に近づいている
 - 人物が背景から独立しており、矩形の空・木・階段・看板が残っていない
 - タイトル、キャラクター、吹き出しが重なっていない
@@ -79,3 +101,6 @@ GitHub Pages反映後、ユーザー側で確認する。
 - `＋記録` / 振り返り
 - Safari再起動後のDay復元
 - JSON Backup / Restore
+- 320〜430px相当で横スクロール、文字切れ、画像と文字の重なりがない
+- Day / NEXTの主要情報と操作がスクロールなしで確認できる
+- 今日のルートのGoogle Maps、手動NEXT、取得状態が片手で操作しやすい

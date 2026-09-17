@@ -56,7 +56,7 @@ This file records only important project milestones. It is not a detailed daily 
 - PC-side validation passed.
 - iPhone Safari validation is pending after GitHub Pages update.
 
-## v0.6.1
+## v0.6 Asset Load Fix (intermediate)
 
 - Changed guide character rendering from CSS background images to normal image elements so missing GitHub uploads are easier to detect and cache behavior is clearer.
 - Confirmed locally that the home and Day screen guide characters render.
@@ -84,11 +84,24 @@ This file records only important project milestones. It is not a detailed daily 
 - Re-ran data, storage, NEXT, route, record, review, restore, Afghanistan, and `dataVersion: "1.0"` regression checks; PC validation passed.
 - iPhone Safari validation remains pending after GitHub Pages update.
 
+## v0.6.1 Responsive & Visual Polish
+
+- Applied the iPhone Safari review findings to the v0.6 Final Implementation without changing app data, logic, or storage.
+- Shortened the Home Hero and completed the visual language with earth, stamp, clouds, airplane, and a Tokyo skyline Asset.
+- Replaced abstract Home menu marks with practical list, location, record, and backup icons.
+- Compressed Day list cards while retaining Day colors and touch targets.
+- Kept the NEXT screen's core information and actions within the first iPhone viewport at tested widths.
+- Moved `次` and `その次` into the NEXT card and arranged route / record actions in two columns.
+- Compressed route cards and kept map, manual NEXT, and status controls at least 44px high.
+- Verified Day7 and Day8 long routes without sticky/fixed `＋記録` residue.
+- Re-ran data, storage, NEXT, record, review, restore, Afghanistan, and responsive regression checks; PC validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
 ## Current Next Gate
 
-- Upload the v0.6.4 Final Implementation files to GitHub Pages.
-- Confirm the v0.6.4 UI, Day7 / Day8 route scrolling, and `＋記録` behavior on iPhone Safari.
-- After v0.6 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
+- Upload the v0.6.1 Responsive & Visual Polish files to GitHub Pages.
+- Confirm the four screens, first-viewport NEXT information, Day7 / Day8 route scrolling, and `＋記録` behavior on iPhone Safari.
+- After v0.6.1 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup
 
