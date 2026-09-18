@@ -1216,7 +1216,7 @@ body {
 
 .home-skyline {
   height: 56px;
-  background: url("../assets/tokyo-skyline.png?v=0.6.1-polish") center bottom / cover no-repeat;
+  background: url("../assets/tokyo-skyline.png?v=0.6.2-final") center bottom / cover no-repeat;
   clip-path: none;
 }
 
@@ -1705,5 +1705,376 @@ body {
 
   .day-guide-note p {
     display: none;
+  }
+}
+
+/* v0.6.2 Final Visual Polish */
+.hero-brand {
+  grid-template-columns: 36px minmax(0, auto) 38px;
+}
+
+.brand-logo {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  align-self: start;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--green);
+  font-size: 18px;
+  line-height: 1;
+  transform: rotate(-12deg);
+}
+
+.home-guide-scene {
+  grid-template-columns: minmax(78px, 1fr) clamp(88px, 25vw, 108px) minmax(78px, 1fr);
+}
+
+.home-guide-scene .guide-character-man {
+  transform: scaleX(-1);
+}
+
+.home-globe {
+  width: clamp(88px, 25vw, 108px);
+  height: clamp(88px, 25vw, 108px);
+  margin-bottom: 8px;
+}
+
+.bubble {
+  top: 0;
+  display: grid;
+  min-width: 62px;
+  min-height: 36px;
+  place-items: center;
+  border: 1px solid #cfe2da;
+  box-shadow: 0 2px 0 rgba(15, 122, 70, 0.08);
+  line-height: 1.15;
+}
+
+.bubble::after {
+  position: absolute;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border-right: 1px solid #cfe2da;
+  border-bottom: 1px solid #cfe2da;
+  background: var(--white);
+  transform: rotate(45deg);
+}
+
+.bubble-man::after {
+  right: 12px;
+}
+
+.bubble-woman::after {
+  left: 12px;
+}
+
+.cloud-three,
+.cloud-four {
+  position: absolute;
+  z-index: 1;
+  width: 48px;
+  height: 17px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.cloud-three::before,
+.cloud-three::after,
+.cloud-four::before,
+.cloud-four::after {
+  position: absolute;
+  bottom: 4px;
+  content: "";
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud-three::before,
+.cloud-four::before {
+  left: 9px;
+  width: 18px;
+  height: 18px;
+}
+
+.cloud-three::after,
+.cloud-four::after {
+  right: 7px;
+  width: 13px;
+  height: 13px;
+}
+
+.cloud-one {
+  left: 23%;
+  top: 79px;
+  transform: scale(0.48);
+}
+
+.cloud-two {
+  right: 22%;
+  top: 82px;
+  transform: scale(0.44);
+}
+
+.cloud-three {
+  left: -7px;
+  top: 139px;
+  transform: scale(0.48);
+}
+
+.cloud-four {
+  right: -7px;
+  top: 143px;
+  transform: scale(0.46);
+}
+
+.home-visual-footer {
+  position: relative;
+  flex: 1 1 112px;
+  min-height: 112px;
+  height: 112px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-top: 1px solid rgba(15, 122, 70, 0.18);
+  background: #fffdf4;
+}
+
+#homeScreen.active {
+  display: flex;
+  min-height: calc(100svh - 40px);
+  flex-direction: column;
+}
+
+.home-visual-footer .home-footer-copy {
+  position: relative;
+  z-index: 2;
+  margin: 9px 0 0;
+}
+
+.home-visual-footer::before {
+  position: absolute;
+  z-index: 1;
+  top: 52%;
+  left: 23%;
+  width: 50%;
+  content: "";
+  border-top: 2px dashed rgba(135, 206, 235, 0.7);
+  transform: rotate(-7deg);
+}
+
+.home-footer-skyline {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 68px;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.home-footer-plane {
+  position: absolute;
+  z-index: 2;
+  top: 43%;
+  left: 29%;
+  color: var(--sky);
+  font-size: 20px;
+  transform: rotate(-10deg);
+}
+
+.home-footer-cloud {
+  position: absolute;
+  z-index: 1;
+  top: 32%;
+  right: 22%;
+  width: 35px;
+  height: 11px;
+  border-radius: 999px;
+  background: #dff5ff;
+}
+
+.home-footer-stamp {
+  position: absolute;
+  z-index: 2;
+  top: 39%;
+  right: 7%;
+  width: 29px;
+  height: 29px;
+  border: 2px solid var(--coral);
+  border-radius: 50%;
+  opacity: 0.78;
+  transform: rotate(9deg);
+}
+
+.home-footer-stamp::after {
+  position: absolute;
+  right: -12px;
+  bottom: 5px;
+  width: 14px;
+  height: 7px;
+  content: "";
+  border-top: 2px solid var(--coral);
+  border-bottom: 2px solid var(--coral);
+}
+
+.next-panel h3 {
+  margin-top: 0;
+}
+
+.complete-button {
+  background: var(--green);
+}
+
+.acquired-status {
+  margin: 7px 0 0;
+  padding: 9px 12px;
+  border: 1px solid #b9dfc9;
+  border-radius: 6px;
+  background: #e8f6ee;
+  color: #0a6739;
+  font-size: 13px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.acquired-status[hidden] {
+  display: none;
+}
+
+.day-visual-footer {
+  position: relative;
+  height: clamp(120px, 31vw, 148px);
+  margin-top: 8px;
+  overflow: hidden;
+  border-top: 1px solid rgba(15, 122, 70, 0.18);
+  pointer-events: none;
+}
+
+.day-footer-skyline {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.92;
+}
+
+.day-footer-character {
+  position: absolute;
+  z-index: 2;
+  bottom: 25px;
+  width: auto;
+  height: clamp(76px, 21vw, 94px);
+  object-fit: contain;
+}
+
+.day-footer-man {
+  left: 5%;
+  transform: scaleX(-1);
+}
+
+.day-footer-woman {
+  right: 5%;
+}
+
+.day-footer-bubble {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  left: 50%;
+  min-width: 102px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid #cfe2da;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.day-footer-bubble::before,
+.day-footer-bubble::after {
+  position: absolute;
+  bottom: -7px;
+  width: 11px;
+  height: 11px;
+  content: "";
+  border-right: 1px solid #cfe2da;
+  border-bottom: 1px solid #cfe2da;
+  background: var(--white);
+  transform: rotate(45deg);
+}
+
+.day-footer-bubble::before {
+  left: 18px;
+}
+
+.day-footer-bubble::after {
+  right: 18px;
+}
+
+@media (max-width: 430px) {
+  .home-globe {
+    width: clamp(88px, 25vw, 102px);
+    height: clamp(88px, 25vw, 102px);
+  }
+}
+
+@media (max-width: 350px) {
+  .hero-brand {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .bubble {
+    display: grid;
+    min-width: 52px;
+    min-height: 32px;
+    padding: 4px 5px;
+    font-size: 8px;
+  }
+
+  .home-guide-scene {
+    grid-template-columns: minmax(70px, 1fr) 82px minmax(70px, 1fr);
+  }
+
+  .home-globe {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 8px;
+  }
+
+  .cloud-one {
+    left: 21%;
+  }
+
+  .cloud-two {
+    right: 20%;
+  }
+
+  .home-visual-footer {
+    height: 100px;
+  }
+
+  .day-footer-bubble {
+    min-width: 90px;
+    padding: 7px 9px;
+    font-size: 10px;
   }
 }
