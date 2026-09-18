@@ -139,18 +139,29 @@ v0.6.1 Responsive & Visual Polish:
 - NEXT画面は主要情報と操作を1画面内で確認しやすい構成へ変更
 - `＋記録` は通常のコンテンツフローを維持
 - PC検証PASS
+- iPhone Safari実機レビューを実施し、ホーム下部の空白、案内役の向きと吹き出し、地球サイズ、Day画面の取得状態表現に改善余地があることを確認
+
+v0.6.2 Final Visual Polish:
+
+- ホームHeroのコンパクトさを維持したまま、男性・地球・女性を内向きに配置
+- 吹き出し、4つの雲、アプリロゴ、地球サイズ、下部の街並みフッターを調整
+- Day画面の名称を統一し、`NEXT` ラベルを廃止
+- 未取得時の操作を `スタンプを取得した`、取得後の確認を薄緑の `✓ 取得済み` ステータスとして分離
+- Day画面下部に男性・吹き出し・女性・街並みの案内フッターを追加
+- 正式157件、保存構造、NEXTロジック、Day一覧、今日のルートは変更しない
+- PC検証PASS
 - iPhone Safari実機確認待ち
 
 現在の状態:
 
-- v0.6.1 Responsive & Visual PolishはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
+- v0.6.2 Final Visual PolishはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
 - v0.5は実装、PC検証、iPhone Safari実機検証まですべて完了
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.6.1をGitHub Pagesへ反映した後のiPhone Safari実機確認
-- v0.6.1確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
+- v0.6.2をGitHub Pagesへ反映した後のiPhone Safari実機確認
+- v0.6.2確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
 - 新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認する
 
 ## v0.5 PM決定事項

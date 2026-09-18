@@ -54,11 +54,12 @@ Prototypeの技術検証は完了しています。
 - v0.4: 正式Day1 13件データ統合、iPhone実機検証PASS
 - v0.5: 正式Day1〜10 157件データ統合、PC検証PASS、iPhone実機検証PASS
 - v0.6: Design Targetに沿った4画面UI、背景透過キャラクターAsset、`＋記録` スクロール位置Bug Fix
-- v0.6.1 Responsive & Visual Polish: Hero短縮、Asset活用、Day一覧・NEXT・ルートのiPhone向け情報密度調整、PC検証PASS、iPhone実機確認待ち
+- v0.6.1 Responsive & Visual Polish: Hero短縮、Asset活用、Day一覧・NEXT・ルートのiPhone向け情報密度調整、iPhone実機レビュー完了
+- v0.6.2 Final Visual Polish: ホームの人物・地球・吹き出し・雲・下部フッター、Day画面の文言・取得状態・案内フッターを最終調整、PC検証PASS、iPhone実機確認待ち
 
-現在の状態は、v0.6.1 Responsive & Visual PolishのGitHub Pages反映・iPhone Safari実機確認待ちです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
+現在の状態は、v0.6.2 Final Visual PolishのGitHub Pages反映・iPhone Safari実機確認待ちです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
 
-次のGateは、v0.6.1をGitHub Pagesへ反映した後のiPhone Safari実機確認です。確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進みます。
+次のGateは、v0.6.2をGitHub Pagesへ反映した後のiPhone Safari実機確認です。確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進みます。
 
 ## 開発時の確認
 
