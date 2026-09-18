@@ -97,11 +97,25 @@ This file records only important project milestones. It is not a detailed daily 
 - Re-ran data, storage, NEXT, record, review, restore, Afghanistan, and responsive regression checks; PC validation passed.
 - iPhone Safari validation is pending after GitHub Pages update.
 
+## v0.6.2 Final Visual Polish
+
+- Applied the final Visual Issue findings from the v0.6.1 iPhone Safari review without changing app data, storage, or route logic.
+- Reoriented the Home guide characters toward the enlarged globe and added speech-bubble tails and four clouds.
+- Replaced the duplicated globe mark beside the title with a small airplane app logo.
+- Added a restrained Home footer using the Tokyo skyline, airplane, cloud, stamp, and route motifs.
+- Renamed the Day heading to `Day X 今日のルート` and removed the `NEXT` label.
+- Separated the unacquired `スタンプを取得した` action from the acquired light-green `✓ 取得済み` status.
+- Added a 120〜133px Day guide footer below the core actions.
+- Verified 320, 375, 390, and 430px layouts without horizontal overflow.
+- Re-ran official data, NEXT, manual NEXT, route, record, review, restore, maps, Afghanistan, storage, and Backup / Restore compatibility checks; PC validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
 ## Current Next Gate
 
-- Upload the v0.6.1 Responsive & Visual Polish files to GitHub Pages.
-- Confirm the four screens, first-viewport NEXT information, Day7 / Day8 route scrolling, and `＋記録` behavior on iPhone Safari.
-- After v0.6.1 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
+- Upload the v0.6.2 Final Visual Polish files to GitHub Pages.
+- Confirm the Home character direction, speech bubbles, globe size, visual footer, Day action/status wording, and guide footer on iPhone Safari.
+- Confirm Day7 / Day8 route scrolling and `＋記録` behavior remain unchanged.
+- After v0.6.2 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup
 
