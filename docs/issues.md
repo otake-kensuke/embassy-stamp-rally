@@ -2,11 +2,11 @@
 
 ## Open Issues
 
-### v0.6.2 iPhone Safari Real-device Validation
+### v0.6.3 iPhone Safari Real-device Validation
 
 Status: OPEN
 
-v0.6.2 Final Visual PolishはPC検証まで完了。GitHub Pages反映後、320〜430px相当のiPhone Safari縦画面でホームHero、Day画面の取得操作と状態表示、案内フッター、Day7 / Day8のスクロールを確認する。
+v0.6.3 Final Layout TuningはPC検証まで完了。GitHub Pages反映後、320〜430px相当のiPhone Safari縦画面で人物比率、地球と街並みの間隔、Visual Footer、取得前後のLayout Shift、Toast、Day7 / Day8のスクロールを確認する。
 
 ### Prototype / Release Folder Role
 
@@ -42,9 +42,22 @@ Result:
 - PC browser validation passed at 320, 375, 390, and 430px widths.
 - iPhone Safari実機レビューでVisual Issueを確認し、v0.6.2の修正対象として整理した。
 
-### v0.6.2 Final Visual Polish
+### v0.6.3 Final Layout Tuning
 
 Status: CLOSED (PC)
+
+Result:
+
+- ホームとDay画面の男性を女性より見た目で約7.5%高く調整した。
+- ホームの地球を20px上へ、下部街並みを20px下へ移動した。
+- Day案内フッターを通常フローのflex領域で画面下部まで展開した。
+- 取得後の通常フロー内ステータスをToastへ置き換え、390x844で主要要素の位置差0pxを確認した。
+- 320、375、390、430px幅と主要回帰テストはPASSした。
+- GitHub Pages反映後のiPhone Safari実機確認が次Gate。
+
+### v0.6.2 Final Visual Polish
+
+Status: CLOSED (iPhone review completed; superseded by v0.6.3)
 
 Result:
 
@@ -54,7 +67,7 @@ Result:
 - 未取得時の操作と取得後の状態表示を分離した。
 - Day画面下部に男性・吹き出し・女性・街並みの案内フッターを追加した。
 - 320、375、390、430px幅と主要回帰テストはPASSした。
-- GitHub Pages反映後のiPhone Safari実機確認が次Gate。
+- iPhone Safari実機レビューで人物比率、地球と街並みの間隔、Visual Footer、取得時Layout Shiftの改善点を確認し、v0.6.3へ引き継いだ。
 
 ### v0.6 `＋記録` Scroll Position
 

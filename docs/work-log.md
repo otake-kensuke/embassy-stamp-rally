@@ -110,12 +110,24 @@ This file records only important project milestones. It is not a detailed daily 
 - Re-ran official data, NEXT, manual NEXT, route, record, review, restore, maps, Afghanistan, storage, and Backup / Restore compatibility checks; PC validation passed.
 - iPhone Safari validation is pending after GitHub Pages update.
 
+## v0.6.3 Final Layout Tuning (2026-09-19)
+
+- Kept the v0.6.2 screen structure, official 157-entry data, NEXT logic, and storage structure unchanged.
+- Adjusted the Home and Day guide characters so the male character is visually about 7.5% taller than the female character at 320, 375, 390, and 430px widths.
+- Raised the Home globe by 20px and lowered the Home footer skyline by 20px.
+- Extended the Day visual footer in normal flex flow and added the shared airplane, cloud, stamp, route, and skyline motifs.
+- Removed the acquired-status row that changed document height after acquisition.
+- Added `スタンプを取得しました` to the existing Toast after acquisition while preserving save, progress update, and automatic NEXT.
+- Measured 0px vertical movement for the acquisition button, route and record actions, footer, characters, and skyline before/after acquisition at 390x844.
+- Re-ran responsive, data, NEXT, manual NEXT, route, record, review, restore, maps, Afghanistan, storage, and Backup / Restore compatibility checks; PC validation passed.
+- iPhone Safari validation is pending after GitHub Pages update.
+
 ## Current Next Gate
 
-- Upload the v0.6.2 Final Visual Polish files to GitHub Pages.
-- Confirm the Home character direction, speech bubbles, globe size, visual footer, Day action/status wording, and guide footer on iPhone Safari.
+- Upload the v0.6.3 Final Layout Tuning files to GitHub Pages.
+- Confirm the Home character height ratio, globe/skyline gap, visual footer, Day footer, acquisition layout stability, and completion Toast on iPhone Safari.
 - Confirm Day7 / Day8 route scrolling and `＋記録` behavior remain unchanged.
-- After v0.6.2 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
+- After v0.6.3 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
 
 ## Project Management Setup
 
