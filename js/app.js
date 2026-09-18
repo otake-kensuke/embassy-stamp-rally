@@ -4,7 +4,6 @@ let state = loadState();
 let activeScreen = "home";
 let selectedCategory = "メモ";
 let toastTimer = null;
-let lastAcquiredNotice = null;
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -163,13 +162,6 @@ function renderDay() {
   $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
   $("#acquireButton").disabled = !current;
   $("#acquireButton").textContent = current ? "スタンプを取得した" : "完了";
-
-  const acquiredStatus = $("#acquiredStatus");
-  const showAcquiredStatus = lastAcquiredNotice && lastAcquiredNotice.day === state.settings.activeDay;
-  acquiredStatus.hidden = !showAcquiredStatus;
-  acquiredStatus.textContent = showAcquiredStatus
-    ? `✓ ${lastAcquiredNotice.name} 取得済み`
-    : "";
 
   const routeList = $("#routeList");
   clearChildren(routeList);
@@ -396,11 +388,8 @@ $("#backButton").addEventListener("click", () => {
 $("#acquireButton").addEventListener("click", () => {
   const current = getNextEmbassy();
   if (current) {
-    lastAcquiredNotice = {
-      day: state.settings.activeDay,
-      name: current.embassyName
-    };
     setEmbassyStatus(current.id, "acquired");
+    showToast("スタンプを取得しました");
   }
 });
 $("#openLogSheet").addEventListener("click", openSheet);
