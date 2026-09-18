@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.6.2-final">
+    <link rel="stylesheet" href="css/style.css?v=0.6.3-layout">
   </head>
   <body>
     <div class="app-shell">
@@ -38,12 +38,12 @@
             <div class="home-guide-scene" aria-hidden="true">
               <div class="guide-slot">
                 <span class="bubble bubble-man">世界を<br>めぐろう！</span>
-                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.6.2-final" alt="">
+                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.6.3-layout" alt="">
               </div>
-              <img class="home-globe" src="assets/hero-globe.png?v=0.6.2-final" alt="">
+              <img class="home-globe" src="assets/hero-globe.png?v=0.6.3-layout" alt="">
               <div class="guide-slot">
                 <span class="bubble bubble-woman">次は<br>どこへ？</span>
-                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.2-final" alt="">
+                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.3-layout" alt="">
               </div>
             </div>
             <div class="home-skyline" aria-hidden="true"></div>
@@ -86,7 +86,7 @@
             <span class="home-footer-cloud" aria-hidden="true"></span>
             <span class="home-footer-plane" aria-hidden="true">✈</span>
             <span class="home-footer-stamp" aria-hidden="true"></span>
-            <img class="home-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.2-final" alt="">
+            <img class="home-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.3-layout" alt="">
           </div>
         </section>
 
@@ -119,7 +119,6 @@
           </article>
 
           <button class="complete-button" id="acquireButton" type="button">スタンプを取得した</button>
-          <p class="acquired-status" id="acquiredStatus" role="status" aria-live="polite" hidden></p>
 
           <div class="day-actions">
             <button class="route-button" data-screen="route" type="button">
@@ -133,10 +132,14 @@
           </div>
 
           <aside class="day-visual-footer" aria-label="案内役">
-            <img class="day-footer-character day-footer-man" src="assets/guide-man-clean.png?v=0.6.2-final" alt="男性の案内役キャラクター">
+            <span class="day-footer-plane" aria-hidden="true">✈</span>
+            <span class="day-footer-cloud day-footer-cloud-one" aria-hidden="true"></span>
+            <span class="day-footer-cloud day-footer-cloud-two" aria-hidden="true"></span>
+            <span class="day-footer-stamp" aria-hidden="true"></span>
+            <img class="day-footer-character day-footer-man" src="assets/guide-man-clean.png?v=0.6.3-layout" alt="男性の案内役キャラクター">
             <p class="day-footer-bubble">次はどこへ？</p>
-            <img class="day-footer-character day-footer-woman" src="assets/guide-woman-clean.png?v=0.6.2-final" alt="女性の案内役キャラクター">
-            <img class="day-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.2-final" alt="">
+            <img class="day-footer-character day-footer-woman" src="assets/guide-woman-clean.png?v=0.6.3-layout" alt="女性の案内役キャラクター">
+            <img class="day-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.3-layout" alt="">
           </aside>
         </section>
 
@@ -188,9 +191,9 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.6.2-final"></script>
-    <script src="js/storage.js?v=0.6.2-final"></script>
-    <script src="js/backup.js?v=0.6.2-final"></script>
-    <script src="js/app.js?v=0.6.2-final"></script>
+    <script src="js/data.js?v=0.6.3-layout"></script>
+    <script src="js/storage.js?v=0.6.3-layout"></script>
+    <script src="js/backup.js?v=0.6.3-layout"></script>
+    <script src="js/app.js?v=0.6.3-layout"></script>
   </body>
 </html>

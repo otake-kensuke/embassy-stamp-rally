@@ -150,18 +150,30 @@ v0.6.2 Final Visual Polish:
 - Day画面下部に男性・吹き出し・女性・街並みの案内フッターを追加
 - 正式157件、保存構造、NEXTロジック、Day一覧、今日のルートは変更しない
 - PC検証PASS
+- iPhone Safari実機レビューを実施し、人物の高さ、地球と街並みの間隔、Visual Footerの位置、取得時のLayout Shiftに最終調整が必要と判断
+
+v0.6.3 Final Layout Tuning:
+
+- ホームとDay画面の人物サイズを調整し、男性を女性より見た目で約7.5%高く統一
+- ホームの地球を上へ20px移動し、街並みとの見た目上の空きを確保
+- ホームVisual Footerの街並みを20px下げ、飛行機、雲、スタンプ、移動経路と分離
+- Day案内フッターを通常フローのまま画面下部まで展開し、飛行機、雲、スタンプ、移動経路、街並みを追加
+- `スタンプを取得した` 実行後の通常フロー内ステータスを廃止し、Toast `スタンプを取得しました` へ変更
+- 取得前後で主要操作と案内フッターの位置差0pxをPC計測
+- 正式157件、保存構造、NEXTロジック、Day一覧、今日のルートは変更しない
+- PC検証PASS
 - iPhone Safari実機確認待ち
 
 現在の状態:
 
-- v0.6.2 Final Visual PolishはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
+- v0.6.3 Final Layout TuningはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
 - v0.5は実装、PC検証、iPhone Safari実機検証まですべて完了
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.6.2をGitHub Pagesへ反映した後のiPhone Safari実機確認
-- v0.6.2確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
+- v0.6.3をGitHub Pagesへ反映した後のiPhone Safari実機確認
+- v0.6.3確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
 - 新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認する
 
 ## v0.5 PM決定事項
