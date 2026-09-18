@@ -1216,7 +1216,7 @@ body {
 
 .home-skyline {
   height: 56px;
-  background: url("../assets/tokyo-skyline.png?v=0.6.2-final") center bottom / cover no-repeat;
+  background: url("../assets/tokyo-skyline.png?v=0.6.3-layout") center bottom / cover no-repeat;
   clip-path: none;
 }
 
@@ -1930,22 +1930,6 @@ body {
   background: var(--green);
 }
 
-.acquired-status {
-  margin: 7px 0 0;
-  padding: 9px 12px;
-  border: 1px solid #b9dfc9;
-  border-radius: 6px;
-  background: #e8f6ee;
-  color: #0a6739;
-  font-size: 13px;
-  font-weight: 750;
-  text-align: center;
-}
-
-.acquired-status[hidden] {
-  display: none;
-}
-
 .day-visual-footer {
   position: relative;
   height: clamp(120px, 31vw, 148px);
@@ -2076,5 +2060,170 @@ body {
     min-width: 90px;
     padding: 7px 9px;
     font-size: 10px;
+  }
+}
+
+/* v0.6.3 Final Layout Tuning */
+.home-guide-scene .guide-character-man {
+  width: 104px;
+  height: 122px;
+  transform: scaleX(-1) translateY(10px);
+}
+
+.home-guide-scene .guide-character-woman {
+  width: 92px;
+  height: 106px;
+  transform: translateY(10px);
+}
+
+.home-guide-scene .bubble {
+  top: -10px;
+}
+
+.home-globe {
+  transform: translateY(-20px);
+}
+
+.home-footer-skyline {
+  bottom: -20px;
+}
+
+.home-visual-footer::before {
+  top: 45%;
+}
+
+.home-footer-plane {
+  top: 35%;
+}
+
+.home-footer-cloud {
+  top: 25%;
+}
+
+.home-footer-stamp {
+  top: 28%;
+}
+
+#dayScreen.active {
+  display: flex;
+  min-height: calc(100svh - 81px);
+  flex-direction: column;
+}
+
+.day-visual-footer {
+  flex: 1 1 230px;
+  min-height: 230px;
+  height: auto;
+  margin-top: 8px;
+}
+
+.day-visual-footer::before {
+  position: absolute;
+  z-index: 1;
+  top: 27%;
+  left: 20%;
+  width: 54%;
+  content: "";
+  border-top: 2px dashed rgba(135, 206, 235, 0.82);
+  transform: rotate(-4deg);
+}
+
+.day-footer-character {
+  bottom: 27px;
+}
+
+.day-footer-man {
+  left: 5%;
+  height: clamp(101px, 27.5vw, 126px);
+  transform: scaleX(-1);
+}
+
+.day-footer-woman {
+  right: 5%;
+  height: clamp(88px, 24vw, 110px);
+}
+
+.day-footer-bubble {
+  top: clamp(54px, 22%, 82px);
+}
+
+.day-footer-skyline {
+  height: 78px;
+}
+
+.day-footer-plane {
+  position: absolute;
+  z-index: 2;
+  top: 17%;
+  left: 23%;
+  color: var(--sky);
+  font-size: 25px;
+  transform: rotate(-9deg);
+}
+
+.day-footer-cloud {
+  position: absolute;
+  z-index: 1;
+  width: 38px;
+  height: 12px;
+  border-radius: 999px;
+  background: #dff5ff;
+}
+
+.day-footer-cloud-one {
+  top: 18%;
+  left: 4%;
+}
+
+.day-footer-cloud-two {
+  top: 19%;
+  right: 19%;
+}
+
+.day-footer-stamp {
+  position: absolute;
+  z-index: 2;
+  top: 15%;
+  right: 4%;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--coral);
+  border-radius: 50%;
+  opacity: 0.78;
+  transform: rotate(9deg);
+}
+
+.day-footer-stamp::after {
+  position: absolute;
+  right: -13px;
+  bottom: 6px;
+  width: 16px;
+  height: 8px;
+  content: "";
+  border-top: 2px solid var(--coral);
+  border-bottom: 2px solid var(--coral);
+}
+
+@media (max-width: 350px) {
+  .home-guide-scene .guide-character-man {
+    width: 92px;
+    height: 103px;
+  }
+
+  .home-guide-scene .guide-character-woman {
+    width: 82px;
+    height: 90px;
+  }
+
+  .home-globe {
+    transform: translateY(-20px);
+  }
+
+  .day-footer-man {
+    height: 101px;
+  }
+
+  .day-footer-woman {
+    height: 88px;
   }
 }
