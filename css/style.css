@@ -2770,3 +2770,206 @@ body {
     font-size: 10px;
   }
 }
+
+/* v0.7.1 iPhone standalone hotfix */
+.home-history-nav {
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 44px 44px;
+  gap: 12px;
+  width: max-content;
+  height: 44px;
+  margin: max(10px, env(safe-area-inset-top)) 12px 6px;
+}
+
+.home-history-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+}
+
+.home-history-nav:not([hidden]) ~ .hero-brand {
+  padding-top: 0;
+}
+
+.completion-panel {
+  padding: 14px;
+}
+
+.completion-kicker {
+  margin-bottom: 5px;
+  font-size: 17px;
+}
+
+.completion-progress {
+  margin-bottom: 3px;
+  font-size: clamp(32px, 9vw, 42px);
+}
+
+.completion-panel > p:not(.completion-kicker) {
+  margin-bottom: 0;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.completion-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.completion-stats span {
+  min-width: 0;
+  min-height: 42px;
+  padding: 6px 4px;
+  border-radius: 0;
+  background: #edf8f2;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.completion-added {
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.completion-added h3 {
+  font-size: 15px;
+}
+
+.completion-added-item {
+  min-height: 54px;
+  padding: 8px 10px;
+}
+
+.day-actions {
+  margin-bottom: 0;
+}
+
+#dayScreen.active {
+  display: block;
+  min-height: 0;
+}
+
+.day-visual-footer {
+  position: relative;
+  display: grid;
+  flex: none;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 8px 10px;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  margin-top: 20px;
+  padding: 10px 6px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(15, 122, 70, 0.18);
+}
+
+.day-guide,
+.day-guide-man,
+.day-guide-woman {
+  position: static;
+  display: grid;
+  grid-template-rows: minmax(54px, auto) auto;
+  align-items: end;
+  justify-items: center;
+  width: auto;
+  height: auto;
+}
+
+.day-guide .day-footer-bubble {
+  position: relative;
+  top: auto;
+  left: auto;
+  align-self: start;
+  width: min(138px, 100%);
+  min-height: 48px;
+  margin: 0;
+  transform: none;
+}
+
+.day-guide .day-footer-character,
+.day-guide-man .day-footer-character,
+.day-guide-woman .day-footer-character {
+  position: static;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  display: block;
+  width: auto;
+  margin: 2px auto 0;
+  object-fit: contain;
+}
+
+.day-guide-man .day-footer-character {
+  height: clamp(104px, 29vw, 126px);
+  transform: scaleX(-1);
+}
+
+.day-guide-woman .day-footer-character {
+  height: clamp(96px, 26.5vw, 116px);
+}
+
+.day-footer-skyline {
+  position: static;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 60px;
+  margin-top: 0;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.day-visual-footer::before,
+.day-footer-plane,
+.day-footer-cloud-one,
+.day-footer-cloud-two,
+.day-footer-stamp {
+  display: none;
+}
+
+@media (display-mode: standalone) {
+  #dayScreen.active {
+    min-height: 0;
+  }
+
+  .day-visual-footer {
+    min-height: 0;
+    height: auto;
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 350px) {
+  .home-history-nav {
+    gap: 10px;
+  }
+
+  .completion-stats span {
+    min-height: 40px;
+    padding: 5px 2px;
+    font-size: 10px;
+  }
+
+  .day-visual-footer {
+    gap: 7px 6px;
+    margin-top: 16px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+}
