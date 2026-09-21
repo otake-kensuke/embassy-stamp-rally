@@ -173,20 +173,31 @@ v0.7 Actual Day Activity:
 - 基本ルート完了と当日追加を分けて表示し、Day1を14 / 13とは表示しない
 - 正式157件、ID、master Day、順序、住所、Google Maps情報は変更しない
 - PC検証PASS
-- GitHub Pages反映後のiPhone Safari / standalone実機確認待ち
+- Migration GateはiPhone standalone実機でPASS
+
+v0.7.1 iPhone Hotfix:
+
+- HomeのBack / Forwardを独立した44px touch targetとして通常フローへ配置
+- Dayの操作ボタン、案内吹き出し、人物、街並みを独立Footer内の通常フローへ分離
+- Day完了summaryを3列のcompact cardへ統合
+- Navigation entryへDay表示モードと表示対象大使館IDを追加
+- Back / Forwardで過去のNEXT表示を再現するが、取得状態、記録、当日実績は巻き戻さない
+- `dataVersion: "1.1"`、Migration、正式157件、activity modelは変更しない
+- PC検証PASS、iPhone standalone実機確認待ち
 
 現在の状態:
 
 - v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
 - 実運用データはDay1基本13 / 13、ノルウェー取得済み、全体14 / 157
-- v0.7は実装・PC検証完了、GitHub Pages反映・iPhone Safari / standalone実機確認待ち
+- v0.7 Migration GateはiPhone standalone実機でPASS
+- v0.7.1 Hotfixは実装・PC検証完了、GitHub Pages反映・iPhone standalone実機確認待ち
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.7をGitHub Pagesへ反映した後のiPhone Safari / standalone実機確認
-- 実機で`1.0 → 1.1` Migration後に14 / 157、Day1 13 / 13、Norway実績、既存記録4件が維持されることを確認する
-- 実機確認PASS後、Day2以降の実地運用へ進む
+- v0.7.1をGitHub Pagesへ反映する
+- Home Navigation、Day完了layout、Guide Footer重なり、Back / ForwardによるDay表示状態復元をiPhone standaloneで確認する
+- Hotfix実機確認PASS後、Day2以降の実地運用へ進む
 
 ## v0.5 PM決定事項
 

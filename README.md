@@ -66,10 +66,11 @@ Prototypeの技術検証は完了しています。
 - v0.6.2 Final Visual Polish: ホームの人物・地球・吹き出し・雲・下部フッター、Day画面の文言・取得状態・案内フッターを調整。iPhoneレビュー結果をv0.6.3へ引き継ぎ
 - v0.6.3 Final Layout Tuning: 人物の見た目上の高さ、地球と街並みの間隔、ホーム・DayのVisual Footerを調整し、取得時のLayout ShiftをToast方式で解消。PC・iPhone検証後、Day1で実運用
 - v0.7: 実利用Day1を受け、計画ルートと当日実績を分離、START / GOAL、画面履歴、当日追加、日付別記録、記録編集・削除、完了画面、動的案内コメントを追加。`1.0 → 1.1` MigrationとPC検証PASS
+- v0.7.1 iPhone Hotfix: Home履歴ボタン、Day案内Footer、完了summaryを調整し、Dayの表示対象を含むBack / Forward履歴へ拡張。Migration・保存構造・正式157件は変更なし
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
-現在の状態は、v0.7実装・PC検証完了、GitHub Pages反映後のiPhone Safari / standalone実機確認待ちです。確認項目は `docs/pre-use-checklist.md` で管理します。
+v0.7のMigration GateはiPhone standalone実機でPASSしました。現在はv0.7.1 HotfixのPC検証完了、Home Navigation、Day完了layout、Guide Footer、Day表示履歴のiPhone standalone再確認待ちです。確認項目は `docs/pre-use-checklist.md` で管理します。
 
 ## 開発時の確認
 
