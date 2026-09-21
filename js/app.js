@@ -3,31 +3,30 @@ const CATEGORIES = ["食事", "寄り道", "発見", "休憩", "メモ"];
 let state = loadState();
 let activeScreen = "home";
 let selectedCategory = "メモ";
+let selectedRecordDate = "";
+let editingLogId = null;
 let toastTimer = null;
+let navigationHistory = [];
+let navigationIndex = -1;
 
 const $ = (selector) => document.querySelector(selector);
+const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
 
 function clearChildren(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
+  while (element.firstChild) element.removeChild(element.firstChild);
 }
 
 function dayNumbers() {
   return [...new Set(EMBASSY_MASTER.map((embassy) => embassy.day))].sort((a, b) => a - b);
 }
 
-function allAcquiredCount() {
-  return EMBASSY_MASTER.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
-}
-
-function dayEmbassies() {
-  return EMBASSY_MASTER.filter((embassy) => embassy.day === state.settings.activeDay)
+function dayEmbassies(day = state.settings.activeDay) {
+  return EMBASSY_MASTER.filter((embassy) => embassy.day === day)
     .sort((a, b) => a.order - b.order);
 }
 
 function embassyStatus(id) {
-  return state.embassies[id] || { status: "unvisited", acquiredAt: null };
+  return state.embassies[id] || { status: "unvisited", acquiredAt: null, updatedAt: null };
 }
 
 function isNextCandidate(id) {
@@ -35,28 +34,74 @@ function isNextCandidate(id) {
   return status === "unvisited" || status === "check";
 }
 
-function acquiredCount() {
-  return dayEmbassies().filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+function allAcquiredCount() {
+  return EMBASSY_MASTER.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+}
+
+function acquiredCount(day = state.settings.activeDay) {
+  return dayEmbassies(day).filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
+}
+
+function activitiesForDay(day = state.settings.activeDay) {
+  return state.actualDayActivities
+    .filter((activity) => Number(activity.plannedDay) === Number(day))
+    .sort((a, b) => b.localDate.localeCompare(a.localDate));
+}
+
+function todayActivity(day = state.settings.activeDay) {
+  const id = activityIdFor(toLocalDateKey(), day);
+  return state.actualDayActivities.find((activity) => activity.id === id) || null;
+}
+
+function displayActivity(day = state.settings.activeDay) {
+  return todayActivity(day) || activitiesForDay(day)[0] || null;
+}
+
+function ensureTodayActivity(day = state.settings.activeDay) {
+  return ensureActualDayActivity(state, toLocalDateKey(), day);
+}
+
+function addedRouteEntries(activity = displayActivity()) {
+  if (!activity) return [];
+  return activity.addedEmbassies
+    .map((addition, index) => ({
+      addition,
+      embassy: embassyById.get(addition.embassyId),
+      index
+    }))
+    .filter((entry) => entry.embassy);
+}
+
+function routeEmbassies() {
+  return [
+    ...dayEmbassies(),
+    ...addedRouteEntries().map((entry) => entry.embassy)
+  ];
 }
 
 function getNextEmbassy() {
-  const embassies = dayEmbassies();
+  const route = routeEmbassies();
   if (state.manualNextId) {
-    const manual = embassies.find((embassy) => embassy.id === state.manualNextId);
+    const manual = route.find((embassy) => embassy.id === state.manualNextId);
     if (manual && isNextCandidate(manual.id)) return manual;
   }
-  return embassies.find((embassy) => isNextCandidate(embassy.id)) || null;
+  return route.find((embassy) => isNextCandidate(embassy.id)) || null;
 }
 
 function followingEmbassies(current) {
-  const remaining = dayEmbassies().filter((embassy) => {
-    return embassy.id !== (current && current.id) && isNextCandidate(embassy.id);
-  });
-  if (!current) return remaining.slice(0, 2);
+  const route = routeEmbassies();
+  const currentIndex = current ? route.findIndex((embassy) => embassy.id === current.id) : -1;
+  const after = route.slice(currentIndex + 1).filter((embassy) => isNextCandidate(embassy.id));
+  const before = route.slice(0, Math.max(currentIndex, 0)).filter((embassy) => isNextCandidate(embassy.id));
+  return [...after, ...before].slice(0, 2);
+}
 
-  const later = remaining.filter((embassy) => embassy.order > current.order);
-  const earlier = remaining.filter((embassy) => embassy.order < current.order);
-  return [...later, ...earlier].slice(0, 2);
+function dayProgress(day) {
+  const embassies = dayEmbassies(day);
+  return {
+    done: embassies.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length,
+    total: embassies.length
+  };
 }
 
 function formatTime(value) {
@@ -64,55 +109,106 @@ function formatTime(value) {
   return new Intl.DateTimeFormat("ja-JP", { hour: "2-digit", minute: "2-digit" }).format(new Date(value));
 }
 
-function persist() {
-  saveState(state);
-  render();
+function formatRecordDate(localDate) {
+  const date = new Date(`${localDate}T00:00:00`);
+  return new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "short"
+  }).format(date);
 }
 
-function setScreen(screen) {
-  activeScreen = screen;
-  document.body.dataset.screen = screen;
-  state.settings.lastScreen = screen === "day" || screen === "route" ? "day" : "home";
-  saveState(state);
+function persist(options = {}) {
+  state = saveState(state);
+  if (options.render !== false) render();
+}
+
+function currentView(screen = activeScreen) {
+  return {
+    screen,
+    day: state.settings.activeDay,
+    recordDate: screen === "record" ? selectedRecordDate : ""
+  };
+}
+
+function applyView(view) {
+  activeScreen = view.screen;
+  if (view.day) state.settings.activeDay = Number(view.day);
+  if (view.recordDate) selectedRecordDate = view.recordDate;
+  document.body.dataset.screen = activeScreen;
+  state.settings.lastScreen = activeScreen === "day" || activeScreen === "route" || activeScreen === "add"
+    ? "day"
+    : "home";
+  state = saveState(state);
   window.scrollTo({ top: 0, left: 0 });
   document.querySelectorAll(".screen").forEach((section) => {
-    section.classList.toggle("active", section.id === `${screen}Screen`);
+    section.classList.toggle("active", section.id === `${activeScreen}Screen`);
   });
-  $("#backButton").style.visibility = screen === "home" ? "hidden" : "visible";
-  $("#screenTitle").textContent = {
+  const titles = {
     home: "大使館スタンプラリー",
     days: "Day一覧",
     day: `Day ${state.settings.activeDay}`,
     route: "今日のルート",
-    review: "振り返り",
+    add: "大使館を追加",
+    review: "記録一覧",
+    record: "日別記録",
     settings: "設定"
-  }[screen];
+  };
+  $("#screenTitle").textContent = titles[activeScreen] || "大使館スタンプラリー";
   render();
+}
+
+function navigateTo(screen, options = {}) {
+  const view = {
+    screen,
+    day: options.day || state.settings.activeDay,
+    recordDate: options.recordDate || ""
+  };
+  navigationHistory = navigationHistory.slice(0, navigationIndex + 1);
+  navigationHistory.push(view);
+  navigationIndex = navigationHistory.length - 1;
+  applyView(view);
+}
+
+function goBack() {
+  if (navigationIndex <= 0) return;
+  navigationIndex -= 1;
+  applyView(navigationHistory[navigationIndex]);
+}
+
+function goForward() {
+  if (navigationIndex >= navigationHistory.length - 1) return;
+  navigationIndex += 1;
+  applyView(navigationHistory[navigationIndex]);
+}
+
+function renderNavigation() {
+  const canBack = navigationIndex > 0;
+  const canForward = navigationIndex < navigationHistory.length - 1;
+  $("#backButton").disabled = !canBack;
+  $("#forwardButton").disabled = !canForward;
+  $("#homeButton").disabled = activeScreen === "home";
+  $("#homeBackButton").disabled = !canBack;
+  $("#homeForwardButton").disabled = !canForward;
+  $("#homeHistoryNav").hidden = activeScreen !== "home" || (!canBack && !canForward);
 }
 
 function renderProgress() {
   const total = EMBASSY_MASTER.length;
   const done = allAcquiredCount();
   const percent = total ? Math.round((done / total) * 100) : 0;
-  const dayTotal = dayEmbassies().length;
-  const dayDone = acquiredCount();
+  const progress = dayProgress(state.settings.activeDay);
   $("#homeProgress").textContent = `${done} / ${total}`;
   $("#homePercent").textContent = `${percent}%`;
   $("#homeProgressBar").style.width = `${percent}%`;
-  $("#dayProgress").textContent = `${dayDone} / ${dayTotal}`;
-  $("#routeProgress").textContent = `${dayDone} / ${dayTotal}`;
-}
-
-function dayProgress(day) {
-  const embassies = EMBASSY_MASTER.filter((embassy) => embassy.day === day);
-  const done = embassies.filter((embassy) => embassyStatus(embassy.id).status === "acquired").length;
-  return { done, total: embassies.length };
+  $("#dayProgress").textContent = `${progress.done} / ${progress.total}`;
+  $("#routeProgress").textContent = `${progress.done} / ${progress.total}`;
 }
 
 function renderHomeDays() {
   const dayGrid = $("#dayGrid");
   clearChildren(dayGrid);
-
   dayNumbers().forEach((day) => {
     const progress = dayProgress(day);
     const button = document.createElement("button");
@@ -136,140 +232,423 @@ function renderHomeDays() {
     arrow.className = "day-arrow";
     arrow.setAttribute("aria-hidden", "true");
     arrow.textContent = "›";
-
     button.append(number, copy, arrow);
     dayGrid.append(button);
   });
 }
 
-function renderDay() {
-  const current = getNextEmbassy();
-  const following = followingEmbassies(current);
-  const panel = $("#nextPanel");
+function mapControl(embassy, className = "route-map-link") {
+  if (!embassy.googleMapsQuery) {
+    const disabled = document.createElement("span");
+    disabled.className = "disabled-map";
+    disabled.textContent = "地図要確認";
+    return disabled;
+  }
+  const link = document.createElement("a");
+  link.className = className;
+  link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(embassy.googleMapsQuery)}`;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = "地図を開く";
+  return link;
+}
 
-  panel.classList.toggle("complete", !current);
-  $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
-  $("#routeHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
-  $("#reviewHeading").textContent = `Day ${state.settings.activeDay} 振り返り`;
-  $("#nextEmbassyName").textContent = current ? current.embassyName : `Day ${state.settings.activeDay} 完了`;
-  $("#nextAddress").textContent = current ? current.address : "すべて取得済みです。";
-  const hasMapQuery = current && current.googleMapsQuery;
-  $("#dayEyebrow").textContent = `Day ${state.settings.activeDay}`;
-  $("#mapButton").href = hasMapQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}` : "#";
-  $("#mapButton").textContent = hasMapQuery ? "地図を開く" : "地図要確認";
-  $("#mapButton").setAttribute("aria-disabled", hasMapQuery ? "false" : "true");
-  $("#nextOne").textContent = following[0] ? following[0].embassyName : "-";
-  $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
-  $("#acquireButton").disabled = !current;
-  $("#acquireButton").textContent = current ? "スタンプを取得した" : "完了";
+function renderCompletion(activity, addedEntries, addedNext) {
+  const progress = dayProgress(state.settings.activeDay);
+  $("#completionTitle").textContent = `Day ${state.settings.activeDay} 基本ルート完了`;
+  $("#completionProgress").textContent = `${progress.done} / ${progress.total}`;
+  const acquiredAdded = addedEntries.filter((entry) => embassyStatus(entry.embassy.id).status === "acquired").length;
+  const stats = $("#completionStats");
+  clearChildren(stats);
+  [
+    `基本ルート ${progress.done} / ${progress.total}`,
+    `当日追加 ${acquiredAdded} / ${addedEntries.length}`,
+    `今日の訪問 ${progress.done + acquiredAdded}か所`
+  ].forEach((label) => {
+    const span = document.createElement("span");
+    span.textContent = label;
+    stats.append(span);
+  });
 
-  const routeList = $("#routeList");
-  clearChildren(routeList);
+  const container = $("#completionAdded");
+  clearChildren(container);
+  if (!activity || !addedEntries.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "当日追加はありません。";
+    container.append(empty);
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "small-primary-button";
+    add.dataset.screen = "add";
+    add.textContent = "＋ 大使館を追加";
+    container.append(add);
+    return;
+  }
 
-  dayEmbassies().forEach((embassy) => {
-    const status = embassyStatus(embassy.id);
-    const isCurrent = current && current.id === embassy.id;
-    const row = document.createElement("div");
-    row.className = `route-row${isCurrent ? " current" : ""}`;
-
-    const info = document.createElement("div");
-    const order = document.createElement("span");
-    order.className = "route-order";
-    order.textContent = embassy.order;
+  const heading = document.createElement("h3");
+  heading.textContent = `当日追加 ${addedEntries.length}件`;
+  container.append(heading);
+  addedEntries.forEach(({ embassy }) => {
+    const item = document.createElement("div");
+    item.className = "completion-added-item";
+    const text = document.createElement("div");
     const name = document.createElement("strong");
     name.textContent = embassy.embassyName;
-    const statusText = document.createElement("p");
-    statusText.textContent = status.status === "acquired" ? `取得 ${formatTime(status.acquiredAt)}` : "未取得";
-    const address = document.createElement("p");
-    address.className = "route-address";
-    address.textContent = embassy.address;
-    info.append(order, name, statusText, address);
-
-    const actions = document.createElement("div");
-    actions.className = "row-actions";
-    let routeMapControl;
-    if (embassy.googleMapsQuery) {
-      routeMapControl = document.createElement("a");
-      routeMapControl.className = "route-map-link";
-      routeMapControl.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(embassy.googleMapsQuery)}`;
-      routeMapControl.target = "_blank";
-      routeMapControl.rel = "noopener";
-      routeMapControl.textContent = "地図を開く";
-    } else {
-      routeMapControl = document.createElement("span");
-      routeMapControl.className = "disabled-map";
-      routeMapControl.textContent = "地図要確認";
+    const detail = document.createElement("span");
+    detail.textContent = `本来：Day ${embassy.day}・${embassyStatus(embassy.id).status === "acquired" ? "取得済み" : "未取得"}`;
+    text.append(name, detail);
+    item.append(text);
+    if (addedNext && addedNext.id === embassy.id) {
+      const badge = document.createElement("span");
+      badge.className = "next-badge";
+      badge.textContent = "当日追加のNEXT";
+      item.append(badge);
     }
-    const nextButton = document.createElement("button");
-    nextButton.type = "button";
-    nextButton.className = "route-next-button";
-    nextButton.dataset.next = embassy.id;
-    nextButton.disabled = !isNextCandidate(embassy.id);
-    nextButton.textContent = "ここをNEXTにする";
+    container.append(item);
+  });
+  if (addedNext) {
+    const actions = document.createElement("div");
+    actions.className = "completion-added-actions";
+    actions.append(mapControl(addedNext));
+    const next = document.createElement("button");
+    next.type = "button";
+    next.dataset.next = addedNext.id;
+    next.textContent = "ここをNEXTにする";
+    actions.append(next);
+    const acquire = document.createElement("button");
+    acquire.type = "button";
+    acquire.className = "completion-acquire-button";
+    acquire.dataset.acquireAdded = addedNext.id;
+    acquire.textContent = "スタンプを取得した";
+    actions.append(acquire);
+    container.append(actions);
+  }
+}
 
-    const select = document.createElement("select");
-    select.dataset.status = embassy.id;
-    select.setAttribute("aria-label", `${embassy.embassyName}の状態`);
-    [
-      ["unvisited", "未取得"],
-      ["acquired", "取得済み"],
-      ["check", "要確認"],
-      ["skipped", "スキップ"]
-    ].forEach(([value, label]) => {
+function renderDay() {
+  const meta = DAY_META[state.settings.activeDay];
+  const progress = dayProgress(state.settings.activeDay);
+  const plannedComplete = progress.done === progress.total;
+  const activity = displayActivity();
+  const addedEntries = addedRouteEntries(activity);
+  const addedNext = addedEntries.map((entry) => entry.embassy).find((embassy) => isNextCandidate(embassy.id)) || null;
+  const current = getNextEmbassy();
+  const following = followingEmbassies(current);
+
+  $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
+  $("#routeHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
+  $("#dayEyebrow").textContent = `Day ${state.settings.activeDay}`;
+  $("#dayStartGoal").textContent = `START ${meta.start} → GOAL ${meta.goal}`;
+  $("#routeStart").textContent = meta.start;
+  $("#routeGoal").textContent = meta.goal;
+  $("#activeDayContent").hidden = plannedComplete;
+  $("#completionPanel").hidden = !plannedComplete;
+
+  if (!plannedComplete && current) {
+    $("#nextEmbassyName").textContent = current.embassyName;
+    $("#nextAddress").textContent = current.address;
+    const hasMapQuery = Boolean(current.googleMapsQuery);
+    $("#mapButton").href = hasMapQuery
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}`
+      : "#";
+    $("#mapButton").textContent = hasMapQuery ? "地図を開く" : "地図要確認";
+    $("#mapButton").setAttribute("aria-disabled", hasMapQuery ? "false" : "true");
+    $("#nextOne").textContent = following[0] ? following[0].embassyName : "-";
+    $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
+    $("#acquireButton").disabled = false;
+  }
+  const currentIsAdded = current && addedEntries.some((entry) => entry.embassy.id === current.id);
+  renderCompletion(activity, addedEntries, currentIsAdded ? current : addedNext);
+
+  const comments = getGuideComments({
+    day: state.settings.activeDay,
+    area: meta.area,
+    complete: plannedComplete,
+    addedNext: Boolean(current && addedEntries.some((entry) => entry.embassy.id === current.id)),
+    remaining: progress.total - progress.done,
+    nextName: current ? current.embassyName : ""
+  });
+  $("#guideManComment").textContent = comments.man;
+  $("#guideWomanComment").textContent = comments.woman;
+}
+
+function createRouteCard(embassy, options = {}) {
+  const status = embassyStatus(embassy.id);
+  const current = getNextEmbassy();
+  const row = document.createElement("article");
+  row.className = `route-row${current && current.id === embassy.id ? " current" : ""}`;
+
+  const info = document.createElement("div");
+  const order = document.createElement("span");
+  order.className = "route-order";
+  order.textContent = options.orderLabel || embassy.order;
+  const name = document.createElement("strong");
+  name.textContent = embassy.embassyName;
+  const statusText = document.createElement("p");
+  statusText.textContent = status.status === "acquired" ? `取得 ${formatTime(status.acquiredAt)}` : "未取得";
+  const address = document.createElement("p");
+  address.className = "route-address";
+  address.textContent = embassy.address;
+  info.append(order, name, statusText, address);
+  if (options.added) {
+    const original = document.createElement("p");
+    original.className = "route-original-day";
+    original.textContent = `当日追加・本来 Day ${embassy.day}`;
+    info.append(original);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "row-actions";
+  actions.append(mapControl(embassy));
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.className = "route-next-button";
+  nextButton.dataset.next = embassy.id;
+  nextButton.disabled = !isNextCandidate(embassy.id);
+  nextButton.textContent = "ここをNEXTにする";
+  actions.append(nextButton);
+
+  const select = document.createElement("select");
+  select.dataset.status = embassy.id;
+  select.setAttribute("aria-label", `${embassy.embassyName}の状態`);
+  [["unvisited", "未取得"], ["acquired", "取得済み"], ["check", "要確認"], ["skipped", "スキップ"]]
+    .forEach(([value, label]) => {
       const option = document.createElement("option");
       option.value = value;
       option.textContent = label;
       option.selected = status.status === value;
       select.append(option);
     });
-    actions.append(routeMapControl, nextButton, select);
-    row.append(info, actions);
-    routeList.append(row);
+  actions.append(select);
+
+  if (options.added && status.status !== "acquired") {
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "remove-route-button";
+    remove.dataset.removeAdded = embassy.id;
+    remove.dataset.activityId = options.activityId;
+    remove.textContent = "ルートから外す";
+    actions.append(remove);
+  }
+  row.append(info, actions);
+  return row;
+}
+
+function renderRoute() {
+  const routeList = $("#routeList");
+  clearChildren(routeList);
+  dayEmbassies().forEach((embassy) => routeList.append(createRouteCard(embassy)));
+
+  const addedList = $("#addedRouteList");
+  clearChildren(addedList);
+  const activity = displayActivity();
+  const added = addedRouteEntries(activity);
+  if (!added.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state route-empty";
+    empty.textContent = "当日追加はありません。";
+    addedList.append(empty);
+  } else {
+    added.forEach(({ embassy, index }) => {
+      addedList.append(createRouteCard(embassy, {
+        added: true,
+        activityId: activity.id,
+        orderLabel: `＋${index + 1}`
+      }));
+    });
+  }
+}
+
+function renderSearchResults() {
+  const container = $("#embassySearchResults");
+  clearChildren(container);
+  const query = $("#embassySearch").value.trim().toLocaleLowerCase("ja-JP");
+  if (!query) {
+    const prompt = document.createElement("p");
+    prompt.className = "empty-state";
+    prompt.textContent = "検索語を入力してください。";
+    container.append(prompt);
+    return;
+  }
+
+  const currentActivity = todayActivity();
+  const addedIds = new Set(currentActivity ? currentActivity.addedEmbassies.map((entry) => entry.embassyId) : []);
+  const plannedIds = new Set(dayEmbassies().map((embassy) => embassy.id));
+  const results = EMBASSY_MASTER.filter((embassy) => {
+    return embassy.country.toLocaleLowerCase("ja-JP").includes(query)
+      || embassy.embassyName.toLocaleLowerCase("ja-JP").includes(query);
+  });
+
+  if (!results.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "該当する大使館はありません。";
+    container.append(empty);
+    return;
+  }
+
+  results.forEach((embassy) => {
+    const item = document.createElement("article");
+    item.className = "search-result";
+    const info = document.createElement("div");
+    const name = document.createElement("strong");
+    name.textContent = embassy.embassyName;
+    const detail = document.createElement("p");
+    detail.textContent = `本来：Day ${embassy.day}・${embassyStatus(embassy.id).status === "acquired" ? "取得済み" : "未取得"}`;
+    info.append(name, detail);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.addEmbassy = embassy.id;
+    button.disabled = plannedIds.has(embassy.id) || addedIds.has(embassy.id);
+    button.textContent = plannedIds.has(embassy.id)
+      ? "基本ルート内"
+      : addedIds.has(embassy.id) ? "追加済み" : "追加";
+    item.append(info, button);
+    container.append(item);
+  });
+}
+
+function addedContextForAcquisition(embassyId, localDate) {
+  return state.actualDayActivities.find((activity) => activity.localDate === localDate
+    && activity.addedEmbassies.some((entry) => entry.embassyId === embassyId)) || null;
+}
+
+function allTimelineEvents() {
+  const events = [];
+  EMBASSY_MASTER.forEach((embassy) => {
+    const status = embassyStatus(embassy.id);
+    if (status.status !== "acquired" || !status.acquiredAt) return;
+    const localDate = toLocalDateKey(status.acquiredAt);
+    const activity = addedContextForAcquisition(embassy.id, localDate);
+    events.push({
+      type: "acquired",
+      timestamp: status.acquiredAt,
+      localDate,
+      plannedDay: activity ? activity.plannedDay : embassy.day,
+      embassy,
+      addedActivity: activity
+    });
+  });
+  state.walkLogs.forEach((log) => {
+    const timestamp = log.timestamp || log.createdAt;
+    if (!timestamp) return;
+    events.push({
+      type: "log",
+      timestamp,
+      localDate: toLocalDateKey(timestamp),
+      plannedDay: Number(log.day) || null,
+      log
+    });
+  });
+  state.actualDayActivities.forEach((activity) => {
+    activity.routeEvents.forEach((event) => {
+      if (!event.timestamp) return;
+      events.push({
+        type: "route-added",
+        timestamp: event.timestamp,
+        localDate: toLocalDateKey(event.timestamp),
+        plannedDay: activity.plannedDay,
+        embassy: embassyById.get(event.embassyId),
+        activity
+      });
+    });
+  });
+  return events.filter((event) => event.localDate).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+}
+
+function renderRecordList() {
+  const list = $("#recordList");
+  clearChildren(list);
+  const events = allTimelineEvents();
+  const dates = [...new Set(events.map((event) => event.localDate))].sort().reverse();
+  if (!dates.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "まだ記録がありません。";
+    list.append(empty);
+    return;
+  }
+
+  dates.forEach((localDate) => {
+    const dateEvents = events.filter((event) => event.localDate === localDate);
+    const days = [...new Set(dateEvents.map((event) => event.plannedDay).filter(Boolean))].sort((a, b) => a - b);
+    const stampCount = dateEvents.filter((event) => event.type === "acquired").length;
+    const logCount = dateEvents.filter((event) => event.type === "log").length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "record-date-card";
+    button.dataset.recordDate = localDate;
+    const copy = document.createElement("span");
+    const date = document.createElement("strong");
+    date.textContent = formatRecordDate(localDate);
+    const day = document.createElement("span");
+    day.textContent = days.length ? days.map((value) => `Day ${value}`).join(" / ") : "街歩き記録";
+    const counts = document.createElement("span");
+    counts.textContent = `スタンプ ${stampCount}　記録 ${logCount}`;
+    copy.append(date, day, counts);
+    const arrow = document.createElement("span");
+    arrow.className = "record-arrow";
+    arrow.textContent = "›";
+    button.append(copy, arrow);
+    list.append(button);
   });
 }
 
 function renderTimeline() {
-  const acquiredEvents = dayEmbassies()
-    .map((embassy) => ({ embassy, status: embassyStatus(embassy.id) }))
-    .filter((entry) => entry.status.status === "acquired" && entry.status.acquiredAt)
-    .map((entry) => ({
-      timestamp: entry.status.acquiredAt,
-      title: entry.embassy.embassyName,
-      body: "✓ 取得"
-    }));
-
-  const logEvents = state.walkLogs
-    .filter((log) => !log.day || log.day === state.settings.activeDay)
-    .map((log) => ({
-      timestamp: log.timestamp,
-      title: log.category || "メモ",
-      body: log.text || ""
-    }));
-
-  const events = [...acquiredEvents, ...logEvents]
-    .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
   const timeline = $("#timeline");
   clearChildren(timeline);
+  if (!selectedRecordDate) return;
+  const events = allTimelineEvents().filter((event) => event.localDate === selectedRecordDate);
+  const days = [...new Set(events.map((event) => event.plannedDay).filter(Boolean))].sort((a, b) => a - b);
+  $("#recordHeading").textContent = formatRecordDate(selectedRecordDate);
+  $("#recordDayLabel").textContent = days.map((day) => `Day ${day}`).join(" / ") || "街歩き記録";
 
   if (!events.length) {
     const empty = document.createElement("p");
     empty.className = "empty-state";
-    empty.textContent = "まだ記録がありません。";
+    empty.textContent = "この日の記録はありません。";
     timeline.append(empty);
     return;
   }
 
   events.forEach((event) => {
     const item = document.createElement("article");
-    item.className = "timeline-item";
+    item.className = `timeline-item timeline-${event.type}`;
     const time = document.createElement("time");
+    time.dateTime = event.timestamp;
     time.textContent = formatTime(event.timestamp);
     const body = document.createElement("div");
     const title = document.createElement("strong");
-    title.textContent = event.title;
     const text = document.createElement("p");
-    text.textContent = event.body;
+
+    if (event.type === "acquired") {
+      title.textContent = event.embassy.embassyName;
+      text.textContent = event.addedActivity
+        ? `スタンプ取得・当日追加・本来 Day ${event.embassy.day}`
+        : "スタンプ取得";
+    } else if (event.type === "route-added") {
+      title.textContent = event.embassy ? event.embassy.embassyName : "大使館を追加";
+      text.textContent = event.embassy ? `当日ルートへ追加・本来 Day ${event.embassy.day}` : "当日ルートへ追加";
+    } else {
+      title.textContent = event.log.category || "メモ";
+      text.textContent = event.log.text || "";
+      const actions = document.createElement("div");
+      actions.className = "timeline-actions";
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.dataset.editLog = event.log.id;
+      edit.textContent = "編集";
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.dataset.deleteLog = event.log.id;
+      remove.textContent = "削除";
+      actions.append(edit, remove);
+      body.append(title, text, actions);
+      item.append(time, body);
+      timeline.append(item);
+      return;
+    }
     body.append(title, text);
     item.append(time, body);
     timeline.append(item);
@@ -290,44 +669,74 @@ function renderCategories() {
 }
 
 function render() {
+  renderNavigation();
   renderProgress();
   renderHomeDays();
   renderDay();
+  renderRoute();
+  renderRecordList();
   renderTimeline();
   renderCategories();
+  if (activeScreen === "add") renderSearchResults();
   $("#memoInput").value = state.memo || "";
 }
 
 function setActiveDay(day) {
   state.settings.activeDay = day;
-  saveState(state);
-  setScreen("day");
+  state.manualNextId = null;
+  persist({ render: false });
+  navigateTo("day", { day });
 }
 
 function setEmbassyStatus(id, nextStatus) {
   const current = embassyStatus(id);
-  if (current.status === "acquired" && nextStatus === "unvisited") {
+  if (current.status === "acquired" && nextStatus !== "acquired") {
     const ok = confirm("取得済みを未取得に戻しますか？");
     if (!ok) {
       render();
       return;
     }
   }
-
+  const now = new Date().toISOString();
   state.embassies[id] = {
     ...current,
     status: nextStatus,
-    acquiredAt: nextStatus === "acquired" ? (current.acquiredAt || new Date().toISOString()) : null,
-    updatedAt: new Date().toISOString()
+    acquiredAt: nextStatus === "acquired" ? (current.acquiredAt || now) : null,
+    updatedAt: now
   };
-
-  if (state.manualNextId === id && !isNextCandidate(id)) {
-    state.manualNextId = null;
-  }
+  if (state.manualNextId === id && !isNextCandidate(id)) state.manualNextId = null;
   persist();
 }
 
-function openSheet() {
+function addEmbassyToToday(id) {
+  const embassy = embassyById.get(id);
+  if (!embassy || embassy.day === state.settings.activeDay) return;
+  const timestamp = new Date().toISOString();
+  const result = addEmbassyToActivity(state, embassy, toLocalDateKey(timestamp), state.settings.activeDay, timestamp);
+  if (!result.added) return;
+  persist({ render: false });
+  navigateTo("route");
+  showToast(`${embassy.embassyName}を当日ルートへ追加しました`);
+}
+
+function removeAddedEmbassy(activityId, embassyId) {
+  const activity = state.actualDayActivities.find((entry) => entry.id === activityId);
+  const embassy = embassyById.get(embassyId);
+  if (!activity || !embassy || embassyStatus(embassyId).status === "acquired") return;
+  if (!confirm(`${embassy.embassyName}を当日ルートから外しますか？`)) return;
+  const removed = removeEmbassyFromActivity(state, activityId, embassyId, false);
+  if (!removed) return;
+  if (state.manualNextId === embassyId) state.manualNextId = null;
+  persist();
+}
+
+function openSheet(logId = null) {
+  editingLogId = logId;
+  const log = logId ? state.walkLogs.find((entry) => entry.id === logId) : null;
+  selectedCategory = log && CATEGORIES.includes(log.category) ? log.category : "メモ";
+  $("#logSheetTitle").textContent = log ? "記録を編集" : "＋記録";
+  $("#logText").value = log ? (log.text || "") : "";
+  renderCategories();
   $("#sheetBackdrop").hidden = false;
   $("#logSheet").hidden = false;
   $("#logText").focus();
@@ -337,6 +746,35 @@ function closeSheet() {
   $("#sheetBackdrop").hidden = true;
   $("#logSheet").hidden = true;
   $("#logText").value = "";
+  editingLogId = null;
+}
+
+function saveWalkLog() {
+  const text = $("#logText").value.trim();
+  if (!text && !selectedCategory) return;
+  const wasEditing = Boolean(editingLogId);
+  if (editingLogId) {
+    if (!updateWalkLog(state, editingLogId, selectedCategory, text, new Date().toISOString())) return;
+  } else {
+    state.walkLogs.push({
+      id: `log-${Date.now()}`,
+      day: state.settings.activeDay,
+      category: selectedCategory,
+      text,
+      timestamp: new Date().toISOString()
+    });
+  }
+  persist();
+  closeSheet();
+  showToast(wasEditing ? "記録を更新しました" : "記録を保存しました");
+}
+
+function deleteWalkLog(id) {
+  const log = state.walkLogs.find((entry) => entry.id === id);
+  if (!log || !confirm("この記録を削除しますか？")) return;
+  if (!deleteWalkLogData(state, id)) return;
+  persist();
+  showToast("記録を削除しました");
 }
 
 function showToast(message) {
@@ -352,21 +790,43 @@ function showToast(message) {
 
 document.addEventListener("click", (event) => {
   const nav = event.target.closest("button[data-screen]");
-  if (nav) setScreen(nav.dataset.screen);
+  if (nav) navigateTo(nav.dataset.screen);
 
   const dayButton = event.target.closest("[data-day]");
   if (dayButton) setActiveDay(Number(dayButton.dataset.day));
 
   const nextButton = event.target.closest("[data-next]");
-  if (nextButton) {
+  if (nextButton && !nextButton.disabled) {
     state.manualNextId = nextButton.dataset.next;
     persist();
+    showToast("NEXTを変更しました");
   }
 
   const categoryButton = event.target.closest("[data-category]");
   if (categoryButton) {
     selectedCategory = categoryButton.dataset.category;
     renderCategories();
+  }
+
+  const addButton = event.target.closest("[data-add-embassy]");
+  if (addButton && !addButton.disabled) addEmbassyToToday(addButton.dataset.addEmbassy);
+
+  const removeButton = event.target.closest("[data-remove-added]");
+  if (removeButton) removeAddedEmbassy(removeButton.dataset.activityId, removeButton.dataset.removeAdded);
+
+  const recordButton = event.target.closest("[data-record-date]");
+  if (recordButton) navigateTo("record", { recordDate: recordButton.dataset.recordDate });
+
+  const editButton = event.target.closest("[data-edit-log]");
+  if (editButton) openSheet(editButton.dataset.editLog);
+
+  const deleteButton = event.target.closest("[data-delete-log]");
+  if (deleteButton) deleteWalkLog(deleteButton.dataset.deleteLog);
+
+  const acquireAddedButton = event.target.closest("[data-acquire-added]");
+  if (acquireAddedButton) {
+    setEmbassyStatus(acquireAddedButton.dataset.acquireAdded, "acquired");
+    showToast("スタンプを取得しました");
   }
 });
 
@@ -375,64 +835,56 @@ document.addEventListener("change", (event) => {
   if (statusInput) setEmbassyStatus(statusInput.dataset.status, statusInput.value);
 });
 
-$("#backButton").addEventListener("click", () => {
-  const destination = {
-    days: "home",
-    day: "days",
-    route: "day",
-    review: "home",
-    settings: "home"
-  }[activeScreen] || "home";
-  setScreen(destination);
-});
+$("#backButton").addEventListener("click", goBack);
+$("#forwardButton").addEventListener("click", goForward);
+$("#homeButton").addEventListener("click", () => navigateTo("home"));
+$("#homeBackButton").addEventListener("click", goBack);
+$("#homeForwardButton").addEventListener("click", goForward);
 $("#acquireButton").addEventListener("click", () => {
   const current = getNextEmbassy();
-  if (current) {
-    setEmbassyStatus(current.id, "acquired");
-    showToast("スタンプを取得しました");
-  }
+  if (!current) return;
+  setEmbassyStatus(current.id, "acquired");
+  showToast("スタンプを取得しました");
 });
-$("#openLogSheet").addEventListener("click", openSheet);
+$("#embassySearch").addEventListener("input", renderSearchResults);
+$("#openLogSheet").addEventListener("click", () => openSheet());
 $("#closeLogSheet").addEventListener("click", closeSheet);
 $("#sheetBackdrop").addEventListener("click", closeSheet);
-$("#saveLog").addEventListener("click", () => {
-  const text = $("#logText").value.trim();
-  if (!text && !selectedCategory) return;
-  state.walkLogs.push({
-    id: `log-${Date.now()}`,
-    day: state.settings.activeDay,
-    category: selectedCategory,
-    text,
-    timestamp: new Date().toISOString()
-  });
-  persist();
-  closeSheet();
-  showToast("記録を保存しました");
-});
+$("#saveLog").addEventListener("click", saveWalkLog);
 $("#memoInput").addEventListener("input", (event) => {
   state.memo = event.target.value;
-  saveState(state);
+  state = saveState(state);
 });
 $("#exportButton").addEventListener("click", () => downloadBackup(state));
 $("#importInput").addEventListener("change", async (event) => {
   const file = event.target.files[0];
   if (!file) return;
+  const previousState = state;
   try {
     const candidate = await readBackupFile(file);
-    const error = validateImportState(candidate);
-    if (error) {
-      $("#settingsMessage").textContent = error;
+    const prepared = prepareState(candidate);
+    if (prepared.error) {
+      $("#settingsMessage").textContent = prepared.error;
       return;
     }
-    state = normalizeState(candidate);
-    saveState(state);
-    $("#settingsMessage").textContent = "復元しました。";
-    persist();
+    state = prepared.state;
+    state = saveState(state);
+    $("#settingsMessage").textContent = prepared.migrated
+      ? "旧Backupをv1.1へ移行して復元しました。"
+      : "復元しました。";
+    navigationHistory = [];
+    navigationIndex = -1;
+    const restoredScreen = state.settings.lastScreen === "day" ? "day" : "home";
+    navigateTo(restoredScreen);
   } catch (error) {
+    state = previousState;
     $("#settingsMessage").textContent = error.message;
   } finally {
     event.target.value = "";
   }
 });
 
-setScreen(state.settings.lastScreen === "day" ? "day" : "home");
+const initialScreen = state.settings.lastScreen === "day" ? "day" : "home";
+navigationHistory = [currentView(initialScreen)];
+navigationIndex = 0;
+applyView(navigationHistory[0]);
