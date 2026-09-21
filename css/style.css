@@ -2773,16 +2773,16 @@ body {
 
 /* v0.7.1 iPhone standalone hotfix */
 .home-history-nav {
-  position: relative;
-  top: auto;
-  left: auto;
+  position: static;
   z-index: 10;
   display: grid;
   grid-template-columns: 44px 44px;
   gap: 12px;
-  width: max-content;
-  height: 44px;
-  margin: max(10px, env(safe-area-inset-top)) 12px 6px;
+  width: calc(100% + 32px);
+  min-height: 44px;
+  margin: calc(-1 * max(12px, env(safe-area-inset-top))) -16px 0;
+  padding: max(10px, env(safe-area-inset-top)) 16px 8px;
+  background: var(--cream);
 }
 
 .home-history-button {
@@ -2796,8 +2796,8 @@ body {
   padding: 0;
 }
 
-.home-history-nav:not([hidden]) ~ .hero-brand {
-  padding-top: 0;
+.home-history-nav:not([hidden]) + .hero-panel {
+  margin-top: 0;
 }
 
 .completion-panel {
@@ -2906,7 +2906,8 @@ body {
 .day-guide .day-footer-character,
 .day-guide-man .day-footer-character,
 .day-guide-woman .day-footer-character {
-  position: static;
+  position: relative;
+  z-index: 2;
   right: auto;
   bottom: auto;
   left: auto;
@@ -2926,11 +2927,12 @@ body {
 }
 
 .day-footer-skyline {
-  position: static;
+  position: relative;
+  z-index: 1;
   grid-column: 1 / -1;
   width: 100%;
   height: 60px;
-  margin-top: 0;
+  margin-top: -18px;
   object-fit: cover;
   object-position: center bottom;
 }
