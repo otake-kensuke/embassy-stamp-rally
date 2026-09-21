@@ -193,7 +193,9 @@ v0.7.2 iPhone Hotfix 2:
 - manual NEXTを保存後に最新Day snapshotへ遷移し、大使館名入りToastを表示
 - 過去snapshotは表示履歴だけに使用し、現在のmanual NEXTや永続データを上書きしない
 - `dataVersion: "1.1"`、Migration、正式157件、activity modelは変更しない
-- PC検証PASS、iPhone standalone実機確認待ち
+- PC検証PASS
+- iPhone standalone実機検証PASS
+- Final Status: RELEASE / STABLE
 
 現在の状態:
 
@@ -201,14 +203,14 @@ v0.7.2 iPhone Hotfix 2:
 - 実運用データはDay1基本13 / 13、ノルウェー取得済み、全体14 / 157
 - v0.7 Migration GateはiPhone standalone実機でPASS
 - v0.7.1実機確認でMigration、Day完了compact layout、Footer非重複はPASS
-- v0.7.2 Hotfix 2は実装・PC検証完了、GitHub Pages反映・iPhone standalone実機確認待ち
+- v0.7.2 Hotfix 2は実装・PC検証・iPhone standalone実機検証完了
+- 現在の正式安定版はv0.7.2 RELEASE / STABLE
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.7.2をGitHub Pagesへ反映する
-- Home NavigationのHero非干渉、Guide人物の接地、manual NEXTの保存・Day表示をiPhone standaloneで確認する
-- Hotfix実機確認PASS後、Day2以降の実地運用へ進む
+- v0.7.2を安定版として実地利用する
+- 次Versionへ着手する前に、Guide Footer人物位置のVisual Polish、Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理についてPM判断する
 
 ## v0.5 PM決定事項
 
