@@ -718,10 +718,25 @@ function render() {
 }
 
 function setActiveDay(day) {
+  const dayChanged = Number(state.settings.activeDay) !== Number(day);
   state.settings.activeDay = day;
-  state.manualNextId = null;
+  if (dayChanged) state.manualNextId = null;
   persist({ render: false });
   navigateTo("day", { day });
+}
+
+function setManualNext(id) {
+  const embassy = routeEmbassies().find((entry) => entry.id === id);
+  if (!embassy || !isNextCandidate(embassy.id)) return;
+
+  state.manualNextId = embassy.id;
+  state = saveState(state);
+  navigateTo("day", {
+    day: state.settings.activeDay,
+    dayMode: "next",
+    nextEmbassyId: embassy.id
+  });
+  showToast(`${embassy.embassyName}をNEXTに設定しました`);
 }
 
 function setEmbassyStatus(id, nextStatus, options = {}) {
@@ -842,17 +857,8 @@ document.addEventListener("click", (event) => {
 
   const nextButton = event.target.closest("[data-next]");
   if (nextButton && !nextButton.disabled) {
-    state.manualNextId = nextButton.dataset.next;
-    if (activeScreen === "day") {
-      state = saveState(state);
-      navigateTo("day", {
-        day: state.settings.activeDay,
-        nextEmbassyId: nextButton.dataset.next
-      });
-    } else {
-      persist();
-    }
-    showToast("NEXTを変更しました");
+    event.preventDefault();
+    setManualNext(nextButton.dataset.next);
   }
 
   const categoryButton = event.target.closest("[data-category]");
