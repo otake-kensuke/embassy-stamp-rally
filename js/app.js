@@ -8,6 +8,8 @@ let editingLogId = null;
 let toastTimer = null;
 let navigationHistory = [];
 let navigationIndex = -1;
+let viewNextEmbassyId = null;
+let viewDayMode = null;
 
 const $ = (selector) => document.querySelector(selector);
 const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
@@ -125,10 +127,20 @@ function persist(options = {}) {
 }
 
 function currentView(screen = activeScreen) {
+  const dayMode = screen === "day"
+    ? (viewDayMode || (dayProgress(state.settings.activeDay).done === dayProgress(state.settings.activeDay).total
+      ? "completion"
+      : "next"))
+    : null;
+  const current = screen === "day" && dayMode === "next"
+    ? (viewNextEmbassyId ? embassyById.get(viewNextEmbassyId) : getNextEmbassy())
+    : null;
   return {
     screen,
     day: state.settings.activeDay,
-    recordDate: screen === "record" ? selectedRecordDate : ""
+    recordDate: screen === "record" ? selectedRecordDate : "",
+    nextEmbassyId: current ? current.id : null,
+    dayMode
   };
 }
 
@@ -136,6 +148,12 @@ function applyView(view) {
   activeScreen = view.screen;
   if (view.day) state.settings.activeDay = Number(view.day);
   if (view.recordDate) selectedRecordDate = view.recordDate;
+  viewNextEmbassyId = view.screen === "day" ? (view.nextEmbassyId || null) : null;
+  viewDayMode = view.screen === "day"
+    ? (view.dayMode || (dayProgress(state.settings.activeDay).done === dayProgress(state.settings.activeDay).total
+      ? "completion"
+      : "next"))
+    : null;
   document.body.dataset.screen = activeScreen;
   state.settings.lastScreen = activeScreen === "day" || activeScreen === "route" || activeScreen === "add"
     ? "day"
@@ -160,10 +178,21 @@ function applyView(view) {
 }
 
 function navigateTo(screen, options = {}) {
+  const hasNextSnapshot = Object.prototype.hasOwnProperty.call(options, "nextEmbassyId");
+  const targetDay = Number(options.day || state.settings.activeDay);
+  const progress = dayProgress(targetDay);
+  const dayMode = screen === "day"
+    ? (options.dayMode || (progress.done === progress.total ? "completion" : "next"))
+    : null;
+  const current = screen === "day" && dayMode === "next" && !hasNextSnapshot ? getNextEmbassy() : null;
   const view = {
     screen,
-    day: options.day || state.settings.activeDay,
-    recordDate: options.recordDate || ""
+    day: targetDay,
+    recordDate: options.recordDate || "",
+    nextEmbassyId: screen === "day" && dayMode === "next"
+      ? (hasNextSnapshot ? options.nextEmbassyId : (current ? current.id : null))
+      : null,
+    dayMode
   };
   navigationHistory = navigationHistory.slice(0, navigationIndex + 1);
   navigationHistory.push(view);
@@ -333,7 +362,11 @@ function renderDay() {
   const activity = displayActivity();
   const addedEntries = addedRouteEntries(activity);
   const addedNext = addedEntries.map((entry) => entry.embassy).find((embassy) => isNextCandidate(embassy.id)) || null;
-  const current = getNextEmbassy();
+  const historyCurrent = activeScreen === "day" && viewNextEmbassyId
+    ? routeEmbassies().find((embassy) => embassy.id === viewNextEmbassyId) || null
+    : null;
+  const current = historyCurrent || getNextEmbassy();
+  const showCompletion = plannedComplete && viewDayMode === "completion";
   const following = followingEmbassies(current);
 
   $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
@@ -342,10 +375,11 @@ function renderDay() {
   $("#dayStartGoal").textContent = `START ${meta.start} → GOAL ${meta.goal}`;
   $("#routeStart").textContent = meta.start;
   $("#routeGoal").textContent = meta.goal;
-  $("#activeDayContent").hidden = plannedComplete;
-  $("#completionPanel").hidden = !plannedComplete;
+  $("#dayProgress").hidden = showCompletion;
+  $("#activeDayContent").hidden = showCompletion;
+  $("#completionPanel").hidden = !showCompletion;
 
-  if (!plannedComplete && current) {
+  if (!showCompletion && current) {
     $("#nextEmbassyName").textContent = current.embassyName;
     $("#nextAddress").textContent = current.address;
     const hasMapQuery = Boolean(current.googleMapsQuery);
@@ -356,7 +390,9 @@ function renderDay() {
     $("#mapButton").setAttribute("aria-disabled", hasMapQuery ? "false" : "true");
     $("#nextOne").textContent = following[0] ? following[0].embassyName : "-";
     $("#nextTwo").textContent = following[1] ? following[1].embassyName : "-";
-    $("#acquireButton").disabled = false;
+    const canAcquire = isNextCandidate(current.id);
+    $("#acquireButton").disabled = !canAcquire;
+    $("#acquireButton").textContent = canAcquire ? "スタンプを取得した" : "取得済み（履歴表示）";
   }
   const currentIsAdded = current && addedEntries.some((entry) => entry.embassy.id === current.id);
   renderCompletion(activity, addedEntries, currentIsAdded ? current : addedNext);
@@ -364,7 +400,7 @@ function renderDay() {
   const comments = getGuideComments({
     day: state.settings.activeDay,
     area: meta.area,
-    complete: plannedComplete,
+    complete: showCompletion,
     addedNext: Boolean(current && addedEntries.some((entry) => entry.embassy.id === current.id)),
     remaining: progress.total - progress.done,
     nextName: current ? current.embassyName : ""
@@ -688,7 +724,7 @@ function setActiveDay(day) {
   navigateTo("day", { day });
 }
 
-function setEmbassyStatus(id, nextStatus) {
+function setEmbassyStatus(id, nextStatus, options = {}) {
   const current = embassyStatus(id);
   if (current.status === "acquired" && nextStatus !== "acquired") {
     const ok = confirm("取得済みを未取得に戻しますか？");
@@ -705,6 +741,15 @@ function setEmbassyStatus(id, nextStatus) {
     updatedAt: now
   };
   if (state.manualNextId === id && !isNextCandidate(id)) state.manualNextId = null;
+  if (options.recordDayView && activeScreen === "day") {
+    state = saveState(state);
+    const next = getNextEmbassy();
+    navigateTo("day", {
+      day: state.settings.activeDay,
+      nextEmbassyId: next ? next.id : null
+    });
+    return;
+  }
   persist();
 }
 
@@ -798,7 +843,15 @@ document.addEventListener("click", (event) => {
   const nextButton = event.target.closest("[data-next]");
   if (nextButton && !nextButton.disabled) {
     state.manualNextId = nextButton.dataset.next;
-    persist();
+    if (activeScreen === "day") {
+      state = saveState(state);
+      navigateTo("day", {
+        day: state.settings.activeDay,
+        nextEmbassyId: nextButton.dataset.next
+      });
+    } else {
+      persist();
+    }
     showToast("NEXTを変更しました");
   }
 
@@ -825,7 +878,7 @@ document.addEventListener("click", (event) => {
 
   const acquireAddedButton = event.target.closest("[data-acquire-added]");
   if (acquireAddedButton) {
-    setEmbassyStatus(acquireAddedButton.dataset.acquireAdded, "acquired");
+    setEmbassyStatus(acquireAddedButton.dataset.acquireAdded, "acquired", { recordDayView: true });
     showToast("スタンプを取得しました");
   }
 });
@@ -841,9 +894,11 @@ $("#homeButton").addEventListener("click", () => navigateTo("home"));
 $("#homeBackButton").addEventListener("click", goBack);
 $("#homeForwardButton").addEventListener("click", goForward);
 $("#acquireButton").addEventListener("click", () => {
-  const current = getNextEmbassy();
-  if (!current) return;
-  setEmbassyStatus(current.id, "acquired");
+  const current = viewNextEmbassyId
+    ? routeEmbassies().find((embassy) => embassy.id === viewNextEmbassyId)
+    : getNextEmbassy();
+  if (!current || !isNextCandidate(current.id)) return;
+  setEmbassyStatus(current.id, "acquired", { recordDayView: true });
   showToast("スタンプを取得しました");
 });
 $("#embassySearch").addEventListener("input", renderSearchResults);
