@@ -2,13 +2,13 @@
 
 ## Open Issues
 
-### v0.7 iPhone Safari / Standalone Validation
+### v0.7.1 iPhone Standalone Hotfix Validation
 
 Status: OPEN
 
-v0.7は実装とPC検証まで完了。GitHub Pages反映後、実機の`1.0`保存状態が安全に`1.1`へMigrationされ、全体14 / 157、Day1基本13 / 13、当日追加ノルウェー1 / 1、walkLogs 4件を維持することを最優先で確認する。
+v0.7 Migration GateはiPhone standalone実機でPASSした。全体14 / 157、Day1基本13 / 13、ノルウェーDay1当日追加、ノルウェーDay4取得済み、START / GOAL、Day完了データを確認済み。
 
-あわせてSafari / standaloneでNavigation、当日追加、完了画面、記録編集・削除、Backup / Restore、Guide Footer、Day7 / Day8のスクロールを確認する。詳細は `docs/pre-use-checklist.md` と `docs/test-plan-v0.7.md` で管理する。
+v0.7.1でHome Navigation重なり、Day Footer重なり、Day完了summary、Day表示状態を含むBack / Forwardを修正した。PC検証PASS。GitHub Pages反映後、Home Navigation、Day完了layout、Guide Footer、Day表示履歴をiPhone standaloneで確認する。
 
 ### Prototype / Release Folder Role
 
@@ -29,6 +29,18 @@ Current behavior:
 - App shows `地図要確認` and disables the map link.
 
 ## Closed Issues
+
+### v0.7 Migration Gate
+
+Status: CLOSED (iPhone standalone PASS)
+
+Result:
+
+- Home 14 / 157、9%を確認した。
+- Day1基本13 / 13を確認した。
+- ノルウェーがDay1当日追加・取得済み、Day4でも取得済みであることを確認した。
+- START / GOALとDay完了データを確認した。
+- v0.7.1ではMigration、正式157件、activity modelを変更しない。
 
 ### v0.6.1 Responsive & Visual Polish
 

@@ -143,13 +143,24 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Migration・保存・Master回帰テストと、320 / 375 / 390 / 430pxのPCブラウザ確認をPASSした。
 - iPhone Safari / standalone実機確認はGitHub Pages反映後に行う。
 
+## v0.7.1 iPhone Standalone Hotfix (2026-09-21)
+
+- v0.7 Migration GateはiPhone standaloneでPASSした。
+- 保存構造、Migration、正式157件、activity model、Backup / Restoreには変更を加えなかった。
+- HomeのBack / Forwardを通常フローの独立した44px touch targetへ変更し、disabled時も位置を固定した。
+- Day案内Footerをaction buttons後の独立sectionへ変更し、吹き出し、人物、skylineをnormal flowへ配置した。
+- Day完了summaryの3項目を1つのcompactな3列cardへ統合し、重複する上部進捗を完了時だけ隠した。
+- Navigation entryに`dayMode`と`nextEmbassyId`を追加し、Back / Forwardで過去のDay / NEXT表示対象を復元できるようにした。
+- 履歴表示時も取得状態と進捗は現在値を使用し、既に取得済みの過去NEXTは`取得済み（履歴表示）`として操作不可にした。
+- 320 / 375 / 390 / 430pxでHome Navigation、完了summary、Footer非重複、横overflowなしを確認した。
+- Day2で`アメリカ → バーレーン → Route → Home`を作り、Backで`Route → バーレーン → アメリカ`、Forwardでバーレーンを再現した。
+- auto NEXTとmanual NEXT、Golden Migration、正式157件の回帰をPASSした。
+
 ## Current Next Gate
 
-- 実機のv0.6.3 Backupを別保管したうえで、v0.7変更ファイルをGitHub Pagesへ反映する。
-- iPhone Safari / standaloneで`1.0 → 1.1` Migration後も、全体14 / 157、Day1基本13 / 13、ノルウェー当日追加1 / 1、walkLogs 4件が維持されることを確認する。
-- Navigation、当日追加、追加NEXT、記録編集・削除、日付別Timeline、v1.1 Backup / Restoreを実機確認する。
-- Day7 / Day8ルートのスクロールと`＋記録`のnormal-flow動作、standaloneのGuide Footerを確認する。
-- 実機確認PASS後、Day2以降の実地運用へ進む。
+- v0.7.1変更ファイルをGitHub Pagesへ反映する。
+- Home Navigation、Day完了layout、Guide Footer重なり、Back / ForwardによるDay表示状態復元をiPhone standaloneで確認する。
+- Hotfix実機確認PASS後、Day2以降の実地運用へ進む。
 
 ## Project Management Setup
 

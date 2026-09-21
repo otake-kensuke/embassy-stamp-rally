@@ -108,3 +108,25 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 
 実機確認が完了するまでは、Safari / standalone項目をPASSと記録しない。
 
+## v0.7.1 Hotfix PC確認
+
+- Migration回帰、正式157件、Day別件数、ID、Afghanistan: PASS
+- `dataVersion: "1.1"`、Golden 14 / 157、全`acquiredAt`、walkLogs 4件: PASS
+- Home Back / Forwardは320 / 375 / 390 / 430pxで44x44px: PASS
+- Homeボタン非表示、矢印間gap 10〜12px、Hero titleとの重なりなし: PASS
+- Day action buttonsとGuide Footerの間隔16〜20px: PASS
+- 吹き出し・人物・skylineはFooter内のnormal flowに収まる: PASS
+- Day完了summaryは3列compact card、320pxでも横overflowなし: PASS
+- Day2 アメリカ取得後のauto NEXTがバーレーン: PASS
+- `Home → Route → Day2/バーレーン → Day2/アメリカ`のBack履歴: PASS
+- 過去のアメリカ表示でも進捗1 / 14、取得済み表示のままでrollbackなし: PASS
+- ForwardでDay2/バーレーンを再表示: PASS
+- manual NEXTで南スーダンを指定: PASS
+- ブラウザconsole errorなし: PASS
+
+### v0.7.1 iPhone standalone確認待ち
+
+- Home Navigationのtouch target、gap、title非干渉
+- Day完了summaryの情報密度
+- action buttonsとGuide Footerの重なり解消
+- Back / ForwardによるDay表示対象の復元と永続データ非rollback

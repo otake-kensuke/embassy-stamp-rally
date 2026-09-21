@@ -4,7 +4,7 @@
 
 v0.6.3はiPhone Safari確認後、Day1で実運用済み。実利用状態はDay1基本13 / 13、ノルウェー大使館取得済み、全体14 / 157、walkLogs 4件である。
 
-v0.7は実装とPC検証まで完了している。次GateはGitHub Pages反映後のiPhone Safari / standalone実機確認である。
+v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1 HotfixはPC検証まで完了している。次GateはGitHub Pages反映後のUI / Navigation再確認である。
 
 ## 更新前
 
@@ -33,6 +33,13 @@ v0.7は実装とPC検証まで完了している。次GateはGitHub Pages反映�
 - START / GOALが表示され、NEXTをfirst viewportから押し出していない
 - standaloneでGuide Footerに巨大な空白、画像や吹き出しの重なりがない
 - 320〜430px相当の縦画面で横スクロールがない
+- HomeのBack / Forwardが重ならず、各44px前後のtouch targetを持つ
+- Homeの矢印とHero titleが干渉せず、Home buttonが表示されない
+- Day完了summaryがcompactな1つのrow/cardとして読める
+- Day action buttonsとGuide Footerの吹き出しが重ならない
+- Guide Footerがviewport bottomへ引き伸ばされない
+- Day2でアメリカ取得後にバーレーンへ進み、Route、Homeを経てBackするとバーレーン、アメリカの順に表示が戻る
+- 過去のアメリカ画面でも取得済み状態と現在進捗が維持され、Forwardでバーレーンへ進める
 
 ## 当日追加 / NEXT
 
@@ -66,4 +73,4 @@ v0.7は実装とPC検証まで完了している。次GateはGitHub Pages反映�
 
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断
-- v0.7のiPhone Safari / standalone実機確認は未完了
+- v0.7.1 UI / Navigation HotfixのiPhone standalone実機確認は未完了

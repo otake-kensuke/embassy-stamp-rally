@@ -117,3 +117,14 @@ Footerはnormal flowに置き、standalone表示でも巨大な余白を作ら�
 - GitHub Pages、iPhone Safari、Vanilla JavaScript、`localStorage`
 - 写真管理、クラウド同期、ログインを導入しない方針
 
+## v0.7.1 iPhone Hotfix
+
+Migration Gateの実機PASS後に、UIとNavigationだけを調整する。
+
+- HomeのBack / Forwardは44pxの独立touch targetとし、disabledでも位置と寸法を変えない
+- HomeではHome buttonを表示しない
+- Day Footerはaction buttonsの後から始まる独立sectionとし、吹き出し、人物、skylineをnormal flowへ置く
+- Day完了summaryは基本ルート、当日追加、今日の訪問を1つの3列cardへまとめる
+- Navigation entryは`screen`、`day`、`recordDate`に加え、Day表示用の`dayMode`と`nextEmbassyId`を持つ
+- 過去のNEXTが既に取得済みの場合は、現在の取得状態のまま`取得済み（履歴表示）`として表示する
+- Back / Forwardは表示状態だけを復元し、`embassies`、`walkLogs`、`actualDayActivities`等をrollbackしない
