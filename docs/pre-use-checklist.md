@@ -4,7 +4,7 @@
 
 v0.6.3はiPhone Safari確認後、Day1で実運用済み。実利用状態はDay1基本13 / 13、ノルウェー大使館取得済み、全体14 / 157、walkLogs 4件である。
 
-v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1 HotfixはPC検証まで完了している。次GateはGitHub Pages反映後のUI / Navigation再確認である。
+v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1のDay完了compact layoutとFooter非重複も実機PASS。v0.7.2 Hotfix 2はPC検証まで完了している。次GateはGitHub Pages反映後のHome Navigation、Guide人物接地、manual NEXT再確認である。
 
 ## 更新前
 
@@ -35,9 +35,11 @@ v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1 HotfixはP
 - 320〜430px相当の縦画面で横スクロールがない
 - HomeのBack / Forwardが重ならず、各44px前後のtouch targetを持つ
 - Homeの矢印とHero titleが干渉せず、Home buttonが表示されない
+- 履歴ありHomeでNavigation rowがHeroより上に表示され、吹き出しや装飾と重ならない
 - Day完了summaryがcompactな1つのrow/cardとして読める
 - Day action buttonsとGuide Footerの吹き出しが重ならない
 - Guide Footerがviewport bottomへ引き伸ばされない
+- Guide人物の足元がskyline / groundへ接地し、浮いて見えない
 - Day2でアメリカ取得後にバーレーンへ進み、Route、Homeを経てBackするとバーレーン、アメリカの順に表示が戻る
 - 過去のアメリカ画面でも取得済み状態と現在進捗が維持され、Forwardでバーレーンへ進める
 
@@ -51,6 +53,8 @@ v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1 HotfixはP
 - 当日追加を `ここをNEXTにする` で指定できる
 - 基本ルート完了後も、未取得の当日追加NEXTを別枠で操作できる
 - 未完了Dayの既存auto NEXT / manual NEXTが動作する
+- Day2で南スーダンを `ここをNEXTにする` で指定し、Toast後のDay画面、再読込、Home経由でも南スーダンがNEXTになる
+- manual NEXT指定後のBack / Forwardが表示履歴だけを戻し、取得状態や記録をrollbackしない
 
 ## 記録 / Backup
 
@@ -73,4 +77,4 @@ v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1 HotfixはP
 
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断
-- v0.7.1 UI / Navigation HotfixのiPhone standalone実機確認は未完了
+- v0.7.2 Home Navigation、Guide人物接地、manual NEXTのiPhone standalone実機確認は未完了

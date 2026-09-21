@@ -156,10 +156,23 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Day2で`アメリカ → バーレーン → Route → Home`を作り、Backで`Route → バーレーン → アメリカ`、Forwardでバーレーンを再現した。
 - auto NEXTとmanual NEXT、Golden Migration、正式157件の回帰をPASSした。
 
+## v0.7.2 iPhone Standalone Hotfix 2 (2026-09-21)
+
+- v0.7.1実機確認でPASSしたMigration、Day1完了compact layout、action buttonsとGuide Footerの非重複を維持した。
+- HomeのBack / ForwardをHero外の独立Navigation rowへ移し、履歴がない場合はrowを表示しない構成へ変更した。
+- Guide Footer内で人物の足元をskyline / groundへ接地させ、Footerのnormal flowとaction buttons後の間隔を維持した。
+- manual NEXTは`manualNextId`保存後に指定先を持つ最新Day snapshotを追加し、Day画面へ戻すよう修正した。
+- 同じDayの再選択ではmanual NEXTを維持し、別Dayへの切替時だけ解除するようにした。
+- manual NEXT成功時に大使館名入りToastを表示した。
+- 320 / 375 / 390 / 430pxのHome Navigation、Guide Footer、横overflowを確認した。
+- Day2南スーダンのmanual NEXT、再読込・Home経由の保持、取得後auto NEXT、Back / Forwardの永続データ非rollbackを確認した。
+- 匿名化Goldenを再復元し、14 / 157、Day1基本13 / 13、Day4 1 / 18を確認した。
+- `dataVersion: "1.1"`、Migration、正式157件、activity model、Backup / Restoreは変更していない。
+
 ## Current Next Gate
 
-- v0.7.1変更ファイルをGitHub Pagesへ反映する。
-- Home Navigation、Day完了layout、Guide Footer重なり、Back / ForwardによるDay表示状態復元をiPhone standaloneで確認する。
+- v0.7.2変更ファイルをGitHub Pagesへ反映する。
+- Home NavigationのHero非干渉、Guide人物接地、manual NEXTの保存・Day表示をiPhone standaloneで確認する。
 - Hotfix実機確認PASS後、Day2以降の実地運用へ進む。
 
 ## Project Management Setup

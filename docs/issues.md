@@ -2,13 +2,13 @@
 
 ## Open Issues
 
-### v0.7.1 iPhone Standalone Hotfix Validation
+### v0.7.2 iPhone Standalone Hotfix Validation
 
 Status: OPEN
 
 v0.7 Migration GateはiPhone standalone実機でPASSした。全体14 / 157、Day1基本13 / 13、ノルウェーDay1当日追加、ノルウェーDay4取得済み、START / GOAL、Day完了データを確認済み。
 
-v0.7.1でHome Navigation重なり、Day Footer重なり、Day完了summary、Day表示状態を含むBack / Forwardを修正した。PC検証PASS。GitHub Pages反映後、Home Navigation、Day完了layout、Guide Footer、Day表示履歴をiPhone standaloneで確認する。
+v0.7.1実機確認でMigration、Day1完了compact layout、action buttonsとGuide Footerの非重複はPASSした。残ったHome NavigationのHero干渉、Guide人物の浮き、manual NEXT不動作をv0.7.2で修正し、PC検証PASS。GitHub Pages反映後、Home Navigation、Guide人物接地、manual NEXTと履歴の優先順位をiPhone standaloneで確認する。
 
 ### Prototype / Release Folder Role
 

@@ -130,3 +130,25 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 - Day完了summaryの情報密度
 - action buttonsとGuide Footerの重なり解消
 - Back / ForwardによるDay表示対象の復元と永続データ非rollback
+
+## v0.7.2 Hotfix 2 PC確認
+
+- Home Navigationは320 / 375 / 390 / 430pxでHeroの直上にnormal flow配置: PASS
+- Back / Forwardは44x44px、gap 10〜12px、横overflowなし: PASS
+- 履歴なしではNavigation row非表示かつHero開始位置維持: PASS
+- action buttonsとGuide Footerの間隔16〜20px: PASS
+- Guide人物の足元はskylineへ10〜11px重なり、Footer外へ侵入しない: PASS
+- Day2で南スーダンをmanual NEXT指定後、Dayへ遷移して同大使館を表示: PASS
+- Toast `南スーダン大使館をNEXTに設定しました`: PASS
+- 再読込とHome経由の同Day再選択後もmanual NEXT保持: PASS
+- 南スーダン取得後、manual NEXT解除・auto NEXTでアメリカへ更新: PASS
+- Backで南スーダンの過去表示を再現しつつ進捗1 / 14と取得済みを維持: PASS
+- Forwardで最新auto NEXTのアメリカを再表示: PASS
+- 匿名化Goldenを再復元し、14 / 157、Day1 13 / 13、Day4 1 / 18を確認: PASS
+
+### v0.7.2 iPhone standalone確認待ち
+
+- 履歴ありHomeでNavigation rowがHero内のタイトル、吹き出し、装飾と重ならない
+- Guide人物の足元がskyline / groundへ接地し、Footer全体が過度に高くない
+- Day2で南スーダンをmanual NEXT指定するとToast後にDayへ戻り、南スーダンを表示する
+- 再読込、Home経由、Back / Forward後もmanual NEXTと現在の永続データが正しく扱われる

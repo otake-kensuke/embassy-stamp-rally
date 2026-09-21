@@ -128,3 +128,12 @@ Migration Gateの実機PASS後に、UIとNavigationだけを調整する。
 - Navigation entryは`screen`、`day`、`recordDate`に加え、Day表示用の`dayMode`と`nextEmbassyId`を持つ
 - 過去のNEXTが既に取得済みの場合は、現在の取得状態のまま`取得済み（履歴表示）`として表示する
 - Back / Forwardは表示状態だけを復元し、`embassies`、`walkLogs`、`actualDayActivities`等をrollbackしない
+
+## v0.7.2 iPhone Hotfix 2
+
+- Homeの履歴がある場合だけ、Back / ForwardをHeroより上の独立Navigation rowとしてnormal flowに表示する
+- 履歴がない場合はNavigation rowを表示せず、Heroの開始位置を変えない
+- Guide Footerは前sectionへ侵入させず、Footer内部で人物の足元とskyline / groundを重ねて接地させる
+- manual NEXTは`manualNextId`を保存してから、その大使館を持つ最新のNEXT表示Day snapshotを履歴へ追加しDay画面へ遷移する。基本ルート完了後の未取得当日追加も同じ扱いとする
+- Navigation snapshotの`nextEmbassyId`は過去表示の再現専用とし、現在の`manualNextId`を変更しない
+- 同じDayをHomeから選び直した場合はmanual NEXTを維持し、別Dayへ切り替えた場合だけ解除する
