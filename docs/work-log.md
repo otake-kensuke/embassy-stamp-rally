@@ -84,6 +84,8 @@ This file records only important project milestones. It is not a detailed daily 
 - Re-ran data, storage, NEXT, route, record, review, restore, Afghanistan, and `dataVersion: "1.0"` regression checks; PC validation passed.
 - iPhone Safari validation remains pending after GitHub Pages update.
 
+Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける途中で使用した作業ラベルである。その後の正式な調整履歴は `v0.6.1 Responsive & Visual Polish`、`v0.6.2 Final Visual Polish`、`v0.6.3 Final Layout Tuning` として管理した。過去記録は当時の作業名として保持する。
+
 ## v0.6.1 Responsive & Visual Polish
 
 - Applied the iPhone Safari review findings to the v0.6 Final Implementation without changing app data, logic, or storage.
@@ -120,14 +122,34 @@ This file records only important project milestones. It is not a detailed daily 
 - Added `スタンプを取得しました` to the existing Toast after acquisition while preserving save, progress update, and automatic NEXT.
 - Measured 0px vertical movement for the acquisition button, route and record actions, footer, characters, and skyline before/after acquisition at 390x844.
 - Re-ran responsive, data, NEXT, manual NEXT, route, record, review, restore, maps, Afghanistan, storage, and Backup / Restore compatibility checks; PC validation passed.
-- iPhone Safari validation is pending after GitHub Pages update.
+- iPhone Safari validation passed after the GitHub Pages update.
+- Day1で実運用し、Day1基本ルート13件と本来Day4のノルウェー大使館を取得した。
+- 実利用状態は全体14 / 157、Day1基本13 / 13、walkLogs 4件となり、v0.7 MigrationのGolden Caseに採用した。
+
+## v0.7 Actual Day Activity (2026-09-21)
+
+- `dataVersion`を`"1.1"`へ更新した。
+- 保存データ解析、version判定、Migration、validation、成功時保存の順を固定し、失敗時に元データを上書きしないようにした。
+- v0.6.3の`1.0` Backup Restoreも同じMigration pathへ統合した。
+- 個人メモを含まない匿名化Golden fixtureを追加し、取得済み14件、全`acquiredAt`、walkLogs 4件と全timestamp、settingsの保持を機械比較した。
+- ノルウェー大使館を正式Day4のままDay1 actual activityへ`addedAt: null / source: migration`で関連付け、架空のroute-added eventは生成しない。
+- Master routeとactual activityを分離し、ローカル日付とplanned Dayごとに当日実績を保持する構造を追加した。
+- 正式START / GOALを`js/day-meta.js`へ分離した。
+- セッション中のBack / Forward / Home履歴を追加し、HomeまたはDayだけを安全な再起動復元対象とした。
+- 今日のルートに当日追加セクションと157件検索を追加し、重複防止、未取得のみ削除、追加大使館の手動NEXTに対応した。
+- 基本ルート完了UI、未取得の当日追加NEXT、日付別記録一覧、統合Timeline、walkLog編集・削除を追加した。
+- 動的案内コメントを`js/guide-comments.js`へ分離し、Guide Footerをnormal flowで調整した。
+- `js/data.js`の157件、Day別件数、ID、順序、住所、mapQuery、master Day、Afghanistanの扱いは変更しなかった。
+- Migration・保存・Master回帰テストと、320 / 375 / 390 / 430pxのPCブラウザ確認をPASSした。
+- iPhone Safari / standalone実機確認はGitHub Pages反映後に行う。
 
 ## Current Next Gate
 
-- Upload the v0.6.3 Final Layout Tuning files to GitHub Pages.
-- Confirm the Home character height ratio, globe/skyline gap, visual footer, Day footer, acquisition layout stability, and completion Toast on iPhone Safari.
-- Confirm Day7 / Day8 route scrolling and `＋記録` behavior remain unchanged.
-- After v0.6.3 iPhone confirmation passes, return to real-use standby and keep unresolved Issues visible.
+- 実機のv0.6.3 Backupを別保管したうえで、v0.7変更ファイルをGitHub Pagesへ反映する。
+- iPhone Safari / standaloneで`1.0 → 1.1` Migration後も、全体14 / 157、Day1基本13 / 13、ノルウェー当日追加1 / 1、walkLogs 4件が維持されることを確認する。
+- Navigation、当日追加、追加NEXT、記録編集・削除、日付別Timeline、v1.1 Backup / Restoreを実機確認する。
+- Day7 / Day8ルートのスクロールと`＋記録`のnormal-flow動作、standaloneのGuide Footerを確認する。
+- 実機確認PASS後、Day2以降の実地運用へ進む。
 
 ## Project Management Setup
 

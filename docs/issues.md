@@ -2,11 +2,13 @@
 
 ## Open Issues
 
-### v0.6.3 iPhone Safari Real-device Validation
+### v0.7 iPhone Safari / Standalone Validation
 
 Status: OPEN
 
-v0.6.3 Final Layout TuningはPC検証まで完了。GitHub Pages反映後、320〜430px相当のiPhone Safari縦画面で人物比率、地球と街並みの間隔、Visual Footer、取得前後のLayout Shift、Toast、Day7 / Day8のスクロールを確認する。
+v0.7は実装とPC検証まで完了。GitHub Pages反映後、実機の`1.0`保存状態が安全に`1.1`へMigrationされ、全体14 / 157、Day1基本13 / 13、当日追加ノルウェー1 / 1、walkLogs 4件を維持することを最優先で確認する。
+
+あわせてSafari / standaloneでNavigation、当日追加、完了画面、記録編集・削除、Backup / Restore、Guide Footer、Day7 / Day8のスクロールを確認する。詳細は `docs/pre-use-checklist.md` と `docs/test-plan-v0.7.md` で管理する。
 
 ### Prototype / Release Folder Role
 
@@ -44,7 +46,7 @@ Result:
 
 ### v0.6.3 Final Layout Tuning
 
-Status: CLOSED (PC)
+Status: CLOSED (iPhone validation completed; Day1 real use completed)
 
 Result:
 
@@ -53,7 +55,21 @@ Result:
 - Day案内フッターを通常フローのflex領域で画面下部まで展開した。
 - 取得後の通常フロー内ステータスをToastへ置き換え、390x844で主要要素の位置差0pxを確認した。
 - 320、375、390、430px幅と主要回帰テストはPASSした。
-- GitHub Pages反映後のiPhone Safari実機確認が次Gate。
+- iPhone Safari実機確認後、Day1で実運用した。
+- Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、全体14 / 157、walkLogs 4件の実利用状態をv0.7 MigrationのGolden Caseとした。
+
+### v0.7 Actual Day Activity Implementation
+
+Status: CLOSED (PC implementation and validation)
+
+Result:
+
+- `dataVersion`を`"1.1"`へ更新し、検証成功後だけ保存する`1.0 → 1.1` Migrationを実装した。
+- Day1実利用のノルウェー大使館を正式Day4のままDay1 actual activityへ関連付け、既存`acquiredAt`を保持し、架空のroute-added eventを作らない。
+- START / GOAL、セッション内Back / Forward / Home、当日追加、追加大使館NEXT、日付別記録、Timeline、walkLog編集・削除、基本ルート完了UI、動的案内コメントを実装した。
+- 匿名化Golden fixtureと自動回帰テストを追加し、正式157件とDay別件数を維持した。
+- 320 / 375 / 390 / 430pxのPCブラウザ確認を完了した。
+- GitHub Pages反映後のiPhone Safari / standalone確認はOpen Issueとして継続する。
 
 ### v0.6.2 Final Visual Polish
 
@@ -101,7 +117,7 @@ Result:
 - Added a dedicated Day list and Today's route screen while preserving v0.5 data and NEXT behavior.
 - 390x844 and 320px PC browser validation passed without horizontal overflow or content overlap.
 - Day7 long-route scrolling passed without `＋記録` residual display.
-- iPhone Safari validation remains pending after GitHub Pages update.
+- 当時のiPhone Safari確認待ちは、その後のv0.6.3 Final Layout Tuning確認とDay1実運用で完了した。
 
 ### Official Day1 13-entry Data Integration
 
