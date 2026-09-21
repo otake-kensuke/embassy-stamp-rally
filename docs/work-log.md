@@ -169,11 +169,19 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - 匿名化Goldenを再復元し、14 / 157、Day1基本13 / 13、Day4 1 / 18を確認した。
 - `dataVersion: "1.1"`、Migration、正式157件、activity model、Backup / Restoreは変更していない。
 
+## v0.7.2 Release Close (2026-09-22)
+
+- iPhone standalone最終実機確認を完了し、v0.7.2をRELEASE / STABLEとした。
+- Migration、14 / 157、Day1基本13 / 13、ノルウェーDay1当日追加・正式Day4を確認した。
+- Home Navigation、Back / Forward、manual NEXTと再起動後の保持を確認した。
+- Day完了compact layout、Guide Footer、記録追加・編集・削除、日付別記録、Timelineを確認した。
+- 当日追加・削除、Backup、既存データ保持を確認した。
+- Documentation Closeのみを行い、機能、データ、UI、`dataVersion: "1.1"`は変更していない。
+
 ## Current Next Gate
 
-- v0.7.2変更ファイルをGitHub Pagesへ反映する。
-- Home NavigationのHero非干渉、Guide人物接地、manual NEXTの保存・Day表示をiPhone standaloneで確認する。
-- Hotfix実機確認PASS後、Day2以降の実地運用へ進む。
+- v0.7.2 RELEASE / STABLEとして実地利用を継続する。
+- 次Versionへ着手する前に、Guide Footer人物位置のVisual Polish、Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理についてPM判断する。
 
 ## Project Management Setup
 

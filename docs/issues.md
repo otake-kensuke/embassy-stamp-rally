@@ -2,19 +2,11 @@
 
 ## Open Issues
 
-### v0.7.2 iPhone Standalone Hotfix Validation
+### Guide Footer Character Position Visual Polish
 
 Status: OPEN
 
-v0.7 Migration GateはiPhone standalone実機でPASSした。全体14 / 157、Day1基本13 / 13、ノルウェーDay1当日追加、ノルウェーDay4取得済み、START / GOAL、Day完了データを確認済み。
-
-v0.7.1実機確認でMigration、Day1完了compact layout、action buttonsとGuide Footerの非重複はPASSした。残ったHome NavigationのHero干渉、Guide人物の浮き、manual NEXT不動作をv0.7.2で修正し、PC検証PASS。GitHub Pages反映後、Home Navigation、Guide人物接地、manual NEXTと履歴の優先順位をiPhone standaloneで確認する。
-
-### Prototype / Release Folder Role
-
-Status: OPEN
-
-`prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
+v0.7.2のGuide Footerは重なり解消と人物接地を含め実機PASSしている。人物位置のさらなる見た目調整は次Version候補とし、機能Issueとしては扱わない。
 
 ### Afghanistan Google Maps Query
 
@@ -28,7 +20,27 @@ Current behavior:
 - iPhone Safari validation passed.
 - App shows `地図要確認` and disables the map link.
 
+### Prototype / Release Folder Role
+
+Status: OPEN
+
+`prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
+
 ## Closed Issues
+
+### v0.7.2 Release Validation
+
+Status: CLOSED (RELEASE / STABLE, iPhone standalone PASS)
+
+Result:
+
+- v0.6.3からv0.7へのMigrationと14 / 157の既存進捗保持を確認した。
+- Day1基本13 / 13、ノルウェーDay1当日追加・正式Day4を確認した。
+- Home Navigation、Back / Forward、manual NEXTと再起動後の保持を確認した。
+- Day完了compact layoutとGuide Footerを確認した。
+- 記録追加・編集・削除、日付別記録、Timelineを確認した。
+- 当日追加・削除、Backup、既存データ保持を確認した。
+- `dataVersion: "1.1"`、正式157件、Migration、activity modelは変更していない。
 
 ### v0.7 Migration Gate
 

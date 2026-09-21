@@ -4,7 +4,7 @@
 
 v0.6.3はiPhone Safari確認後、Day1で実運用済み。実利用状態はDay1基本13 / 13、ノルウェー大使館取得済み、全体14 / 157、walkLogs 4件である。
 
-v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1のDay完了compact layoutとFooter非重複も実機PASS。v0.7.2 Hotfix 2はPC検証まで完了している。次GateはGitHub Pages反映後のHome Navigation、Guide人物接地、manual NEXT再確認である。
+v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / STABLEとなった。Migration、14 / 157、Day1基本13 / 13、ノルウェー当日追加、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backup、既存データ保持はPASSしている。
 
 ## 更新前
 
@@ -75,6 +75,6 @@ v0.7のMigration GateはiPhone standalone実機でPASSした。v0.7.1のDay完�
 
 ## 既知Issue
 
+- Guide Footer人物位置のVisual Polishは次Version候補
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断
-- v0.7.2 Home Navigation、Guide人物接地、manual NEXTのiPhone standalone実機確認は未完了

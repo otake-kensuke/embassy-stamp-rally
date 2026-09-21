@@ -106,7 +106,7 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 14. 保存済みv0.6.3 Backupをv0.7へ復元できることを確認する
 15. Day7 / Day8長距離スクロールで `＋記録` が途中に残らないことを確認する
 
-実機確認が完了するまでは、Safari / standalone項目をPASSと記録しない。
+上記の主要Safari / standalone項目はv0.7.2最終実機確認でPASSした。
 
 ## v0.7.1 Hotfix PC確認
 
@@ -124,12 +124,12 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 - manual NEXTで南スーダンを指定: PASS
 - ブラウザconsole errorなし: PASS
 
-### v0.7.1 iPhone standalone確認待ち
+### v0.7.1 iPhone standalone確認結果
 
-- Home Navigationのtouch target、gap、title非干渉
-- Day完了summaryの情報密度
-- action buttonsとGuide Footerの重なり解消
-- Back / ForwardによるDay表示対象の復元と永続データ非rollback
+- Home Navigationのtouch target、gap、title非干渉: v0.7.2でPASS
+- Day完了summaryの情報密度: PASS
+- action buttonsとGuide Footerの重なり解消: PASS
+- Back / ForwardによるDay表示対象の復元と永続データ非rollback: PASS
 
 ## v0.7.2 Hotfix 2 PC確認
 
@@ -146,9 +146,14 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 - Forwardで最新auto NEXTのアメリカを再表示: PASS
 - 匿名化Goldenを再復元し、14 / 157、Day1 13 / 13、Day4 1 / 18を確認: PASS
 
-### v0.7.2 iPhone standalone確認待ち
+### v0.7.2 iPhone standalone確認結果
 
-- 履歴ありHomeでNavigation rowがHero内のタイトル、吹き出し、装飾と重ならない
-- Guide人物の足元がskyline / groundへ接地し、Footer全体が過度に高くない
-- Day2で南スーダンをmanual NEXT指定するとToast後にDayへ戻り、南スーダンを表示する
-- 再読込、Home経由、Back / Forward後もmanual NEXTと現在の永続データが正しく扱われる
+- v0.6.3からv0.7へのMigration、14 / 157、Day1基本13 / 13: PASS
+- ノルウェーDay1当日追加・正式Day4: PASS
+- Home Navigation、Back / Forward: PASS
+- manual NEXTと再起動後の保持: PASS
+- Day完了compact layout、Guide Footer: PASS
+- 記録追加・編集・削除、日付別記録、Timeline: PASS
+- 当日追加・削除: PASS
+- Backup、既存データ保持: PASS
+- Final Status: RELEASE / STABLE

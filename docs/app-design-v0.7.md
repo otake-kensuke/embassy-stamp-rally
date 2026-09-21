@@ -137,3 +137,10 @@ Migration Gateの実機PASS後に、UIとNavigationだけを調整する。
 - manual NEXTは`manualNextId`を保存してから、その大使館を持つ最新のNEXT表示Day snapshotを履歴へ追加しDay画面へ遷移する。基本ルート完了後の未取得当日追加も同じ扱いとする
 - Navigation snapshotの`nextEmbassyId`は過去表示の再現専用とし、現在の`manualNextId`を変更しない
 - 同じDayをHomeから選び直した場合はmanual NEXTを維持し、別Dayへ切り替えた場合だけ解除する
+
+## v0.7.2 Release Status
+
+- PC検証とiPhone standalone実機検証を完了した
+- Migration、既存データ、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backupを含む設計が実機で成立した
+- v0.7.2をRELEASE / STABLEとする
+- `dataVersion: "1.1"`を維持する
