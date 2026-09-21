@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.7.1">
+    <link rel="stylesheet" href="css/style.css?v=0.7.2">
   </head>
   <body>
     <div class="app-shell">
@@ -24,11 +24,11 @@
 
       <main>
         <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
+          <nav class="home-history-nav" id="homeHistoryNav" aria-label="画面履歴" hidden>
+            <button class="home-history-button" id="homeBackButton" type="button" aria-label="前の画面へ戻る">←</button>
+            <button class="home-history-button" id="homeForwardButton" type="button" aria-label="次の画面へ進む">→</button>
+          </nav>
           <div class="hero-panel">
-            <nav class="home-history-nav" id="homeHistoryNav" aria-label="画面履歴" hidden>
-              <button class="home-history-button" id="homeBackButton" type="button" aria-label="前の画面へ戻る">←</button>
-              <button class="home-history-button" id="homeForwardButton" type="button" aria-label="次の画面へ進む">→</button>
-            </nav>
             <div class="cloud cloud-one" aria-hidden="true"></div>
             <div class="cloud cloud-two" aria-hidden="true"></div>
             <div class="cloud cloud-three" aria-hidden="true"></div>
@@ -263,6 +263,6 @@
     <script src="js/activity-model.js?v=0.7"></script>
     <script src="js/log-model.js?v=0.7"></script>
     <script src="js/backup.js?v=0.7"></script>
-    <script src="js/app.js?v=0.7.1"></script>
+    <script src="js/app.js?v=0.7.2"></script>
   </body>
 </html>
