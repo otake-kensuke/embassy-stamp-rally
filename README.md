@@ -25,8 +25,14 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `assets/`: 背景透過キャラクター、地球、東京の街並みAsset
 - `js/app.js`: UI、NEXTロジック、画面復元
 - `js/data.js`: 現在のDay1〜10正式データ
-- `js/storage.js`: `localStorage` 保存、復元データ検証
+- `js/day-meta.js`: Day1〜10のSTART / GOAL
+- `js/activity-model.js`: 計画ルートと当日実績の分離
+- `js/log-model.js`: 街歩き記録の編集・削除
+- `js/guide-comments.js`: 案内役の動的コメント
+- `js/storage.js`: `localStorage` 保存、Migration、復元データ検証
 - `js/backup.js`: JSON Backup / Restore
+- `tests/fixtures/v063-golden-state.json`: 個人メモを含まない匿名化Migration fixture
+- `tests/v07-storage-regression.js`: v0.7のMigration・保存・Master回帰テスト
 - `docs/`: 設計、テスト計画、Issue、作業履歴
 - `prototype/`: 単一HTML版
 - `release/`: 配布確認用HTML
@@ -38,11 +44,13 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 
 個人データは各iPhone Safariの `localStorage` に `embassyStampRally.appState` として保存します。夫婦間・端末間の同期は行いません。
 
-保存データには `dataVersion: "1.0"` を含めます。保存対象は大使館ごとの状態、取得日時、手動NEXT、街歩き記録、メモ、設定です。
+保存データには `dataVersion: "1.1"` を含めます。保存対象は大使館ごとの状態、取得日時、手動NEXT、日付別の当日実績、当日追加大使館、ルート追加イベント、街歩き記録、メモ、設定です。
 
 ## Backup / Restore
 
-設定画面から現在の保存状態をJSONファイルとして書き出せます。復元時はJSON形式と `dataVersion` を確認し、不正データの場合は既存の保存状態を上書きしません。
+設定画面から現在の保存状態をJSONファイルとして書き出せます。v0.6.3の`dataVersion: "1.0"` Backupは、検証後に`1.1`へMigrationして復元できます。不正データの場合は既存の保存状態を上書きしません。
+
+実機から書き出した `embassy-rally-backup-*.json` は個人データを含むためGitHubへアップロードしません。テストには匿名化fixtureだけを使用します。
 
 ## 現在の開発段階
 
@@ -55,12 +63,13 @@ Prototypeの技術検証は完了しています。
 - v0.5: 正式Day1〜10 157件データ統合、PC検証PASS、iPhone実機検証PASS
 - v0.6: Design Targetに沿った4画面UI、背景透過キャラクターAsset、`＋記録` スクロール位置Bug Fix
 - v0.6.1 Responsive & Visual Polish: Hero短縮、Asset活用、Day一覧・NEXT・ルートのiPhone向け情報密度調整、iPhone実機レビュー完了
-- v0.6.2 Final Visual Polish: ホームの人物・地球・吹き出し・雲・下部フッター、Day画面の文言・取得状態・案内フッターを最終調整、PC検証PASS、iPhone実機確認待ち
-- v0.6.3 Final Layout Tuning: 人物の見た目上の高さ、地球と街並みの間隔、ホーム・DayのVisual Footerを調整し、取得時のLayout ShiftをToast方式で解消、PC検証PASS、iPhone実機確認待ち
+- v0.6.2 Final Visual Polish: ホームの人物・地球・吹き出し・雲・下部フッター、Day画面の文言・取得状態・案内フッターを調整。iPhoneレビュー結果をv0.6.3へ引き継ぎ
+- v0.6.3 Final Layout Tuning: 人物の見た目上の高さ、地球と街並みの間隔、ホーム・DayのVisual Footerを調整し、取得時のLayout ShiftをToast方式で解消。PC・iPhone検証後、Day1で実運用
+- v0.7: 実利用Day1を受け、計画ルートと当日実績を分離、START / GOAL、画面履歴、当日追加、日付別記録、記録編集・削除、完了画面、動的案内コメントを追加。`1.0 → 1.1` MigrationとPC検証PASS
 
-現在の状態は、v0.6.3 Final Layout TuningのGitHub Pages反映・iPhone Safari実機確認待ちです。使用開始前チェックリストは `docs/pre-use-checklist.md` で管理します。
+v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
-次のGateは、v0.6.3をGitHub Pagesへ反映した後のiPhone Safari実機確認です。確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進みます。
+現在の状態は、v0.7実装・PC検証完了、GitHub Pages反映後のiPhone Safari / standalone実機確認待ちです。確認項目は `docs/pre-use-checklist.md` で管理します。
 
 ## 開発時の確認
 

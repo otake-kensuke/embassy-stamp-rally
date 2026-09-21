@@ -3,14 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.6.3-layout">
+    <link rel="stylesheet" href="css/style.css?v=0.7">
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <button class="icon-button" id="backButton" type="button" aria-label="戻る">←</button>
-        <div>
+        <nav class="header-nav" aria-label="画面履歴">
+          <button class="icon-button" id="backButton" type="button" aria-label="前の画面へ戻る">←</button>
+          <button class="icon-button" id="forwardButton" type="button" aria-label="次の画面へ進む">→</button>
+          <button class="icon-button" id="homeButton" type="button" aria-label="ホームへ移動">⌂</button>
+        </nav>
+        <div class="topbar-title">
           <p class="eyebrow">世界とつながる 東京散歩</p>
           <h1 id="screenTitle">大使館スタンプラリー</h1>
         </div>
@@ -19,6 +25,10 @@
       <main>
         <section class="screen active" id="homeScreen" aria-labelledby="homeHeading">
           <div class="hero-panel">
+            <nav class="home-history-nav" id="homeHistoryNav" aria-label="画面履歴" hidden>
+              <button class="home-history-button" id="homeBackButton" type="button" aria-label="前の画面へ戻る">←</button>
+              <button class="home-history-button" id="homeForwardButton" type="button" aria-label="次の画面へ進む">→</button>
+            </nav>
             <div class="cloud cloud-one" aria-hidden="true"></div>
             <div class="cloud cloud-two" aria-hidden="true"></div>
             <div class="cloud cloud-three" aria-hidden="true"></div>
@@ -38,12 +48,12 @@
             <div class="home-guide-scene" aria-hidden="true">
               <div class="guide-slot">
                 <span class="bubble bubble-man">世界を<br>めぐろう！</span>
-                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.6.3-layout" alt="">
+                <img class="guide-character guide-character-man" src="assets/guide-man-clean.png?v=0.7" alt="">
               </div>
-              <img class="home-globe" src="assets/hero-globe.png?v=0.6.3-layout" alt="">
+              <img class="home-globe" src="assets/hero-globe.png?v=0.7" alt="">
               <div class="guide-slot">
                 <span class="bubble bubble-woman">次は<br>どこへ？</span>
-                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.6.3-layout" alt="">
+                <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.7" alt="">
               </div>
             </div>
             <div class="home-skyline" aria-hidden="true"></div>
@@ -86,7 +96,7 @@
             <span class="home-footer-cloud" aria-hidden="true"></span>
             <span class="home-footer-plane" aria-hidden="true">✈</span>
             <span class="home-footer-stamp" aria-hidden="true"></span>
-            <img class="home-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.3-layout" alt="">
+            <img class="home-footer-skyline" src="assets/tokyo-skyline.png?v=0.7" alt="">
           </div>
         </section>
 
@@ -107,18 +117,28 @@
             </div>
             <strong id="dayProgress">0 / 13</strong>
           </div>
+          <p class="start-goal" id="dayStartGoal">START 恵比寿駅 → GOAL 麻布十番駅</p>
 
-          <article class="next-panel" id="nextPanel">
-            <h3 id="nextEmbassyName">未取得はありません</h3>
-            <p id="nextAddress">おつかれさまでした。</p>
-            <a class="map-button" id="mapButton" target="_blank" rel="noopener">地図を開く</a>
-            <div class="up-next">
-              <div><span>次</span><strong id="nextOne">-</strong></div>
-              <div><span>その次</span><strong id="nextTwo">-</strong></div>
-            </div>
-          </article>
+          <div id="activeDayContent">
+            <article class="next-panel" id="nextPanel">
+              <h3 id="nextEmbassyName">未取得はありません</h3>
+              <p id="nextAddress">おつかれさまでした。</p>
+              <a class="map-button" id="mapButton" target="_blank" rel="noopener">地図を開く</a>
+              <div class="up-next">
+                <div><span>次</span><strong id="nextOne">-</strong></div>
+                <div><span>その次</span><strong id="nextTwo">-</strong></div>
+              </div>
+            </article>
+            <button class="complete-button" id="acquireButton" type="button">スタンプを取得した</button>
+          </div>
 
-          <button class="complete-button" id="acquireButton" type="button">スタンプを取得した</button>
+          <section class="completion-panel" id="completionPanel" hidden>
+            <p class="completion-kicker" id="completionTitle">Day 1 基本ルート完了</p>
+            <strong class="completion-progress" id="completionProgress">13 / 13</strong>
+            <p>すべての基本ルートスタンプを取得しました</p>
+            <div class="completion-stats" id="completionStats"></div>
+            <div class="completion-added" id="completionAdded"></div>
+          </section>
 
           <div class="day-actions">
             <button class="route-button" data-screen="route" type="button">
@@ -136,10 +156,15 @@
             <span class="day-footer-cloud day-footer-cloud-one" aria-hidden="true"></span>
             <span class="day-footer-cloud day-footer-cloud-two" aria-hidden="true"></span>
             <span class="day-footer-stamp" aria-hidden="true"></span>
-            <img class="day-footer-character day-footer-man" src="assets/guide-man-clean.png?v=0.6.3-layout" alt="男性の案内役キャラクター">
-            <p class="day-footer-bubble">次はどこへ？</p>
-            <img class="day-footer-character day-footer-woman" src="assets/guide-woman-clean.png?v=0.6.3-layout" alt="女性の案内役キャラクター">
-            <img class="day-footer-skyline" src="assets/tokyo-skyline.png?v=0.6.3-layout" alt="">
+            <div class="day-guide day-guide-man">
+              <p class="day-footer-bubble" id="guideManComment">次の大使館へ行こう！</p>
+              <img class="day-footer-character" src="assets/guide-man-clean.png?v=0.7" alt="男性の攻略ガイド">
+            </div>
+            <div class="day-guide day-guide-woman">
+              <p class="day-footer-bubble" id="guideWomanComment">街歩きも楽しもう！</p>
+              <img class="day-footer-character" src="assets/guide-woman-clean.png?v=0.7" alt="女性の街歩きガイド">
+            </div>
+            <img class="day-footer-skyline" src="assets/tokyo-skyline.png?v=0.7" alt="">
           </aside>
         </section>
 
@@ -151,11 +176,51 @@
             </div>
             <strong id="routeProgress">0 / 13</strong>
           </header>
-          <div id="routeList" class="route-list"></div>
+          <div class="route-terminal route-start"><span>START</span><strong id="routeStart">恵比寿駅</strong></div>
+          <section class="route-section" aria-labelledby="plannedRouteHeading">
+            <h3 id="plannedRouteHeading">基本ルート</h3>
+            <div id="routeList" class="route-list"></div>
+          </section>
+          <section class="route-section added-route-section" aria-labelledby="addedRouteHeading">
+            <div class="route-section-heading">
+              <div>
+                <p class="eyebrow">＋ 当日追加</p>
+                <h3 id="addedRouteHeading">当日追加</h3>
+              </div>
+              <button class="small-primary-button" data-screen="add" type="button">＋ 大使館を追加</button>
+            </div>
+            <div id="addedRouteList" class="route-list"></div>
+          </section>
+          <div class="route-terminal route-goal"><span>GOAL</span><strong id="routeGoal">麻布十番駅</strong></div>
+        </section>
+
+        <section class="screen" id="addScreen" aria-labelledby="addHeading">
+          <header class="section-heading">
+            <p class="eyebrow">157件から検索</p>
+            <h2 id="addHeading">大使館を追加</h2>
+            <p>国名または大使館名で検索してください。</p>
+          </header>
+          <label class="search-field">
+            <span>検索</span>
+            <input id="embassySearch" type="search" autocomplete="off" placeholder="例：ノルウェー">
+          </label>
+          <div class="search-results" id="embassySearchResults"></div>
         </section>
 
         <section class="screen" id="reviewScreen" aria-labelledby="reviewHeading">
-          <h2 id="reviewHeading">Day 1 振り返り</h2>
+          <header class="section-heading">
+            <p class="eyebrow">街歩き日記</p>
+            <h2 id="reviewHeading">記録一覧</h2>
+            <p>記録日を選ぶと、その日のTimelineを確認できます。</p>
+          </header>
+          <div id="recordList" class="record-list"></div>
+        </section>
+
+        <section class="screen" id="recordScreen" aria-labelledby="recordHeading">
+          <header class="section-heading">
+            <p class="eyebrow" id="recordDayLabel">Day 1</p>
+            <h2 id="recordHeading">日別記録</h2>
+          </header>
           <div id="timeline" class="timeline"></div>
         </section>
 
@@ -191,9 +256,13 @@
 
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
-    <script src="js/data.js?v=0.6.3-layout"></script>
-    <script src="js/storage.js?v=0.6.3-layout"></script>
-    <script src="js/backup.js?v=0.6.3-layout"></script>
-    <script src="js/app.js?v=0.6.3-layout"></script>
+    <script src="js/data.js?v=0.7"></script>
+    <script src="js/day-meta.js?v=0.7"></script>
+    <script src="js/guide-comments.js?v=0.7"></script>
+    <script src="js/storage.js?v=0.7"></script>
+    <script src="js/activity-model.js?v=0.7"></script>
+    <script src="js/log-model.js?v=0.7"></script>
+    <script src="js/backup.js?v=0.7"></script>
+    <script src="js/app.js?v=0.7"></script>
   </body>
 </html>

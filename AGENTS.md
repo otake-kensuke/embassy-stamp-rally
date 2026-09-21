@@ -162,19 +162,31 @@ v0.6.3 Final Layout Tuning:
 - 取得前後で主要操作と案内フッターの位置差0pxをPC計測
 - 正式157件、保存構造、NEXTロジック、Day一覧、今日のルートは変更しない
 - PC検証PASS
-- iPhone Safari実機確認待ち
+- iPhone Safari実機確認後、Day1で実運用を開始
+
+v0.7 Actual Day Activity:
+
+- `dataVersion`を`"1.1"`へ更新し、`1.0` Backupを安全にMigrationする
+- 計画Day、取得状態、ローカル日付ごとの当日実績を分離する
+- Day1実績として、本来Day4のノルウェー大使館を`addedAt: null / source: migration`で関連付ける
+- START / GOAL、Back / Forward / Home、当日大使館追加、日付別記録一覧、記録編集・削除を追加する
+- 基本ルート完了と当日追加を分けて表示し、Day1を14 / 13とは表示しない
+- 正式157件、ID、master Day、順序、住所、Google Maps情報は変更しない
+- PC検証PASS
+- GitHub Pages反映後のiPhone Safari / standalone実機確認待ち
 
 現在の状態:
 
-- v0.6.3 Final Layout TuningはPC検証完了、GitHub Pages反映・iPhone Safari実機確認待ち
-- v0.5は実装、PC検証、iPhone Safari実機検証まですべて完了
+- v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
+- 実運用データはDay1基本13 / 13、ノルウェー取得済み、全体14 / 157
+- v0.7は実装・PC検証完了、GitHub Pages反映・iPhone Safari / standalone実機確認待ち
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.6.3をGitHub Pagesへ反映した後のiPhone Safari実機確認
-- v0.6.3確認PASS後、実際のスタンプラリーで使用した後の実地運用レビューへ進む
-- 新機能追加ではなく、実地利用で分かった課題、記録運用、地図運用、Backup / Restore運用を確認する
+- v0.7をGitHub Pagesへ反映した後のiPhone Safari / standalone実機確認
+- 実機で`1.0 → 1.1` Migration後に14 / 157、Day1 13 / 13、Norway実績、既存記録4件が維持されることを確認する
+- 実機確認PASS後、Day2以降の実地運用へ進む
 
 ## v0.5 PM決定事項
 
