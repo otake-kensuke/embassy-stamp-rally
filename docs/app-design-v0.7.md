@@ -169,3 +169,20 @@ Migration Gateの実機PASS後に、UIとNavigationだけを調整する。
 - v0.7.2のnormal flow、操作領域との分離、吹き出し、人物比率、Footer高さを維持する
 - 男女の人物だけを6px下げ、skyline / groundとの接地を強める
 - Footer外の前sectionへ侵入させず、viewport bottomへstretchしない
+
+## v0.7.3 Release Status
+
+- PC RegressionとiPhone standalone Acceptanceを完了した
+- Home検索、検索結果からRouteへの移動・自動スクロール・一時強調、検索によるNEXT非変更を実機確認した
+- Day4とDay2で`Day Xへ戻る`によるDay画面への直接遷移を実機確認した
+- Guide人物の接地、action buttonsとの非重複、余白、Footer layoutを実機確認した
+- v0.7.3をRELEASE / STABLEとする
+- `dataVersion: "1.1"`、Migration、正式157件、既存データ構造を維持する
+
+## Next Version Candidate
+
+Guide Comment / 吹き出しの基本的な中央配置は維持し、次回Visual Polishで以下をまとめて検討する。
+
+- 人物を6px下げた後の、吹き出しと人物の縦方向の間隔
+- iPhone横幅とのバランスを保った文字サイズの拡大
+- `font-size`、`line-height`、有効幅、`padding`、`word-break`、`line-break`を含む日本語の自然な改行

@@ -6,7 +6,7 @@ v0.6.3はiPhone Safari確認後、Day1で実運用済み。実利用状態はDay
 
 v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / STABLEとなった。Migration、14 / 157、Day1基本13 / 13、ノルウェー当日追加、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backup、既存データ保持はPASSしている。
 
-v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ戻る`、Guide人物位置の微調整を実装した。PC検証はPASSし、iPhone standalone実機確認待ちである。v0.7.2のデータ、Migration、正式157件、実績、記録、Backup仕様は変更していない。
+v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ戻る`、Guide人物位置の微調整を実装した。PC RegressionとiPhone standalone Acceptanceを完了し、RELEASE / STABLEとなった。v0.7.2のデータ、Migration、正式157件、実績、記録、Backup仕様は変更していない。
 
 ## 更新前
 
@@ -85,6 +85,6 @@ v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ
 
 ## 既知Issue
 
-- v0.7.3のHome検索、RouteからDayへの復帰、Guide Footer人物位置はiPhone standalone実機確認待ち
+- Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はNext Version Candidate
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断

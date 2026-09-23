@@ -190,12 +190,20 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - 320 / 375 / 390 / 430pxで横overflowなし、検索ボタン48px、`Day Xへ戻る`48px、action buttonsとFooterの間隔16〜20pxを確認した。
 - `tests/v07-storage-regression.js`、JavaScript構文、console error、正式157件・Master signature・Migration・Golden 14 / 157の回帰をPASSした。
 - `dataVersion: "1.1"`、Migration、`js/data.js`、取得状態、`acquiredAt`、`walkLogs`、`actualDayActivities`、Backup / Restoreは変更していない。
-- iPhone standalone実機確認はGitHub Pages反映後に行う。
+- GitHub Pages反映後のiPhone standalone Acceptanceで、Home検索、Route遷移、自動スクロール、一時highlight、検索によるNEXT非変更をPASSした。
+- Day4とDay2の`Day Xへ戻る`、Guide人物の接地、action buttonsとの非重複、余白、Footer layoutをPASSした。
+
+## v0.7.3 Release Close (2026-09-23)
+
+- PC RegressionとiPhone standalone Acceptanceを完了し、v0.7.3をRELEASE / STABLEとした。
+- v0.7.2 RELEASE / STABLEの履歴は維持した。
+- Release CloseはDocumentationのみ更新し、機能、UI、データ、`dataVersion: "1.1"`には追加変更していない。
+- Guide Comment / 吹き出しの縦間隔、文字サイズ、日本語改行をNext Version Candidateへ移した。
 
 ## Current Next Gate
 
-- v0.7.2 RELEASE / STABLEを正式安定版として維持する。
-- v0.7.3をGitHub Pagesへ反映し、指定8項目をiPhone standaloneで確認する。
+- v0.7.3 RELEASE / STABLEとして実地利用を継続する。
+- Guide Comment / 吹き出しのVisual Polishは次Version候補とする。
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。
 
 ## Project Management Setup

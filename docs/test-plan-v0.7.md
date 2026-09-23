@@ -177,13 +177,16 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 - 正式157件、Day別件数、ID、順序、住所、mapQuery、master Day、Afghanistan、Master signature: PASS
 - `dataVersion: "1.1"`、Migration、Golden 14 / 157、`acquiredAt`、walkLogs 4件、actualDayActivities: PASS
 
-### v0.7.3 iPhone standalone確認待ち
+### v0.7.3 iPhone standalone Acceptance結果
 
-1. Homeの`大使館を検索`の位置・押しやすさ
-2. 検索画面の見やすさ
-3. 検索結果から対象大使館Routeへ正しく移動すること
-4. 対象大使館がすぐ見つかること
-5. `Day Xへ戻る`が押しやすいこと
-6. RouteからDayへ戻ったとき最新NEXTが表示されること
-7. Guide人物が街並みに自然に接地して見えること
-8. Guide Footerに重なりが再発していないこと
+- Homeから`大使館を検索`を開き、ノルウェーを検索: PASS
+- `ノルウェー大使館`、`Day 4・取得済み`の表示: PASS
+- 検索結果からDay4 Routeへ遷移: PASS
+- ノルウェーカードへの自動スクロールと約2秒の一時highlight: PASS
+- 検索だけではNEXTを変更しない: PASS
+- Day4 Routeから`Day 4へ戻る`: PASS
+- Day2 Routeから`Day 2へ戻る`: PASS
+- Guide人物が街並みに自然に接地: PASS
+- `今日のルート`、`＋記録`との非重複: PASS
+- 不自然な大きな空白なし、Footer layout破綻なし: PASS
+- Final Status: v0.7.3 RELEASE / STABLE

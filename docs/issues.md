@@ -2,17 +2,16 @@
 
 ## Open Issues
 
-### Guide Footer Character Position Visual Polish
+### Guide Comment / 吹き出し Visual Polish
 
-Status: OPEN (v0.7.3 PC PASS / iPhone standalone確認待ち)
+Status: OPEN (Next Version Candidate)
 
-v0.7.2のGuide Footerは重なり解消と人物接地を含め実機PASSしている。v0.7.3では男女の人物を6px下げ、320 / 375 / 390 / 430pxでaction buttonsとの分離、吹き出し、Footer高さ、横overflowを確認した。iPhone standaloneで自然な接地と重なり再発がないことを確認後にCLOSEする。
+v0.7.3で人物の接地は実機PASSした。次Versionでは吹き出しの中央配置を基本として維持しながら、以下を一体で再調整する。
 
-### v0.7.3 iPhone Standalone Validation
-
-Status: OPEN
-
-GitHub Pages反映後に、Home検索の位置と押しやすさ、検索画面、検索結果から対象Routeへの移動・一時強調、`Day Xへ戻る`、最新NEXT復元、Guide人物の接地、Footer非重複を確認する。
+- 吹き出しと人物の縦方向の間隔
+- iPhone横幅とのバランスを保った文字サイズの拡大
+- 末尾の1文字だけが次行へ送られない、日本語として自然な改行
+- `font-size`、`line-height`、有効幅、`padding`、`word-break`、`line-break`の組み合わせ
 
 ### Afghanistan Google Maps Query
 
@@ -33,6 +32,29 @@ Status: OPEN
 `prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
 
 ## Closed Issues
+
+### v0.7.3 Release Validation
+
+Status: CLOSED (RELEASE / STABLE, iPhone standalone PASS)
+
+Result:
+
+- Homeからノルウェーを検索し、`Day 4・取得済み`を確認した。
+- 検索結果からDay4 Routeへ遷移し、対象カードへの自動スクロールと一時highlightを確認した。
+- 検索だけではNEXTが変わらないことを確認した。
+- Day4とDay2で`Day Xへ戻る`を確認した。
+- Guide人物の自然な接地、action buttonsとの非重複、余白、Footer layoutを確認した。
+- PC RegressionとiPhone standalone Acceptanceを完了し、v0.7.3をRELEASE / STABLEとした。
+- 機能、UI、データ、`dataVersion: "1.1"`にはRelease Closeで追加変更していない。
+
+### Guide Footer Character Position Visual Polish
+
+Status: CLOSED (v0.7.3 iPhone standalone PASS)
+
+Result:
+
+- 男女を6px下げ、街並みに自然に接地して見えることを確認した。
+- action buttonsとの重なり、不自然な大きな空白、Footer layout破綻がないことを確認した。
 
 ### v0.7.2 Release Validation
 
