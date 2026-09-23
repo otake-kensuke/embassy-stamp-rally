@@ -197,6 +197,17 @@ v0.7.2 iPhone Hotfix 2:
 - iPhone standalone実機検証PASS
 - Final Status: RELEASE / STABLE
 
+v0.7.3 Day2実利用フィードバック反映:
+
+- Homeメニューから正式157件を国名または大使館名で部分一致検索できる画面を追加
+- 検索結果に正式Dayと現在の取得状態を表示し、該当DayのRouteカードへスクロール・一時強調する
+- 検索画面と検索結果RouteをBack / Forward / Homeの表示履歴へ含める
+- 検索では`manualNextId`を変更せず、既存の`ここをNEXTにする`操作だけがmanual NEXTを変更する
+- 今日のルート上部に`Day Xへ戻る`を追加し、過去snapshotではなく最新のmanual NEXT、auto NEXT、取得状態、当日追加状態からDay画面を表示する
+- Guide Footerの基本構造とnormal flowを維持したまま、男女の人物を6px下げて街並みへの接地を強める
+- `dataVersion: "1.1"`、Migration、正式157件、activity model、取得状態、記録、Backup / Restoreは変更しない
+- PC検証PASS、iPhone standalone実機確認待ち
+
 現在の状態:
 
 - v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
@@ -205,12 +216,14 @@ v0.7.2 iPhone Hotfix 2:
 - v0.7.1実機確認でMigration、Day完了compact layout、Footer非重複はPASS
 - v0.7.2 Hotfix 2は実装・PC検証・iPhone standalone実機検証完了
 - 現在の正式安定版はv0.7.2 RELEASE / STABLE
+- v0.7.3 Day2実利用フィードバック反映は実装・PC検証完了、iPhone standalone実機確認待ち
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.7.2を安定版として実地利用する
-- 次Versionへ着手する前に、Guide Footer人物位置のVisual Polish、Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理についてPM判断する
+- v0.7.2を正式安定版として維持する
+- v0.7.3をGitHub Pagesへ反映し、Home検索、RouteからDayへの復帰、Guide Footer人物位置をiPhone standaloneで確認する
+- Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
 
 ## v0.5 PM決定事項
 

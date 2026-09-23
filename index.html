@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.7.2">
+    <link rel="stylesheet" href="css/style.css?v=0.7.3">
   </head>
   <body>
     <div class="app-shell">
@@ -77,6 +77,11 @@
             <button class="nav-button" data-screen="route" type="button">
               <span class="nav-icon icon-route" aria-hidden="true"></span>
               <strong>今日のルートを見る</strong>
+              <span class="nav-arrow" aria-hidden="true">›</span>
+            </button>
+            <button class="nav-button" data-screen="search" type="button">
+              <span class="nav-icon icon-search" aria-hidden="true"></span>
+              <strong>大使館を検索</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
             <button class="nav-button" data-screen="review" type="button">
@@ -176,6 +181,7 @@
             </div>
             <strong id="routeProgress">0 / 13</strong>
           </header>
+          <button class="route-day-button" id="returnToDayButton" type="button">Day 1へ戻る</button>
           <div class="route-terminal route-start"><span>START</span><strong id="routeStart">恵比寿駅</strong></div>
           <section class="route-section" aria-labelledby="plannedRouteHeading">
             <h3 id="plannedRouteHeading">基本ルート</h3>
@@ -192,6 +198,19 @@
             <div id="addedRouteList" class="route-list"></div>
           </section>
           <div class="route-terminal route-goal"><span>GOAL</span><strong id="routeGoal">麻布十番駅</strong></div>
+        </section>
+
+        <section class="screen" id="searchScreen" aria-labelledby="searchHeading">
+          <header class="section-heading">
+            <p class="eyebrow">正式157件から検索</p>
+            <h2 id="searchHeading">大使館を検索</h2>
+            <p>国名または大使館名で検索してください。</p>
+          </header>
+          <label class="search-field">
+            <span>検索</span>
+            <input id="homeEmbassySearch" type="search" autocomplete="off" placeholder="例：ノルウェー">
+          </label>
+          <div class="search-results lookup-results" id="homeEmbassySearchResults"></div>
         </section>
 
         <section class="screen" id="addScreen" aria-labelledby="addHeading">
@@ -263,6 +282,6 @@
     <script src="js/activity-model.js?v=0.7"></script>
     <script src="js/log-model.js?v=0.7"></script>
     <script src="js/backup.js?v=0.7"></script>
-    <script src="js/app.js?v=0.7.2"></script>
+    <script src="js/app.js?v=0.7.3"></script>
   </body>
 </html>
