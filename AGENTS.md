@@ -206,7 +206,9 @@ v0.7.3 Day2実利用フィードバック反映:
 - 今日のルート上部に`Day Xへ戻る`を追加し、過去snapshotではなく最新のmanual NEXT、auto NEXT、取得状態、当日追加状態からDay画面を表示する
 - Guide Footerの基本構造とnormal flowを維持したまま、男女の人物を6px下げて街並みへの接地を強める
 - `dataVersion: "1.1"`、Migration、正式157件、activity model、取得状態、記録、Backup / Restoreは変更しない
-- PC検証PASS、iPhone standalone実機確認待ち
+- PC Regression PASS
+- iPhone standalone Acceptance PASS
+- Final Status: RELEASE / STABLE
 
 現在の状態:
 
@@ -215,14 +217,15 @@ v0.7.3 Day2実利用フィードバック反映:
 - v0.7 Migration GateはiPhone standalone実機でPASS
 - v0.7.1実機確認でMigration、Day完了compact layout、Footer非重複はPASS
 - v0.7.2 Hotfix 2は実装・PC検証・iPhone standalone実機検証完了
-- 現在の正式安定版はv0.7.2 RELEASE / STABLE
-- v0.7.3 Day2実利用フィードバック反映は実装・PC検証完了、iPhone standalone実機確認待ち
+- v0.7.2 RELEASE / STABLEの履歴を維持する
+- v0.7.3 Day2実利用フィードバック反映は実装・PC検証・iPhone standalone実機検証完了
+- 現在の正式安定版はv0.7.3 RELEASE / STABLE
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.7.2を正式安定版として維持する
-- v0.7.3をGitHub Pagesへ反映し、Home検索、RouteからDayへの復帰、Guide Footer人物位置をiPhone standaloneで確認する
+- v0.7.3 RELEASE / STABLEとして実地利用を継続する
+- Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行を次VersionのVisual Polish候補とする
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
 
 ## v0.5 PM決定事項

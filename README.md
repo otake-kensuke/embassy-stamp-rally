@@ -68,17 +68,19 @@ Prototypeの技術検証は完了しています。
 - v0.7: 実利用Day1を受け、計画ルートと当日実績を分離、START / GOAL、画面履歴、当日追加、日付別記録、記録編集・削除、完了画面、動的案内コメントを追加。`1.0 → 1.1` MigrationとPC検証PASS
 - v0.7.1 iPhone Hotfix: Home履歴ボタン、Day案内Footer、完了summaryを調整し、Dayの表示対象を含むBack / Forward履歴へ拡張。Migration・保存構造・正式157件は変更なし
 - v0.7.2 Hotfix 2: Home NavigationをHero外へ分離し、Guide人物の足元を街並みに接地。manual NEXTを保存後に最新Day snapshotへ遷移する方式へ修正。PC・iPhone standalone実機検証PASS
-- v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC検証PASS、iPhone standalone実機確認待ち
+- v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC・iPhone standalone実機検証PASS
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
 v0.7.2はMigration、既存14 / 157、Day1基本13 / 13、ノルウェー当日追加、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backupを含むPC・iPhone standalone実機検証をすべて完了しました。
 
-**Final Status: v0.7.2 RELEASE / STABLE**
+**v0.7.2 Final Status: RELEASE / STABLE**
 
-v0.7.3はv0.7.2を安定版ベースとするadditiveな小規模改修として実装・PC検証を完了しています。`dataVersion: "1.1"`、Migration、正式157件、取得状態、記録、当日実績、Backup / Restoreは変更していません。現在はGitHub Pages反映後のiPhone standalone実機確認待ちです。
+v0.7.3はv0.7.2を安定版ベースとするadditiveな小規模改修として実装し、PC RegressionとiPhone standalone Acceptanceを完了しました。`dataVersion: "1.1"`、Migration、正式157件、取得状態、記録、当日実績、Backup / Restoreは変更していません。
 
-継続Issueはv0.7.3実機確認、Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理です。
+**Final Status: v0.7.3 RELEASE / STABLE**
+
+Next Version CandidateはGuide Comment / 吹き出しのVisual Polishです。人物との縦間隔、文字サイズ、日本語の自然な改行をまとめて再調整します。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
 
 ## 開発時の確認
 
