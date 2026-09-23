@@ -410,6 +410,26 @@ h2 {
   font-weight: 900;
 }
 
+.icon-search::before {
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.icon-search::after {
+  position: absolute;
+  width: 9px;
+  content: "";
+  border-top: 2px solid currentColor;
+  transform: translate(8px, 8px) rotate(45deg);
+}
+
+.icon-search {
+  position: relative;
+}
+
 .nav-arrow,
 .day-arrow {
   color: var(--muted);
@@ -2439,6 +2459,19 @@ body {
   margin-bottom: 10px;
 }
 
+.route-day-button {
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 10px;
+  padding: 9px 13px;
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  background: #edf8f2;
+  color: var(--green-dark);
+  font: inherit;
+  font-weight: 900;
+}
+
 .route-goal {
   margin-top: 10px;
 }
@@ -2556,6 +2589,44 @@ body {
   border-color: var(--line);
   background: #eef3f0;
   color: var(--muted);
+}
+
+.embassy-lookup-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 68px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+  text-align: left;
+}
+
+.embassy-lookup-result > span:first-child {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.embassy-lookup-result strong {
+  overflow-wrap: anywhere;
+  font-size: 16px;
+}
+
+.embassy-lookup-result strong + span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.route-row.route-search-target {
+  border-color: var(--blue);
+  outline: 3px solid rgba(135, 206, 235, 0.4);
+  background: #f1fbff;
 }
 
 .record-date-card {
@@ -2919,11 +2990,12 @@ body {
 
 .day-guide-man .day-footer-character {
   height: clamp(104px, 29vw, 126px);
-  transform: scaleX(-1);
+  transform: translateY(6px) scaleX(-1);
 }
 
 .day-guide-woman .day-footer-character {
   height: clamp(96px, 26.5vw, 116px);
+  transform: translateY(6px);
 }
 
 .day-footer-skyline {
