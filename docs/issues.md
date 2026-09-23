@@ -4,9 +4,15 @@
 
 ### Guide Footer Character Position Visual Polish
 
+Status: OPEN (v0.7.3 PC PASS / iPhone standalone確認待ち)
+
+v0.7.2のGuide Footerは重なり解消と人物接地を含め実機PASSしている。v0.7.3では男女の人物を6px下げ、320 / 375 / 390 / 430pxでaction buttonsとの分離、吹き出し、Footer高さ、横overflowを確認した。iPhone standaloneで自然な接地と重なり再発がないことを確認後にCLOSEする。
+
+### v0.7.3 iPhone Standalone Validation
+
 Status: OPEN
 
-v0.7.2のGuide Footerは重なり解消と人物接地を含め実機PASSしている。人物位置のさらなる見た目調整は次Version候補とし、機能Issueとしては扱わない。
+GitHub Pages反映後に、Home検索の位置と押しやすさ、検索画面、検索結果から対象Routeへの移動・一時強調、`Day Xへ戻る`、最新NEXT復元、Guide人物の接地、Footer非重複を確認する。
 
 ### Afghanistan Google Maps Query
 

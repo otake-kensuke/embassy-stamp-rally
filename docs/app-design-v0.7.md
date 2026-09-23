@@ -144,3 +144,28 @@ Migration Gateの実機PASS後に、UIとNavigationだけを調整する。
 - Migration、既存データ、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backupを含む設計が実機で成立した
 - v0.7.2をRELEASE / STABLEとする
 - `dataVersion: "1.1"`を維持する
+
+## v0.7.3 Day2実利用フィードバック反映
+
+### Home検索
+
+- Homeメニューから正式157件を国名または大使館名で日本語部分一致検索する
+- 検索語は前後空白を除去する
+- 結果には大使館名、正式Day、現在の取得状態を表示する
+- 選択時は正式Dayの今日のルートへ移動し、対象カードへスクロール、フォーカス、一時強調する
+- 検索画面は検索語を、検索結果Routeは対象大使館IDをNavigation snapshotに保持する
+- 検索は`manualNextId`、取得状態、当日実績を変更しない
+
+### RouteからDayへの移動
+
+- 今日のルート上部のSTART付近に`Day Xへ戻る`を置く
+- Backとは別の直接遷移とし、新しいNavigation entryとして追加する
+- Day表示は現在保存されている`manualNextId`を最優先し、なければ既存auto NEXTを使う
+- 過去snapshotの`nextEmbassyId`を再利用せず、取得状態と当日追加を含む最新状態から再計算する
+- 基本ルート完了時は完了画面へ戻し、未取得の当日追加がmanual NEXTならNEXT画面へ戻す
+
+### Guide Footer
+
+- v0.7.2のnormal flow、操作領域との分離、吹き出し、人物比率、Footer高さを維持する
+- 男女の人物だけを6px下げ、skyline / groundとの接地を強める
+- Footer外の前sectionへ侵入させず、viewport bottomへstretchしない

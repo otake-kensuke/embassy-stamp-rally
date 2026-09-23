@@ -157,3 +157,33 @@ GitHub Pages反映後に、実機Backupを保持した状態で確認する。
 - 当日追加・削除: PASS
 - Backup、既存データ保持: PASS
 - Final Status: RELEASE / STABLE
+
+## v0.7.3 Day2実利用フィードバック PC確認
+
+- Homeから検索画面へ遷移: PASS
+- 国名・大使館名の日本語部分一致と前後空白除去: PASS
+- ノルウェーを`Day 4・取得済み`、フランスを`Day 1・取得済み`、南スーダンを`Day 2・未取得`として表示: PASS
+- 検索結果から正式DayのRouteへ遷移し、対象カードへスクロール・フォーカス・一時強調: PASS
+- Searchの検索語とRoute対象をBack / Forwardで復元: PASS
+- 検索後もDay2南スーダンのmanual NEXTを維持: PASS
+- `Day Xへ戻る`は48px touch target: PASS
+- manual NEXTあり、manual NEXTなしのauto NEXT、基本ルート完了Day、当日追加ありDay: PASS
+- 過去Navigation snapshotより最新のmanual NEXTを優先: PASS
+- 320 / 375 / 390 / 430pxで横overflowなし: PASS
+- Home検索ボタン高さ48px、action buttonsとGuide Footerの間隔16〜20px: PASS
+- Guide人物とskylineの重なり16〜17px、Footer外への侵入なし: PASS
+- JavaScript構文、console errorなし: PASS
+- `tests/v07-storage-regression.js`: PASS
+- 正式157件、Day別件数、ID、順序、住所、mapQuery、master Day、Afghanistan、Master signature: PASS
+- `dataVersion: "1.1"`、Migration、Golden 14 / 157、`acquiredAt`、walkLogs 4件、actualDayActivities: PASS
+
+### v0.7.3 iPhone standalone確認待ち
+
+1. Homeの`大使館を検索`の位置・押しやすさ
+2. 検索画面の見やすさ
+3. 検索結果から対象大使館Routeへ正しく移動すること
+4. 対象大使館がすぐ見つかること
+5. `Day Xへ戻る`が押しやすいこと
+6. RouteからDayへ戻ったとき最新NEXTが表示されること
+7. Guide人物が街並みに自然に接地して見えること
+8. Guide Footerに重なりが再発していないこと

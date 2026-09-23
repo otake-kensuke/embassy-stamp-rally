@@ -178,10 +178,25 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - 当日追加・削除、Backup、既存データ保持を確認した。
 - Documentation Closeのみを行い、機能、データ、UI、`dataVersion: "1.1"`は変更していない。
 
+## v0.7.3 Day2実利用フィードバック反映 (2026-09-23)
+
+- v0.7.2 RELEASE / STABLEをベースに、Homeへ`大使館を検索`を追加した。
+- 正式157件を国名・大使館名の日本語部分一致で検索し、前後空白を除去して、正式Dayと現在状態を表示するようにした。
+- 検索結果から正式Dayの今日のルートへ遷移し、対象カードへスクロール、フォーカス、一時強調するようにした。
+- 検索画面と検索結果RouteをNavigation snapshotへ追加し、検索語と対象カードをBack / Forwardで復元するようにした。
+- 検索操作は`manualNextId`を変更せず、Day2南スーダンmanual NEXTがDay1フランス検索後も保持されることを確認した。
+- 今日のルート上部へ`Day Xへ戻る`を追加し、最新のmanual NEXT、auto NEXT、取得状態、当日追加状態を使ってDay画面へ移動するようにした。
+- Guide Footerの人物を6px下げ、人物とskylineの重なりを320pxで17px、375 / 390 / 430pxで16pxへ調整した。
+- 320 / 375 / 390 / 430pxで横overflowなし、検索ボタン48px、`Day Xへ戻る`48px、action buttonsとFooterの間隔16〜20pxを確認した。
+- `tests/v07-storage-regression.js`、JavaScript構文、console error、正式157件・Master signature・Migration・Golden 14 / 157の回帰をPASSした。
+- `dataVersion: "1.1"`、Migration、`js/data.js`、取得状態、`acquiredAt`、`walkLogs`、`actualDayActivities`、Backup / Restoreは変更していない。
+- iPhone standalone実機確認はGitHub Pages反映後に行う。
+
 ## Current Next Gate
 
-- v0.7.2 RELEASE / STABLEとして実地利用を継続する。
-- 次Versionへ着手する前に、Guide Footer人物位置のVisual Polish、Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理についてPM判断する。
+- v0.7.2 RELEASE / STABLEを正式安定版として維持する。
+- v0.7.3をGitHub Pagesへ反映し、指定8項目をiPhone standaloneで確認する。
+- Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。
 
 ## Project Management Setup
 

@@ -6,6 +6,8 @@ v0.6.3はiPhone Safari確認後、Day1で実運用済み。実利用状態はDay
 
 v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / STABLEとなった。Migration、14 / 157、Day1基本13 / 13、ノルウェー当日追加、Navigation、manual NEXT、完了画面、Guide Footer、記録、当日追加、Backup、既存データ保持はPASSしている。
 
+v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ戻る`、Guide人物位置の微調整を実装した。PC検証はPASSし、iPhone standalone実機確認待ちである。v0.7.2のデータ、Migration、正式157件、実績、記録、Backup仕様は変更していない。
+
 ## 更新前
 
 - iPhoneのv0.6.3から最新のJSON Backupを書き出す
@@ -42,6 +44,14 @@ v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / 
 - Guide人物の足元がskyline / groundへ接地し、浮いて見えない
 - Day2でアメリカ取得後にバーレーンへ進み、Route、Homeを経てBackするとバーレーン、アメリカの順に表示が戻る
 - 過去のアメリカ画面でも取得済み状態と現在進捗が維持され、Forwardでバーレーンへ進める
+- Homeの`大使館を検索`が見つけやすく、押しやすい
+- 国名・大使館名の部分一致検索と前後空白の除去が動作する
+- 検索結果に大使館名、正式Day、現在の取得状態が表示される
+- 検索結果から正しいDayのRouteへ移動し、対象カードがすぐ見つかる
+- Searchと検索結果RouteがBack / Forward / Homeの履歴に含まれる
+- 検索だけではmanual NEXTが変わらない
+- `Day Xへ戻る`で過去snapshotではなく最新のmanual NEXTまたはauto NEXTを表示する
+- 完了Dayと当日追加ありDayでも`Day Xへ戻る`が正しい表示へ移動する
 
 ## 当日追加 / NEXT
 
@@ -75,6 +85,6 @@ v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / 
 
 ## 既知Issue
 
-- Guide Footer人物位置のVisual Polishは次Version候補
+- v0.7.3のHome検索、RouteからDayへの復帰、Guide Footer人物位置はiPhone standalone実機確認待ち
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断
