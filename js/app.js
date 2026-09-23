@@ -10,6 +10,8 @@ let navigationHistory = [];
 let navigationIndex = -1;
 let viewNextEmbassyId = null;
 let viewDayMode = null;
+let viewRouteEmbassyId = null;
+let homeSearchQuery = "";
 
 const $ = (selector) => document.querySelector(selector);
 const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
@@ -139,6 +141,8 @@ function currentView(screen = activeScreen) {
     screen,
     day: state.settings.activeDay,
     recordDate: screen === "record" ? selectedRecordDate : "",
+    searchQuery: screen === "search" ? homeSearchQuery : "",
+    routeEmbassyId: screen === "route" ? viewRouteEmbassyId : null,
     nextEmbassyId: current ? current.id : null,
     dayMode
   };
@@ -148,6 +152,8 @@ function applyView(view) {
   activeScreen = view.screen;
   if (view.day) state.settings.activeDay = Number(view.day);
   if (view.recordDate) selectedRecordDate = view.recordDate;
+  homeSearchQuery = view.screen === "search" ? (view.searchQuery || "") : homeSearchQuery;
+  viewRouteEmbassyId = view.screen === "route" ? (view.routeEmbassyId || null) : null;
   viewNextEmbassyId = view.screen === "day" ? (view.nextEmbassyId || null) : null;
   viewDayMode = view.screen === "day"
     ? (view.dayMode || (dayProgress(state.settings.activeDay).done === dayProgress(state.settings.activeDay).total
@@ -168,6 +174,7 @@ function applyView(view) {
     days: "Day一覧",
     day: `Day ${state.settings.activeDay}`,
     route: "今日のルート",
+    search: "大使館を検索",
     add: "大使館を追加",
     review: "記録一覧",
     record: "日別記録",
@@ -175,6 +182,7 @@ function applyView(view) {
   };
   $("#screenTitle").textContent = titles[activeScreen] || "大使館スタンプラリー";
   render();
+  if (activeScreen === "route" && viewRouteEmbassyId) focusRouteEmbassy(viewRouteEmbassyId);
 }
 
 function navigateTo(screen, options = {}) {
@@ -189,6 +197,8 @@ function navigateTo(screen, options = {}) {
     screen,
     day: targetDay,
     recordDate: options.recordDate || "",
+    searchQuery: screen === "search" ? (options.searchQuery || homeSearchQuery) : "",
+    routeEmbassyId: screen === "route" ? (options.routeEmbassyId || null) : null,
     nextEmbassyId: screen === "day" && dayMode === "next"
       ? (hasNextSnapshot ? options.nextEmbassyId : (current ? current.id : null))
       : null,
@@ -414,6 +424,7 @@ function createRouteCard(embassy, options = {}) {
   const current = getNextEmbassy();
   const row = document.createElement("article");
   row.className = `route-row${current && current.id === embassy.id ? " current" : ""}`;
+  row.dataset.routeEmbassy = embassy.id;
 
   const info = document.createElement("div");
   const order = document.createElement("span");
@@ -494,6 +505,89 @@ function renderRoute() {
       }));
     });
   }
+  $("#returnToDayButton").textContent = `Day ${state.settings.activeDay}へ戻る`;
+}
+
+function statusLabel(id) {
+  const labels = {
+    unvisited: "未取得",
+    acquired: "取得済み",
+    check: "要確認",
+    skipped: "スキップ"
+  };
+  return labels[embassyStatus(id).status] || "未取得";
+}
+
+function matchingEmbassies(query) {
+  const normalized = query.trim().toLocaleLowerCase("ja-JP");
+  if (!normalized) return [];
+  return EMBASSY_MASTER.filter((embassy) => {
+    return embassy.country.toLocaleLowerCase("ja-JP").includes(normalized)
+      || embassy.embassyName.toLocaleLowerCase("ja-JP").includes(normalized);
+  });
+}
+
+function renderHomeSearchResults() {
+  const container = $("#homeEmbassySearchResults");
+  const input = $("#homeEmbassySearch");
+  input.value = homeSearchQuery;
+  clearChildren(container);
+  if (!homeSearchQuery.trim()) {
+    const prompt = document.createElement("p");
+    prompt.className = "empty-state";
+    prompt.textContent = "検索語を入力してください。";
+    container.append(prompt);
+    return;
+  }
+
+  const results = matchingEmbassies(homeSearchQuery);
+  if (!results.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "該当する大使館はありません。";
+    container.append(empty);
+    return;
+  }
+
+  results.forEach((embassy) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "embassy-lookup-result";
+    button.dataset.viewEmbassy = embassy.id;
+    const info = document.createElement("span");
+    const name = document.createElement("strong");
+    name.textContent = embassy.embassyName;
+    const detail = document.createElement("span");
+    detail.textContent = `Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    const arrow = document.createElement("span");
+    arrow.className = "nav-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "›";
+    info.append(name, detail);
+    button.append(info, arrow);
+    container.append(button);
+  });
+}
+
+function openEmbassyInRoute(id) {
+  const embassy = embassyById.get(id);
+  if (!embassy) return;
+  state.settings.activeDay = embassy.day;
+  state = saveState(state);
+  navigateTo("route", { day: embassy.day, routeEmbassyId: embassy.id });
+}
+
+function focusRouteEmbassy(id) {
+  window.requestAnimationFrame(() => {
+    const card = [...document.querySelectorAll("[data-route-embassy]")]
+      .find((element) => element.dataset.routeEmbassy === id);
+    if (!card) return;
+    card.tabIndex = -1;
+    card.classList.add("route-search-target");
+    card.scrollIntoView({ block: "center", behavior: "auto" });
+    card.focus({ preventScroll: true });
+    window.setTimeout(() => card.classList.remove("route-search-target"), 2400);
+  });
 }
 
 function renderSearchResults() {
@@ -511,10 +605,7 @@ function renderSearchResults() {
   const currentActivity = todayActivity();
   const addedIds = new Set(currentActivity ? currentActivity.addedEmbassies.map((entry) => entry.embassyId) : []);
   const plannedIds = new Set(dayEmbassies().map((embassy) => embassy.id));
-  const results = EMBASSY_MASTER.filter((embassy) => {
-    return embassy.country.toLocaleLowerCase("ja-JP").includes(query)
-      || embassy.embassyName.toLocaleLowerCase("ja-JP").includes(query);
-  });
+  const results = matchingEmbassies(query);
 
   if (!results.length) {
     const empty = document.createElement("p");
@@ -713,6 +804,7 @@ function render() {
   renderRecordList();
   renderTimeline();
   renderCategories();
+  if (activeScreen === "search") renderHomeSearchResults();
   if (activeScreen === "add") renderSearchResults();
   $("#memoInput").value = state.memo || "";
 }
@@ -737,6 +829,18 @@ function setManualNext(id) {
     nextEmbassyId: embassy.id
   });
   showToast(`${embassy.embassyName}をNEXTに設定しました`);
+}
+
+function returnToCurrentDay() {
+  const current = getNextEmbassy();
+  const progress = dayProgress(state.settings.activeDay);
+  const manualIsCurrent = Boolean(current && state.manualNextId === current.id);
+  const dayMode = manualIsCurrent || progress.done < progress.total ? "next" : "completion";
+  navigateTo("day", {
+    day: state.settings.activeDay,
+    dayMode,
+    nextEmbassyId: dayMode === "next" && current ? current.id : null
+  });
 }
 
 function setEmbassyStatus(id, nextStatus, options = {}) {
@@ -870,6 +974,9 @@ document.addEventListener("click", (event) => {
   const addButton = event.target.closest("[data-add-embassy]");
   if (addButton && !addButton.disabled) addEmbassyToToday(addButton.dataset.addEmbassy);
 
+  const viewEmbassyButton = event.target.closest("[data-view-embassy]");
+  if (viewEmbassyButton) openEmbassyInRoute(viewEmbassyButton.dataset.viewEmbassy);
+
   const removeButton = event.target.closest("[data-remove-added]");
   if (removeButton) removeAddedEmbassy(removeButton.dataset.activityId, removeButton.dataset.removeAdded);
 
@@ -899,6 +1006,7 @@ $("#forwardButton").addEventListener("click", goForward);
 $("#homeButton").addEventListener("click", () => navigateTo("home"));
 $("#homeBackButton").addEventListener("click", goBack);
 $("#homeForwardButton").addEventListener("click", goForward);
+$("#returnToDayButton").addEventListener("click", returnToCurrentDay);
 $("#acquireButton").addEventListener("click", () => {
   const current = viewNextEmbassyId
     ? routeEmbassies().find((embassy) => embassy.id === viewNextEmbassyId)
@@ -908,6 +1016,16 @@ $("#acquireButton").addEventListener("click", () => {
   showToast("スタンプを取得しました");
 });
 $("#embassySearch").addEventListener("input", renderSearchResults);
+$("#homeEmbassySearch").addEventListener("input", (event) => {
+  homeSearchQuery = event.target.value;
+  if (activeScreen === "search" && navigationIndex >= 0) {
+    navigationHistory[navigationIndex] = {
+      ...navigationHistory[navigationIndex],
+      searchQuery: homeSearchQuery
+    };
+  }
+  renderHomeSearchResults();
+});
 $("#openLogSheet").addEventListener("click", () => openSheet());
 $("#closeLogSheet").addEventListener("click", closeSheet);
 $("#sheetBackdrop").addEventListener("click", closeSheet);
