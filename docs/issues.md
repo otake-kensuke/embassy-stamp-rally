@@ -2,19 +2,6 @@
 
 ## Open Issues
 
-### v0.8 World Map Production Gate
-
-Status: OPEN (IMPLEMENTED / PC VERIFIED, iPhone standalone Acceptance Pending)
-
-- World Map Concept Mock v2はConcept Gate PASS。
-- 正式157件のCountry / Region Mappingは157 / 157件完了した。
-- Unique country / regionは157、110m polygonは145、marker必須は12、TBDは0。
-- PM承認済み仕様として、12 marker、検証済み地域分類、Maldives / Mauritiusのfallback、Kosovo `KOS`、ローマ法王庁のVatican City markerを本番実装した。
-- World Mapは既存`embassy.status`から導出するVIEWで、専用永続状態やBackup項目は追加していない。
-- PC RegressionはPASS。iPhone standaloneでHome入口、地域切替、marker、取得・取消反映、Navigation、描画速度、横overflowを確認後にRelease Closeする。
-- 検証結果は`prototype/world-map-concept/COUNTRY-MAPPING-VALIDATION.md`と`COUNTRY-MAPPING-EXCEPTIONS.md`で管理する。
-- 正式157件、保存データ、Migration、`dataVersion: "1.1"`は変更していない。
-
 ### Guide Comment / 吹き出し Visual Polish
 
 Status: OPEN (Next Version Candidate)
@@ -25,6 +12,12 @@ v0.7.3で人物の接地は実機PASSした。次Versionでは吹き出しの中
 - iPhone横幅とのバランスを保った文字サイズの拡大
 - 末尾の1文字だけが次行へ送られない、日本語として自然な改行
 - `font-size`、`line-height`、有効幅、`padding`、`word-break`、`line-break`の組み合わせ
+
+### World Map世界タブの取得済みchip一覧
+
+Status: OPEN (Future Candidate)
+
+取得数の増加に伴って世界タブのchip一覧が長くなるため、将来、地域別groupまたは折りたたみを検討する。v0.8 Acceptance時点では操作上の問題がないため変更しない。
 
 ### Afghanistan Google Maps Query
 
@@ -45,6 +38,19 @@ Status: OPEN
 `prototype/` and `release/` are still present and should not be deleted or moved during Project Management Setup. Their role may be thinner after GitHub Pages adoption, so future cleanup can be considered separately.
 
 ## Closed Issues
+
+### v0.8 World Map Production Gate
+
+Status: CLOSED (RELEASE / STABLE, iPhone standalone全12項目PASS)
+
+Result:
+
+- World Map Concept Mock v2と157 / 157 Country / Region Mappingを本番実装した。
+- Natural Earth 110mの145 polygonと12 marker、TBD 0を確認した。
+- World Mapは既存`embassy.status`から導出し、専用永続状態やBackup項目を追加していない。
+- PC Regressionを完了した。
+- iPhone standaloneでHome入口、初回描画、地域切替、地域カラー、marker、0件empty state、取得済み一覧、Navigation、取得・取消反映、再起動後再構成、UI / overflow / text wrappingを確認した。
+- `dataVersion: "1.1"`、Migration、正式157件、既存機能・データ・UIはRelease Closeで変更していない。
 
 ### v0.7.3 Release Validation
 

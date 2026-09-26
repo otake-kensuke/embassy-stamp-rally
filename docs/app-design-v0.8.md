@@ -1,5 +1,11 @@
 # App Design v0.8
 
+## Status
+
+PC検証とiPhone standalone Acceptance全12項目を完了した。
+
+`v0.8 RELEASE / STABLE`
+
 ## 目的
 
 既存の取得状態から「スタンプを集めると、世界が色づいていく」体験を提供する。World Mapは進捗を変更する機能ではなく、v0.7.3の`embassy.status`を読み取って描画するVIEWである。
@@ -64,4 +70,3 @@
 ## Scope外
 
 Guide Comment / 吹き出しVisual Polish、国・地域詳細、取得日、Timeline連携、MapからEmbassyへの移動、GPS、pinch zoom、animation、外部同期はv0.8では実装しない。
-

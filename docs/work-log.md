@@ -248,11 +248,20 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - 320 / 375 / 390 / 430pxで横overflowなし、44px地域tab、Map、Legend、chip、Navigation、文字折返しを確認した。
 - `tests/v07-storage-regression.js`と`tests/v08-world-map-regression.js`はPASSし、console errorなしを確認した。
 - `dataVersion: "1.1"`、Migration、正式157件、NEXT、取得状態、記録、当日実績、Backup / Restoreは変更していない。
-- Statusは`IMPLEMENTED / PC VERIFIED`。iPhone standalone Acceptance待ちであり、まだRELEASE / STABLEではない。
+- 実装時Statusは`IMPLEMENTED / PC VERIFIED`とし、iPhone standalone Acceptanceへ進めた。
+
+## v0.8 Release Close (2026-09-26)
+
+- iPhone standalone Acceptance全12項目をPASSした。
+- Home入口、初回描画、地域切替、地域カラー、marker、0 / 9 empty state、取得済み一覧を確認した。
+- Back / Forward / Home、取得・取消反映、standalone再起動後の再構成、UI / overflow / text wrappingを確認した。
+- v0.8 World Mapを`RELEASE / STABLE`として開発・検証Closeした。
+- Release CloseはDocumentationのみ更新し、機能、データ、UI、`dataVersion: "1.1"`には追加変更していない。
+- v0.7.3 RELEASE / STABLEの履歴を維持した。
 
 ## Current Next Gate
 
-- GitHub Pagesへv0.8を反映し、`docs/test-plan-v0.8.md`のiPhone standalone項目を確認する。
-- Acceptance完了まではv0.7.3を正式安定版として扱う。
+- v0.8 RELEASE / STABLEとして実地利用を継続する。
 - Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。
+- World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない。
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。

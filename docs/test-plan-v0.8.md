@@ -2,9 +2,11 @@
 
 ## Status
 
-`IMPLEMENTED / PC VERIFIED`
+`RELEASE / STABLE`
 
-`iPhone standalone Acceptance Pending`
+PC Regression: PASS
+
+iPhone standalone Acceptance: 全12項目PASS
 
 ## 自動検証
 
@@ -56,24 +58,23 @@ node tests/v08-world-map-regression.js
 - Map、Legend、marker、chip、Navigation、text wrapping: PASS
 - JavaScript console errorなし: PASS
 
-## iPhone standalone Acceptance Pending
+## iPhone standalone Acceptance結果
 
-GitHub Pages反映後に次を確認する。
+GitHub PagesをiPhone standaloneで確認し、全項目PASSした。
 
-1. Homeの`世界を旅した記録`入口と現在の取得数
-2. 世界表示と地域別カラー
-3. 6つの地域切替と横スクロールtab
-4. polygonと12件markerの視認性
-5. 選択地域のSummaryと取得済み一覧
-6. 0件地域の地図とempty state
-7. Back / Forward / Homeと地域表示の復元
-8. スタンプ取得後に対象国・地域が着色されること
-9. 取得取消後に未取得表示へ戻ること
-10. Backup Restore後に同じ地図が再構成されること
-11. World Map初回表示と再表示の体感速度
-12. 320〜430px相当で横overflow、文字切れ、操作しにくい箇所がないこと
+1. Home入口: PASS
+2. 世界地図初回描画: PASS
+3. 地域切替: PASS
+4. 地域カラー: PASS
+5. 小国・島国marker: PASS
+6. オセアニア0 / 9 empty state: PASS
+7. 取得済み国・地域一覧: PASS
+8. Back / Forward / Home: PASS
+9. 取得からWorld Mapへの反映: PASS
+10. 取得取消からWorld Mapへの反映: PASS
+11. standalone再起動後の再構成: PASS
+12. iPhone UI / overflow / text wrapping: PASS
 
 ## Release Gate
 
-iPhone standalone Acceptance完了まではv0.8をRELEASE / STABLEにしない。
-
+iPhone standalone Acceptance全12項目PASSにより、v0.8を`RELEASE / STABLE`としてCloseした。
