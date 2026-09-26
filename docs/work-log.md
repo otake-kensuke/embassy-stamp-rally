@@ -200,11 +200,22 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Release CloseはDocumentationのみ更新し、機能、UI、データ、`dataVersion: "1.1"`には追加変更していない。
 - Guide Comment / 吹き出しの縦間隔、文字サイズ、日本語改行をNext Version Candidateへ移した。
 
-## Current Next Gate
+## v0.7.3 Next Gate (v0.8着手により完了)
 
 - v0.7.3 RELEASE / STABLEとして実地利用を継続する。
 - Guide Comment / 吹き出しのVisual Polishは次Version候補とする。
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。
+
+## v0.8事前検討 World Map Concept Mock (2026-09-24)
+
+- `prototype/world-map-concept/`へ、本番v0.7.3から独立したSVG世界地図モックを作成した。
+- Natural Earth Vector v5.1.2の1:110m GeoJSONをローカル配置し、`ADM0_A3`で国を識別した。
+- 世界、欧州、アジア、アフリカ、北米・中南米、オセアニアの切替を追加した。
+- 2026-09-21 Backupで確認できるDay1基本13か国と、Day1当日追加・master Day4のNorwayを取得済みとして着色した。
+- Day2実利用後のBackupはworkspaceに存在しないため、Day2取得国は推測で追加していない。
+- 375 / 390 / 430pxの全6地域で横overflowなし、44px tab、SVG描画を確認した。
+- 390pxの世界、欧州、アジアの確認画像を`prototype/world-map-concept/screenshots/`へ保存した。
+- `index.html`、`js/app.js`、`js/data.js`、`css/style.css`、storage、Migration、`dataVersion: "1.1"`は変更していない。
 
 ## Project Management Setup
 
@@ -212,3 +223,36 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Rewrote `README.md` to present GitHub Pages + iPhone Safari as the current official approach.
 - Reorganized `docs/issues.md` into Open Issues and Closed Issues.
 - Kept the existing GitHub Pages app structure unchanged.
+
+## v0.8 Preparation - 157 Country / Region Mapping (2026-09-26)
+
+- 正式`js/data.js`の157 Embassy spotsをNatural Earth Vector v5.1.2へ全件照合した。
+- 157 / 157件をMappingし、unique country / region 157、110m polygon 145、marker必須12、TBD 0を確認した。
+- appRegionはEurope 41、Asia 44、Africa 40、Americas 23、Oceania 9となった。
+- 110mでshapeがない12対象は、同じNatural Earth v5.1.2の10m `LABEL_X` / `LABEL_Y`を代表座標として記録した。
+- 全157件にcountryCode、ADM0_A3、CONTINENT、appRegion、regionColor、renderMethodがあることを機械検証した。
+- 同一country / regionの複数spotは現行データに存在しないことを確認した。
+- 名称alias、code差、地域分類注意対象、marker仕様案、PM判断事項を独立レポートへ整理した。
+- v0.7.3本番コード、正式master、storage、Migration、`dataVersion: "1.1"`は変更していない。
+
+## v0.8 World Map Production Implementation (2026-09-26)
+
+- v0.7.3 RELEASE / STABLEをベースに、Homeへ`世界を旅した記録`を追加した。
+- World Map画面へ世界、欧州、アジア、アフリカ、北米・中南米、オセアニアの地域tab、Summary、Map、Legend、取得済み一覧を追加した。
+- 検証済み157件mappingを本番補助データとして配置し、Natural Earth Vector v5.1.2の145 polygonと10m代表座標による12 markerを描画した。
+- D3 v7.9.0とNatural Earthデータはローカル配置し、World Map初回表示時にだけ読み込む構成にした。
+- 取得状態は`state.embassies[id].status === "acquired"`から毎回導出し、World Map専用の保存状態やBackup項目を追加していない。
+- 地域選択をNavigation snapshotへ含め、地域切替だけでは履歴entryを追加せず現在entryを更新する方式にした。
+- Golden 14 / 157ではEurope 8、Asia 5、Africa 0、Americas 1、Oceania 0を確認した。
+- 新規0 / 157、Golden 14 / 157、最大157 / 157、0件empty state、145 polygon、12 marker、全marker表示範囲内を確認した。
+- 320 / 375 / 390 / 430pxで横overflowなし、44px地域tab、Map、Legend、chip、Navigation、文字折返しを確認した。
+- `tests/v07-storage-regression.js`と`tests/v08-world-map-regression.js`はPASSし、console errorなしを確認した。
+- `dataVersion: "1.1"`、Migration、正式157件、NEXT、取得状態、記録、当日実績、Backup / Restoreは変更していない。
+- Statusは`IMPLEMENTED / PC VERIFIED`。iPhone standalone Acceptance待ちであり、まだRELEASE / STABLEではない。
+
+## Current Next Gate
+
+- GitHub Pagesへv0.8を反映し、`docs/test-plan-v0.8.md`のiPhone standalone項目を確認する。
+- Acceptance完了まではv0.7.3を正式安定版として扱う。
+- Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。
+- Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。

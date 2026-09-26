@@ -2,6 +2,19 @@
 
 ## Open Issues
 
+### v0.8 World Map Production Gate
+
+Status: OPEN (IMPLEMENTED / PC VERIFIED, iPhone standalone Acceptance Pending)
+
+- World Map Concept Mock v2はConcept Gate PASS。
+- 正式157件のCountry / Region Mappingは157 / 157件完了した。
+- Unique country / regionは157、110m polygonは145、marker必須は12、TBDは0。
+- PM承認済み仕様として、12 marker、検証済み地域分類、Maldives / Mauritiusのfallback、Kosovo `KOS`、ローマ法王庁のVatican City markerを本番実装した。
+- World Mapは既存`embassy.status`から導出するVIEWで、専用永続状態やBackup項目は追加していない。
+- PC RegressionはPASS。iPhone standaloneでHome入口、地域切替、marker、取得・取消反映、Navigation、描画速度、横overflowを確認後にRelease Closeする。
+- 検証結果は`prototype/world-map-concept/COUNTRY-MAPPING-VALIDATION.md`と`COUNTRY-MAPPING-EXCEPTIONS.md`で管理する。
+- 正式157件、保存データ、Migration、`dataVersion: "1.1"`は変更していない。
+
 ### Guide Comment / 吹き出し Visual Polish
 
 Status: OPEN (Next Version Candidate)

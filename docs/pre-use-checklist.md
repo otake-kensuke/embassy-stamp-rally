@@ -8,6 +8,8 @@ v0.7.2はPC検証とiPhone standalone最終実機確認を完了し、RELEASE / 
 
 v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ戻る`、Guide人物位置の微調整を実装した。PC RegressionとiPhone standalone Acceptanceを完了し、RELEASE / STABLEとなった。v0.7.2のデータ、Migration、正式157件、実績、記録、Backup仕様は変更していない。
 
+v0.8はWorld Mapを本番実装し、PC Regressionを完了した。現在は`IMPLEMENTED / PC VERIFIED`であり、iPhone standalone Acceptance待ちである。Acceptance完了まではv0.7.3を正式安定版として扱う。
+
 ## 更新前
 
 - iPhoneのv0.6.3から最新のJSON Backupを書き出す
@@ -83,8 +85,25 @@ v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ
 - Day10 アフガニスタンが `地図要確認` のまま表示される
 - 写真はiPhone写真アプリで管理し、Webアプリ内には保存しない
 
+## v0.8 World Map iPhone standalone Acceptance
+
+- Homeに`世界を旅した記録`と現在の`取得済み / 157 国・地域`が表示される
+- 世界表示で取得済み対象が地域色、未取得対象が淡色で表示される
+- 欧州、アジア、アフリカ、北米・中南米、オセアニアへ切り替えられる
+- 地域Summaryが選択地域の`取得済み / 対象総数`だけを主表示する
+- 12件の小国・島国markerが認識でき、取得状態が反映される
+- 取得済み国・地域一覧が選択地域に連動する
+- 0件の地域で地図とempty stateが正常に表示される
+- Back / Forward / Homeが動作し、HomeからBackした時に直前の地域を復元する
+- スタンプ取得後に対象国・地域が着色される
+- 取得取消後に対象国・地域が未取得表示へ戻る
+- Backup Restore後に取得状態から地図が再構成される
+- World Map初回表示と再表示に不自然な待ち時間がない
+- iPhone縦画面で横overflow、文字切れ、押しにくいtabがない
+
 ## 既知Issue
 
+- v0.8 World MapはiPhone standalone Acceptance待ち
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はNext Version Candidate
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
 - `prototype/` と `release/` の役割整理は別途PM判断
