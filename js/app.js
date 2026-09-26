@@ -12,6 +12,7 @@ let viewNextEmbassyId = null;
 let viewDayMode = null;
 let viewRouteEmbassyId = null;
 let homeSearchQuery = "";
+let worldMapRegion = "world";
 
 const $ = (selector) => document.querySelector(selector);
 const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
@@ -142,6 +143,7 @@ function currentView(screen = activeScreen) {
     day: state.settings.activeDay,
     recordDate: screen === "record" ? selectedRecordDate : "",
     searchQuery: screen === "search" ? homeSearchQuery : "",
+    mapRegion: screen === "world-map" ? worldMapRegion : "",
     routeEmbassyId: screen === "route" ? viewRouteEmbassyId : null,
     nextEmbassyId: current ? current.id : null,
     dayMode
@@ -153,6 +155,9 @@ function applyView(view) {
   if (view.day) state.settings.activeDay = Number(view.day);
   if (view.recordDate) selectedRecordDate = view.recordDate;
   homeSearchQuery = view.screen === "search" ? (view.searchQuery || "") : homeSearchQuery;
+  worldMapRegion = view.screen === "world-map" && WorldMapFeature.regions.includes(view.mapRegion)
+    ? view.mapRegion
+    : worldMapRegion;
   viewRouteEmbassyId = view.screen === "route" ? (view.routeEmbassyId || null) : null;
   viewNextEmbassyId = view.screen === "day" ? (view.nextEmbassyId || null) : null;
   viewDayMode = view.screen === "day"
@@ -175,6 +180,7 @@ function applyView(view) {
     day: `Day ${state.settings.activeDay}`,
     route: "今日のルート",
     search: "大使館を検索",
+    "world-map": "世界を旅した記録",
     add: "大使館を追加",
     review: "記録一覧",
     record: "日別記録",
@@ -198,6 +204,7 @@ function navigateTo(screen, options = {}) {
     day: targetDay,
     recordDate: options.recordDate || "",
     searchQuery: screen === "search" ? (options.searchQuery || homeSearchQuery) : "",
+    mapRegion: screen === "world-map" ? (options.mapRegion || worldMapRegion) : "",
     routeEmbassyId: screen === "route" ? (options.routeEmbassyId || null) : null,
     nextEmbassyId: screen === "day" && dayMode === "next"
       ? (hasNextSnapshot ? options.nextEmbassyId : (current ? current.id : null))
@@ -241,6 +248,7 @@ function renderProgress() {
   $("#homeProgress").textContent = `${done} / ${total}`;
   $("#homePercent").textContent = `${percent}%`;
   $("#homeProgressBar").style.width = `${percent}%`;
+  $("#homeWorldMapProgress").textContent = `${done} / ${total} 国・地域`;
   $("#dayProgress").textContent = `${progress.done} / ${progress.total}`;
   $("#routeProgress").textContent = `${progress.done} / ${progress.total}`;
 }
@@ -795,6 +803,11 @@ function renderCategories() {
   });
 }
 
+function renderWorldMapScreen() {
+  if (activeScreen !== "world-map") return;
+  WorldMapFeature.render($("#world-mapScreen"), state, worldMapRegion);
+}
+
 function render() {
   renderNavigation();
   renderProgress();
@@ -804,6 +817,7 @@ function render() {
   renderRecordList();
   renderTimeline();
   renderCategories();
+  renderWorldMapScreen();
   if (activeScreen === "search") renderHomeSearchResults();
   if (activeScreen === "add") renderSearchResults();
   $("#memoInput").value = state.memo || "";
@@ -955,6 +969,21 @@ function showToast(message) {
 document.addEventListener("click", (event) => {
   const nav = event.target.closest("button[data-screen]");
   if (nav) navigateTo(nav.dataset.screen);
+
+  const regionButton = event.target.closest("button[data-world-region]");
+  if (regionButton && activeScreen === "world-map") {
+    const nextRegion = regionButton.dataset.worldRegion;
+    if (WorldMapFeature.regions.includes(nextRegion)) {
+      worldMapRegion = nextRegion;
+      if (navigationIndex >= 0) {
+        navigationHistory[navigationIndex] = {
+          ...navigationHistory[navigationIndex],
+          mapRegion: worldMapRegion
+        };
+      }
+      renderWorldMapScreen();
+    }
+  }
 
   const dayButton = event.target.closest("[data-day]");
   if (dayButton) setActiveDay(Number(dayButton.dataset.day));
