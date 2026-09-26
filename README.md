@@ -73,7 +73,7 @@ Prototypeの技術検証は完了しています。
 - v0.7.1 iPhone Hotfix: Home履歴ボタン、Day案内Footer、完了summaryを調整し、Dayの表示対象を含むBack / Forward履歴へ拡張。Migration・保存構造・正式157件は変更なし
 - v0.7.2 Hotfix 2: Home NavigationをHero外へ分離し、Guide人物の足元を街並みに接地。manual NEXTを保存後に最新Day snapshotへ遷移する方式へ修正。PC・iPhone standalone実機検証PASS
 - v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC・iPhone standalone実機検証PASS
-- v0.8 World Map: 既存の取得状態から世界と5地域を色分け表示するVIEWを追加。Natural Earth 110mの145 polygonと12 marker、地域Summary、取得済み一覧、Navigation復元を実装。PC検証PASS、iPhone standalone Acceptance待ち
+- v0.8 World Map: 既存の取得状態から世界と5地域を色分け表示するVIEWを追加。Natural Earth 110mの145 polygonと12 marker、地域Summary、取得済み一覧、Navigation復元を実装。PC検証・iPhone standalone Acceptance全12項目PASS
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
@@ -87,9 +87,9 @@ v0.7.3はv0.7.2を安定版ベースとするadditiveな小規模改修として
 
 v0.8はv0.7.3を安定版ベースとしてWorld Mapだけを追加しました。World Map専用の保存状態は持たず、既存の`embassy.status`から毎回取得状態を導出します。`dataVersion: "1.1"`、Migration、正式157件、NEXT、記録、当日実績、Backup / Restoreは変更していません。
 
-**v0.8 Status: IMPLEMENTED / PC VERIFIED - iPhone standalone Acceptance Pending**
+**Final Status: v0.8 RELEASE / STABLE**
 
-Next Version CandidateはGuide Comment / 吹き出しのVisual Polishです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
+Next Version CandidateはGuide Comment / 吹き出しのVisual Polishと、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
 
 ## 開発時の確認
 

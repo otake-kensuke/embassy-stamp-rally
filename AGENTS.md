@@ -219,8 +219,8 @@ v0.8 World Map:
 - 地域選択はNavigation snapshotへ含めるが、地域切替だけでは履歴entryを増やさない
 - `dataVersion: "1.1"`、Migration、正式157件、NEXT、記録、当日実績、Backup / Restoreは変更しない
 - PC Regression PASS
-- Status: IMPLEMENTED / PC VERIFIED
-- iPhone standalone Acceptance Pending
+- iPhone standalone Acceptance全12項目PASS
+- Final Status: RELEASE / STABLE
 
 現在の状態:
 
@@ -231,16 +231,16 @@ v0.8 World Map:
 - v0.7.2 Hotfix 2は実装・PC検証・iPhone standalone実機検証完了
 - v0.7.2 RELEASE / STABLEの履歴を維持する
 - v0.7.3 Day2実利用フィードバック反映は実装・PC検証・iPhone standalone実機検証完了
-- 現在の正式安定版はv0.7.3 RELEASE / STABLE
-- v0.8 World Mapは実装・PC検証完了、iPhone standalone Acceptance待ち
-- v0.8はRELEASE / STABLEにはまだ移行しない
+- v0.7.3 RELEASE / STABLEの履歴を維持する
+- v0.8 World Mapは実装・PC検証・iPhone standalone Acceptance全12項目を完了した
+- 現在の正式安定版はv0.8 RELEASE / STABLE
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- GitHub Pagesへv0.8を反映し、World MapのiPhone standalone Acceptanceを実施する
-- Acceptance完了まではv0.7.3を正式安定版として扱う
-- Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行を次VersionのVisual Polish候補とする
+- v0.8 RELEASE / STABLEとして実地利用を継続する
+- Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行をv0.8.1 Candidateとする
+- World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
 
 ## v0.5 PM決定事項
