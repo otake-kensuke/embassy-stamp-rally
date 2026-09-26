@@ -210,6 +210,18 @@ v0.7.3 Day2実利用フィードバック反映:
 - iPhone standalone Acceptance PASS
 - Final Status: RELEASE / STABLE
 
+v0.8 World Map:
+
+- Homeに`世界を旅した記録`を追加し、既存取得状態から動的に`取得済み / 157 国・地域`を表示する
+- 世界、欧州、アジア、アフリカ、北米・中南米、オセアニアの地域表示を追加する
+- 検証済みmappingとNatural Earth Vector v5.1.2を使い、145件をpolygon、12件をmarkerで描画する
+- World Mapは既存`embassy.status`から毎回導出するVIEWとし、専用の永続状態を追加しない
+- 地域選択はNavigation snapshotへ含めるが、地域切替だけでは履歴entryを増やさない
+- `dataVersion: "1.1"`、Migration、正式157件、NEXT、記録、当日実績、Backup / Restoreは変更しない
+- PC Regression PASS
+- Status: IMPLEMENTED / PC VERIFIED
+- iPhone standalone Acceptance Pending
+
 現在の状態:
 
 - v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
@@ -220,11 +232,14 @@ v0.7.3 Day2実利用フィードバック反映:
 - v0.7.2 RELEASE / STABLEの履歴を維持する
 - v0.7.3 Day2実利用フィードバック反映は実装・PC検証・iPhone standalone実機検証完了
 - 現在の正式安定版はv0.7.3 RELEASE / STABLE
+- v0.8 World Mapは実装・PC検証完了、iPhone standalone Acceptance待ち
+- v0.8はRELEASE / STABLEにはまだ移行しない
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.7.3 RELEASE / STABLEとして実地利用を継続する
+- GitHub Pagesへv0.8を反映し、World MapのiPhone standalone Acceptanceを実施する
+- Acceptance完了まではv0.7.3を正式安定版として扱う
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行を次VersionのVisual Polish候補とする
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
 

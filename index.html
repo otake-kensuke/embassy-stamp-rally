@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.7.3">
+    <link rel="stylesheet" href="css/style.css?v=0.8">
   </head>
   <body>
     <div class="app-shell">
@@ -84,6 +84,14 @@
               <strong>大使館を検索</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
+            <button class="nav-button world-map-entry" data-screen="world-map" type="button">
+              <span class="nav-icon icon-world" aria-hidden="true"></span>
+              <span class="nav-copy">
+                <strong>世界を旅した記録</strong>
+                <small id="homeWorldMapProgress">0 / 157 国・地域</small>
+              </span>
+              <span class="nav-arrow" aria-hidden="true">›</span>
+            </button>
             <button class="nav-button" data-screen="review" type="button">
               <span class="nav-icon icon-record" aria-hidden="true"></span>
               <strong>記録を見る</strong>
@@ -103,6 +111,66 @@
             <span class="home-footer-stamp" aria-hidden="true"></span>
             <img class="home-footer-skyline" src="assets/tokyo-skyline.png?v=0.7" alt="">
           </div>
+        </section>
+
+        <section class="screen world-map-screen" id="world-mapScreen" aria-labelledby="worldMapHeading">
+          <header class="section-heading world-map-heading">
+            <p class="eyebrow">スタンプを集めると、世界が色づいていく</p>
+            <h2 id="worldMapHeading">世界を旅した記録</h2>
+          </header>
+
+          <nav class="world-region-tabs" aria-label="地図の地域切替">
+            <button class="world-region-tab active" data-world-region="world" type="button" aria-pressed="true">世界</button>
+            <button class="world-region-tab" data-world-region="europe" type="button" aria-pressed="false">欧州</button>
+            <button class="world-region-tab" data-world-region="asia" type="button" aria-pressed="false">アジア</button>
+            <button class="world-region-tab" data-world-region="africa" type="button" aria-pressed="false">アフリカ</button>
+            <button class="world-region-tab" data-world-region="americas" type="button" aria-pressed="false">北米・中南米</button>
+            <button class="world-region-tab" data-world-region="oceania" type="button" aria-pressed="false">オセアニア</button>
+          </nav>
+
+          <section class="world-map-summary" aria-live="polite">
+            <div>
+              <p class="world-map-kicker" id="worldMapKicker">WORLD</p>
+              <h3 id="worldMapRegionName">世界</h3>
+            </div>
+            <div class="world-map-count">
+              <span>取得済みの国・地域</span>
+              <strong id="worldMapCount">0 / 157</strong>
+            </div>
+          </section>
+
+          <section class="world-map-panel" aria-labelledby="worldMapPanelTitle">
+            <div class="world-map-panel-heading">
+              <div>
+                <p class="eyebrow" id="worldMapPanelKicker">WORLD MAP</p>
+                <h3 id="worldMapPanelTitle">世界</h3>
+              </div>
+              <p id="worldMapStatus" role="status">地図を読み込んでいます</p>
+            </div>
+            <div class="world-map-stage">
+              <svg id="worldMapSvg" viewBox="0 0 760 430" role="img" aria-labelledby="worldMapSvgTitle worldMapSvgDescription">
+                <title id="worldMapSvgTitle">世界の取得状況</title>
+                <desc id="worldMapSvgDescription">取得済みの国・地域を地域別の色で表示します。</desc>
+                <g id="worldMapCountryLayer"></g>
+                <g id="worldMapMarkerLayer"></g>
+              </svg>
+              <p class="world-map-loading" id="worldMapLoading">地図を読み込んでいます</p>
+            </div>
+            <div class="world-map-legend" id="worldMapLegend" aria-label="地域と取得状態の凡例"></div>
+          </section>
+
+          <section class="world-map-visited" aria-labelledby="worldMapVisitedHeading">
+            <div class="world-map-visited-heading">
+              <h3 id="worldMapVisitedHeading">取得済みの国・地域</h3>
+              <span id="worldMapVisitedCount">0件</span>
+            </div>
+            <div class="world-map-country-list" id="worldMapCountryList"></div>
+          </section>
+
+          <footer class="world-map-credit">
+            <span>Made with Natural Earth</span>
+            <span>D3 v7.9.0</span>
+          </footer>
         </section>
 
         <section class="screen" id="daysScreen" aria-labelledby="daysHeading">
@@ -282,6 +350,7 @@
     <script src="js/activity-model.js?v=0.7"></script>
     <script src="js/log-model.js?v=0.7"></script>
     <script src="js/backup.js?v=0.7"></script>
-    <script src="js/app.js?v=0.7.3"></script>
+    <script src="js/world-map.js?v=0.8"></script>
+    <script src="js/app.js?v=0.8"></script>
   </body>
 </html>
