@@ -27,7 +27,7 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `js/data.js`: 現在のDay1〜10正式データ
 - `js/day-meta.js`: Day1〜10のSTART / GOAL
 - `js/activity-model.js`: 計画ルートと当日実績の分離
-- `js/log-model.js`: 街歩き記録の編集・削除
+- `js/log-model.js`: 街歩き記録のDay文脈確定・追加・編集・削除
 - `js/guide-comments.js`: 案内役の動的コメント
 - `js/world-map.js`: World Mapの遅延読込、地域切替、SVG描画
 - `js/storage.js`: `localStorage` 保存、Migration、復元データ検証
@@ -74,6 +74,7 @@ Prototypeの技術検証は完了しています。
 - v0.7.2 Hotfix 2: Home NavigationをHero外へ分離し、Guide人物の足元を街並みに接地。manual NEXTを保存後に最新Day snapshotへ遷移する方式へ修正。PC・iPhone standalone実機検証PASS
 - v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC・iPhone standalone実機検証PASS
 - v0.8 World Map: 既存の取得状態から世界と5地域を色分け表示するVIEWを追加。Natural Earth 110mの145 polygonと12 marker、地域Summary、取得済み一覧、Navigation復元を実装。PC検証・iPhone standalone Acceptance全12項目PASS
+- v0.8 Walk Log Day Hotfix: 新規記録の`walkLog.day`を保存時の`settings.activeDay`ではなく、`＋記録`を開いたDay画面のNavigation snapshotから確定するよう修正。PC Regression PASS、iPhone standalone確認待ち
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
@@ -89,7 +90,11 @@ v0.8はv0.7.3を安定版ベースとしてWorld Mapだけを追加しました�
 
 **Final Status: v0.8 RELEASE / STABLE**
 
-Next Version CandidateはGuide Comment / 吹き出しのVisual Polishと、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
+v0.8実利用で確認されたWalk LogのDay誤紐付けはHotfixを実装し、PC検証を完了しました。正式157件、取得状態、`acquiredAt`、`actualDayActivities`、manual NEXT、World Map、Backup形式、Migration、`dataVersion: "1.1"`は変更していません。
+
+**Walk Log Day Hotfix Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち**
+
+Next GateはWalk Log Day HotfixのiPhone standalone確認です。Next Version CandidateはGuide Comment / 吹き出しのVisual Polish、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみ、既存Walk LogのDay変更UIです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
 
 ## 開発時の確認
 

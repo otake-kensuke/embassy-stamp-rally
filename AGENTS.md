@@ -222,6 +222,17 @@ v0.8 World Map:
 - iPhone standalone Acceptance全12項目PASS
 - Final Status: RELEASE / STABLE
 
+v0.8 Walk Log Day Hotfix:
+
+- 実利用で、Day3の`＋記録`が保存時の`settings.activeDay: 9`を参照し、`walkLog.day: 9`へ誤紐付けされる問題を確認した
+- 新規記録のDayは、`＋記録`を開いたDay画面のNavigation snapshotから確定して保存する
+- Home等のDay文脈を持たない画面から新規記録は作成しない。現行UIの新規`＋記録`導線はDay画面だけにある
+- 記録編集ではcategory / textだけを更新し、既存の`day`を変更しない
+- 正式157件、取得状態、`acquiredAt`、`actualDayActivities`、manual NEXT、World Map、Backup形式、Migrationは変更しない
+- `dataVersion: "1.1"`を維持する
+- PC Regression PASS
+- Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち
+
 現在の状態:
 
 - v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
@@ -234,13 +245,16 @@ v0.8 World Map:
 - v0.7.3 RELEASE / STABLEの履歴を維持する
 - v0.8 World Mapは実装・PC検証・iPhone standalone Acceptance全12項目を完了した
 - 現在の正式安定版はv0.8 RELEASE / STABLE
+- Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ち
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- v0.8 RELEASE / STABLEとして実地利用を継続する
+- Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する
+- Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行をv0.8.1 Candidateとする
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない
+- 既存Walk LogのDay変更UIは今回追加せず、別IssueとしてPM判断対象にする
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
 
 ## v0.5 PM決定事項
