@@ -2,6 +2,28 @@
 
 ## Open Issues
 
+### v0.8 Walk Log Day Hotfix
+
+Status: OPEN (IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち)
+
+実利用で、Day3画面から作成した記録のうち1件が`day: 9`へ誤紐付けされた。原因は、新規記録保存時にDay画面の文脈ではなく、保存時点のグローバルな`settings.activeDay`を直接使用していたことだった。
+
+対応:
+
+- `＋記録`を開いた時点のDay画面Navigation snapshotからDayを確定し、保存完了まで保持する。
+- 新規記録保存では保持したDayを使用し、`settings.activeDay`を参照しない。
+- Day文脈を持たない画面からの新規記録は作成しない。現行UIの新規記録導線はDay画面だけにある。
+- 編集はcategory / text / `updatedAt`だけを更新し、既存`day`を維持する。
+- 最新Backupは原本を残し、対象1件の`day`だけを`9 → 3`へ変更した修正版コピーを作成した。
+- PCで日別一覧が`2026年10月3日(土) Day 3`だけになることを確認した。
+- `dataVersion: "1.1"`、Migration、正式157件、取得状態、`acquiredAt`、`actualDayActivities`、manual NEXT、World Map、Backup形式は変更していない。
+
+### Walk Log Day変更UI
+
+Status: OPEN (Future Candidate / PM判断)
+
+現行の記録編集はcategoryとtextだけを対象とし、Dayは変更できない。今回のHotfixは新規記録の再発防止と対象Backupの安全な一点修正に限定する。既存記録のDay変更UIが必要かは、別IssueとしてPM判断する。
+
 ### Guide Comment / 吹き出し Visual Polish
 
 Status: OPEN (Next Version Candidate)

@@ -103,6 +103,8 @@ Migrationで関連付けたノルウェーはroute-added eventを持たないが
 
 user-created walkLogsはcategoryとtextを編集できる。編集時も作成timestampを保持し、`updatedAt` のみ追加する。削除には確認を入れる。取得イベントとroute-added eventは編集・削除できない。
 
+新規walkLogの`day`は、保存時のグローバルな`settings.activeDay`ではなく、`＋記録`を開いたDay画面のNavigation snapshotから確定する。Day3画面から開けば`day: 3`、Day9画面から開けば`day: 9`として、シートを閉じるか保存するまで保持する。現行UIでは新規`＋記録`導線はDay画面だけにあり、Day文脈が取得できない場合は新規記録を作成しない。編集時は既存の`day`を変更しない。
+
 ## Guide Footer
 
 案内コメントは `js/guide-comments.js` の少数templateから状態に応じて生成する。優先順位は、Day完了、当日追加、残り少数、通常NEXT、Day開始。男性と女性は独立した吹き出しを持つ。

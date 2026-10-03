@@ -259,9 +259,24 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Release CloseはDocumentationのみ更新し、機能、データ、UI、`dataVersion: "1.1"`には追加変更していない。
 - v0.7.3 RELEASE / STABLEの履歴を維持した。
 
+## v0.8 Walk Log Day Hotfix (2026-10-03)
+
+- 2026-10-03のDay3実利用記録1件が`day: 9`へ誤紐付けされ、日別記録が`Day 3 / Day 9`になる問題を確認した。
+- 原因は、新規walkLog保存時にDay画面の文脈ではなく、保存時の`state.settings.activeDay`を直接使用していたことだった。
+- `＋記録`を開いたDay画面のNavigation snapshotからDayを確定し、保存完了まで`newWalkLogDay`として保持するよう修正した。
+- Day文脈がない新規記録は作成せず、編集ではcategory / text / `updatedAt`だけを更新して既存`day`を維持する。
+- 最新Backupの原本を残したまま、対象walkLog 1件の`day`だけを`9 → 3`へ修正したコピーを作成した。
+- 修正版Backupの機械比較で変更が対象1 fieldだけであることを確認した。
+- ローカルブラウザへ修正版Backupを復元し、2026年10月3日が日別一覧・Timelineとも`Day 3`だけになることを確認した。
+- Day3 / Day9の新規追加、別Day閲覧後のDay3追加、編集時Day維持、削除、Timeline、取得event、activity、Backup / Restore、World Map、NavigationのRegressionをPASSした。
+- `dataVersion: "1.1"`、Migration、正式157件、取得状態、`acquiredAt`、`actualDayActivities`、manual NEXT、World Map、Backup形式は変更していない。
+- Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
+
 ## Current Next Gate
 
-- v0.8 RELEASE / STABLEとして実地利用を継続する。
+- Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
+- Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。
 - Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない。
+- 既存Walk LogのDay変更UIは別IssueとしてPM判断する。
 - Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。

@@ -10,6 +10,8 @@ v0.7.3はDay2実利用フィードバックを反映し、Home検索、`Day Xへ
 
 v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptance全12項目を完了した。現在の正式安定版はv0.8 RELEASE / STABLEである。`dataVersion: "1.1"`、Migration、正式157件、既存実績、記録、Backup仕様は変更していない。
 
+v0.8 Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ちである。新規記録は`＋記録`を開いたDay画面へ紐付け、保存時の`settings.activeDay`は使用しない。
+
 ## 更新前
 
 - iPhoneのv0.6.3から最新のJSON Backupを書き出す
@@ -71,10 +73,15 @@ v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptanc
 ## 記録 / Backup
 
 - 記録を追加できる
+- Day3画面から`＋記録`を作成すると、Backup内の新規`walkLog.day`が`3`になる
+- Day9画面から`＋記録`を作成すると、Backup内の新規`walkLog.day`が`9`になる
+- 別Dayを閲覧した後でも、Day3画面から開いた`＋記録`はDay3へ紐付く
 - user-created記録のcategory / textを編集でき、作成時刻は変わらない
+- user-created記録を編集しても既存の`day`が変わらない
 - 記録削除前に確認が表示される
 - 日付別一覧にstamp数と記録数が表示される
 - Timelineに取得、記録、v0.7のroute-added eventが時刻順で表示される
+- 2026年10月3日の修正版Backupでは日別一覧とTimelineが`Day 3`だけを表示し、`Day 3 / Day 9`にならない
 - v1.1 JSON Backupを書き出して復元できる
 - 更新前のv1.0 Backupをv0.7へ復元できる
 - 不正なBackupで現在のデータが消えない
@@ -96,6 +103,8 @@ v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptanc
 
 ## 既知Issue
 
+- Walk Log Day HotfixはiPhone standalone確認待ち
+- 既存Walk LogのDay変更UIはFuture Candidate / PM判断
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はv0.8.1 Candidate
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを将来検討する
 - Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
