@@ -132,8 +132,37 @@ assert.strictEqual(context.getGuideComments({ day: 1, area: "南麻布・広尾"
 
 const logState = JSON.parse(JSON.stringify(migratedState));
 const originalTimestamp = logState.walkLogs[0].timestamp;
+const originalDay = logState.walkLogs[0].day;
+assert.strictEqual(context.resolveWalkLogDayContext("day", { day: 3 }), 3);
+assert.strictEqual(context.resolveWalkLogDayContext("day", { day: 9 }), 9);
+assert.strictEqual(context.resolveWalkLogDayContext("day", { day: 3, activeDay: 9 }), 3);
+assert.strictEqual(context.resolveWalkLogDayContext("home", { day: 3 }), null);
+assert.strictEqual(context.resolveWalkLogDayContext("record", { day: 3 }), null);
+const dayContextState = { walkLogs: [], settings: { activeDay: 9 } };
+const dayThreeLog = context.addWalkLogData(
+  dayContextState,
+  context.resolveWalkLogDayContext("day", { day: 3 }),
+  "メモ",
+  "Day3 context",
+  "2026-10-03T06:00:00.000Z",
+  "log-day-3"
+);
+const dayNineLog = context.addWalkLogData(
+  dayContextState,
+  context.resolveWalkLogDayContext("day", { day: 9 }),
+  "メモ",
+  "Day9 context",
+  "2026-10-03T07:00:00.000Z",
+  "log-day-9"
+);
+assert.strictEqual(dayThreeLog.day, 3);
+assert.strictEqual(dayNineLog.day, 9);
+assert.strictEqual(dayContextState.walkLogs.length, 2);
+assert.strictEqual(context.addWalkLogData(dayContextState, null, "メモ", "No context", "2026-10-03T08:00:00.000Z", "log-none"), null);
+assert.strictEqual(dayContextState.walkLogs.length, 2);
 assert.strictEqual(context.updateWalkLog(logState, logState.walkLogs[0].id, "寄り道", "編集後", "2026-09-21T04:00:00.000Z"), true);
 assert.strictEqual(logState.walkLogs[0].timestamp, originalTimestamp);
+assert.strictEqual(logState.walkLogs[0].day, originalDay);
 assert.strictEqual(logState.walkLogs[0].updatedAt, "2026-09-21T04:00:00.000Z");
 const deletedLogId = logState.walkLogs[0].id;
 assert.strictEqual(context.deleteWalkLogData(logState, deletedLogId), true);
