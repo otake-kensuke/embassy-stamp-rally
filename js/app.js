@@ -5,6 +5,7 @@ let activeScreen = "home";
 let selectedCategory = "メモ";
 let selectedRecordDate = "";
 let editingLogId = null;
+let newWalkLogDay = null;
 let toastTimer = null;
 let navigationHistory = [];
 let navigationIndex = -1;
@@ -911,6 +912,13 @@ function removeAddedEmbassy(activityId, embassyId) {
 function openSheet(logId = null) {
   editingLogId = logId;
   const log = logId ? state.walkLogs.find((entry) => entry.id === logId) : null;
+  newWalkLogDay = log
+    ? null
+    : resolveWalkLogDayContext(activeScreen, navigationHistory[navigationIndex]);
+  if (!log && !newWalkLogDay) {
+    showToast("Day画面から記録を追加してください");
+    return;
+  }
   selectedCategory = log && CATEGORIES.includes(log.category) ? log.category : "メモ";
   $("#logSheetTitle").textContent = log ? "記録を編集" : "＋記録";
   $("#logText").value = log ? (log.text || "") : "";
@@ -925,6 +933,7 @@ function closeSheet() {
   $("#logSheet").hidden = true;
   $("#logText").value = "";
   editingLogId = null;
+  newWalkLogDay = null;
 }
 
 function saveWalkLog() {
@@ -934,13 +943,16 @@ function saveWalkLog() {
   if (editingLogId) {
     if (!updateWalkLog(state, editingLogId, selectedCategory, text, new Date().toISOString())) return;
   } else {
-    state.walkLogs.push({
-      id: `log-${Date.now()}`,
-      day: state.settings.activeDay,
-      category: selectedCategory,
+    if (!newWalkLogDay) return;
+    const added = addWalkLogData(
+      state,
+      newWalkLogDay,
+      selectedCategory,
       text,
-      timestamp: new Date().toISOString()
-    });
+      new Date().toISOString(),
+      `log-${Date.now()}`
+    );
+    if (!added) return;
   }
   persist();
   closeSheet();
