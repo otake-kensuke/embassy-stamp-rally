@@ -336,9 +336,20 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - `dataVersion: "1.1"`、正式157件、保存schema、Migration、既存実績を変更していない。
 - Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
 
+## Candidate B' Home Recovery UI Polish (2026-10-06)
+
+- iPhone Acceptance前のUI Polishとして、全体取得状況直下の大きな飛び地回収カードを廃止した。
+- `バックアップ / 復元`直下へ、`通常ルート外`、`飛び地回収`、`ベナン・ザンビア`、取得進捗だけを示すコンパクトなメニュー行として移動した。
+- 行全体のタップで既存の大使館追加画面を開き、ベナン・ザンビア2件の取得状態、正式住所、Google Maps、当日追加を確認できる構成を維持した。
+- 進捗は引き続き`state.embassies[id].status`から導出し、`0 / 2`、`1 / 2`、`2 / 2 完了 ✓`を表示する。専用の永続状態は追加していない。
+- Home Heroと下部Footerの街並みを画像本来の3:1比率で表示し、`cover`と負のbottom offsetによる建物上端のクリップを解消した。
+- 320 / 375 / 390 / 430pxで、横overflowなし、文字重なりなし、メニュー末尾配置、上下街並みの全体表示を確認した。
+- Candidate B'の攻略ルート、正式Master、取得状態、Backup / Restore、Migration、`dataVersion: "1.1"`は変更していない。
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
+
 ## Current Next Gate
 
-- Candidate B'をGitHub Pagesへ反映し、飛び地回収カード、順不同の攻略コース選択を含む`docs/test-plan-candidate-b-prime.md`のiPhone standalone項目を確認する。
+- Candidate B'をGitHub Pagesへ反映し、Homeメニュー末尾のコンパクトな飛び地回収行、上下街並み、順不同の攻略コース選択を含む`docs/test-plan-candidate-b-prime.md`のiPhone standalone項目を確認する。
 - iPhone Acceptance完了前はCandidate B'を`RELEASE / STABLE`へ昇格しない。
 - Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
 - Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。

@@ -23,14 +23,14 @@ v0.1の効率優先案をPMレビューし、総距離改善を維持しなが�
 - PMはDay4新富町駅GOAL、ベナン・ザンビアの飛び地回収、Cameroon Day9維持、Day10公共交通併用を正式決定した。
 - 正式Masterは変更せず、`js/route-plan.js`へ今後の攻略計画を分離してProduction反映した。
 - Home検索は攻略Dayと正式Dayを区別し、通常ルート外の大使館は既存の当日追加画面へ誘導する。
-- Homeに飛び地回収カードを追加し、ベナン・ザンビアの取得状態から`0 / 2`〜`2 / 2 完了`を毎回導出する。専用のlocalStorage / Backup項目は追加しない。
-- 飛び地の各行から既存の追加画面へ進み、正式住所、Google Maps、取得状態、当日追加を確認できる。
+- Homeメニューの`バックアップ / 復元`直下へコンパクトな飛び地回収行を追加し、ベナン・ザンビアの取得状態から`0 / 2`〜`2 / 2 完了 ✓`を毎回導出する。専用のlocalStorage / Backup項目は追加しない。
+- コンパクト行から既存の追加画面へ進み、ベナン・ザンビア2件の正式住所、Google Maps、取得状態、当日追加を確認できる。Home上部の大きな回収カードと個別ボタンは使用しない。
 - Day4〜Day10は実施順ではなく攻略コース番号とし、Day6 → Day4 → Day8のような順不同利用を正式仕様とする。前Day完了条件やunlockは追加しない。
 - 活動日はactual activityの日付、攻略コースは`plannedDay`で管理し、Review / TimelineとWalk Log Day Hotfixの意味を維持する。
 - 最新Backupで取得済み51件、全`acquiredAt`、walkLogs 13件、actualDayActivities 2件、Norway履歴、Day3 Walk Log Hotfixを保持した。
 - `js/data.js`、Backup、localStorage schema、Migration、World Map mapping、`dataVersion: "1.1"`は変更していない。
 - 成果物は`docs/route-reoptimization-v0.2/`へ本番データと分離して保存した。v0.1成果物は分析履歴として維持する。
-- PC自動検証、飛び地進捗`0 → 1 → 2 → 1`導出、Day6 → Day4 → Day8の順不同選択、320 / 375 / 390 / 430pxのブラウザ検証はPASSした。GitHub Pages反映後のiPhone standalone Acceptanceを残す。
+- PC自動検証、飛び地進捗`0 → 1 → 2 → 1`導出、Day6 → Day4 → Day8の順不同選択、320 / 375 / 390 / 430pxのブラウザ検証はPASSした。Home上下の街並みは元画像と同じ3:1比率で表示し、横overflowと建物上端のクリップがないことを確認した。GitHub Pages反映後のiPhone standalone Acceptanceを残す。
 
 ### v0.8 Walk Log Day Hotfix
 
