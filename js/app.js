@@ -258,31 +258,15 @@ function renderProgress() {
 }
 
 function renderRecoveryCard() {
-  const container = $("#recoveryList");
   const progress = recoveryCandidateProgress((id) => embassyStatus(id).status);
-  clearChildren(container);
-
-  $("#recoveryProgress").textContent = `${progress.done} / ${progress.total}`;
-  $("#recoveryComplete").hidden = !progress.complete;
-
-  recoveryCandidateEmbassies().forEach((embassy) => {
-    const acquired = embassyStatus(embassy.id).status === "acquired";
-    const button = document.createElement("button");
-    button.type = "button";
-    button.dataset.viewEmbassy = embassy.id;
-    button.className = acquired ? "recovery-item acquired" : "recovery-item";
-    button.setAttribute("aria-label", `${embassy.country}大使館・${acquired ? "取得済み" : "未取得"}`);
-
-    const mark = document.createElement("span");
-    mark.className = "recovery-mark";
-    mark.setAttribute("aria-hidden", "true");
-    mark.textContent = acquired ? "✓" : "○";
-
-    const name = document.createElement("strong");
-    name.textContent = embassy.country;
-    button.append(mark, name);
-    container.append(button);
-  });
+  const progressText = progress.complete
+    ? `${progress.done} / ${progress.total} 完了 ✓`
+    : `${progress.done} / ${progress.total}`;
+  $("#recoveryProgress").textContent = progressText;
+  $("#recoveryMenuEntry").setAttribute(
+    "aria-label",
+    `通常ルート外 飛び地回収 ベナン・ザンビア ${progressText}`
+  );
 }
 
 function renderHomeDays() {
@@ -566,6 +550,7 @@ function statusLabel(id) {
 function matchingEmbassies(query) {
   const normalized = query.trim().toLocaleLowerCase("ja-JP");
   if (!normalized) return [];
+  if (normalized === "飛び地回収") return recoveryCandidateEmbassies();
   return EMBASSY_MASTER.filter((embassy) => {
     return embassy.country.toLocaleLowerCase("ja-JP").includes(normalized)
       || embassy.embassyName.toLocaleLowerCase("ja-JP").includes(normalized);
@@ -638,6 +623,11 @@ function openEmbassyInRoute(id) {
   state.settings.activeDay = plannedDay;
   state = saveState(state);
   navigateTo("route", { day: plannedDay, routeEmbassyId: embassy.id });
+}
+
+function openRecoveryCandidates() {
+  addSearchQuery = "飛び地回収";
+  navigateTo("add", { addSearchQuery });
 }
 
 function focusRouteEmbassy(id) {
@@ -1054,6 +1044,12 @@ function showToast(message) {
 }
 
 document.addEventListener("click", (event) => {
+  const recoveryEntry = event.target.closest("[data-recovery-entry]");
+  if (recoveryEntry) {
+    openRecoveryCandidates();
+    return;
+  }
+
   const nav = event.target.closest("button[data-screen]");
   if (nav) navigateTo(nav.dataset.screen);
 
