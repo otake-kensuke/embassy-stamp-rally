@@ -13,6 +13,7 @@ let viewNextEmbassyId = null;
 let viewDayMode = null;
 let viewRouteEmbassyId = null;
 let homeSearchQuery = "";
+let addSearchQuery = "";
 let worldMapRegion = "world";
 
 const $ = (selector) => document.querySelector(selector);
@@ -23,12 +24,11 @@ function clearChildren(element) {
 }
 
 function dayNumbers() {
-  return [...new Set(EMBASSY_MASTER.map((embassy) => embassy.day))].sort((a, b) => a - b);
+  return routePlanDayNumbers();
 }
 
 function dayEmbassies(day = state.settings.activeDay) {
-  return EMBASSY_MASTER.filter((embassy) => embassy.day === day)
-    .sort((a, b) => a.order - b.order);
+  return routePlanEmbassies(day);
 }
 
 function embassyStatus(id) {
@@ -144,6 +144,7 @@ function currentView(screen = activeScreen) {
     day: state.settings.activeDay,
     recordDate: screen === "record" ? selectedRecordDate : "",
     searchQuery: screen === "search" ? homeSearchQuery : "",
+    addSearchQuery: screen === "add" ? addSearchQuery : "",
     mapRegion: screen === "world-map" ? worldMapRegion : "",
     routeEmbassyId: screen === "route" ? viewRouteEmbassyId : null,
     nextEmbassyId: current ? current.id : null,
@@ -156,6 +157,7 @@ function applyView(view) {
   if (view.day) state.settings.activeDay = Number(view.day);
   if (view.recordDate) selectedRecordDate = view.recordDate;
   homeSearchQuery = view.screen === "search" ? (view.searchQuery || "") : homeSearchQuery;
+  addSearchQuery = view.screen === "add" ? (view.addSearchQuery || "") : addSearchQuery;
   worldMapRegion = view.screen === "world-map" && WorldMapFeature.regions.includes(view.mapRegion)
     ? view.mapRegion
     : worldMapRegion;
@@ -205,6 +207,7 @@ function navigateTo(screen, options = {}) {
     day: targetDay,
     recordDate: options.recordDate || "",
     searchQuery: screen === "search" ? (options.searchQuery || homeSearchQuery) : "",
+    addSearchQuery: screen === "add" ? (options.addSearchQuery || "") : "",
     mapRegion: screen === "world-map" ? (options.mapRegion || worldMapRegion) : "",
     routeEmbassyId: screen === "route" ? (options.routeEmbassyId || null) : null,
     nextEmbassyId: screen === "day" && dayMode === "next"
@@ -252,6 +255,34 @@ function renderProgress() {
   $("#homeWorldMapProgress").textContent = `${done} / ${total} 国・地域`;
   $("#dayProgress").textContent = `${progress.done} / ${progress.total}`;
   $("#routeProgress").textContent = `${progress.done} / ${progress.total}`;
+}
+
+function renderRecoveryCard() {
+  const container = $("#recoveryList");
+  const progress = recoveryCandidateProgress((id) => embassyStatus(id).status);
+  clearChildren(container);
+
+  $("#recoveryProgress").textContent = `${progress.done} / ${progress.total}`;
+  $("#recoveryComplete").hidden = !progress.complete;
+
+  recoveryCandidateEmbassies().forEach((embassy) => {
+    const acquired = embassyStatus(embassy.id).status === "acquired";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.viewEmbassy = embassy.id;
+    button.className = acquired ? "recovery-item acquired" : "recovery-item";
+    button.setAttribute("aria-label", `${embassy.country}大使館・${acquired ? "取得済み" : "未取得"}`);
+
+    const mark = document.createElement("span");
+    mark.className = "recovery-mark";
+    mark.setAttribute("aria-hidden", "true");
+    mark.textContent = acquired ? "✓" : "○";
+
+    const name = document.createElement("strong");
+    name.textContent = embassy.country;
+    button.append(mark, name);
+    container.append(button);
+  });
 }
 
 function renderHomeDays() {
@@ -391,9 +422,14 @@ function renderDay() {
   $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
   $("#routeHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
   $("#dayEyebrow").textContent = `Day ${state.settings.activeDay}`;
-  $("#dayStartGoal").textContent = `START ${meta.start} → GOAL ${meta.goal}`;
+  const modeSuffix = meta.modeLabel ? `（${meta.modeLabel}）` : "";
+  $("#dayStartGoal").textContent = `START ${meta.start} → GOAL ${meta.goal}${modeSuffix}`;
   $("#routeStart").textContent = meta.start;
   $("#routeGoal").textContent = meta.goal;
+  $("#routePlanNote").hidden = !meta.modeLabel;
+  $("#routePlanNote").textContent = meta.modeLabel
+    ? `${meta.modeLabel}：具体的な交通経路は実施日にGoogle Mapsで確認してください。`
+    : "";
   $("#dayProgress").hidden = showCompletion;
   $("#activeDayContent").hidden = showCompletion;
   $("#completionPanel").hidden = !showCompletion;
@@ -438,7 +474,7 @@ function createRouteCard(embassy, options = {}) {
   const info = document.createElement("div");
   const order = document.createElement("span");
   order.className = "route-order";
-  order.textContent = options.orderLabel || embassy.order;
+  order.textContent = options.orderLabel || embassy.routeOrder || embassy.order;
   const name = document.createElement("strong");
   name.textContent = embassy.embassyName;
   const statusText = document.createElement("p");
@@ -567,7 +603,18 @@ function renderHomeSearchResults() {
     const name = document.createElement("strong");
     name.textContent = embassy.embassyName;
     const detail = document.createElement("span");
-    detail.textContent = `Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    const plannedDay = routePlanDayForEmbassy(embassy.id);
+    if (plannedDay) {
+      detail.textContent = plannedDay === embassy.day
+        ? `攻略Day ${plannedDay}・${statusLabel(embassy.id)}`
+        : `攻略Day ${plannedDay}・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    } else if (isRecoveryCandidate(embassy.id)) {
+      detail.textContent = `飛び地回収・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    } else if (isUnlocatedRouteCandidate(embassy.id)) {
+      detail.textContent = `地図要確認・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    } else {
+      detail.textContent = `通常ルート外・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
+    }
     const arrow = document.createElement("span");
     arrow.className = "nav-arrow";
     arrow.setAttribute("aria-hidden", "true");
@@ -581,9 +628,16 @@ function renderHomeSearchResults() {
 function openEmbassyInRoute(id) {
   const embassy = embassyById.get(id);
   if (!embassy) return;
-  state.settings.activeDay = embassy.day;
+  const plannedDay = routePlanDayForEmbassy(embassy.id);
+  if (!plannedDay) {
+    addSearchQuery = embassy.country;
+    navigateTo("add", { addSearchQuery });
+    showToast(`${embassy.embassyName}は当日追加から選択できます`);
+    return;
+  }
+  state.settings.activeDay = plannedDay;
   state = saveState(state);
-  navigateTo("route", { day: embassy.day, routeEmbassyId: embassy.id });
+  navigateTo("route", { day: plannedDay, routeEmbassyId: embassy.id });
 }
 
 function focusRouteEmbassy(id) {
@@ -632,7 +686,23 @@ function renderSearchResults() {
     name.textContent = embassy.embassyName;
     const detail = document.createElement("p");
     detail.textContent = `本来：Day ${embassy.day}・${embassyStatus(embassy.id).status === "acquired" ? "取得済み" : "未取得"}`;
-    info.append(name, detail);
+    const address = document.createElement("p");
+    address.className = "search-result-address";
+    address.textContent = embassy.address;
+    info.append(name, detail, address);
+
+    const actions = document.createElement("div");
+    actions.className = "search-result-actions";
+    const mapLink = document.createElement("a");
+    mapLink.className = "search-result-map";
+    mapLink.textContent = embassy.googleMapsQuery ? "地図" : "地図要確認";
+    if (embassy.googleMapsQuery) {
+      mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(embassy.googleMapsQuery)}`;
+      mapLink.target = "_blank";
+      mapLink.rel = "noopener";
+    } else {
+      mapLink.setAttribute("aria-disabled", "true");
+    }
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.addEmbassy = embassy.id;
@@ -640,7 +710,8 @@ function renderSearchResults() {
     button.textContent = plannedIds.has(embassy.id)
       ? "基本ルート内"
       : addedIds.has(embassy.id) ? "追加済み" : "追加";
-    item.append(info, button);
+    actions.append(mapLink, button);
+    item.append(info, actions);
     container.append(item);
   });
 }
@@ -661,7 +732,7 @@ function allTimelineEvents() {
       type: "acquired",
       timestamp: status.acquiredAt,
       localDate,
-      plannedDay: activity ? activity.plannedDay : embassy.day,
+      plannedDay: activity ? activity.plannedDay : (routePlanDayForEmbassy(embassy.id) || embassy.day),
       embassy,
       addedActivity: activity
     });
@@ -812,6 +883,7 @@ function renderWorldMapScreen() {
 function render() {
   renderNavigation();
   renderProgress();
+  renderRecoveryCard();
   renderHomeDays();
   renderDay();
   renderRoute();
@@ -820,7 +892,10 @@ function render() {
   renderCategories();
   renderWorldMapScreen();
   if (activeScreen === "search") renderHomeSearchResults();
-  if (activeScreen === "add") renderSearchResults();
+  if (activeScreen === "add") {
+    $("#embassySearch").value = addSearchQuery;
+    renderSearchResults();
+  }
   $("#memoInput").value = state.memo || "";
 }
 
@@ -889,7 +964,7 @@ function setEmbassyStatus(id, nextStatus, options = {}) {
 
 function addEmbassyToToday(id) {
   const embassy = embassyById.get(id);
-  if (!embassy || embassy.day === state.settings.activeDay) return;
+  if (!embassy || routePlanDayForEmbassy(embassy.id) === state.settings.activeDay) return;
   const timestamp = new Date().toISOString();
   const result = addEmbassyToActivity(state, embassy, toLocalDateKey(timestamp), state.settings.activeDay, timestamp);
   if (!result.added) return;
@@ -1056,7 +1131,16 @@ $("#acquireButton").addEventListener("click", () => {
   setEmbassyStatus(current.id, "acquired", { recordDayView: true });
   showToast("スタンプを取得しました");
 });
-$("#embassySearch").addEventListener("input", renderSearchResults);
+$("#embassySearch").addEventListener("input", (event) => {
+  addSearchQuery = event.target.value;
+  if (activeScreen === "add" && navigationIndex >= 0) {
+    navigationHistory[navigationIndex] = {
+      ...navigationHistory[navigationIndex],
+      addSearchQuery
+    };
+  }
+  renderSearchResults();
+});
 $("#homeEmbassySearch").addEventListener("input", (event) => {
   homeSearchQuery = event.target.value;
   if (activeScreen === "search" && navigationIndex >= 0) {
