@@ -319,9 +319,9 @@ h2 {
   bottom: 0;
   left: 0;
   z-index: 3;
-  height: 76px;
-  background: var(--green-light);
-  clip-path: polygon(0 66%, 5% 55%, 9% 66%, 9% 45%, 13% 45%, 13% 66%, 18% 54%, 22% 66%, 26% 38%, 30% 66%, 36% 52%, 41% 66%, 46% 46%, 51% 66%, 56% 56%, 61% 66%, 66% 40%, 71% 66%, 76% 50%, 81% 66%, 86% 46%, 91% 66%, 95% 54%, 100% 62%, 100% 100%, 0 100%);
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .home-progress-card {
@@ -342,88 +342,6 @@ h2 {
   color: var(--green);
   font-size: clamp(38px, 11vw, 58px);
   line-height: 1;
-}
-
-.recovery-card {
-  margin-bottom: 9px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--white);
-  box-shadow: var(--shadow);
-}
-
-.recovery-card-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.recovery-card-heading .eyebrow {
-  margin-bottom: 0;
-  font-size: 10px;
-}
-
-.recovery-card-heading h3,
-.recovery-card-progress {
-  margin: 0;
-}
-
-.recovery-card-heading h3 {
-  color: var(--green-dark);
-  font-size: 16px;
-}
-
-.recovery-card-progress {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 7px;
-  color: var(--green);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.recovery-card-progress strong {
-  font-size: 18px;
-}
-
-.recovery-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.recovery-item {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  align-items: center;
-  min-height: 44px;
-  padding: 7px 9px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #f8fcfa;
-  color: var(--ink);
-  text-align: left;
-}
-
-.recovery-item.acquired {
-  border-color: #a8d5bd;
-  background: #edf8f2;
-  color: var(--green-dark);
-}
-
-.recovery-mark {
-  color: var(--green);
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.recovery-item strong {
-  overflow-wrap: anywhere;
-  font-size: 14px;
 }
 
 .large-percent {
@@ -480,6 +398,37 @@ h2 {
   font-size: 16px;
 }
 
+.recovery-menu-entry {
+  grid-template-columns: 36px minmax(0, 1fr) auto 20px;
+}
+
+.recovery-menu-copy {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+}
+
+.recovery-menu-copy small,
+.recovery-menu-copy span {
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.recovery-menu-copy small {
+  font-size: 9px;
+}
+
+.recovery-menu-copy span {
+  font-size: 11px;
+}
+
+.recovery-menu-progress {
+  color: var(--green);
+  font-size: 14px !important;
+  white-space: nowrap;
+}
+
 .nav-icon {
   display: grid;
   place-items: center;
@@ -510,6 +459,12 @@ h2 {
 
 .icon-search {
   position: relative;
+}
+
+.icon-recovery::before {
+  content: "◇";
+  font-size: 21px;
+  line-height: 1;
 }
 
 .nav-arrow,
@@ -1317,9 +1272,7 @@ body {
 }
 
 .home-skyline {
-  height: 56px;
-  background: url("../assets/tokyo-skyline.png?v=0.6.3-layout") center bottom / cover no-repeat;
-  clip-path: none;
+  height: auto;
 }
 
 .home-progress-card {
@@ -1356,6 +1309,11 @@ body {
   grid-template-columns: 34px 1fr 18px;
   min-height: 48px;
   padding: 6px 7px;
+}
+
+.recovery-menu-entry {
+  grid-template-columns: 34px minmax(0, 1fr) auto 18px;
+  min-height: 58px;
 }
 
 .nav-button strong {
@@ -1936,9 +1894,9 @@ body {
 
 .home-visual-footer {
   position: relative;
-  flex: 1 1 112px;
-  min-height: 112px;
-  height: 112px;
+  flex: none;
+  min-height: clamp(145px, 42vw, 230px);
+  height: clamp(145px, 42vw, 230px);
   margin-top: 8px;
   overflow: hidden;
   border-top: 1px solid rgba(15, 122, 70, 0.18);
@@ -1974,8 +1932,8 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 68px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center bottom;
 }
 
@@ -2154,10 +2112,6 @@ body {
     right: 20%;
   }
 
-  .home-visual-footer {
-    height: 100px;
-  }
-
   .day-footer-bubble {
     min-width: 90px;
     padding: 7px 9px;
@@ -2187,7 +2141,7 @@ body {
 }
 
 .home-footer-skyline {
-  bottom: -20px;
+  bottom: 0;
 }
 
 .home-visual-footer::before {
