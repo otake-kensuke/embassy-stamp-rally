@@ -233,6 +233,21 @@ v0.8 Walk Log Day Hotfix:
 - PC Regression PASS
 - Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち
 
+Candidate B' Production:
+
+- 正式157件Masterを変更せず、`js/route-plan.js`へDay4〜Day10の今後の攻略計画を分離する
+- Day4は14件・赤羽橋駅 → 新富町駅、Day5〜8はCandidate B、Day9はザンビアなし・Cameroon維持、Day10は公共交通併用Dayとする
+- ベナンとザンビアは飛び地回収候補とし、既存の検索・当日追加・取得・World Map・Backupを利用する
+- Homeに小さな飛び地回収カードを表示し、`state.embassies[id].status`から`0 / 2`〜`2 / 2`を毎回導出する。専用の永続状態は追加しない
+- 飛び地カードから既存の大使館追加画面へ進み、住所、Google Maps、当日追加、取得状態を確認できる
+- Candidate B'のDay番号は実施順ではなく攻略コース番号とする。前Day完了条件、unlock、sequential progressionは追加しない
+- 実際の活動日は`actualDayActivities.localDate`、攻略コースは`plannedDay`、Walk Logの所属は記録を開いたDay文脈で管理し、互いを推測で置換しない
+- Afghanistanは通常ルート外の未確定別枠とし、`地図要確認`を維持する
+- 正式Master Day、取得済み51件、`acquiredAt`、walkLogs、actualDayActivities、manual NEXT、Backup形式は変更しない
+- `dataVersion: "1.1"`とMigrationを維持する
+- PC Regression PASS
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち
+
 現在の状態:
 
 - v0.6.3はiPhone Safari実機確認後、Day1で実運用済み
@@ -246,11 +261,13 @@ v0.8 Walk Log Day Hotfix:
 - v0.8 World Mapは実装・PC検証・iPhone standalone Acceptance全12項目を完了した
 - 現在の正式安定版はv0.8 RELEASE / STABLE
 - Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ち
+- Candidate B'攻略計画はPM承認・Production反映・PC検証を完了し、iPhone standalone確認待ち
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
 - Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する
+- Candidate B'攻略計画をGitHub Pagesへ反映し、Day4〜10、飛び地回収カードと既存導線、順不同のDay選択、Day10公共交通併用表示をiPhone standaloneで確認する
 - Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行をv0.8.1 Candidateとする
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない

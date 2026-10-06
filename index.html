@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=0.8">
+    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-recovery-20261006">
   </head>
   <body>
     <div class="app-shell">
@@ -66,6 +66,20 @@
             </div>
             <p class="large-percent" id="homePercent">0%</p>
             <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
+          </section>
+
+          <section class="recovery-card" aria-labelledby="recoveryHeading">
+            <header class="recovery-card-heading">
+              <div>
+                <p class="eyebrow">通常ルート外</p>
+                <h3 id="recoveryHeading">飛び地回収</h3>
+              </div>
+              <p class="recovery-card-progress">
+                <strong id="recoveryProgress">0 / 2</strong>
+                <span id="recoveryComplete" hidden>完了 ✓</span>
+              </p>
+            </header>
+            <div class="recovery-list" id="recoveryList"></div>
           </section>
 
           <nav class="home-menu" aria-label="メインメニュー">
@@ -175,9 +189,9 @@
 
         <section class="screen" id="daysScreen" aria-labelledby="daysHeading">
           <header class="section-heading">
-            <p class="eyebrow">Day1〜Day10</p>
+            <p class="eyebrow">攻略コース Day1〜Day10</p>
             <h2 id="daysHeading">Day一覧</h2>
-            <p>巡回するDayを選択してください。</p>
+            <p>攻略コースを選択してください。順不同で実施できます。</p>
           </header>
           <div class="day-list" id="dayGrid"></div>
         </section>
@@ -250,6 +264,7 @@
             <strong id="routeProgress">0 / 13</strong>
           </header>
           <button class="route-day-button" id="returnToDayButton" type="button">Day 1へ戻る</button>
+          <p class="route-plan-note" id="routePlanNote" hidden></p>
           <div class="route-terminal route-start"><span>START</span><strong id="routeStart">恵比寿駅</strong></div>
           <section class="route-section" aria-labelledby="plannedRouteHeading">
             <h3 id="plannedRouteHeading">基本ルート</h3>
@@ -344,13 +359,14 @@
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
     <script src="js/data.js?v=0.7"></script>
-    <script src="js/day-meta.js?v=0.7"></script>
+    <script src="js/day-meta.js?v=candidate-b-prime-20261006"></script>
+    <script src="js/route-plan.js?v=candidate-b-prime-recovery-20261006"></script>
     <script src="js/guide-comments.js?v=0.7"></script>
     <script src="js/storage.js?v=0.7"></script>
     <script src="js/activity-model.js?v=0.7"></script>
     <script src="js/log-model.js?v=0.8-walk-log-hotfix"></script>
     <script src="js/backup.js?v=0.7"></script>
     <script src="js/world-map.js?v=0.8"></script>
-    <script src="js/app.js?v=0.8-walk-log-hotfix"></script>
+    <script src="js/app.js?v=candidate-b-prime-recovery-20261006"></script>
   </body>
 </html>
