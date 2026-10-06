@@ -1,0 +1,6066 @@
+{
+  "generatedAt": "2026-10-04T10:52:30.704Z",
+  "status": "ANALYSIS ONLY / PM REVIEW PENDING",
+  "methodology": {
+    "walkingMatrix": "OpenStreetMap routed-foot OSRM; full directed distance/duration matrix in 45x45 blocks",
+    "routeOrder": "Fixed candidate START/GOAL, nearest-neighbor seed, 2-opt on walking duration",
+    "search": "Seeded simulated annealing using one-embassy moves, 2-4 nearby embassy cluster moves, and swaps; nine runs per profile",
+    "stationSelection": "Best walking-duration pair among stations already verified in v0.1; traffic convenience requires PM review",
+    "dailyComfortAdjustment": "Candidate C starts from B and moves the adjacent Cuba/Palau pair from Day4 to Day6 to reduce practical per-day load",
+    "comparisonOnly": "Profile coefficients rank candidates and do not prove a global optimum",
+    "walkingCaveat": "Walking estimates exclude stamp, photo, entrance, signal, lunch, and rest time"
+  },
+  "profiles": {
+    "A": {
+      "label": "Efficiency Priority",
+      "totalWeight": 1,
+      "rangeWeight": 0.16,
+      "maxWeight": 2.5,
+      "countRangeWeight": 120,
+      "countOutsideWeight": 900,
+      "durationOutsideWeight": 10,
+      "compositeRangeWeight": 0.2,
+      "compositeMaxWeight": 1,
+      "totalSoftLimitMinutes": 1170,
+      "totalLimitWeight": 8,
+      "minLocatedCount": 8,
+      "maxLocatedCount": 19
+    },
+    "B": {
+      "label": "Balanced",
+      "totalWeight": 0.8,
+      "rangeWeight": 0.8,
+      "maxWeight": 12,
+      "countRangeWeight": 180,
+      "countOutsideWeight": 700,
+      "durationOutsideWeight": 60,
+      "compositeRangeWeight": 4,
+      "compositeMaxWeight": 10,
+      "totalSoftLimitMinutes": 1200,
+      "totalLimitWeight": 7,
+      "minLocatedCount": 8,
+      "maxLocatedCount": 19
+    },
+    "C": {
+      "label": "Daily Comfort",
+      "totalWeight": 0.5,
+      "rangeWeight": 1.3,
+      "maxWeight": 50,
+      "countRangeWeight": 120,
+      "countOutsideWeight": 300,
+      "durationOutsideWeight": 150,
+      "compositeRangeWeight": 5,
+      "compositeMaxWeight": 12,
+      "totalSoftLimitMinutes": 1320,
+      "totalLimitWeight": 3,
+      "minLocatedCount": 8,
+      "maxLocatedCount": 18
+    }
+  },
+  "baselineV01": {
+    "totalDistanceKm": 83.34,
+    "totalDurationMinutes": 1113,
+    "dayCounts": [
+      10,
+      15,
+      15,
+      20,
+      17,
+      17,
+      12
+    ],
+    "dayDurations": [
+      193,
+      150,
+      102,
+      102,
+      161,
+      191,
+      214
+    ]
+  },
+  "candidates": {
+    "A": {
+      "label": "Efficiency Priority",
+      "optimizationScore": 4390.060372222222,
+      "totalDistanceKm": 86.64,
+      "totalDurationMinutes": 1158,
+      "averageDurationMinutes": 165,
+      "maxDurationMinutes": 195,
+      "minDurationMinutes": 140,
+      "durationRangeMinutes": 55,
+      "maxEmbassyCount": 16,
+      "minEmbassyCount": 11,
+      "embassyCountRange": 5,
+      "over200Days": [],
+      "atLeast20EmbassyDays": [],
+      "sensitivity": {
+        "visit3Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 235
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 202
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 199
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 188
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 195
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 229
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 228
+          }
+        ],
+        "visit5Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 267
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 234
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 231
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 220
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 227
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 259
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 250
+          }
+        ]
+      },
+      "days": [
+        {
+          "day": 4,
+          "start": "赤羽橋駅",
+          "goal": "後楽園駅",
+          "embassyCount": 16,
+          "locatedEmbassyCount": 16,
+          "unlocatedIds": [],
+          "distanceKm": 13.99,
+          "durationMinutes": 187,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-キューバ",
+              "country": "キューバ",
+              "embassyName": "キューバ大使館",
+              "currentDay": 7,
+              "currentOrder": 14,
+              "address": "〒106-0044 東京都港区東麻布1-28-4",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-チリ",
+              "country": "チリ",
+              "embassyName": "チリ大使館",
+              "currentDay": 4,
+              "currentOrder": 2,
+              "address": "〒105-0014 東京都港区芝3-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ハイチ",
+              "country": "ハイチ",
+              "embassyName": "ハイチ大使館",
+              "currentDay": 7,
+              "currentOrder": 13,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ホンジュラス",
+              "country": "ホンジュラス",
+              "embassyName": "ホンジュラス大使館",
+              "currentDay": 7,
+              "currentOrder": 12,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-グアテマラ",
+              "country": "グアテマラ",
+              "embassyName": "グアテマラ大使館",
+              "currentDay": 7,
+              "currentOrder": 11,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ロシア",
+              "country": "ロシア",
+              "embassyName": "ロシア大使館",
+              "currentDay": 7,
+              "currentOrder": 6,
+              "address": "〒106-0041 東京都港区麻布台2-1-1",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ナミビア",
+              "country": "ナミビア",
+              "embassyName": "ナミビア大使館",
+              "currentDay": 7,
+              "currentOrder": 10,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-エクアドル",
+              "country": "エクアドル",
+              "embassyName": "エクアドル大使館",
+              "currentDay": 7,
+              "currentOrder": 9,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-サモア",
+              "country": "サモア",
+              "embassyName": "サモア大使館",
+              "currentDay": 7,
+              "currentOrder": 8,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-フィジー",
+              "country": "フィジー",
+              "embassyName": "フィジー大使館",
+              "currentDay": 7,
+              "currentOrder": 7,
+              "address": "〒106-0041 東京都港区麻布台2-3-5",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-トンガ",
+              "country": "トンガ",
+              "embassyName": "トンガ大使館",
+              "currentDay": 7,
+              "currentOrder": 5,
+              "address": "〒106-0041 東京都港区麻布台1-9-10",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-コソボ",
+              "country": "コソボ",
+              "embassyName": "コソボ大使館",
+              "currentDay": 7,
+              "currentOrder": 1,
+              "address": "〒105-0003 東京都港区西新橋3-13-7",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-モーリシャス",
+              "country": "モーリシャス",
+              "embassyName": "モーリシャス大使館",
+              "currentDay": 9,
+              "currentOrder": 8,
+              "address": "〒104-0045 東京都中央区築地6-25-10",
+              "ward": "中央区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-アルバニア",
+              "country": "アルバニア",
+              "embassyName": "アルバニア大使館",
+              "currentDay": 9,
+              "currentOrder": 7,
+              "address": "〒104-0045 東京都中央区築地6-4-8",
+              "ward": "中央区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ベネズエラ",
+              "country": "ベネズエラ",
+              "embassyName": "ベネズエラ大使館",
+              "currentDay": 9,
+              "currentOrder": 9,
+              "address": "〒104-0042 東京都中央区入船2-7-4",
+              "ward": "中央区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-ベナン",
+              "country": "ベナン",
+              "embassyName": "ベナン大使館",
+              "currentDay": 9,
+              "currentOrder": 10,
+              "address": "〒112-0003 東京都文京区春日1-11-14",
+              "ward": "文京区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "赤羽橋駅",
+              "to": "キューバ大使館",
+              "distanceKm": 0.11,
+              "durationMinutes": 2
+            },
+            {
+              "from": "キューバ大使館",
+              "to": "チリ大使館",
+              "distanceKm": 0.31,
+              "durationMinutes": 4
+            },
+            {
+              "from": "チリ大使館",
+              "to": "ハイチ大使館",
+              "distanceKm": 0.38,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ハイチ大使館",
+              "to": "ホンジュラス大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ホンジュラス大使館",
+              "to": "グアテマラ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "グアテマラ大使館",
+              "to": "ロシア大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ロシア大使館",
+              "to": "ナミビア大使館",
+              "distanceKm": 0.5,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ナミビア大使館",
+              "to": "エクアドル大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "エクアドル大使館",
+              "to": "サモア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "サモア大使館",
+              "to": "フィジー大使館",
+              "distanceKm": 0.29,
+              "durationMinutes": 4
+            },
+            {
+              "from": "フィジー大使館",
+              "to": "トンガ大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "トンガ大使館",
+              "to": "コソボ大使館",
+              "distanceKm": 1.22,
+              "durationMinutes": 16
+            },
+            {
+              "from": "コソボ大使館",
+              "to": "モーリシャス大使館",
+              "distanceKm": 2.35,
+              "durationMinutes": 31
+            },
+            {
+              "from": "モーリシャス大使館",
+              "to": "アルバニア大使館",
+              "distanceKm": 0.11,
+              "durationMinutes": 1
+            },
+            {
+              "from": "アルバニア大使館",
+              "to": "ベネズエラ大使館",
+              "distanceKm": 1.13,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ベネズエラ大使館",
+              "to": "ベナン大使館",
+              "distanceKm": 6.13,
+              "durationMinutes": 82
+            },
+            {
+              "from": "ベナン大使館",
+              "to": "後楽園駅",
+              "distanceKm": 0.75,
+              "durationMinutes": 10
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "trip",
+            "originalRouteDistanceKm": 14.01,
+            "originalRouteDurationMinutes": 187,
+            "tripDistanceKm": 13.51,
+            "tripDurationMinutes": 180,
+            "tripOrderRouteDistanceKm": 13.99,
+            "tripOrderRouteDurationMinutes": 187,
+            "selectedRouteDistanceKm": 13.99,
+            "selectedRouteDurationMinutes": 187,
+            "pass": true
+          }
+        },
+        {
+          "day": 5,
+          "start": "代官山駅",
+          "goal": "池ノ上駅",
+          "embassyCount": 16,
+          "locatedEmbassyCount": 16,
+          "unlocatedIds": [],
+          "distanceKm": 11.54,
+          "durationMinutes": 154,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-デンマーク",
+              "country": "デンマーク",
+              "embassyName": "デンマーク大使館",
+              "currentDay": 5,
+              "currentOrder": 13,
+              "address": "〒150-0033 東京都渋谷区猿楽町29-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-エジプト",
+              "country": "エジプト",
+              "embassyName": "エジプト大使館",
+              "currentDay": 8,
+              "currentOrder": 18,
+              "address": "〒153-0042 東京都目黒区青葉台1-5-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-セネガル",
+              "country": "セネガル",
+              "embassyName": "セネガル大使館",
+              "currentDay": 8,
+              "currentOrder": 19,
+              "address": "〒153-0042 東京都目黒区青葉台1-3-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ギニア",
+              "country": "ギニア",
+              "embassyName": "ギニア大使館",
+              "currentDay": 5,
+              "currentOrder": 11,
+              "address": "〒150-0035 東京都渋谷区鉢山町12-9",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-UAE",
+              "country": "UAE",
+              "embassyName": "UAE大使館",
+              "currentDay": 5,
+              "currentOrder": 9,
+              "address": "〒150-0036 東京都渋谷区南平台町9-10",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-マレーシア",
+              "country": "マレーシア",
+              "embassyName": "マレーシア大使館",
+              "currentDay": 5,
+              "currentOrder": 10,
+              "address": "〒150-0036 東京都渋谷区南平台町20-16",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-レバノン",
+              "country": "レバノン",
+              "embassyName": "レバノン大使館",
+              "currentDay": 8,
+              "currentOrder": 20,
+              "address": "〒153-0043 東京都目黒区東山2-6-9",
+              "ward": "目黒区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-モンゴル",
+              "country": "モンゴル",
+              "embassyName": "モンゴル大使館",
+              "currentDay": 5,
+              "currentOrder": 5,
+              "address": "〒150-0047 東京都渋谷区神山町21-4",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-ニュージーランド",
+              "country": "ニュージーランド",
+              "embassyName": "ニュージーランド大使館",
+              "currentDay": 5,
+              "currentOrder": 6,
+              "address": "〒150-0047 東京都渋谷区神山町20-40",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-イラク",
+              "country": "イラク",
+              "embassyName": "イラク大使館",
+              "currentDay": 5,
+              "currentOrder": 4,
+              "address": "〒150-0047 東京都渋谷区神山町14-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ヨルダン",
+              "country": "ヨルダン",
+              "embassyName": "ヨルダン大使館",
+              "currentDay": 5,
+              "currentOrder": 8,
+              "address": "〒150-0047 東京都渋谷区神山町39-8",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ラトビア",
+              "country": "ラトビア",
+              "embassyName": "ラトビア大使館",
+              "currentDay": 5,
+              "currentOrder": 7,
+              "address": "〒150-0047 東京都渋谷区神山町37-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ブルガリア",
+              "country": "ブルガリア",
+              "embassyName": "ブルガリア大使館",
+              "currentDay": 5,
+              "currentOrder": 1,
+              "address": "〒151-0053 東京都渋谷区代々木5-36-3",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-ベトナム",
+              "country": "ベトナム",
+              "embassyName": "ベトナム大使館",
+              "currentDay": 5,
+              "currentOrder": 2,
+              "address": "〒151-0062 東京都渋谷区元代々木町50-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ブルキナファソ",
+              "country": "ブルキナファソ",
+              "embassyName": "ブルキナファソ大使館",
+              "currentDay": 5,
+              "currentOrder": 3,
+              "address": "〒151-0065 東京都渋谷区大山町45-24",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-アンゴラ",
+              "country": "アンゴラ",
+              "embassyName": "アンゴラ大使館",
+              "currentDay": 10,
+              "currentOrder": 1,
+              "address": "〒155-0032 東京都世田谷区代沢2-10-24",
+              "ward": "世田谷区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "代官山駅",
+              "to": "デンマーク大使館",
+              "distanceKm": 0.37,
+              "durationMinutes": 5
+            },
+            {
+              "from": "デンマーク大使館",
+              "to": "エジプト大使館",
+              "distanceKm": 0.13,
+              "durationMinutes": 2
+            },
+            {
+              "from": "エジプト大使館",
+              "to": "セネガル大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "セネガル大使館",
+              "to": "ギニア大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ギニア大使館",
+              "to": "UAE大使館",
+              "distanceKm": 0.53,
+              "durationMinutes": 7
+            },
+            {
+              "from": "UAE大使館",
+              "to": "マレーシア大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "マレーシア大使館",
+              "to": "レバノン大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "レバノン大使館",
+              "to": "モンゴル大使館",
+              "distanceKm": 1.69,
+              "durationMinutes": 23
+            },
+            {
+              "from": "モンゴル大使館",
+              "to": "ニュージーランド大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "ニュージーランド大使館",
+              "to": "イラク大使館",
+              "distanceKm": 0.56,
+              "durationMinutes": 8
+            },
+            {
+              "from": "イラク大使館",
+              "to": "ヨルダン大使館",
+              "distanceKm": 0.21,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ヨルダン大使館",
+              "to": "ラトビア大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ラトビア大使館",
+              "to": "ブルガリア大使館",
+              "distanceKm": 1.52,
+              "durationMinutes": 20
+            },
+            {
+              "from": "ブルガリア大使館",
+              "to": "ベトナム大使館",
+              "distanceKm": 0.7,
+              "durationMinutes": 9
+            },
+            {
+              "from": "ベトナム大使館",
+              "to": "ブルキナファソ大使館",
+              "distanceKm": 0.97,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ブルキナファソ大使館",
+              "to": "アンゴラ大使館",
+              "distanceKm": 2.14,
+              "durationMinutes": 28
+            },
+            {
+              "from": "アンゴラ大使館",
+              "to": "池ノ上駅",
+              "distanceKm": 0.43,
+              "durationMinutes": 6
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 11.54,
+            "originalRouteDurationMinutes": 154,
+            "tripDistanceKm": 10.5,
+            "tripDurationMinutes": 140,
+            "tripOrderRouteDistanceKm": 11.79,
+            "tripOrderRouteDurationMinutes": 157,
+            "selectedRouteDistanceKm": 11.54,
+            "selectedRouteDurationMinutes": 154,
+            "pass": true
+          }
+        },
+        {
+          "day": 6,
+          "start": "代官山駅",
+          "goal": "大門駅",
+          "embassyCount": 16,
+          "locatedEmbassyCount": 16,
+          "unlocatedIds": [],
+          "distanceKm": 11.34,
+          "durationMinutes": 151,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-リビア",
+              "country": "リビア",
+              "embassyName": "リビア大使館",
+              "currentDay": 5,
+              "currentOrder": 12,
+              "address": "〒150-0034 東京都渋谷区代官山町10-14",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-トルクメニスタン",
+              "country": "トルクメニスタン",
+              "embassyName": "トルクメニスタン大使館",
+              "currentDay": 5,
+              "currentOrder": 14,
+              "address": "〒150-0011 東京都渋谷区東2-6-14",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ギリシャ",
+              "country": "ギリシャ",
+              "embassyName": "ギリシャ大使館",
+              "currentDay": 6,
+              "currentOrder": 2,
+              "address": "〒106-0031 東京都港区西麻布3-16-30",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ルーマニア",
+              "country": "ルーマニア",
+              "embassyName": "ルーマニア大使館",
+              "currentDay": 6,
+              "currentOrder": 3,
+              "address": "〒106-0031 東京都港区西麻布3-16-19",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-マダガスカル",
+              "country": "マダガスカル",
+              "embassyName": "マダガスカル大使館",
+              "currentDay": 6,
+              "currentOrder": 14,
+              "address": "〒106-0046 東京都港区元麻布2-3-23",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-カタール",
+              "country": "カタール",
+              "embassyName": "カタール大使館",
+              "currentDay": 6,
+              "currentOrder": 15,
+              "address": "〒106-0046 東京都港区元麻布2-3-28",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-リトアニア",
+              "country": "リトアニア",
+              "embassyName": "リトアニア大使館",
+              "currentDay": 6,
+              "currentOrder": 9,
+              "address": "〒106-0046 東京都港区元麻布3-7-18",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-スロバキア",
+              "country": "スロバキア",
+              "embassyName": "スロバキア大使館",
+              "currentDay": 6,
+              "currentOrder": 11,
+              "address": "〒106-0046 東京都港区元麻布2-11-33",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-オーストリア",
+              "country": "オーストリア",
+              "embassyName": "オーストリア大使館",
+              "currentDay": 6,
+              "currentOrder": 16,
+              "address": "〒106-0046 東京都港区元麻布1-1-20",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-パナマ",
+              "country": "パナマ",
+              "embassyName": "パナマ大使館",
+              "currentDay": 7,
+              "currentOrder": 19,
+              "address": "〒106-0032 東京都港区六本木3-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-カザフスタン",
+              "country": "カザフスタン",
+              "embassyName": "カザフスタン大使館",
+              "currentDay": 7,
+              "currentOrder": 4,
+              "address": "〒106-0041 東京都港区麻布台1-8-14",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ナイジェリア",
+              "country": "ナイジェリア",
+              "embassyName": "ナイジェリア大使館",
+              "currentDay": 7,
+              "currentOrder": 3,
+              "address": "〒105-0001 東京都港区虎ノ門3-6-1",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-マルタ",
+              "country": "マルタ",
+              "embassyName": "マルタ大使館",
+              "currentDay": 7,
+              "currentOrder": 2,
+              "address": "〒105-0001 東京都港区虎ノ門4-3-20",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-オランダ",
+              "country": "オランダ",
+              "embassyName": "オランダ大使館",
+              "currentDay": 4,
+              "currentOrder": 3,
+              "address": "〒105-0011 東京都港区芝公園3-6-3",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ボリビア",
+              "country": "ボリビア",
+              "embassyName": "ボリビア大使館",
+              "currentDay": 4,
+              "currentOrder": 5,
+              "address": "〒105-0011 東京都港区芝公園3-4-30",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-ウルグアイ",
+              "country": "ウルグアイ",
+              "embassyName": "ウルグアイ大使館",
+              "currentDay": 4,
+              "currentOrder": 1,
+              "address": "〒105-0012 東京都港区芝大門1-2-1",
+              "ward": "港区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "代官山駅",
+              "to": "リビア大使館",
+              "distanceKm": 0.49,
+              "durationMinutes": 7
+            },
+            {
+              "from": "リビア大使館",
+              "to": "トルクメニスタン大使館",
+              "distanceKm": 0.92,
+              "durationMinutes": 12
+            },
+            {
+              "from": "トルクメニスタン大使館",
+              "to": "ギリシャ大使館",
+              "distanceKm": 1.83,
+              "durationMinutes": 25
+            },
+            {
+              "from": "ギリシャ大使館",
+              "to": "ルーマニア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ルーマニア大使館",
+              "to": "マダガスカル大使館",
+              "distanceKm": 0.63,
+              "durationMinutes": 8
+            },
+            {
+              "from": "マダガスカル大使館",
+              "to": "カタール大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "カタール大使館",
+              "to": "リトアニア大使館",
+              "distanceKm": 0.58,
+              "durationMinutes": 8
+            },
+            {
+              "from": "リトアニア大使館",
+              "to": "スロバキア大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "スロバキア大使館",
+              "to": "オーストリア大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "オーストリア大使館",
+              "to": "パナマ大使館",
+              "distanceKm": 1,
+              "durationMinutes": 13
+            },
+            {
+              "from": "パナマ大使館",
+              "to": "カザフスタン大使館",
+              "distanceKm": 0.72,
+              "durationMinutes": 10
+            },
+            {
+              "from": "カザフスタン大使館",
+              "to": "ナイジェリア大使館",
+              "distanceKm": 0.99,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ナイジェリア大使館",
+              "to": "マルタ大使館",
+              "distanceKm": 0.52,
+              "durationMinutes": 7
+            },
+            {
+              "from": "マルタ大使館",
+              "to": "オランダ大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "オランダ大使館",
+              "to": "ボリビア大使館",
+              "distanceKm": 0.51,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ボリビア大使館",
+              "to": "ウルグアイ大使館",
+              "distanceKm": 0.98,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ウルグアイ大使館",
+              "to": "大門駅",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 11.34,
+            "originalRouteDurationMinutes": 151,
+            "tripDistanceKm": 11.18,
+            "tripDurationMinutes": 149,
+            "tripOrderRouteDistanceKm": 11.46,
+            "tripOrderRouteDurationMinutes": 153,
+            "selectedRouteDistanceKm": 11.34,
+            "selectedRouteDurationMinutes": 151,
+            "pass": true
+          }
+        },
+        {
+          "day": 7,
+          "start": "品川駅",
+          "goal": "六本木一丁目駅",
+          "embassyCount": 16,
+          "locatedEmbassyCount": 16,
+          "unlocatedIds": [],
+          "distanceKm": 10.43,
+          "durationMinutes": 140,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-マラウイ",
+              "country": "マラウイ",
+              "embassyName": "マラウイ大使館",
+              "currentDay": 4,
+              "currentOrder": 15,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-エチオピア",
+              "country": "エチオピア",
+              "embassyName": "エチオピア大使館",
+              "currentDay": 4,
+              "currentOrder": 14,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-タジキスタン",
+              "country": "タジキスタン",
+              "embassyName": "タジキスタン大使館",
+              "currentDay": 8,
+              "currentOrder": 12,
+              "address": "〒141-0021 東京都品川区上大崎1-5-42",
+              "ward": "品川区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-エリトリア",
+              "country": "エリトリア",
+              "embassyName": "エリトリア大使館",
+              "currentDay": 4,
+              "currentOrder": 16,
+              "address": "〒108-0071 東京都港区白金台4-7-4",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ウズベキスタン",
+              "country": "ウズベキスタン",
+              "embassyName": "ウズベキスタン大使館",
+              "currentDay": 4,
+              "currentOrder": 13,
+              "address": "〒108-0074 東京都港区高輪2-1-52",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-スリランカ",
+              "country": "スリランカ",
+              "embassyName": "スリランカ大使館",
+              "currentDay": 4,
+              "currentOrder": 12,
+              "address": "〒108-0074 東京都港区高輪2-1-54",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-クウェート",
+              "country": "クウェート",
+              "embassyName": "クウェート大使館",
+              "currentDay": 4,
+              "currentOrder": 10,
+              "address": "〒108-0073 東京都港区三田4-13-12",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ジンバブエ",
+              "country": "ジンバブエ",
+              "embassyName": "ジンバブエ大使館",
+              "currentDay": 4,
+              "currentOrder": 11,
+              "address": "〒108-0073 東京都港区三田5-4-3",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-ハンガリー",
+              "country": "ハンガリー",
+              "embassyName": "ハンガリー大使館",
+              "currentDay": 4,
+              "currentOrder": 8,
+              "address": "〒108-0073 東京都港区三田2-17-14",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-イタリア",
+              "country": "イタリア",
+              "embassyName": "イタリア大使館",
+              "currentDay": 4,
+              "currentOrder": 9,
+              "address": "〒108-8302 東京都港区三田2-5-4",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-オーストラリア",
+              "country": "オーストラリア",
+              "embassyName": "オーストラリア大使館",
+              "currentDay": 4,
+              "currentOrder": 6,
+              "address": "〒108-8361 東京都港区三田2-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-キルギス",
+              "country": "キルギス",
+              "embassyName": "キルギス大使館",
+              "currentDay": 4,
+              "currentOrder": 7,
+              "address": "〒108-0073 東京都港区三田1-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-パラオ",
+              "country": "パラオ",
+              "embassyName": "パラオ大使館",
+              "currentDay": 7,
+              "currentOrder": 15,
+              "address": "〒106-0044 東京都港区東麻布2-21-11",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-シンガポール",
+              "country": "シンガポール",
+              "embassyName": "シンガポール大使館",
+              "currentDay": 7,
+              "currentOrder": 20,
+              "address": "〒106-0032 東京都港区六本木5-12-3",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-フィリピン",
+              "country": "フィリピン",
+              "embassyName": "フィリピン大使館",
+              "currentDay": 7,
+              "currentOrder": 21,
+              "address": "〒106-8537 東京都港区六本木5-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-サウジアラビア",
+              "country": "サウジアラビア",
+              "embassyName": "サウジアラビア大使館",
+              "currentDay": 7,
+              "currentOrder": 17,
+              "address": "〒106-0032 東京都港区六本木1-8-4",
+              "ward": "港区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "品川駅",
+              "to": "マラウイ大使館",
+              "distanceKm": 0.93,
+              "durationMinutes": 12
+            },
+            {
+              "from": "マラウイ大使館",
+              "to": "エチオピア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "エチオピア大使館",
+              "to": "タジキスタン大使館",
+              "distanceKm": 1.04,
+              "durationMinutes": 14
+            },
+            {
+              "from": "タジキスタン大使館",
+              "to": "エリトリア大使館",
+              "distanceKm": 0.88,
+              "durationMinutes": 12
+            },
+            {
+              "from": "エリトリア大使館",
+              "to": "ウズベキスタン大使館",
+              "distanceKm": 1.27,
+              "durationMinutes": 17
+            },
+            {
+              "from": "ウズベキスタン大使館",
+              "to": "スリランカ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "スリランカ大使館",
+              "to": "クウェート大使館",
+              "distanceKm": 0.85,
+              "durationMinutes": 11
+            },
+            {
+              "from": "クウェート大使館",
+              "to": "ジンバブエ大使館",
+              "distanceKm": 0.79,
+              "durationMinutes": 11
+            },
+            {
+              "from": "ジンバブエ大使館",
+              "to": "ハンガリー大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ハンガリー大使館",
+              "to": "イタリア大使館",
+              "distanceKm": 0.6,
+              "durationMinutes": 8
+            },
+            {
+              "from": "イタリア大使館",
+              "to": "オーストラリア大使館",
+              "distanceKm": 0.68,
+              "durationMinutes": 9
+            },
+            {
+              "from": "オーストラリア大使館",
+              "to": "キルギス大使館",
+              "distanceKm": 0.49,
+              "durationMinutes": 7
+            },
+            {
+              "from": "キルギス大使館",
+              "to": "パラオ大使館",
+              "distanceKm": 0.41,
+              "durationMinutes": 5
+            },
+            {
+              "from": "パラオ大使館",
+              "to": "シンガポール大使館",
+              "distanceKm": 0.77,
+              "durationMinutes": 10
+            },
+            {
+              "from": "シンガポール大使館",
+              "to": "フィリピン大使館",
+              "distanceKm": 0.46,
+              "durationMinutes": 6
+            },
+            {
+              "from": "フィリピン大使館",
+              "to": "サウジアラビア大使館",
+              "distanceKm": 0.76,
+              "durationMinutes": 10
+            },
+            {
+              "from": "サウジアラビア大使館",
+              "to": "六本木一丁目駅",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "trip",
+            "originalRouteDistanceKm": 10.64,
+            "originalRouteDurationMinutes": 142,
+            "tripDistanceKm": 10.1,
+            "tripDurationMinutes": 135,
+            "tripOrderRouteDistanceKm": 10.43,
+            "tripOrderRouteDurationMinutes": 140,
+            "selectedRouteDistanceKm": 10.43,
+            "selectedRouteDurationMinutes": 140,
+            "pass": true
+          }
+        },
+        {
+          "day": 8,
+          "start": "恵比寿駅",
+          "goal": "六本木駅",
+          "embassyCount": 16,
+          "locatedEmbassyCount": 16,
+          "unlocatedIds": [],
+          "distanceKm": 11.04,
+          "durationMinutes": 147,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-ポーランド",
+              "country": "ポーランド",
+              "embassyName": "ポーランド大使館",
+              "currentDay": 8,
+              "currentOrder": 14,
+              "address": "〒153-0062 東京都目黒区三田2-13-5",
+              "ward": "目黒区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-アルジェリア",
+              "country": "アルジェリア",
+              "embassyName": "アルジェリア大使館",
+              "currentDay": 8,
+              "currentOrder": 13,
+              "address": "〒153-0062 東京都目黒区三田2-10-67",
+              "ward": "目黒区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-コロンビア",
+              "country": "コロンビア",
+              "embassyName": "コロンビア大使館",
+              "currentDay": 8,
+              "currentOrder": 10,
+              "address": "〒141-0021 東京都品川区上大崎3-10-53",
+              "ward": "品川区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-マリ",
+              "country": "マリ",
+              "embassyName": "マリ大使館",
+              "currentDay": 8,
+              "currentOrder": 11,
+              "address": "〒141-0021 東京都品川区上大崎3-12-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-タイ",
+              "country": "タイ",
+              "embassyName": "タイ大使館",
+              "currentDay": 8,
+              "currentOrder": 9,
+              "address": "〒141-0021 東京都品川区上大崎3-14-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-コートジボワール",
+              "country": "コートジボワール",
+              "embassyName": "コートジボワール大使館",
+              "currentDay": 8,
+              "currentOrder": 8,
+              "address": "〒141-0021 東京都品川区上大崎3-8-5",
+              "ward": "品川区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-アルゼンチン",
+              "country": "アルゼンチン",
+              "embassyName": "アルゼンチン大使館",
+              "currentDay": 6,
+              "currentOrder": 12,
+              "address": "〒106-0046 東京都港区元麻布2-14-14",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ジャマイカ",
+              "country": "ジャマイカ",
+              "embassyName": "ジャマイカ大使館",
+              "currentDay": 6,
+              "currentOrder": 13,
+              "address": "〒106-0046 東京都港区元麻布2-13-1",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-サンマリノ",
+              "country": "サンマリノ",
+              "embassyName": "サンマリノ大使館",
+              "currentDay": 6,
+              "currentOrder": 10,
+              "address": "〒106-0046 東京都港区元麻布3-5-1",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-中国",
+              "country": "中国",
+              "embassyName": "中国大使館",
+              "currentDay": 6,
+              "currentOrder": 8,
+              "address": "〒106-0046 東京都港区元麻布3-4-33",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ポルトガル",
+              "country": "ポルトガル",
+              "embassyName": "ポルトガル大使館",
+              "currentDay": 6,
+              "currentOrder": 4,
+              "address": "〒106-0031 東京都港区西麻布3-6-6",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ウクライナ",
+              "country": "ウクライナ",
+              "embassyName": "ウクライナ大使館",
+              "currentDay": 6,
+              "currentOrder": 5,
+              "address": "〒106-0031 東京都港区西麻布3-5-31",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ラオス",
+              "country": "ラオス",
+              "embassyName": "ラオス大使館",
+              "currentDay": 6,
+              "currentOrder": 6,
+              "address": "〒106-0031 東京都港区西麻布3-3-22",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-エルサルバドル",
+              "country": "エルサルバドル",
+              "embassyName": "エルサルバドル大使館",
+              "currentDay": 6,
+              "currentOrder": 1,
+              "address": "〒106-0031 東京都港区西麻布3-20-5",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ガーナ",
+              "country": "ガーナ",
+              "embassyName": "ガーナ大使館",
+              "currentDay": 6,
+              "currentOrder": 7,
+              "address": "〒106-0031 東京都港区西麻布1-5-21",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-コスタリカ",
+              "country": "コスタリカ",
+              "embassyName": "コスタリカ大使館",
+              "currentDay": 7,
+              "currentOrder": 22,
+              "address": "〒106-0032 東京都港区六本木6-6-2",
+              "ward": "港区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "恵比寿駅",
+              "to": "ポーランド大使館",
+              "distanceKm": 0.98,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ポーランド大使館",
+              "to": "アルジェリア大使館",
+              "distanceKm": 0.35,
+              "durationMinutes": 5
+            },
+            {
+              "from": "アルジェリア大使館",
+              "to": "コロンビア大使館",
+              "distanceKm": 1.25,
+              "durationMinutes": 17
+            },
+            {
+              "from": "コロンビア大使館",
+              "to": "マリ大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "マリ大使館",
+              "to": "タイ大使館",
+              "distanceKm": 0.84,
+              "durationMinutes": 11
+            },
+            {
+              "from": "タイ大使館",
+              "to": "コートジボワール大使館",
+              "distanceKm": 0.08,
+              "durationMinutes": 1
+            },
+            {
+              "from": "コートジボワール大使館",
+              "to": "アルゼンチン大使館",
+              "distanceKm": 2.92,
+              "durationMinutes": 39
+            },
+            {
+              "from": "アルゼンチン大使館",
+              "to": "ジャマイカ大使館",
+              "distanceKm": 0.18,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ジャマイカ大使館",
+              "to": "サンマリノ大使館",
+              "distanceKm": 0.41,
+              "durationMinutes": 6
+            },
+            {
+              "from": "サンマリノ大使館",
+              "to": "中国大使館",
+              "distanceKm": 0.41,
+              "durationMinutes": 5
+            },
+            {
+              "from": "中国大使館",
+              "to": "ポルトガル大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ポルトガル大使館",
+              "to": "ウクライナ大使館",
+              "distanceKm": 0.21,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ウクライナ大使館",
+              "to": "ラオス大使館",
+              "distanceKm": 0.49,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ラオス大使館",
+              "to": "エルサルバドル大使館",
+              "distanceKm": 0.47,
+              "durationMinutes": 6
+            },
+            {
+              "from": "エルサルバドル大使館",
+              "to": "ガーナ大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ガーナ大使館",
+              "to": "コスタリカ大使館",
+              "distanceKm": 0.75,
+              "durationMinutes": 10
+            },
+            {
+              "from": "コスタリカ大使館",
+              "to": "六本木駅",
+              "distanceKm": 0.67,
+              "durationMinutes": 9
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 11.04,
+            "originalRouteDurationMinutes": 147,
+            "tripDistanceKm": 10.52,
+            "tripDurationMinutes": 140,
+            "tripOrderRouteDistanceKm": 11.04,
+            "tripOrderRouteDurationMinutes": 147,
+            "selectedRouteDistanceKm": 11.04,
+            "selectedRouteDurationMinutes": 147,
+            "pass": true
+          }
+        },
+        {
+          "day": 9,
+          "start": "北品川駅",
+          "goal": "祐天寺駅",
+          "embassyCount": 15,
+          "locatedEmbassyCount": 15,
+          "unlocatedIds": [],
+          "distanceKm": 13.71,
+          "durationMinutes": 184,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-ミャンマー",
+              "country": "ミャンマー",
+              "embassyName": "ミャンマー大使館",
+              "currentDay": 8,
+              "currentOrder": 3,
+              "address": "〒140-0001 東京都品川区北品川4-8-26",
+              "ward": "品川区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ジブチ",
+              "country": "ジブチ",
+              "embassyName": "ジブチ大使館",
+              "currentDay": 8,
+              "currentOrder": 2,
+              "address": "〒141-0001 東京都品川区北品川5-13-1",
+              "ward": "品川区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ブルネイ",
+              "country": "ブルネイ",
+              "embassyName": "ブルネイ大使館",
+              "currentDay": 8,
+              "currentOrder": 1,
+              "address": "〒141-0001 東京都品川区北品川6-5-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アイスランド",
+              "country": "アイスランド",
+              "embassyName": "アイスランド大使館",
+              "currentDay": 4,
+              "currentOrder": 18,
+              "address": "〒108-0074 東京都港区高輪4-18-26",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-セルビア",
+              "country": "セルビア",
+              "embassyName": "セルビア大使館",
+              "currentDay": 4,
+              "currentOrder": 17,
+              "address": "〒108-0074 東京都港区高輪4-16-12",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ボツワナ",
+              "country": "ボツワナ",
+              "embassyName": "ボツワナ大使館",
+              "currentDay": 8,
+              "currentOrder": 7,
+              "address": "〒141-0022 東京都品川区東五反田3-18-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-北マケドニア",
+              "country": "北マケドニア",
+              "embassyName": "北マケドニア大使館",
+              "currentDay": 8,
+              "currentOrder": 4,
+              "address": "〒141-0022 東京都品川区東五反田5-16-17",
+              "ward": "品川区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ベラルーシ",
+              "country": "ベラルーシ",
+              "embassyName": "ベラルーシ大使館",
+              "currentDay": 8,
+              "currentOrder": 5,
+              "address": "〒141-0022 東京都品川区東五反田5-6-32",
+              "ward": "品川区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-インドネシア",
+              "country": "インドネシア",
+              "embassyName": "インドネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 6,
+              "address": "〒141-0022 東京都品川区東五反田5-2-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ザンビア",
+              "country": "ザンビア",
+              "embassyName": "ザンビア大使館",
+              "currentDay": 9,
+              "currentOrder": 6,
+              "address": "〒142-0063 東京都品川区荏原1-10-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-パプアニューギニア",
+              "country": "パプアニューギニア",
+              "embassyName": "パプアニューギニア大使館",
+              "currentDay": 8,
+              "currentOrder": 16,
+              "address": "〒153-0064 東京都目黒区下目黒5-32-20",
+              "ward": "目黒区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ミクロネシア",
+              "country": "ミクロネシア",
+              "embassyName": "ミクロネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 15,
+              "address": "〒153-0063 東京都目黒区目黒4-10-6",
+              "ward": "目黒区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ネパール",
+              "country": "ネパール",
+              "embassyName": "ネパール大使館",
+              "currentDay": 8,
+              "currentOrder": 17,
+              "address": "〒153-0064 東京都目黒区下目黒6-20-28",
+              "ward": "目黒区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-カメルーン",
+              "country": "カメルーン",
+              "embassyName": "カメルーン大使館",
+              "currentDay": 10,
+              "currentOrder": 2,
+              "address": "〒154-0003 東京都世田谷区野沢3-27-16",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-モーリタニア",
+              "country": "モーリタニア",
+              "embassyName": "モーリタニア大使館",
+              "currentDay": 8,
+              "currentOrder": 21,
+              "address": "〒153-0053 東京都目黒区五本木1-16-17",
+              "ward": "目黒区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "北品川駅",
+              "to": "ミャンマー大使館",
+              "distanceKm": 0.59,
+              "durationMinutes": 8
+            },
+            {
+              "from": "ミャンマー大使館",
+              "to": "ジブチ大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ジブチ大使館",
+              "to": "ブルネイ大使館",
+              "distanceKm": 0.44,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ブルネイ大使館",
+              "to": "アイスランド大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "アイスランド大使館",
+              "to": "セルビア大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "セルビア大使館",
+              "to": "ボツワナ大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ボツワナ大使館",
+              "to": "北マケドニア大使館",
+              "distanceKm": 0.97,
+              "durationMinutes": 13
+            },
+            {
+              "from": "北マケドニア大使館",
+              "to": "ベラルーシ大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "ベラルーシ大使館",
+              "to": "インドネシア大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "インドネシア大使館",
+              "to": "ザンビア大使館",
+              "distanceKm": 1.54,
+              "durationMinutes": 21
+            },
+            {
+              "from": "ザンビア大使館",
+              "to": "パプアニューギニア大使館",
+              "distanceKm": 1.62,
+              "durationMinutes": 22
+            },
+            {
+              "from": "パプアニューギニア大使館",
+              "to": "ミクロネシア大使館",
+              "distanceKm": 0.74,
+              "durationMinutes": 10
+            },
+            {
+              "from": "ミクロネシア大使館",
+              "to": "ネパール大使館",
+              "distanceKm": 0.89,
+              "durationMinutes": 12
+            },
+            {
+              "from": "ネパール大使館",
+              "to": "カメルーン大使館",
+              "distanceKm": 2.46,
+              "durationMinutes": 33
+            },
+            {
+              "from": "カメルーン大使館",
+              "to": "モーリタニア大使館",
+              "distanceKm": 1.77,
+              "durationMinutes": 24
+            },
+            {
+              "from": "モーリタニア大使館",
+              "to": "祐天寺駅",
+              "distanceKm": 0.43,
+              "durationMinutes": 6
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 13.71,
+            "originalRouteDurationMinutes": 184,
+            "tripDistanceKm": 13.32,
+            "tripDurationMinutes": 178,
+            "tripOrderRouteDistanceKm": 13.71,
+            "tripOrderRouteDurationMinutes": 184,
+            "selectedRouteDistanceKm": 13.71,
+            "selectedRouteDurationMinutes": 184,
+            "pass": true
+          }
+        },
+        {
+          "day": 10,
+          "start": "用賀駅",
+          "goal": "田園調布駅",
+          "embassyCount": 11,
+          "locatedEmbassyCount": 10,
+          "unlocatedIds": [
+            "embassy-アフガニスタン"
+          ],
+          "distanceKm": 14.59,
+          "durationMinutes": 195,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-タンザニア",
+              "country": "タンザニア",
+              "embassyName": "タンザニア大使館",
+              "currentDay": 10,
+              "currentOrder": 4,
+              "address": "〒158-0098 東京都世田谷区上用賀4-21-9",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-モザンビーク",
+              "country": "モザンビーク",
+              "embassyName": "モザンビーク大使館",
+              "currentDay": 10,
+              "currentOrder": 3,
+              "address": "〒154-0015 東京都世田谷区桜新町1-33-14",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ガボン",
+              "country": "ガボン",
+              "embassyName": "ガボン大使館",
+              "currentDay": 9,
+              "currentOrder": 5,
+              "address": "〒152-0021 東京都目黒区東が丘1-34-11",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アゼルバイジャン",
+              "country": "アゼルバイジャン",
+              "embassyName": "アゼルバイジャン大使館",
+              "currentDay": 9,
+              "currentOrder": 4,
+              "address": "〒152-0021 東京都目黒区東が丘1-19-15",
+              "ward": "目黒区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-スーダン",
+              "country": "スーダン",
+              "embassyName": "スーダン大使館",
+              "currentDay": 9,
+              "currentOrder": 3,
+              "address": "〒152-0023 東京都目黒区八雲4-7-1",
+              "ward": "目黒区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-トーゴ",
+              "country": "トーゴ",
+              "embassyName": "トーゴ大使館",
+              "currentDay": 9,
+              "currentOrder": 1,
+              "address": "〒152-0023 東京都目黒区八雲2-2-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ケニア",
+              "country": "ケニア",
+              "embassyName": "ケニア大使館",
+              "currentDay": 9,
+              "currentOrder": 2,
+              "address": "〒152-0023 東京都目黒区八雲3-24-3",
+              "ward": "目黒区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ルワンダ",
+              "country": "ルワンダ",
+              "embassyName": "ルワンダ大使館",
+              "currentDay": 10,
+              "currentOrder": 5,
+              "address": "〒158-0081 東京都世田谷区深沢1-17-17",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-マーシャル諸島",
+              "country": "マーシャル諸島",
+              "embassyName": "マーシャル諸島大使館",
+              "currentDay": 10,
+              "currentOrder": 6,
+              "address": "〒158-0082 東京都世田谷区等々力8-2-22",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-コンゴ共和国",
+              "country": "コンゴ共和国",
+              "embassyName": "コンゴ共和国大使館",
+              "currentDay": 10,
+              "currentOrder": 7,
+              "address": "〒145-0071 東京都大田区田園調布3-16-4",
+              "ward": "大田区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "用賀駅",
+              "to": "タンザニア大使館",
+              "distanceKm": 1.36,
+              "durationMinutes": 18
+            },
+            {
+              "from": "タンザニア大使館",
+              "to": "モザンビーク大使館",
+              "distanceKm": 2.35,
+              "durationMinutes": 31
+            },
+            {
+              "from": "モザンビーク大使館",
+              "to": "ガボン大使館",
+              "distanceKm": 2.49,
+              "durationMinutes": 33
+            },
+            {
+              "from": "ガボン大使館",
+              "to": "アゼルバイジャン大使館",
+              "distanceKm": 0.71,
+              "durationMinutes": 9
+            },
+            {
+              "from": "アゼルバイジャン大使館",
+              "to": "スーダン大使館",
+              "distanceKm": 0.57,
+              "durationMinutes": 8
+            },
+            {
+              "from": "スーダン大使館",
+              "to": "トーゴ大使館",
+              "distanceKm": 0.59,
+              "durationMinutes": 8
+            },
+            {
+              "from": "トーゴ大使館",
+              "to": "ケニア大使館",
+              "distanceKm": 1.15,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ケニア大使館",
+              "to": "ルワンダ大使館",
+              "distanceKm": 0.73,
+              "durationMinutes": 10
+            },
+            {
+              "from": "ルワンダ大使館",
+              "to": "マーシャル諸島大使館",
+              "distanceKm": 1.18,
+              "durationMinutes": 16
+            },
+            {
+              "from": "マーシャル諸島大使館",
+              "to": "コンゴ共和国大使館",
+              "distanceKm": 2.93,
+              "durationMinutes": 39
+            },
+            {
+              "from": "コンゴ共和国大使館",
+              "to": "田園調布駅",
+              "distanceKm": 0.54,
+              "durationMinutes": 7
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 14.59,
+            "originalRouteDurationMinutes": 195,
+            "tripDistanceKm": 14.59,
+            "tripDurationMinutes": 195,
+            "tripOrderRouteDistanceKm": 14.81,
+            "tripOrderRouteDurationMinutes": 198,
+            "selectedRouteDistanceKm": 14.59,
+            "selectedRouteDurationMinutes": 195,
+            "pass": true
+          }
+        }
+      ]
+    },
+    "B": {
+      "label": "Balanced",
+      "optimizationScore": 8263.74333333331,
+      "totalDistanceKm": 88.13,
+      "totalDurationMinutes": 1176,
+      "averageDurationMinutes": 168,
+      "maxDurationMinutes": 189,
+      "minDurationMinutes": 144,
+      "durationRangeMinutes": 45,
+      "maxEmbassyCount": 17,
+      "minEmbassyCount": 10,
+      "embassyCountRange": 7,
+      "over200Days": [],
+      "atLeast20EmbassyDays": [],
+      "sensitivity": {
+        "visit3Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 230
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 215
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 202
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 195
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 219
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 214
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 219
+          }
+        ],
+        "visit5Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 260
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 249
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 236
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 229
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 253
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 240
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 239
+          }
+        ]
+      },
+      "days": [
+        {
+          "day": 4,
+          "start": "赤羽橋駅",
+          "goal": "後楽園駅",
+          "embassyCount": 15,
+          "locatedEmbassyCount": 15,
+          "unlocatedIds": [],
+          "distanceKm": 13.85,
+          "durationMinutes": 185,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-キューバ",
+              "country": "キューバ",
+              "embassyName": "キューバ大使館",
+              "currentDay": 7,
+              "currentOrder": 14,
+              "address": "〒106-0044 東京都港区東麻布1-28-4",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ハイチ",
+              "country": "ハイチ",
+              "embassyName": "ハイチ大使館",
+              "currentDay": 7,
+              "currentOrder": 13,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ホンジュラス",
+              "country": "ホンジュラス",
+              "embassyName": "ホンジュラス大使館",
+              "currentDay": 7,
+              "currentOrder": 12,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-パラオ",
+              "country": "パラオ",
+              "embassyName": "パラオ大使館",
+              "currentDay": 7,
+              "currentOrder": 15,
+              "address": "〒106-0044 東京都港区東麻布2-21-11",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-サモア",
+              "country": "サモア",
+              "embassyName": "サモア大使館",
+              "currentDay": 7,
+              "currentOrder": 8,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ナミビア",
+              "country": "ナミビア",
+              "embassyName": "ナミビア大使館",
+              "currentDay": 7,
+              "currentOrder": 10,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-エクアドル",
+              "country": "エクアドル",
+              "embassyName": "エクアドル大使館",
+              "currentDay": 7,
+              "currentOrder": 9,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-カザフスタン",
+              "country": "カザフスタン",
+              "embassyName": "カザフスタン大使館",
+              "currentDay": 7,
+              "currentOrder": 4,
+              "address": "〒106-0041 東京都港区麻布台1-8-14",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-トンガ",
+              "country": "トンガ",
+              "embassyName": "トンガ大使館",
+              "currentDay": 7,
+              "currentOrder": 5,
+              "address": "〒106-0041 東京都港区麻布台1-9-10",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ナイジェリア",
+              "country": "ナイジェリア",
+              "embassyName": "ナイジェリア大使館",
+              "currentDay": 7,
+              "currentOrder": 3,
+              "address": "〒105-0001 東京都港区虎ノ門3-6-1",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-コソボ",
+              "country": "コソボ",
+              "embassyName": "コソボ大使館",
+              "currentDay": 7,
+              "currentOrder": 1,
+              "address": "〒105-0003 東京都港区西新橋3-13-7",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-モーリシャス",
+              "country": "モーリシャス",
+              "embassyName": "モーリシャス大使館",
+              "currentDay": 9,
+              "currentOrder": 8,
+              "address": "〒104-0045 東京都中央区築地6-25-10",
+              "ward": "中央区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-アルバニア",
+              "country": "アルバニア",
+              "embassyName": "アルバニア大使館",
+              "currentDay": 9,
+              "currentOrder": 7,
+              "address": "〒104-0045 東京都中央区築地6-4-8",
+              "ward": "中央区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-ベネズエラ",
+              "country": "ベネズエラ",
+              "embassyName": "ベネズエラ大使館",
+              "currentDay": 9,
+              "currentOrder": 9,
+              "address": "〒104-0042 東京都中央区入船2-7-4",
+              "ward": "中央区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ベナン",
+              "country": "ベナン",
+              "embassyName": "ベナン大使館",
+              "currentDay": 9,
+              "currentOrder": 10,
+              "address": "〒112-0003 東京都文京区春日1-11-14",
+              "ward": "文京区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "赤羽橋駅",
+              "to": "キューバ大使館",
+              "distanceKm": 0.08,
+              "durationMinutes": 1
+            },
+            {
+              "from": "キューバ大使館",
+              "to": "ハイチ大使館",
+              "distanceKm": 0.32,
+              "durationMinutes": 4
+            },
+            {
+              "from": "ハイチ大使館",
+              "to": "ホンジュラス大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ホンジュラス大使館",
+              "to": "パラオ大使館",
+              "distanceKm": 0.41,
+              "durationMinutes": 6
+            },
+            {
+              "from": "パラオ大使館",
+              "to": "サモア大使館",
+              "distanceKm": 0.61,
+              "durationMinutes": 8
+            },
+            {
+              "from": "サモア大使館",
+              "to": "ナミビア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ナミビア大使館",
+              "to": "エクアドル大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "エクアドル大使館",
+              "to": "カザフスタン大使館",
+              "distanceKm": 0.21,
+              "durationMinutes": 3
+            },
+            {
+              "from": "カザフスタン大使館",
+              "to": "トンガ大使館",
+              "distanceKm": 0.07,
+              "durationMinutes": 1
+            },
+            {
+              "from": "トンガ大使館",
+              "to": "ナイジェリア大使館",
+              "distanceKm": 0.92,
+              "durationMinutes": 12
+            },
+            {
+              "from": "ナイジェリア大使館",
+              "to": "コソボ大使館",
+              "distanceKm": 0.73,
+              "durationMinutes": 10
+            },
+            {
+              "from": "コソボ大使館",
+              "to": "モーリシャス大使館",
+              "distanceKm": 2.39,
+              "durationMinutes": 32
+            },
+            {
+              "from": "モーリシャス大使館",
+              "to": "アルバニア大使館",
+              "distanceKm": 0.11,
+              "durationMinutes": 1
+            },
+            {
+              "from": "アルバニア大使館",
+              "to": "ベネズエラ大使館",
+              "distanceKm": 1.13,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ベネズエラ大使館",
+              "to": "ベナン大使館",
+              "distanceKm": 6.13,
+              "durationMinutes": 82
+            },
+            {
+              "from": "ベナン大使館",
+              "to": "後楽園駅",
+              "distanceKm": 0.75,
+              "durationMinutes": 10
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 13.85,
+            "originalRouteDurationMinutes": 185,
+            "tripDistanceKm": 13.46,
+            "tripDurationMinutes": 180,
+            "tripOrderRouteDistanceKm": 13.85,
+            "tripOrderRouteDurationMinutes": 185,
+            "selectedRouteDistanceKm": 13.85,
+            "selectedRouteDurationMinutes": 185,
+            "pass": true
+          }
+        },
+        {
+          "day": 5,
+          "start": "池ノ上駅",
+          "goal": "代官山駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 12.3,
+          "durationMinutes": 164,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-アンゴラ",
+              "country": "アンゴラ",
+              "embassyName": "アンゴラ大使館",
+              "currentDay": 10,
+              "currentOrder": 1,
+              "address": "〒155-0032 東京都世田谷区代沢2-10-24",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ブルキナファソ",
+              "country": "ブルキナファソ",
+              "embassyName": "ブルキナファソ大使館",
+              "currentDay": 5,
+              "currentOrder": 3,
+              "address": "〒151-0065 東京都渋谷区大山町45-24",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ベトナム",
+              "country": "ベトナム",
+              "embassyName": "ベトナム大使館",
+              "currentDay": 5,
+              "currentOrder": 2,
+              "address": "〒151-0062 東京都渋谷区元代々木町50-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ブルガリア",
+              "country": "ブルガリア",
+              "embassyName": "ブルガリア大使館",
+              "currentDay": 5,
+              "currentOrder": 1,
+              "address": "〒151-0053 東京都渋谷区代々木5-36-3",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ラトビア",
+              "country": "ラトビア",
+              "embassyName": "ラトビア大使館",
+              "currentDay": 5,
+              "currentOrder": 7,
+              "address": "〒150-0047 東京都渋谷区神山町37-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ヨルダン",
+              "country": "ヨルダン",
+              "embassyName": "ヨルダン大使館",
+              "currentDay": 5,
+              "currentOrder": 8,
+              "address": "〒150-0047 東京都渋谷区神山町39-8",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-イラク",
+              "country": "イラク",
+              "embassyName": "イラク大使館",
+              "currentDay": 5,
+              "currentOrder": 4,
+              "address": "〒150-0047 東京都渋谷区神山町14-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ニュージーランド",
+              "country": "ニュージーランド",
+              "embassyName": "ニュージーランド大使館",
+              "currentDay": 5,
+              "currentOrder": 6,
+              "address": "〒150-0047 東京都渋谷区神山町20-40",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-モンゴル",
+              "country": "モンゴル",
+              "embassyName": "モンゴル大使館",
+              "currentDay": 5,
+              "currentOrder": 5,
+              "address": "〒150-0047 東京都渋谷区神山町21-4",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-レバノン",
+              "country": "レバノン",
+              "embassyName": "レバノン大使館",
+              "currentDay": 8,
+              "currentOrder": 20,
+              "address": "〒153-0043 東京都目黒区東山2-6-9",
+              "ward": "目黒区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-マレーシア",
+              "country": "マレーシア",
+              "embassyName": "マレーシア大使館",
+              "currentDay": 5,
+              "currentOrder": 10,
+              "address": "〒150-0036 東京都渋谷区南平台町20-16",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-UAE",
+              "country": "UAE",
+              "embassyName": "UAE大使館",
+              "currentDay": 5,
+              "currentOrder": 9,
+              "address": "〒150-0036 東京都渋谷区南平台町9-10",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ギニア",
+              "country": "ギニア",
+              "embassyName": "ギニア大使館",
+              "currentDay": 5,
+              "currentOrder": 11,
+              "address": "〒150-0035 東京都渋谷区鉢山町12-9",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-セネガル",
+              "country": "セネガル",
+              "embassyName": "セネガル大使館",
+              "currentDay": 8,
+              "currentOrder": 19,
+              "address": "〒153-0042 東京都目黒区青葉台1-3-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-エジプト",
+              "country": "エジプト",
+              "embassyName": "エジプト大使館",
+              "currentDay": 8,
+              "currentOrder": 18,
+              "address": "〒153-0042 東京都目黒区青葉台1-5-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-デンマーク",
+              "country": "デンマーク",
+              "embassyName": "デンマーク大使館",
+              "currentDay": 5,
+              "currentOrder": 13,
+              "address": "〒150-0033 東京都渋谷区猿楽町29-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-リビア",
+              "country": "リビア",
+              "embassyName": "リビア大使館",
+              "currentDay": 5,
+              "currentOrder": 12,
+              "address": "〒150-0034 東京都渋谷区代官山町10-14",
+              "ward": "渋谷区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "池ノ上駅",
+              "to": "アンゴラ大使館",
+              "distanceKm": 0.43,
+              "durationMinutes": 6
+            },
+            {
+              "from": "アンゴラ大使館",
+              "to": "ブルキナファソ大使館",
+              "distanceKm": 2.14,
+              "durationMinutes": 28
+            },
+            {
+              "from": "ブルキナファソ大使館",
+              "to": "ベトナム大使館",
+              "distanceKm": 0.97,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ベトナム大使館",
+              "to": "ブルガリア大使館",
+              "distanceKm": 0.69,
+              "durationMinutes": 9
+            },
+            {
+              "from": "ブルガリア大使館",
+              "to": "ラトビア大使館",
+              "distanceKm": 1.52,
+              "durationMinutes": 20
+            },
+            {
+              "from": "ラトビア大使館",
+              "to": "ヨルダン大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ヨルダン大使館",
+              "to": "イラク大使館",
+              "distanceKm": 0.21,
+              "durationMinutes": 3
+            },
+            {
+              "from": "イラク大使館",
+              "to": "ニュージーランド大使館",
+              "distanceKm": 0.56,
+              "durationMinutes": 8
+            },
+            {
+              "from": "ニュージーランド大使館",
+              "to": "モンゴル大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "モンゴル大使館",
+              "to": "レバノン大使館",
+              "distanceKm": 1.69,
+              "durationMinutes": 23
+            },
+            {
+              "from": "レバノン大使館",
+              "to": "マレーシア大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "マレーシア大使館",
+              "to": "UAE大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "UAE大使館",
+              "to": "ギニア大使館",
+              "distanceKm": 0.53,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ギニア大使館",
+              "to": "セネガル大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "セネガル大使館",
+              "to": "エジプト大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "エジプト大使館",
+              "to": "デンマーク大使館",
+              "distanceKm": 0.13,
+              "durationMinutes": 2
+            },
+            {
+              "from": "デンマーク大使館",
+              "to": "リビア大使館",
+              "distanceKm": 0.65,
+              "durationMinutes": 9
+            },
+            {
+              "from": "リビア大使館",
+              "to": "代官山駅",
+              "distanceKm": 0.49,
+              "durationMinutes": 7
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 12.3,
+            "originalRouteDurationMinutes": 164,
+            "tripDistanceKm": 11.24,
+            "tripDurationMinutes": 150,
+            "tripOrderRouteDistanceKm": 12.48,
+            "tripOrderRouteDurationMinutes": 167,
+            "selectedRouteDistanceKm": 12.3,
+            "selectedRouteDurationMinutes": 164,
+            "pass": true
+          }
+        },
+        {
+          "day": 6,
+          "start": "赤羽橋駅",
+          "goal": "恵比寿駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 11.34,
+          "durationMinutes": 151,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-グアテマラ",
+              "country": "グアテマラ",
+              "embassyName": "グアテマラ大使館",
+              "currentDay": 7,
+              "currentOrder": 11,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ロシア",
+              "country": "ロシア",
+              "embassyName": "ロシア大使館",
+              "currentDay": 7,
+              "currentOrder": 6,
+              "address": "〒106-0041 東京都港区麻布台2-1-1",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-フィジー",
+              "country": "フィジー",
+              "embassyName": "フィジー大使館",
+              "currentDay": 7,
+              "currentOrder": 7,
+              "address": "〒106-0041 東京都港区麻布台2-3-5",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ボリビア",
+              "country": "ボリビア",
+              "embassyName": "ボリビア大使館",
+              "currentDay": 4,
+              "currentOrder": 5,
+              "address": "〒105-0011 東京都港区芝公園3-4-30",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-チリ",
+              "country": "チリ",
+              "embassyName": "チリ大使館",
+              "currentDay": 4,
+              "currentOrder": 2,
+              "address": "〒105-0014 東京都港区芝3-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-イタリア",
+              "country": "イタリア",
+              "embassyName": "イタリア大使館",
+              "currentDay": 4,
+              "currentOrder": 9,
+              "address": "〒108-8302 東京都港区三田2-5-4",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-キルギス",
+              "country": "キルギス",
+              "embassyName": "キルギス大使館",
+              "currentDay": 4,
+              "currentOrder": 7,
+              "address": "〒108-0073 東京都港区三田1-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-シンガポール",
+              "country": "シンガポール",
+              "embassyName": "シンガポール大使館",
+              "currentDay": 7,
+              "currentOrder": 20,
+              "address": "〒106-0032 東京都港区六本木5-12-3",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-オーストリア",
+              "country": "オーストリア",
+              "embassyName": "オーストリア大使館",
+              "currentDay": 6,
+              "currentOrder": 16,
+              "address": "〒106-0046 東京都港区元麻布1-1-20",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-リトアニア",
+              "country": "リトアニア",
+              "embassyName": "リトアニア大使館",
+              "currentDay": 6,
+              "currentOrder": 9,
+              "address": "〒106-0046 東京都港区元麻布3-7-18",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-サンマリノ",
+              "country": "サンマリノ",
+              "embassyName": "サンマリノ大使館",
+              "currentDay": 6,
+              "currentOrder": 10,
+              "address": "〒106-0046 東京都港区元麻布3-5-1",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-中国",
+              "country": "中国",
+              "embassyName": "中国大使館",
+              "currentDay": 6,
+              "currentOrder": 8,
+              "address": "〒106-0046 東京都港区元麻布3-4-33",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ポルトガル",
+              "country": "ポルトガル",
+              "embassyName": "ポルトガル大使館",
+              "currentDay": 6,
+              "currentOrder": 4,
+              "address": "〒106-0031 東京都港区西麻布3-6-6",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-ラオス",
+              "country": "ラオス",
+              "embassyName": "ラオス大使館",
+              "currentDay": 6,
+              "currentOrder": 6,
+              "address": "〒106-0031 東京都港区西麻布3-3-22",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-コスタリカ",
+              "country": "コスタリカ",
+              "embassyName": "コスタリカ大使館",
+              "currentDay": 7,
+              "currentOrder": 22,
+              "address": "〒106-0032 東京都港区六本木6-6-2",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-ガーナ",
+              "country": "ガーナ",
+              "embassyName": "ガーナ大使館",
+              "currentDay": 6,
+              "currentOrder": 7,
+              "address": "〒106-0031 東京都港区西麻布1-5-21",
+              "ward": "港区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-トルクメニスタン",
+              "country": "トルクメニスタン",
+              "embassyName": "トルクメニスタン大使館",
+              "currentDay": 5,
+              "currentOrder": 14,
+              "address": "〒150-0011 東京都渋谷区東2-6-14",
+              "ward": "渋谷区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "赤羽橋駅",
+              "to": "グアテマラ大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "グアテマラ大使館",
+              "to": "ロシア大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ロシア大使館",
+              "to": "フィジー大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "フィジー大使館",
+              "to": "ボリビア大使館",
+              "distanceKm": 0.46,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ボリビア大使館",
+              "to": "チリ大使館",
+              "distanceKm": 0.63,
+              "durationMinutes": 8
+            },
+            {
+              "from": "チリ大使館",
+              "to": "イタリア大使館",
+              "distanceKm": 0.75,
+              "durationMinutes": 10
+            },
+            {
+              "from": "イタリア大使館",
+              "to": "キルギス大使館",
+              "distanceKm": 0.47,
+              "durationMinutes": 6
+            },
+            {
+              "from": "キルギス大使館",
+              "to": "シンガポール大使館",
+              "distanceKm": 1,
+              "durationMinutes": 13
+            },
+            {
+              "from": "シンガポール大使館",
+              "to": "オーストリア大使館",
+              "distanceKm": 0.63,
+              "durationMinutes": 8
+            },
+            {
+              "from": "オーストリア大使館",
+              "to": "リトアニア大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "リトアニア大使館",
+              "to": "サンマリノ大使館",
+              "distanceKm": 0.25,
+              "durationMinutes": 3
+            },
+            {
+              "from": "サンマリノ大使館",
+              "to": "中国大使館",
+              "distanceKm": 0.45,
+              "durationMinutes": 6
+            },
+            {
+              "from": "中国大使館",
+              "to": "ポルトガル大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ポルトガル大使館",
+              "to": "ラオス大使館",
+              "distanceKm": 0.35,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ラオス大使館",
+              "to": "コスタリカ大使館",
+              "distanceKm": 0.78,
+              "durationMinutes": 10
+            },
+            {
+              "from": "コスタリカ大使館",
+              "to": "ガーナ大使館",
+              "distanceKm": 0.8,
+              "durationMinutes": 11
+            },
+            {
+              "from": "ガーナ大使館",
+              "to": "トルクメニスタン大使館",
+              "distanceKm": 2.02,
+              "durationMinutes": 27
+            },
+            {
+              "from": "トルクメニスタン大使館",
+              "to": "恵比寿駅",
+              "distanceKm": 1.09,
+              "durationMinutes": 15
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 11.34,
+            "originalRouteDurationMinutes": 151,
+            "tripDistanceKm": 11,
+            "tripDurationMinutes": 147,
+            "tripOrderRouteDistanceKm": 11.42,
+            "tripOrderRouteDurationMinutes": 153,
+            "selectedRouteDistanceKm": 11.34,
+            "selectedRouteDurationMinutes": 151,
+            "pass": true
+          }
+        },
+        {
+          "day": 7,
+          "start": "田町駅",
+          "goal": "大門駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 10.81,
+          "durationMinutes": 144,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-クウェート",
+              "country": "クウェート",
+              "embassyName": "クウェート大使館",
+              "currentDay": 4,
+              "currentOrder": 10,
+              "address": "〒108-0073 東京都港区三田4-13-12",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ウズベキスタン",
+              "country": "ウズベキスタン",
+              "embassyName": "ウズベキスタン大使館",
+              "currentDay": 4,
+              "currentOrder": 13,
+              "address": "〒108-0074 東京都港区高輪2-1-52",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-スリランカ",
+              "country": "スリランカ",
+              "embassyName": "スリランカ大使館",
+              "currentDay": 4,
+              "currentOrder": 12,
+              "address": "〒108-0074 東京都港区高輪2-1-54",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アルゼンチン",
+              "country": "アルゼンチン",
+              "embassyName": "アルゼンチン大使館",
+              "currentDay": 6,
+              "currentOrder": 12,
+              "address": "〒106-0046 東京都港区元麻布2-14-14",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ジャマイカ",
+              "country": "ジャマイカ",
+              "embassyName": "ジャマイカ大使館",
+              "currentDay": 6,
+              "currentOrder": 13,
+              "address": "〒106-0046 東京都港区元麻布2-13-1",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-スロバキア",
+              "country": "スロバキア",
+              "embassyName": "スロバキア大使館",
+              "currentDay": 6,
+              "currentOrder": 11,
+              "address": "〒106-0046 東京都港区元麻布2-11-33",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-マダガスカル",
+              "country": "マダガスカル",
+              "embassyName": "マダガスカル大使館",
+              "currentDay": 6,
+              "currentOrder": 14,
+              "address": "〒106-0046 東京都港区元麻布2-3-23",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-カタール",
+              "country": "カタール",
+              "embassyName": "カタール大使館",
+              "currentDay": 6,
+              "currentOrder": 15,
+              "address": "〒106-0046 東京都港区元麻布2-3-28",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-ウクライナ",
+              "country": "ウクライナ",
+              "embassyName": "ウクライナ大使館",
+              "currentDay": 6,
+              "currentOrder": 5,
+              "address": "〒106-0031 東京都港区西麻布3-5-31",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ルーマニア",
+              "country": "ルーマニア",
+              "embassyName": "ルーマニア大使館",
+              "currentDay": 6,
+              "currentOrder": 3,
+              "address": "〒106-0031 東京都港区西麻布3-16-19",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ギリシャ",
+              "country": "ギリシャ",
+              "embassyName": "ギリシャ大使館",
+              "currentDay": 6,
+              "currentOrder": 2,
+              "address": "〒106-0031 東京都港区西麻布3-16-30",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-エルサルバドル",
+              "country": "エルサルバドル",
+              "embassyName": "エルサルバドル大使館",
+              "currentDay": 6,
+              "currentOrder": 1,
+              "address": "〒106-0031 東京都港区西麻布3-20-5",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-パナマ",
+              "country": "パナマ",
+              "embassyName": "パナマ大使館",
+              "currentDay": 7,
+              "currentOrder": 19,
+              "address": "〒106-0032 東京都港区六本木3-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-サウジアラビア",
+              "country": "サウジアラビア",
+              "embassyName": "サウジアラビア大使館",
+              "currentDay": 7,
+              "currentOrder": 17,
+              "address": "〒106-0032 東京都港区六本木1-8-4",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-マルタ",
+              "country": "マルタ",
+              "embassyName": "マルタ大使館",
+              "currentDay": 7,
+              "currentOrder": 2,
+              "address": "〒105-0001 東京都港区虎ノ門4-3-20",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-オランダ",
+              "country": "オランダ",
+              "embassyName": "オランダ大使館",
+              "currentDay": 4,
+              "currentOrder": 3,
+              "address": "〒105-0011 東京都港区芝公園3-6-3",
+              "ward": "港区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-ウルグアイ",
+              "country": "ウルグアイ",
+              "embassyName": "ウルグアイ大使館",
+              "currentDay": 4,
+              "currentOrder": 1,
+              "address": "〒105-0012 東京都港区芝大門1-2-1",
+              "ward": "港区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "田町駅",
+              "to": "クウェート大使館",
+              "distanceKm": 0.87,
+              "durationMinutes": 12
+            },
+            {
+              "from": "クウェート大使館",
+              "to": "ウズベキスタン大使館",
+              "distanceKm": 0.83,
+              "durationMinutes": 11
+            },
+            {
+              "from": "ウズベキスタン大使館",
+              "to": "スリランカ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "スリランカ大使館",
+              "to": "アルゼンチン大使館",
+              "distanceKm": 2.07,
+              "durationMinutes": 28
+            },
+            {
+              "from": "アルゼンチン大使館",
+              "to": "ジャマイカ大使館",
+              "distanceKm": 0.18,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ジャマイカ大使館",
+              "to": "スロバキア大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "スロバキア大使館",
+              "to": "マダガスカル大使館",
+              "distanceKm": 0.69,
+              "durationMinutes": 9
+            },
+            {
+              "from": "マダガスカル大使館",
+              "to": "カタール大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "カタール大使館",
+              "to": "ウクライナ大使館",
+              "distanceKm": 0.45,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ウクライナ大使館",
+              "to": "ルーマニア大使館",
+              "distanceKm": 0.2,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ルーマニア大使館",
+              "to": "ギリシャ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ギリシャ大使館",
+              "to": "エルサルバドル大使館",
+              "distanceKm": 0.52,
+              "durationMinutes": 7
+            },
+            {
+              "from": "エルサルバドル大使館",
+              "to": "パナマ大使館",
+              "distanceKm": 1.01,
+              "durationMinutes": 13
+            },
+            {
+              "from": "パナマ大使館",
+              "to": "サウジアラビア大使館",
+              "distanceKm": 0.56,
+              "durationMinutes": 8
+            },
+            {
+              "from": "サウジアラビア大使館",
+              "to": "マルタ大使館",
+              "distanceKm": 0.61,
+              "durationMinutes": 8
+            },
+            {
+              "from": "マルタ大使館",
+              "to": "オランダ大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "オランダ大使館",
+              "to": "ウルグアイ大使館",
+              "distanceKm": 1.32,
+              "durationMinutes": 18
+            },
+            {
+              "from": "ウルグアイ大使館",
+              "to": "大門駅",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 10.81,
+            "originalRouteDurationMinutes": 144,
+            "tripDistanceKm": 10.64,
+            "tripDurationMinutes": 142,
+            "tripOrderRouteDistanceKm": 10.81,
+            "tripOrderRouteDurationMinutes": 144,
+            "selectedRouteDistanceKm": 10.81,
+            "selectedRouteDurationMinutes": 144,
+            "pass": true
+          }
+        },
+        {
+          "day": 8,
+          "start": "麻布十番駅",
+          "goal": "恵比寿駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 12.6,
+          "durationMinutes": 168,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-フィリピン",
+              "country": "フィリピン",
+              "embassyName": "フィリピン大使館",
+              "currentDay": 7,
+              "currentOrder": 21,
+              "address": "〒106-8537 東京都港区六本木5-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-オーストラリア",
+              "country": "オーストラリア",
+              "embassyName": "オーストラリア大使館",
+              "currentDay": 4,
+              "currentOrder": 6,
+              "address": "〒108-8361 東京都港区三田2-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ハンガリー",
+              "country": "ハンガリー",
+              "embassyName": "ハンガリー大使館",
+              "currentDay": 4,
+              "currentOrder": 8,
+              "address": "〒108-0073 東京都港区三田2-17-14",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ジンバブエ",
+              "country": "ジンバブエ",
+              "embassyName": "ジンバブエ大使館",
+              "currentDay": 4,
+              "currentOrder": 11,
+              "address": "〒108-0073 東京都港区三田5-4-3",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-マラウイ",
+              "country": "マラウイ",
+              "embassyName": "マラウイ大使館",
+              "currentDay": 4,
+              "currentOrder": 15,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-エチオピア",
+              "country": "エチオピア",
+              "embassyName": "エチオピア大使館",
+              "currentDay": 4,
+              "currentOrder": 14,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-エリトリア",
+              "country": "エリトリア",
+              "embassyName": "エリトリア大使館",
+              "currentDay": 4,
+              "currentOrder": 16,
+              "address": "〒108-0071 東京都港区白金台4-7-4",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-タジキスタン",
+              "country": "タジキスタン",
+              "embassyName": "タジキスタン大使館",
+              "currentDay": 8,
+              "currentOrder": 12,
+              "address": "〒141-0021 東京都品川区上大崎1-5-42",
+              "ward": "品川区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-インドネシア",
+              "country": "インドネシア",
+              "embassyName": "インドネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 6,
+              "address": "〒141-0022 東京都品川区東五反田5-2-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ベラルーシ",
+              "country": "ベラルーシ",
+              "embassyName": "ベラルーシ大使館",
+              "currentDay": 8,
+              "currentOrder": 5,
+              "address": "〒141-0022 東京都品川区東五反田5-6-32",
+              "ward": "品川区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-北マケドニア",
+              "country": "北マケドニア",
+              "embassyName": "北マケドニア大使館",
+              "currentDay": 8,
+              "currentOrder": 4,
+              "address": "〒141-0022 東京都品川区東五反田5-16-17",
+              "ward": "品川区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-マリ",
+              "country": "マリ",
+              "embassyName": "マリ大使館",
+              "currentDay": 8,
+              "currentOrder": 11,
+              "address": "〒141-0021 東京都品川区上大崎3-12-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-コートジボワール",
+              "country": "コートジボワール",
+              "embassyName": "コートジボワール大使館",
+              "currentDay": 8,
+              "currentOrder": 8,
+              "address": "〒141-0021 東京都品川区上大崎3-8-5",
+              "ward": "品川区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-タイ",
+              "country": "タイ",
+              "embassyName": "タイ大使館",
+              "currentDay": 8,
+              "currentOrder": 9,
+              "address": "〒141-0021 東京都品川区上大崎3-14-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-コロンビア",
+              "country": "コロンビア",
+              "embassyName": "コロンビア大使館",
+              "currentDay": 8,
+              "currentOrder": 10,
+              "address": "〒141-0021 東京都品川区上大崎3-10-53",
+              "ward": "品川区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-アルジェリア",
+              "country": "アルジェリア",
+              "embassyName": "アルジェリア大使館",
+              "currentDay": 8,
+              "currentOrder": 13,
+              "address": "〒153-0062 東京都目黒区三田2-10-67",
+              "ward": "目黒区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-ポーランド",
+              "country": "ポーランド",
+              "embassyName": "ポーランド大使館",
+              "currentDay": 8,
+              "currentOrder": 14,
+              "address": "〒153-0062 東京都目黒区三田2-13-5",
+              "ward": "目黒区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "麻布十番駅",
+              "to": "フィリピン大使館",
+              "distanceKm": 0.58,
+              "durationMinutes": 8
+            },
+            {
+              "from": "フィリピン大使館",
+              "to": "オーストラリア大使館",
+              "distanceKm": 1.3,
+              "durationMinutes": 17
+            },
+            {
+              "from": "オーストラリア大使館",
+              "to": "ハンガリー大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ハンガリー大使館",
+              "to": "ジンバブエ大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ジンバブエ大使館",
+              "to": "マラウイ大使館",
+              "distanceKm": 1.9,
+              "durationMinutes": 25
+            },
+            {
+              "from": "マラウイ大使館",
+              "to": "エチオピア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "エチオピア大使館",
+              "to": "エリトリア大使館",
+              "distanceKm": 0.86,
+              "durationMinutes": 12
+            },
+            {
+              "from": "エリトリア大使館",
+              "to": "タジキスタン大使館",
+              "distanceKm": 0.88,
+              "durationMinutes": 12
+            },
+            {
+              "from": "タジキスタン大使館",
+              "to": "インドネシア大使館",
+              "distanceKm": 0.51,
+              "durationMinutes": 7
+            },
+            {
+              "from": "インドネシア大使館",
+              "to": "ベラルーシ大使館",
+              "distanceKm": 0.5,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ベラルーシ大使館",
+              "to": "北マケドニア大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "北マケドニア大使館",
+              "to": "マリ大使館",
+              "distanceKm": 0.92,
+              "durationMinutes": 12
+            },
+            {
+              "from": "マリ大使館",
+              "to": "コートジボワール大使館",
+              "distanceKm": 1.01,
+              "durationMinutes": 13
+            },
+            {
+              "from": "コートジボワール大使館",
+              "to": "タイ大使館",
+              "distanceKm": 0.08,
+              "durationMinutes": 1
+            },
+            {
+              "from": "タイ大使館",
+              "to": "コロンビア大使館",
+              "distanceKm": 0.57,
+              "durationMinutes": 8
+            },
+            {
+              "from": "コロンビア大使館",
+              "to": "アルジェリア大使館",
+              "distanceKm": 1.23,
+              "durationMinutes": 16
+            },
+            {
+              "from": "アルジェリア大使館",
+              "to": "ポーランド大使館",
+              "distanceKm": 0.35,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ポーランド大使館",
+              "to": "恵比寿駅",
+              "distanceKm": 0.98,
+              "durationMinutes": 13
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 12.6,
+            "originalRouteDurationMinutes": 168,
+            "tripDistanceKm": 11.92,
+            "tripDurationMinutes": 159,
+            "tripOrderRouteDistanceKm": 12.65,
+            "tripOrderRouteDurationMinutes": 169,
+            "selectedRouteDistanceKm": 12.6,
+            "selectedRouteDurationMinutes": 168,
+            "pass": true
+          }
+        },
+        {
+          "day": 9,
+          "start": "都立大学駅",
+          "goal": "北品川駅",
+          "embassyCount": 13,
+          "locatedEmbassyCount": 13,
+          "unlocatedIds": [],
+          "distanceKm": 13.09,
+          "durationMinutes": 175,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-スーダン",
+              "country": "スーダン",
+              "embassyName": "スーダン大使館",
+              "currentDay": 9,
+              "currentOrder": 3,
+              "address": "〒152-0023 東京都目黒区八雲4-7-1",
+              "ward": "目黒区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-カメルーン",
+              "country": "カメルーン",
+              "embassyName": "カメルーン大使館",
+              "currentDay": 10,
+              "currentOrder": 2,
+              "address": "〒154-0003 東京都世田谷区野沢3-27-16",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-モーリタニア",
+              "country": "モーリタニア",
+              "embassyName": "モーリタニア大使館",
+              "currentDay": 8,
+              "currentOrder": 21,
+              "address": "〒153-0053 東京都目黒区五本木1-16-17",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ネパール",
+              "country": "ネパール",
+              "embassyName": "ネパール大使館",
+              "currentDay": 8,
+              "currentOrder": 17,
+              "address": "〒153-0064 東京都目黒区下目黒6-20-28",
+              "ward": "目黒区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ミクロネシア",
+              "country": "ミクロネシア",
+              "embassyName": "ミクロネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 15,
+              "address": "〒153-0063 東京都目黒区目黒4-10-6",
+              "ward": "目黒区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-パプアニューギニア",
+              "country": "パプアニューギニア",
+              "embassyName": "パプアニューギニア大使館",
+              "currentDay": 8,
+              "currentOrder": 16,
+              "address": "〒153-0064 東京都目黒区下目黒5-32-20",
+              "ward": "目黒区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ザンビア",
+              "country": "ザンビア",
+              "embassyName": "ザンビア大使館",
+              "currentDay": 9,
+              "currentOrder": 6,
+              "address": "〒142-0063 東京都品川区荏原1-10-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ボツワナ",
+              "country": "ボツワナ",
+              "embassyName": "ボツワナ大使館",
+              "currentDay": 8,
+              "currentOrder": 7,
+              "address": "〒141-0022 東京都品川区東五反田3-18-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-セルビア",
+              "country": "セルビア",
+              "embassyName": "セルビア大使館",
+              "currentDay": 4,
+              "currentOrder": 17,
+              "address": "〒108-0074 東京都港区高輪4-16-12",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-アイスランド",
+              "country": "アイスランド",
+              "embassyName": "アイスランド大使館",
+              "currentDay": 4,
+              "currentOrder": 18,
+              "address": "〒108-0074 東京都港区高輪4-18-26",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ブルネイ",
+              "country": "ブルネイ",
+              "embassyName": "ブルネイ大使館",
+              "currentDay": 8,
+              "currentOrder": 1,
+              "address": "〒141-0001 東京都品川区北品川6-5-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ジブチ",
+              "country": "ジブチ",
+              "embassyName": "ジブチ大使館",
+              "currentDay": 8,
+              "currentOrder": 2,
+              "address": "〒141-0001 東京都品川区北品川5-13-1",
+              "ward": "品川区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ミャンマー",
+              "country": "ミャンマー",
+              "embassyName": "ミャンマー大使館",
+              "currentDay": 8,
+              "currentOrder": 3,
+              "address": "〒140-0001 東京都品川区北品川4-8-26",
+              "ward": "品川区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "都立大学駅",
+              "to": "スーダン大使館",
+              "distanceKm": 0.89,
+              "durationMinutes": 12
+            },
+            {
+              "from": "スーダン大使館",
+              "to": "カメルーン大使館",
+              "distanceKm": 1.11,
+              "durationMinutes": 15
+            },
+            {
+              "from": "カメルーン大使館",
+              "to": "モーリタニア大使館",
+              "distanceKm": 1.77,
+              "durationMinutes": 24
+            },
+            {
+              "from": "モーリタニア大使館",
+              "to": "ネパール大使館",
+              "distanceKm": 1.77,
+              "durationMinutes": 24
+            },
+            {
+              "from": "ネパール大使館",
+              "to": "ミクロネシア大使館",
+              "distanceKm": 0.89,
+              "durationMinutes": 12
+            },
+            {
+              "from": "ミクロネシア大使館",
+              "to": "パプアニューギニア大使館",
+              "distanceKm": 0.74,
+              "durationMinutes": 10
+            },
+            {
+              "from": "パプアニューギニア大使館",
+              "to": "ザンビア大使館",
+              "distanceKm": 1.62,
+              "durationMinutes": 22
+            },
+            {
+              "from": "ザンビア大使館",
+              "to": "ボツワナ大使館",
+              "distanceKm": 1.71,
+              "durationMinutes": 23
+            },
+            {
+              "from": "ボツワナ大使館",
+              "to": "セルビア大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "セルビア大使館",
+              "to": "アイスランド大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "アイスランド大使館",
+              "to": "ブルネイ大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ブルネイ大使館",
+              "to": "ジブチ大使館",
+              "distanceKm": 0.44,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ジブチ大使館",
+              "to": "ミャンマー大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ミャンマー大使館",
+              "to": "北品川駅",
+              "distanceKm": 0.59,
+              "durationMinutes": 8
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 13.09,
+            "originalRouteDurationMinutes": 175,
+            "tripDistanceKm": 13,
+            "tripDurationMinutes": 174,
+            "tripOrderRouteDistanceKm": 13.22,
+            "tripOrderRouteDurationMinutes": 177,
+            "selectedRouteDistanceKm": 13.09,
+            "selectedRouteDurationMinutes": 175,
+            "pass": true
+          }
+        },
+        {
+          "day": 10,
+          "start": "用賀駅",
+          "goal": "田園調布駅",
+          "embassyCount": 10,
+          "locatedEmbassyCount": 9,
+          "unlocatedIds": [
+            "embassy-アフガニスタン"
+          ],
+          "distanceKm": 14.14,
+          "durationMinutes": 189,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-タンザニア",
+              "country": "タンザニア",
+              "embassyName": "タンザニア大使館",
+              "currentDay": 10,
+              "currentOrder": 4,
+              "address": "〒158-0098 東京都世田谷区上用賀4-21-9",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-モザンビーク",
+              "country": "モザンビーク",
+              "embassyName": "モザンビーク大使館",
+              "currentDay": 10,
+              "currentOrder": 3,
+              "address": "〒154-0015 東京都世田谷区桜新町1-33-14",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ガボン",
+              "country": "ガボン",
+              "embassyName": "ガボン大使館",
+              "currentDay": 9,
+              "currentOrder": 5,
+              "address": "〒152-0021 東京都目黒区東が丘1-34-11",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アゼルバイジャン",
+              "country": "アゼルバイジャン",
+              "embassyName": "アゼルバイジャン大使館",
+              "currentDay": 9,
+              "currentOrder": 4,
+              "address": "〒152-0021 東京都目黒区東が丘1-19-15",
+              "ward": "目黒区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-トーゴ",
+              "country": "トーゴ",
+              "embassyName": "トーゴ大使館",
+              "currentDay": 9,
+              "currentOrder": 1,
+              "address": "〒152-0023 東京都目黒区八雲2-2-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ケニア",
+              "country": "ケニア",
+              "embassyName": "ケニア大使館",
+              "currentDay": 9,
+              "currentOrder": 2,
+              "address": "〒152-0023 東京都目黒区八雲3-24-3",
+              "ward": "目黒区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ルワンダ",
+              "country": "ルワンダ",
+              "embassyName": "ルワンダ大使館",
+              "currentDay": 10,
+              "currentOrder": 5,
+              "address": "〒158-0081 東京都世田谷区深沢1-17-17",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-マーシャル諸島",
+              "country": "マーシャル諸島",
+              "embassyName": "マーシャル諸島大使館",
+              "currentDay": 10,
+              "currentOrder": 6,
+              "address": "〒158-0082 東京都世田谷区等々力8-2-22",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-コンゴ共和国",
+              "country": "コンゴ共和国",
+              "embassyName": "コンゴ共和国大使館",
+              "currentDay": 10,
+              "currentOrder": 7,
+              "address": "〒145-0071 東京都大田区田園調布3-16-4",
+              "ward": "大田区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "用賀駅",
+              "to": "タンザニア大使館",
+              "distanceKm": 1.36,
+              "durationMinutes": 18
+            },
+            {
+              "from": "タンザニア大使館",
+              "to": "モザンビーク大使館",
+              "distanceKm": 2.35,
+              "durationMinutes": 31
+            },
+            {
+              "from": "モザンビーク大使館",
+              "to": "ガボン大使館",
+              "distanceKm": 2.49,
+              "durationMinutes": 33
+            },
+            {
+              "from": "ガボン大使館",
+              "to": "アゼルバイジャン大使館",
+              "distanceKm": 0.71,
+              "durationMinutes": 9
+            },
+            {
+              "from": "アゼルバイジャン大使館",
+              "to": "トーゴ大使館",
+              "distanceKm": 0.71,
+              "durationMinutes": 9
+            },
+            {
+              "from": "トーゴ大使館",
+              "to": "ケニア大使館",
+              "distanceKm": 1.15,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ケニア大使館",
+              "to": "ルワンダ大使館",
+              "distanceKm": 0.73,
+              "durationMinutes": 10
+            },
+            {
+              "from": "ルワンダ大使館",
+              "to": "マーシャル諸島大使館",
+              "distanceKm": 1.18,
+              "durationMinutes": 16
+            },
+            {
+              "from": "マーシャル諸島大使館",
+              "to": "コンゴ共和国大使館",
+              "distanceKm": 2.93,
+              "durationMinutes": 39
+            },
+            {
+              "from": "コンゴ共和国大使館",
+              "to": "田園調布駅",
+              "distanceKm": 0.54,
+              "durationMinutes": 7
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 14.14,
+            "originalRouteDurationMinutes": 189,
+            "tripDistanceKm": 14.05,
+            "tripDurationMinutes": 188,
+            "tripOrderRouteDistanceKm": 14.21,
+            "tripOrderRouteDurationMinutes": 190,
+            "selectedRouteDistanceKm": 14.14,
+            "selectedRouteDurationMinutes": 189,
+            "pass": true
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "Daily Comfort",
+      "optimizationScore": 11198.663166666605,
+      "totalDistanceKm": 88.13,
+      "totalDurationMinutes": 1176,
+      "averageDurationMinutes": 168,
+      "maxDurationMinutes": 189,
+      "minDurationMinutes": 144,
+      "durationRangeMinutes": 45,
+      "maxEmbassyCount": 19,
+      "minEmbassyCount": 10,
+      "embassyCountRange": 9,
+      "over200Days": [],
+      "atLeast20EmbassyDays": [],
+      "sensitivity": {
+        "visit3Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 218
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 215
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 214
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 195
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 219
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 214
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 219
+          }
+        ],
+        "visit5Minutes": [
+          {
+            "day": 4,
+            "estimatedMinutes": 244
+          },
+          {
+            "day": 5,
+            "estimatedMinutes": 249
+          },
+          {
+            "day": 6,
+            "estimatedMinutes": 252
+          },
+          {
+            "day": 7,
+            "estimatedMinutes": 229
+          },
+          {
+            "day": 8,
+            "estimatedMinutes": 253
+          },
+          {
+            "day": 9,
+            "estimatedMinutes": 240
+          },
+          {
+            "day": 10,
+            "estimatedMinutes": 239
+          }
+        ]
+      },
+      "days": [
+        {
+          "day": 4,
+          "start": "赤羽橋駅",
+          "goal": "後楽園駅",
+          "embassyCount": 13,
+          "locatedEmbassyCount": 13,
+          "unlocatedIds": [],
+          "distanceKm": 13.45,
+          "durationMinutes": 179,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-ハイチ",
+              "country": "ハイチ",
+              "embassyName": "ハイチ大使館",
+              "currentDay": 7,
+              "currentOrder": 13,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ホンジュラス",
+              "country": "ホンジュラス",
+              "embassyName": "ホンジュラス大使館",
+              "currentDay": 7,
+              "currentOrder": 12,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-エクアドル",
+              "country": "エクアドル",
+              "embassyName": "エクアドル大使館",
+              "currentDay": 7,
+              "currentOrder": 9,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ナミビア",
+              "country": "ナミビア",
+              "embassyName": "ナミビア大使館",
+              "currentDay": 7,
+              "currentOrder": 10,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-サモア",
+              "country": "サモア",
+              "embassyName": "サモア大使館",
+              "currentDay": 7,
+              "currentOrder": 8,
+              "address": "〒106-0041 東京都港区麻布台3-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-カザフスタン",
+              "country": "カザフスタン",
+              "embassyName": "カザフスタン大使館",
+              "currentDay": 7,
+              "currentOrder": 4,
+              "address": "〒106-0041 東京都港区麻布台1-8-14",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-トンガ",
+              "country": "トンガ",
+              "embassyName": "トンガ大使館",
+              "currentDay": 7,
+              "currentOrder": 5,
+              "address": "〒106-0041 東京都港区麻布台1-9-10",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ナイジェリア",
+              "country": "ナイジェリア",
+              "embassyName": "ナイジェリア大使館",
+              "currentDay": 7,
+              "currentOrder": 3,
+              "address": "〒105-0001 東京都港区虎ノ門3-6-1",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-コソボ",
+              "country": "コソボ",
+              "embassyName": "コソボ大使館",
+              "currentDay": 7,
+              "currentOrder": 1,
+              "address": "〒105-0003 東京都港区西新橋3-13-7",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-モーリシャス",
+              "country": "モーリシャス",
+              "embassyName": "モーリシャス大使館",
+              "currentDay": 9,
+              "currentOrder": 8,
+              "address": "〒104-0045 東京都中央区築地6-25-10",
+              "ward": "中央区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-アルバニア",
+              "country": "アルバニア",
+              "embassyName": "アルバニア大使館",
+              "currentDay": 9,
+              "currentOrder": 7,
+              "address": "〒104-0045 東京都中央区築地6-4-8",
+              "ward": "中央区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ベネズエラ",
+              "country": "ベネズエラ",
+              "embassyName": "ベネズエラ大使館",
+              "currentDay": 9,
+              "currentOrder": 9,
+              "address": "〒104-0042 東京都中央区入船2-7-4",
+              "ward": "中央区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ベナン",
+              "country": "ベナン",
+              "embassyName": "ベナン大使館",
+              "currentDay": 9,
+              "currentOrder": 10,
+              "address": "〒112-0003 東京都文京区春日1-11-14",
+              "ward": "文京区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "赤羽橋駅",
+              "to": "ハイチ大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "ハイチ大使館",
+              "to": "ホンジュラス大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ホンジュラス大使館",
+              "to": "エクアドル大使館",
+              "distanceKm": 0.67,
+              "durationMinutes": 9
+            },
+            {
+              "from": "エクアドル大使館",
+              "to": "ナミビア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ナミビア大使館",
+              "to": "サモア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "サモア大使館",
+              "to": "カザフスタン大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "カザフスタン大使館",
+              "to": "トンガ大使館",
+              "distanceKm": 0.07,
+              "durationMinutes": 1
+            },
+            {
+              "from": "トンガ大使館",
+              "to": "ナイジェリア大使館",
+              "distanceKm": 0.92,
+              "durationMinutes": 12
+            },
+            {
+              "from": "ナイジェリア大使館",
+              "to": "コソボ大使館",
+              "distanceKm": 0.73,
+              "durationMinutes": 10
+            },
+            {
+              "from": "コソボ大使館",
+              "to": "モーリシャス大使館",
+              "distanceKm": 2.39,
+              "durationMinutes": 32
+            },
+            {
+              "from": "モーリシャス大使館",
+              "to": "アルバニア大使館",
+              "distanceKm": 0.11,
+              "durationMinutes": 1
+            },
+            {
+              "from": "アルバニア大使館",
+              "to": "ベネズエラ大使館",
+              "distanceKm": 1.13,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ベネズエラ大使館",
+              "to": "ベナン大使館",
+              "distanceKm": 6.13,
+              "durationMinutes": 82
+            },
+            {
+              "from": "ベナン大使館",
+              "to": "後楽園駅",
+              "distanceKm": 0.75,
+              "durationMinutes": 10
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 13.45,
+            "originalRouteDurationMinutes": 179,
+            "tripDistanceKm": 13.09,
+            "tripDurationMinutes": 175,
+            "tripOrderRouteDistanceKm": 13.45,
+            "tripOrderRouteDurationMinutes": 179,
+            "selectedRouteDistanceKm": 13.45,
+            "selectedRouteDurationMinutes": 179,
+            "pass": true
+          }
+        },
+        {
+          "day": 5,
+          "start": "池ノ上駅",
+          "goal": "代官山駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 12.3,
+          "durationMinutes": 164,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-アンゴラ",
+              "country": "アンゴラ",
+              "embassyName": "アンゴラ大使館",
+              "currentDay": 10,
+              "currentOrder": 1,
+              "address": "〒155-0032 東京都世田谷区代沢2-10-24",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ブルキナファソ",
+              "country": "ブルキナファソ",
+              "embassyName": "ブルキナファソ大使館",
+              "currentDay": 5,
+              "currentOrder": 3,
+              "address": "〒151-0065 東京都渋谷区大山町45-24",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ベトナム",
+              "country": "ベトナム",
+              "embassyName": "ベトナム大使館",
+              "currentDay": 5,
+              "currentOrder": 2,
+              "address": "〒151-0062 東京都渋谷区元代々木町50-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ブルガリア",
+              "country": "ブルガリア",
+              "embassyName": "ブルガリア大使館",
+              "currentDay": 5,
+              "currentOrder": 1,
+              "address": "〒151-0053 東京都渋谷区代々木5-36-3",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ラトビア",
+              "country": "ラトビア",
+              "embassyName": "ラトビア大使館",
+              "currentDay": 5,
+              "currentOrder": 7,
+              "address": "〒150-0047 東京都渋谷区神山町37-11",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ヨルダン",
+              "country": "ヨルダン",
+              "embassyName": "ヨルダン大使館",
+              "currentDay": 5,
+              "currentOrder": 8,
+              "address": "〒150-0047 東京都渋谷区神山町39-8",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-イラク",
+              "country": "イラク",
+              "embassyName": "イラク大使館",
+              "currentDay": 5,
+              "currentOrder": 4,
+              "address": "〒150-0047 東京都渋谷区神山町14-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ニュージーランド",
+              "country": "ニュージーランド",
+              "embassyName": "ニュージーランド大使館",
+              "currentDay": 5,
+              "currentOrder": 6,
+              "address": "〒150-0047 東京都渋谷区神山町20-40",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-モンゴル",
+              "country": "モンゴル",
+              "embassyName": "モンゴル大使館",
+              "currentDay": 5,
+              "currentOrder": 5,
+              "address": "〒150-0047 東京都渋谷区神山町21-4",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-レバノン",
+              "country": "レバノン",
+              "embassyName": "レバノン大使館",
+              "currentDay": 8,
+              "currentOrder": 20,
+              "address": "〒153-0043 東京都目黒区東山2-6-9",
+              "ward": "目黒区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-マレーシア",
+              "country": "マレーシア",
+              "embassyName": "マレーシア大使館",
+              "currentDay": 5,
+              "currentOrder": 10,
+              "address": "〒150-0036 東京都渋谷区南平台町20-16",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-UAE",
+              "country": "UAE",
+              "embassyName": "UAE大使館",
+              "currentDay": 5,
+              "currentOrder": 9,
+              "address": "〒150-0036 東京都渋谷区南平台町9-10",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ギニア",
+              "country": "ギニア",
+              "embassyName": "ギニア大使館",
+              "currentDay": 5,
+              "currentOrder": 11,
+              "address": "〒150-0035 東京都渋谷区鉢山町12-9",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-セネガル",
+              "country": "セネガル",
+              "embassyName": "セネガル大使館",
+              "currentDay": 8,
+              "currentOrder": 19,
+              "address": "〒153-0042 東京都目黒区青葉台1-3-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-エジプト",
+              "country": "エジプト",
+              "embassyName": "エジプト大使館",
+              "currentDay": 8,
+              "currentOrder": 18,
+              "address": "〒153-0042 東京都目黒区青葉台1-5-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-デンマーク",
+              "country": "デンマーク",
+              "embassyName": "デンマーク大使館",
+              "currentDay": 5,
+              "currentOrder": 13,
+              "address": "〒150-0033 東京都渋谷区猿楽町29-6",
+              "ward": "渋谷区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-リビア",
+              "country": "リビア",
+              "embassyName": "リビア大使館",
+              "currentDay": 5,
+              "currentOrder": 12,
+              "address": "〒150-0034 東京都渋谷区代官山町10-14",
+              "ward": "渋谷区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "池ノ上駅",
+              "to": "アンゴラ大使館",
+              "distanceKm": 0.43,
+              "durationMinutes": 6
+            },
+            {
+              "from": "アンゴラ大使館",
+              "to": "ブルキナファソ大使館",
+              "distanceKm": 2.14,
+              "durationMinutes": 28
+            },
+            {
+              "from": "ブルキナファソ大使館",
+              "to": "ベトナム大使館",
+              "distanceKm": 0.97,
+              "durationMinutes": 13
+            },
+            {
+              "from": "ベトナム大使館",
+              "to": "ブルガリア大使館",
+              "distanceKm": 0.69,
+              "durationMinutes": 9
+            },
+            {
+              "from": "ブルガリア大使館",
+              "to": "ラトビア大使館",
+              "distanceKm": 1.52,
+              "durationMinutes": 20
+            },
+            {
+              "from": "ラトビア大使館",
+              "to": "ヨルダン大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ヨルダン大使館",
+              "to": "イラク大使館",
+              "distanceKm": 0.21,
+              "durationMinutes": 3
+            },
+            {
+              "from": "イラク大使館",
+              "to": "ニュージーランド大使館",
+              "distanceKm": 0.56,
+              "durationMinutes": 8
+            },
+            {
+              "from": "ニュージーランド大使館",
+              "to": "モンゴル大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "モンゴル大使館",
+              "to": "レバノン大使館",
+              "distanceKm": 1.69,
+              "durationMinutes": 23
+            },
+            {
+              "from": "レバノン大使館",
+              "to": "マレーシア大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "マレーシア大使館",
+              "to": "UAE大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "UAE大使館",
+              "to": "ギニア大使館",
+              "distanceKm": 0.53,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ギニア大使館",
+              "to": "セネガル大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "セネガル大使館",
+              "to": "エジプト大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "エジプト大使館",
+              "to": "デンマーク大使館",
+              "distanceKm": 0.13,
+              "durationMinutes": 2
+            },
+            {
+              "from": "デンマーク大使館",
+              "to": "リビア大使館",
+              "distanceKm": 0.65,
+              "durationMinutes": 9
+            },
+            {
+              "from": "リビア大使館",
+              "to": "代官山駅",
+              "distanceKm": 0.49,
+              "durationMinutes": 7
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 12.3,
+            "originalRouteDurationMinutes": 164,
+            "tripDistanceKm": 11.24,
+            "tripDurationMinutes": 150,
+            "tripOrderRouteDistanceKm": 12.48,
+            "tripOrderRouteDurationMinutes": 167,
+            "selectedRouteDistanceKm": 12.3,
+            "selectedRouteDurationMinutes": 164,
+            "pass": true
+          }
+        },
+        {
+          "day": 6,
+          "start": "赤羽橋駅",
+          "goal": "恵比寿駅",
+          "embassyCount": 19,
+          "locatedEmbassyCount": 19,
+          "unlocatedIds": [],
+          "distanceKm": 11.74,
+          "durationMinutes": 157,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-キューバ",
+              "country": "キューバ",
+              "embassyName": "キューバ大使館",
+              "currentDay": 7,
+              "currentOrder": 14,
+              "address": "〒106-0044 東京都港区東麻布1-28-4",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-キルギス",
+              "country": "キルギス",
+              "embassyName": "キルギス大使館",
+              "currentDay": 4,
+              "currentOrder": 7,
+              "address": "〒108-0073 東京都港区三田1-5-7",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-イタリア",
+              "country": "イタリア",
+              "embassyName": "イタリア大使館",
+              "currentDay": 4,
+              "currentOrder": 9,
+              "address": "〒108-8302 東京都港区三田2-5-4",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-チリ",
+              "country": "チリ",
+              "embassyName": "チリ大使館",
+              "currentDay": 4,
+              "currentOrder": 2,
+              "address": "〒105-0014 東京都港区芝3-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-グアテマラ",
+              "country": "グアテマラ",
+              "embassyName": "グアテマラ大使館",
+              "currentDay": 7,
+              "currentOrder": 11,
+              "address": "〒106-0044 東京都港区東麻布1-10-11",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ボリビア",
+              "country": "ボリビア",
+              "embassyName": "ボリビア大使館",
+              "currentDay": 4,
+              "currentOrder": 5,
+              "address": "〒105-0011 東京都港区芝公園3-4-30",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-フィジー",
+              "country": "フィジー",
+              "embassyName": "フィジー大使館",
+              "currentDay": 7,
+              "currentOrder": 7,
+              "address": "〒106-0041 東京都港区麻布台2-3-5",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ロシア",
+              "country": "ロシア",
+              "embassyName": "ロシア大使館",
+              "currentDay": 7,
+              "currentOrder": 6,
+              "address": "〒106-0041 東京都港区麻布台2-1-1",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-パラオ",
+              "country": "パラオ",
+              "embassyName": "パラオ大使館",
+              "currentDay": 7,
+              "currentOrder": 15,
+              "address": "〒106-0044 東京都港区東麻布2-21-11",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-シンガポール",
+              "country": "シンガポール",
+              "embassyName": "シンガポール大使館",
+              "currentDay": 7,
+              "currentOrder": 20,
+              "address": "〒106-0032 東京都港区六本木5-12-3",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-オーストリア",
+              "country": "オーストリア",
+              "embassyName": "オーストリア大使館",
+              "currentDay": 6,
+              "currentOrder": 16,
+              "address": "〒106-0046 東京都港区元麻布1-1-20",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-リトアニア",
+              "country": "リトアニア",
+              "embassyName": "リトアニア大使館",
+              "currentDay": 6,
+              "currentOrder": 9,
+              "address": "〒106-0046 東京都港区元麻布3-7-18",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-サンマリノ",
+              "country": "サンマリノ",
+              "embassyName": "サンマリノ大使館",
+              "currentDay": 6,
+              "currentOrder": 10,
+              "address": "〒106-0046 東京都港区元麻布3-5-1",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-中国",
+              "country": "中国",
+              "embassyName": "中国大使館",
+              "currentDay": 6,
+              "currentOrder": 8,
+              "address": "〒106-0046 東京都港区元麻布3-4-33",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-ポルトガル",
+              "country": "ポルトガル",
+              "embassyName": "ポルトガル大使館",
+              "currentDay": 6,
+              "currentOrder": 4,
+              "address": "〒106-0031 東京都港区西麻布3-6-6",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-ラオス",
+              "country": "ラオス",
+              "embassyName": "ラオス大使館",
+              "currentDay": 6,
+              "currentOrder": 6,
+              "address": "〒106-0031 東京都港区西麻布3-3-22",
+              "ward": "港区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-コスタリカ",
+              "country": "コスタリカ",
+              "embassyName": "コスタリカ大使館",
+              "currentDay": 7,
+              "currentOrder": 22,
+              "address": "〒106-0032 東京都港区六本木6-6-2",
+              "ward": "港区"
+            },
+            {
+              "order": 18,
+              "id": "embassy-ガーナ",
+              "country": "ガーナ",
+              "embassyName": "ガーナ大使館",
+              "currentDay": 6,
+              "currentOrder": 7,
+              "address": "〒106-0031 東京都港区西麻布1-5-21",
+              "ward": "港区"
+            },
+            {
+              "order": 19,
+              "id": "embassy-トルクメニスタン",
+              "country": "トルクメニスタン",
+              "embassyName": "トルクメニスタン大使館",
+              "currentDay": 5,
+              "currentOrder": 14,
+              "address": "〒150-0011 東京都渋谷区東2-6-14",
+              "ward": "渋谷区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "赤羽橋駅",
+              "to": "キューバ大使館",
+              "distanceKm": 0.08,
+              "durationMinutes": 1
+            },
+            {
+              "from": "キューバ大使館",
+              "to": "キルギス大使館",
+              "distanceKm": 0.45,
+              "durationMinutes": 6
+            },
+            {
+              "from": "キルギス大使館",
+              "to": "イタリア大使館",
+              "distanceKm": 0.54,
+              "durationMinutes": 7
+            },
+            {
+              "from": "イタリア大使館",
+              "to": "チリ大使館",
+              "distanceKm": 0.72,
+              "durationMinutes": 10
+            },
+            {
+              "from": "チリ大使館",
+              "to": "グアテマラ大使館",
+              "distanceKm": 0.38,
+              "durationMinutes": 5
+            },
+            {
+              "from": "グアテマラ大使館",
+              "to": "ボリビア大使館",
+              "distanceKm": 0.46,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ボリビア大使館",
+              "to": "フィジー大使館",
+              "distanceKm": 0.46,
+              "durationMinutes": 6
+            },
+            {
+              "from": "フィジー大使館",
+              "to": "ロシア大使館",
+              "distanceKm": 0.29,
+              "durationMinutes": 4
+            },
+            {
+              "from": "ロシア大使館",
+              "to": "パラオ大使館",
+              "distanceKm": 0.66,
+              "durationMinutes": 9
+            },
+            {
+              "from": "パラオ大使館",
+              "to": "シンガポール大使館",
+              "distanceKm": 0.77,
+              "durationMinutes": 10
+            },
+            {
+              "from": "シンガポール大使館",
+              "to": "オーストリア大使館",
+              "distanceKm": 0.63,
+              "durationMinutes": 8
+            },
+            {
+              "from": "オーストリア大使館",
+              "to": "リトアニア大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "リトアニア大使館",
+              "to": "サンマリノ大使館",
+              "distanceKm": 0.25,
+              "durationMinutes": 3
+            },
+            {
+              "from": "サンマリノ大使館",
+              "to": "中国大使館",
+              "distanceKm": 0.45,
+              "durationMinutes": 6
+            },
+            {
+              "from": "中国大使館",
+              "to": "ポルトガル大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ポルトガル大使館",
+              "to": "ラオス大使館",
+              "distanceKm": 0.35,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ラオス大使館",
+              "to": "コスタリカ大使館",
+              "distanceKm": 0.78,
+              "durationMinutes": 10
+            },
+            {
+              "from": "コスタリカ大使館",
+              "to": "ガーナ大使館",
+              "distanceKm": 0.8,
+              "durationMinutes": 11
+            },
+            {
+              "from": "ガーナ大使館",
+              "to": "トルクメニスタン大使館",
+              "distanceKm": 2.02,
+              "durationMinutes": 27
+            },
+            {
+              "from": "トルクメニスタン大使館",
+              "to": "恵比寿駅",
+              "distanceKm": 1.09,
+              "durationMinutes": 15
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "trip",
+            "originalRouteDistanceKm": 11.74,
+            "originalRouteDurationMinutes": 157,
+            "tripDistanceKm": 11.33,
+            "tripDurationMinutes": 151,
+            "tripOrderRouteDistanceKm": 11.74,
+            "tripOrderRouteDurationMinutes": 157,
+            "selectedRouteDistanceKm": 11.74,
+            "selectedRouteDurationMinutes": 157,
+            "pass": true
+          }
+        },
+        {
+          "day": 7,
+          "start": "田町駅",
+          "goal": "大門駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 10.81,
+          "durationMinutes": 144,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-クウェート",
+              "country": "クウェート",
+              "embassyName": "クウェート大使館",
+              "currentDay": 4,
+              "currentOrder": 10,
+              "address": "〒108-0073 東京都港区三田4-13-12",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-ウズベキスタン",
+              "country": "ウズベキスタン",
+              "embassyName": "ウズベキスタン大使館",
+              "currentDay": 4,
+              "currentOrder": 13,
+              "address": "〒108-0074 東京都港区高輪2-1-52",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-スリランカ",
+              "country": "スリランカ",
+              "embassyName": "スリランカ大使館",
+              "currentDay": 4,
+              "currentOrder": 12,
+              "address": "〒108-0074 東京都港区高輪2-1-54",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アルゼンチン",
+              "country": "アルゼンチン",
+              "embassyName": "アルゼンチン大使館",
+              "currentDay": 6,
+              "currentOrder": 12,
+              "address": "〒106-0046 東京都港区元麻布2-14-14",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ジャマイカ",
+              "country": "ジャマイカ",
+              "embassyName": "ジャマイカ大使館",
+              "currentDay": 6,
+              "currentOrder": 13,
+              "address": "〒106-0046 東京都港区元麻布2-13-1",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-スロバキア",
+              "country": "スロバキア",
+              "embassyName": "スロバキア大使館",
+              "currentDay": 6,
+              "currentOrder": 11,
+              "address": "〒106-0046 東京都港区元麻布2-11-33",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-マダガスカル",
+              "country": "マダガスカル",
+              "embassyName": "マダガスカル大使館",
+              "currentDay": 6,
+              "currentOrder": 14,
+              "address": "〒106-0046 東京都港区元麻布2-3-23",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-カタール",
+              "country": "カタール",
+              "embassyName": "カタール大使館",
+              "currentDay": 6,
+              "currentOrder": 15,
+              "address": "〒106-0046 東京都港区元麻布2-3-28",
+              "ward": "港区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-ウクライナ",
+              "country": "ウクライナ",
+              "embassyName": "ウクライナ大使館",
+              "currentDay": 6,
+              "currentOrder": 5,
+              "address": "〒106-0031 東京都港区西麻布3-5-31",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ルーマニア",
+              "country": "ルーマニア",
+              "embassyName": "ルーマニア大使館",
+              "currentDay": 6,
+              "currentOrder": 3,
+              "address": "〒106-0031 東京都港区西麻布3-16-19",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ギリシャ",
+              "country": "ギリシャ",
+              "embassyName": "ギリシャ大使館",
+              "currentDay": 6,
+              "currentOrder": 2,
+              "address": "〒106-0031 東京都港区西麻布3-16-30",
+              "ward": "港区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-エルサルバドル",
+              "country": "エルサルバドル",
+              "embassyName": "エルサルバドル大使館",
+              "currentDay": 6,
+              "currentOrder": 1,
+              "address": "〒106-0031 東京都港区西麻布3-20-5",
+              "ward": "港区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-パナマ",
+              "country": "パナマ",
+              "embassyName": "パナマ大使館",
+              "currentDay": 7,
+              "currentOrder": 19,
+              "address": "〒106-0032 東京都港区六本木3-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-サウジアラビア",
+              "country": "サウジアラビア",
+              "embassyName": "サウジアラビア大使館",
+              "currentDay": 7,
+              "currentOrder": 17,
+              "address": "〒106-0032 東京都港区六本木1-8-4",
+              "ward": "港区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-マルタ",
+              "country": "マルタ",
+              "embassyName": "マルタ大使館",
+              "currentDay": 7,
+              "currentOrder": 2,
+              "address": "〒105-0001 東京都港区虎ノ門4-3-20",
+              "ward": "港区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-オランダ",
+              "country": "オランダ",
+              "embassyName": "オランダ大使館",
+              "currentDay": 4,
+              "currentOrder": 3,
+              "address": "〒105-0011 東京都港区芝公園3-6-3",
+              "ward": "港区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-ウルグアイ",
+              "country": "ウルグアイ",
+              "embassyName": "ウルグアイ大使館",
+              "currentDay": 4,
+              "currentOrder": 1,
+              "address": "〒105-0012 東京都港区芝大門1-2-1",
+              "ward": "港区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "田町駅",
+              "to": "クウェート大使館",
+              "distanceKm": 0.87,
+              "durationMinutes": 12
+            },
+            {
+              "from": "クウェート大使館",
+              "to": "ウズベキスタン大使館",
+              "distanceKm": 0.83,
+              "durationMinutes": 11
+            },
+            {
+              "from": "ウズベキスタン大使館",
+              "to": "スリランカ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "スリランカ大使館",
+              "to": "アルゼンチン大使館",
+              "distanceKm": 2.07,
+              "durationMinutes": 28
+            },
+            {
+              "from": "アルゼンチン大使館",
+              "to": "ジャマイカ大使館",
+              "distanceKm": 0.18,
+              "durationMinutes": 2
+            },
+            {
+              "from": "ジャマイカ大使館",
+              "to": "スロバキア大使館",
+              "distanceKm": 0.16,
+              "durationMinutes": 2
+            },
+            {
+              "from": "スロバキア大使館",
+              "to": "マダガスカル大使館",
+              "distanceKm": 0.69,
+              "durationMinutes": 9
+            },
+            {
+              "from": "マダガスカル大使館",
+              "to": "カタール大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "カタール大使館",
+              "to": "ウクライナ大使館",
+              "distanceKm": 0.45,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ウクライナ大使館",
+              "to": "ルーマニア大使館",
+              "distanceKm": 0.2,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ルーマニア大使館",
+              "to": "ギリシャ大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "ギリシャ大使館",
+              "to": "エルサルバドル大使館",
+              "distanceKm": 0.52,
+              "durationMinutes": 7
+            },
+            {
+              "from": "エルサルバドル大使館",
+              "to": "パナマ大使館",
+              "distanceKm": 1.01,
+              "durationMinutes": 13
+            },
+            {
+              "from": "パナマ大使館",
+              "to": "サウジアラビア大使館",
+              "distanceKm": 0.56,
+              "durationMinutes": 8
+            },
+            {
+              "from": "サウジアラビア大使館",
+              "to": "マルタ大使館",
+              "distanceKm": 0.61,
+              "durationMinutes": 8
+            },
+            {
+              "from": "マルタ大使館",
+              "to": "オランダ大使館",
+              "distanceKm": 0.94,
+              "durationMinutes": 13
+            },
+            {
+              "from": "オランダ大使館",
+              "to": "ウルグアイ大使館",
+              "distanceKm": 1.32,
+              "durationMinutes": 18
+            },
+            {
+              "from": "ウルグアイ大使館",
+              "to": "大門駅",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 10.81,
+            "originalRouteDurationMinutes": 144,
+            "tripDistanceKm": 10.64,
+            "tripDurationMinutes": 142,
+            "tripOrderRouteDistanceKm": 10.81,
+            "tripOrderRouteDurationMinutes": 144,
+            "selectedRouteDistanceKm": 10.81,
+            "selectedRouteDurationMinutes": 144,
+            "pass": true
+          }
+        },
+        {
+          "day": 8,
+          "start": "麻布十番駅",
+          "goal": "恵比寿駅",
+          "embassyCount": 17,
+          "locatedEmbassyCount": 17,
+          "unlocatedIds": [],
+          "distanceKm": 12.6,
+          "durationMinutes": 168,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-フィリピン",
+              "country": "フィリピン",
+              "embassyName": "フィリピン大使館",
+              "currentDay": 7,
+              "currentOrder": 21,
+              "address": "〒106-8537 東京都港区六本木5-15-5",
+              "ward": "港区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-オーストラリア",
+              "country": "オーストラリア",
+              "embassyName": "オーストラリア大使館",
+              "currentDay": 4,
+              "currentOrder": 6,
+              "address": "〒108-8361 東京都港区三田2-1-14",
+              "ward": "港区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ハンガリー",
+              "country": "ハンガリー",
+              "embassyName": "ハンガリー大使館",
+              "currentDay": 4,
+              "currentOrder": 8,
+              "address": "〒108-0073 東京都港区三田2-17-14",
+              "ward": "港区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ジンバブエ",
+              "country": "ジンバブエ",
+              "embassyName": "ジンバブエ大使館",
+              "currentDay": 4,
+              "currentOrder": 11,
+              "address": "〒108-0073 東京都港区三田5-4-3",
+              "ward": "港区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-マラウイ",
+              "country": "マラウイ",
+              "embassyName": "マラウイ大使館",
+              "currentDay": 4,
+              "currentOrder": 15,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-エチオピア",
+              "country": "エチオピア",
+              "embassyName": "エチオピア大使館",
+              "currentDay": 4,
+              "currentOrder": 14,
+              "address": "〒108-0074 東京都港区高輪3-4-1",
+              "ward": "港区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-エリトリア",
+              "country": "エリトリア",
+              "embassyName": "エリトリア大使館",
+              "currentDay": 4,
+              "currentOrder": 16,
+              "address": "〒108-0071 東京都港区白金台4-7-4",
+              "ward": "港区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-タジキスタン",
+              "country": "タジキスタン",
+              "embassyName": "タジキスタン大使館",
+              "currentDay": 8,
+              "currentOrder": 12,
+              "address": "〒141-0021 東京都品川区上大崎1-5-42",
+              "ward": "品川区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-インドネシア",
+              "country": "インドネシア",
+              "embassyName": "インドネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 6,
+              "address": "〒141-0022 東京都品川区東五反田5-2-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-ベラルーシ",
+              "country": "ベラルーシ",
+              "embassyName": "ベラルーシ大使館",
+              "currentDay": 8,
+              "currentOrder": 5,
+              "address": "〒141-0022 東京都品川区東五反田5-6-32",
+              "ward": "品川区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-北マケドニア",
+              "country": "北マケドニア",
+              "embassyName": "北マケドニア大使館",
+              "currentDay": 8,
+              "currentOrder": 4,
+              "address": "〒141-0022 東京都品川区東五反田5-16-17",
+              "ward": "品川区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-マリ",
+              "country": "マリ",
+              "embassyName": "マリ大使館",
+              "currentDay": 8,
+              "currentOrder": 11,
+              "address": "〒141-0021 東京都品川区上大崎3-12-9",
+              "ward": "品川区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-コートジボワール",
+              "country": "コートジボワール",
+              "embassyName": "コートジボワール大使館",
+              "currentDay": 8,
+              "currentOrder": 8,
+              "address": "〒141-0021 東京都品川区上大崎3-8-5",
+              "ward": "品川区"
+            },
+            {
+              "order": 14,
+              "id": "embassy-タイ",
+              "country": "タイ",
+              "embassyName": "タイ大使館",
+              "currentDay": 8,
+              "currentOrder": 9,
+              "address": "〒141-0021 東京都品川区上大崎3-14-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 15,
+              "id": "embassy-コロンビア",
+              "country": "コロンビア",
+              "embassyName": "コロンビア大使館",
+              "currentDay": 8,
+              "currentOrder": 10,
+              "address": "〒141-0021 東京都品川区上大崎3-10-53",
+              "ward": "品川区"
+            },
+            {
+              "order": 16,
+              "id": "embassy-アルジェリア",
+              "country": "アルジェリア",
+              "embassyName": "アルジェリア大使館",
+              "currentDay": 8,
+              "currentOrder": 13,
+              "address": "〒153-0062 東京都目黒区三田2-10-67",
+              "ward": "目黒区"
+            },
+            {
+              "order": 17,
+              "id": "embassy-ポーランド",
+              "country": "ポーランド",
+              "embassyName": "ポーランド大使館",
+              "currentDay": 8,
+              "currentOrder": 14,
+              "address": "〒153-0062 東京都目黒区三田2-13-5",
+              "ward": "目黒区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "麻布十番駅",
+              "to": "フィリピン大使館",
+              "distanceKm": 0.58,
+              "durationMinutes": 8
+            },
+            {
+              "from": "フィリピン大使館",
+              "to": "オーストラリア大使館",
+              "distanceKm": 1.3,
+              "durationMinutes": 17
+            },
+            {
+              "from": "オーストラリア大使館",
+              "to": "ハンガリー大使館",
+              "distanceKm": 0.4,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ハンガリー大使館",
+              "to": "ジンバブエ大使館",
+              "distanceKm": 0.24,
+              "durationMinutes": 3
+            },
+            {
+              "from": "ジンバブエ大使館",
+              "to": "マラウイ大使館",
+              "distanceKm": 1.9,
+              "durationMinutes": 25
+            },
+            {
+              "from": "マラウイ大使館",
+              "to": "エチオピア大使館",
+              "distanceKm": 0,
+              "durationMinutes": 0
+            },
+            {
+              "from": "エチオピア大使館",
+              "to": "エリトリア大使館",
+              "distanceKm": 0.86,
+              "durationMinutes": 12
+            },
+            {
+              "from": "エリトリア大使館",
+              "to": "タジキスタン大使館",
+              "distanceKm": 0.88,
+              "durationMinutes": 12
+            },
+            {
+              "from": "タジキスタン大使館",
+              "to": "インドネシア大使館",
+              "distanceKm": 0.51,
+              "durationMinutes": 7
+            },
+            {
+              "from": "インドネシア大使館",
+              "to": "ベラルーシ大使館",
+              "distanceKm": 0.5,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ベラルーシ大使館",
+              "to": "北マケドニア大使館",
+              "distanceKm": 0.28,
+              "durationMinutes": 4
+            },
+            {
+              "from": "北マケドニア大使館",
+              "to": "マリ大使館",
+              "distanceKm": 0.92,
+              "durationMinutes": 12
+            },
+            {
+              "from": "マリ大使館",
+              "to": "コートジボワール大使館",
+              "distanceKm": 1.01,
+              "durationMinutes": 13
+            },
+            {
+              "from": "コートジボワール大使館",
+              "to": "タイ大使館",
+              "distanceKm": 0.08,
+              "durationMinutes": 1
+            },
+            {
+              "from": "タイ大使館",
+              "to": "コロンビア大使館",
+              "distanceKm": 0.57,
+              "durationMinutes": 8
+            },
+            {
+              "from": "コロンビア大使館",
+              "to": "アルジェリア大使館",
+              "distanceKm": 1.23,
+              "durationMinutes": 16
+            },
+            {
+              "from": "アルジェリア大使館",
+              "to": "ポーランド大使館",
+              "distanceKm": 0.35,
+              "durationMinutes": 5
+            },
+            {
+              "from": "ポーランド大使館",
+              "to": "恵比寿駅",
+              "distanceKm": 0.98,
+              "durationMinutes": 13
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 12.6,
+            "originalRouteDurationMinutes": 168,
+            "tripDistanceKm": 11.92,
+            "tripDurationMinutes": 159,
+            "tripOrderRouteDistanceKm": 12.65,
+            "tripOrderRouteDurationMinutes": 169,
+            "selectedRouteDistanceKm": 12.6,
+            "selectedRouteDurationMinutes": 168,
+            "pass": true
+          }
+        },
+        {
+          "day": 9,
+          "start": "都立大学駅",
+          "goal": "北品川駅",
+          "embassyCount": 13,
+          "locatedEmbassyCount": 13,
+          "unlocatedIds": [],
+          "distanceKm": 13.09,
+          "durationMinutes": 175,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-スーダン",
+              "country": "スーダン",
+              "embassyName": "スーダン大使館",
+              "currentDay": 9,
+              "currentOrder": 3,
+              "address": "〒152-0023 東京都目黒区八雲4-7-1",
+              "ward": "目黒区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-カメルーン",
+              "country": "カメルーン",
+              "embassyName": "カメルーン大使館",
+              "currentDay": 10,
+              "currentOrder": 2,
+              "address": "〒154-0003 東京都世田谷区野沢3-27-16",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-モーリタニア",
+              "country": "モーリタニア",
+              "embassyName": "モーリタニア大使館",
+              "currentDay": 8,
+              "currentOrder": 21,
+              "address": "〒153-0053 東京都目黒区五本木1-16-17",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-ネパール",
+              "country": "ネパール",
+              "embassyName": "ネパール大使館",
+              "currentDay": 8,
+              "currentOrder": 17,
+              "address": "〒153-0064 東京都目黒区下目黒6-20-28",
+              "ward": "目黒区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-ミクロネシア",
+              "country": "ミクロネシア",
+              "embassyName": "ミクロネシア大使館",
+              "currentDay": 8,
+              "currentOrder": 15,
+              "address": "〒153-0063 東京都目黒区目黒4-10-6",
+              "ward": "目黒区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-パプアニューギニア",
+              "country": "パプアニューギニア",
+              "embassyName": "パプアニューギニア大使館",
+              "currentDay": 8,
+              "currentOrder": 16,
+              "address": "〒153-0064 東京都目黒区下目黒5-32-20",
+              "ward": "目黒区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ザンビア",
+              "country": "ザンビア",
+              "embassyName": "ザンビア大使館",
+              "currentDay": 9,
+              "currentOrder": 6,
+              "address": "〒142-0063 東京都品川区荏原1-10-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-ボツワナ",
+              "country": "ボツワナ",
+              "embassyName": "ボツワナ大使館",
+              "currentDay": 8,
+              "currentOrder": 7,
+              "address": "〒141-0022 東京都品川区東五反田3-18-6",
+              "ward": "品川区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-セルビア",
+              "country": "セルビア",
+              "embassyName": "セルビア大使館",
+              "currentDay": 4,
+              "currentOrder": 17,
+              "address": "〒108-0074 東京都港区高輪4-16-12",
+              "ward": "港区"
+            },
+            {
+              "order": 10,
+              "id": "embassy-アイスランド",
+              "country": "アイスランド",
+              "embassyName": "アイスランド大使館",
+              "currentDay": 4,
+              "currentOrder": 18,
+              "address": "〒108-0074 東京都港区高輪4-18-26",
+              "ward": "港区"
+            },
+            {
+              "order": 11,
+              "id": "embassy-ブルネイ",
+              "country": "ブルネイ",
+              "embassyName": "ブルネイ大使館",
+              "currentDay": 8,
+              "currentOrder": 1,
+              "address": "〒141-0001 東京都品川区北品川6-5-2",
+              "ward": "品川区"
+            },
+            {
+              "order": 12,
+              "id": "embassy-ジブチ",
+              "country": "ジブチ",
+              "embassyName": "ジブチ大使館",
+              "currentDay": 8,
+              "currentOrder": 2,
+              "address": "〒141-0001 東京都品川区北品川5-13-1",
+              "ward": "品川区"
+            },
+            {
+              "order": 13,
+              "id": "embassy-ミャンマー",
+              "country": "ミャンマー",
+              "embassyName": "ミャンマー大使館",
+              "currentDay": 8,
+              "currentOrder": 3,
+              "address": "〒140-0001 東京都品川区北品川4-8-26",
+              "ward": "品川区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "都立大学駅",
+              "to": "スーダン大使館",
+              "distanceKm": 0.89,
+              "durationMinutes": 12
+            },
+            {
+              "from": "スーダン大使館",
+              "to": "カメルーン大使館",
+              "distanceKm": 1.11,
+              "durationMinutes": 15
+            },
+            {
+              "from": "カメルーン大使館",
+              "to": "モーリタニア大使館",
+              "distanceKm": 1.77,
+              "durationMinutes": 24
+            },
+            {
+              "from": "モーリタニア大使館",
+              "to": "ネパール大使館",
+              "distanceKm": 1.77,
+              "durationMinutes": 24
+            },
+            {
+              "from": "ネパール大使館",
+              "to": "ミクロネシア大使館",
+              "distanceKm": 0.89,
+              "durationMinutes": 12
+            },
+            {
+              "from": "ミクロネシア大使館",
+              "to": "パプアニューギニア大使館",
+              "distanceKm": 0.74,
+              "durationMinutes": 10
+            },
+            {
+              "from": "パプアニューギニア大使館",
+              "to": "ザンビア大使館",
+              "distanceKm": 1.62,
+              "durationMinutes": 22
+            },
+            {
+              "from": "ザンビア大使館",
+              "to": "ボツワナ大使館",
+              "distanceKm": 1.71,
+              "durationMinutes": 23
+            },
+            {
+              "from": "ボツワナ大使館",
+              "to": "セルビア大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "セルビア大使館",
+              "to": "アイスランド大使館",
+              "distanceKm": 0.17,
+              "durationMinutes": 2
+            },
+            {
+              "from": "アイスランド大使館",
+              "to": "ブルネイ大使館",
+              "distanceKm": 0.42,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ブルネイ大使館",
+              "to": "ジブチ大使館",
+              "distanceKm": 0.44,
+              "durationMinutes": 6
+            },
+            {
+              "from": "ジブチ大使館",
+              "to": "ミャンマー大使館",
+              "distanceKm": 0.55,
+              "durationMinutes": 7
+            },
+            {
+              "from": "ミャンマー大使館",
+              "to": "北品川駅",
+              "distanceKm": 0.59,
+              "durationMinutes": 8
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 13.09,
+            "originalRouteDurationMinutes": 175,
+            "tripDistanceKm": 13,
+            "tripDurationMinutes": 174,
+            "tripOrderRouteDistanceKm": 13.22,
+            "tripOrderRouteDurationMinutes": 177,
+            "selectedRouteDistanceKm": 13.09,
+            "selectedRouteDurationMinutes": 175,
+            "pass": true
+          }
+        },
+        {
+          "day": 10,
+          "start": "用賀駅",
+          "goal": "田園調布駅",
+          "embassyCount": 10,
+          "locatedEmbassyCount": 9,
+          "unlocatedIds": [
+            "embassy-アフガニスタン"
+          ],
+          "distanceKm": 14.14,
+          "durationMinutes": 189,
+          "entries": [
+            {
+              "order": 1,
+              "id": "embassy-タンザニア",
+              "country": "タンザニア",
+              "embassyName": "タンザニア大使館",
+              "currentDay": 10,
+              "currentOrder": 4,
+              "address": "〒158-0098 東京都世田谷区上用賀4-21-9",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 2,
+              "id": "embassy-モザンビーク",
+              "country": "モザンビーク",
+              "embassyName": "モザンビーク大使館",
+              "currentDay": 10,
+              "currentOrder": 3,
+              "address": "〒154-0015 東京都世田谷区桜新町1-33-14",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 3,
+              "id": "embassy-ガボン",
+              "country": "ガボン",
+              "embassyName": "ガボン大使館",
+              "currentDay": 9,
+              "currentOrder": 5,
+              "address": "〒152-0021 東京都目黒区東が丘1-34-11",
+              "ward": "目黒区"
+            },
+            {
+              "order": 4,
+              "id": "embassy-アゼルバイジャン",
+              "country": "アゼルバイジャン",
+              "embassyName": "アゼルバイジャン大使館",
+              "currentDay": 9,
+              "currentOrder": 4,
+              "address": "〒152-0021 東京都目黒区東が丘1-19-15",
+              "ward": "目黒区"
+            },
+            {
+              "order": 5,
+              "id": "embassy-トーゴ",
+              "country": "トーゴ",
+              "embassyName": "トーゴ大使館",
+              "currentDay": 9,
+              "currentOrder": 1,
+              "address": "〒152-0023 東京都目黒区八雲2-2-4",
+              "ward": "目黒区"
+            },
+            {
+              "order": 6,
+              "id": "embassy-ケニア",
+              "country": "ケニア",
+              "embassyName": "ケニア大使館",
+              "currentDay": 9,
+              "currentOrder": 2,
+              "address": "〒152-0023 東京都目黒区八雲3-24-3",
+              "ward": "目黒区"
+            },
+            {
+              "order": 7,
+              "id": "embassy-ルワンダ",
+              "country": "ルワンダ",
+              "embassyName": "ルワンダ大使館",
+              "currentDay": 10,
+              "currentOrder": 5,
+              "address": "〒158-0081 東京都世田谷区深沢1-17-17",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 8,
+              "id": "embassy-マーシャル諸島",
+              "country": "マーシャル諸島",
+              "embassyName": "マーシャル諸島大使館",
+              "currentDay": 10,
+              "currentOrder": 6,
+              "address": "〒158-0082 東京都世田谷区等々力8-2-22",
+              "ward": "世田谷区"
+            },
+            {
+              "order": 9,
+              "id": "embassy-コンゴ共和国",
+              "country": "コンゴ共和国",
+              "embassyName": "コンゴ共和国大使館",
+              "currentDay": 10,
+              "currentOrder": 7,
+              "address": "〒145-0071 東京都大田区田園調布3-16-4",
+              "ward": "大田区"
+            }
+          ],
+          "segments": [
+            {
+              "from": "用賀駅",
+              "to": "タンザニア大使館",
+              "distanceKm": 1.36,
+              "durationMinutes": 18
+            },
+            {
+              "from": "タンザニア大使館",
+              "to": "モザンビーク大使館",
+              "distanceKm": 2.35,
+              "durationMinutes": 31
+            },
+            {
+              "from": "モザンビーク大使館",
+              "to": "ガボン大使館",
+              "distanceKm": 2.49,
+              "durationMinutes": 33
+            },
+            {
+              "from": "ガボン大使館",
+              "to": "アゼルバイジャン大使館",
+              "distanceKm": 0.71,
+              "durationMinutes": 9
+            },
+            {
+              "from": "アゼルバイジャン大使館",
+              "to": "トーゴ大使館",
+              "distanceKm": 0.71,
+              "durationMinutes": 9
+            },
+            {
+              "from": "トーゴ大使館",
+              "to": "ケニア大使館",
+              "distanceKm": 1.15,
+              "durationMinutes": 15
+            },
+            {
+              "from": "ケニア大使館",
+              "to": "ルワンダ大使館",
+              "distanceKm": 0.73,
+              "durationMinutes": 10
+            },
+            {
+              "from": "ルワンダ大使館",
+              "to": "マーシャル諸島大使館",
+              "distanceKm": 1.18,
+              "durationMinutes": 16
+            },
+            {
+              "from": "マーシャル諸島大使館",
+              "to": "コンゴ共和国大使館",
+              "distanceKm": 2.93,
+              "durationMinutes": 39
+            },
+            {
+              "from": "コンゴ共和国大使館",
+              "to": "田園調布駅",
+              "distanceKm": 0.54,
+              "durationMinutes": 7
+            }
+          ],
+          "routeVerification": {
+            "source": "OpenStreetMap routed-foot route; matrix order compared with trip order",
+            "selectedOrder": "matrix-2opt",
+            "originalRouteDistanceKm": 14.14,
+            "originalRouteDurationMinutes": 189,
+            "tripDistanceKm": 14.05,
+            "tripDurationMinutes": 188,
+            "tripOrderRouteDistanceKm": 14.21,
+            "tripOrderRouteDurationMinutes": 190,
+            "selectedRouteDistanceKm": 14.14,
+            "selectedRouteDurationMinutes": 189,
+            "pass": true
+          }
+        }
+      ]
+    }
+  },
+  "routeVerification": {
+    "verifiedAt": "2026-10-04T10:56:29.696Z",
+    "source": "OpenStreetMap routed-foot trip and route services",
+    "checkedRoutes": 21,
+    "pass": true
+  }
+}

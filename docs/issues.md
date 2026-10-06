@@ -2,6 +2,36 @@
 
 ## Open Issues
 
+### Candidate B' Production Acceptance
+
+Status: OPEN (PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち)
+
+v0.1の効率優先案をPMレビューし、総距離改善を維持しながら徒歩時間と訪問件数を平準化するA / B / Cの3案を作成した。Day3終了後の最新Backup `embassy-rally-backup-2026-10-03 2.json`、正式`js/data.js`、v0.1成果物を基準とする。
+
+- Candidate A: 86.64km / 最大195分 / 最大16件。v0.1比+4.0%で効率維持を優先する。
+- Candidate B: 88.13km / 最大189分 / 最大17件。徒歩・件数・総距離のバランス案としてCodex推奨。
+- Candidate C: 88.13km / 最大189分 / 最大19件。1件5分仮定の負荷Rangeを24分まで縮小する。
+- 全案で200分超0日、20件以上0日。未取得106件の重複0、欠落0、取得済み51件混入0を機械検証した。
+- Candidate Bのv0.1比+5.7%を許容するか、Day4ベナン区間とDay10で公共交通を併用するか、START / GOALの横浜方面交通利便性、Afghanistan確定後の配置がPM判断事項。
+- Candidate B'ではベナンとザンビアを飛び地回収候補として通常Dayから分離した。未取得のまま別枠管理し、取得済み扱いにはしていない。
+- Day4はベナン除外だけなら13.85km / 185分から12.45km / 166分へ短縮する。さらにGOALを後楽園駅から新富町駅へ変える実用案では7.61km / 102分となり、Candidate B比6.24km・83分短縮する。
+- Day5〜Day8はDay構成とSTART / GOALを維持して再最適化したが、Candidate Bの順序と距離・時間がそのまま最短候補となった。
+- Day9はザンビア除外後、Cameroon維持で12.61km / 169分。CameroonもDay10へ移して得られる追加短縮は0.14km・2分だけだった。
+- CameroonをDay10へ移すとDay10徒歩は1.39km・19分、Day9+Day10合計は1.25km・17分増えるため、Day9維持を推奨する。
+- Day10は徒歩14.14km / 189分、公共交通併用は7.77km / 103分相当の長区間を置換候補化して残存徒歩6.37km / 86分、車は15.64km / 32分の走行推定となった。公共交通の乗車・待ち・乗換時間と車の駐車条件は未確定。
+- B'-1 / B'-2双方で未取得106件の重複0、欠落0、取得済み混入0を機械検証した。Afghanistanは未確定としてルート計算から除外した。
+- PMはDay4新富町駅GOAL、ベナン・ザンビアの飛び地回収、Cameroon Day9維持、Day10公共交通併用を正式決定した。
+- 正式Masterは変更せず、`js/route-plan.js`へ今後の攻略計画を分離してProduction反映した。
+- Home検索は攻略Dayと正式Dayを区別し、通常ルート外の大使館は既存の当日追加画面へ誘導する。
+- Homeに飛び地回収カードを追加し、ベナン・ザンビアの取得状態から`0 / 2`〜`2 / 2 完了`を毎回導出する。専用のlocalStorage / Backup項目は追加しない。
+- 飛び地の各行から既存の追加画面へ進み、正式住所、Google Maps、取得状態、当日追加を確認できる。
+- Day4〜Day10は実施順ではなく攻略コース番号とし、Day6 → Day4 → Day8のような順不同利用を正式仕様とする。前Day完了条件やunlockは追加しない。
+- 活動日はactual activityの日付、攻略コースは`plannedDay`で管理し、Review / TimelineとWalk Log Day Hotfixの意味を維持する。
+- 最新Backupで取得済み51件、全`acquiredAt`、walkLogs 13件、actualDayActivities 2件、Norway履歴、Day3 Walk Log Hotfixを保持した。
+- `js/data.js`、Backup、localStorage schema、Migration、World Map mapping、`dataVersion: "1.1"`は変更していない。
+- 成果物は`docs/route-reoptimization-v0.2/`へ本番データと分離して保存した。v0.1成果物は分析履歴として維持する。
+- PC自動検証、飛び地進捗`0 → 1 → 2 → 1`導出、Day6 → Day4 → Day8の順不同選択、320 / 375 / 390 / 430pxのブラウザ検証はPASSした。GitHub Pages反映後のiPhone standalone Acceptanceを残す。
+
 ### v0.8 Walk Log Day Hotfix
 
 Status: OPEN (IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち)

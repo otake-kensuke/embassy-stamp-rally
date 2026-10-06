@@ -272,8 +272,74 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - `dataVersion: "1.1"`、Migration、正式157件、取得状態、`acquiredAt`、`actualDayActivities`、manual NEXT、World Map、Backup形式は変更していない。
 - Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
 
+## Route Re-optimization v0.1 Analysis (2026-10-04)
+
+- Day3終了後かつWalk Log Hotfix反映済みの最新Backup `embassy-rally-backup-2026-10-03 2.json`を分析基準とした。
+- 正式157件のうち取得済み51件を除外し、未取得106件を確定した。Day1〜Day3実績は全取得済みで再配置対象に含めていない。
+- 住所105件を国土地理院住所検索APIで座標化した。Afghanistanは取得場所未確定のため座標化・徒歩計算から除外したが、Day10保留枠へ一度だけ割り当てた。
+- 未取得105件を地理クラスタ化し、OpenStreetMap徒歩距離行列を使ってSTART / GOAL固定の訪問順を最適化した。
+- 現行Day4〜Day10は116.46km / 1555分、提案は83.34km / 1113分となり、33.12km・442分・28.4%の削減見込みとなった。
+- 未取得106件の全件一回割当、重複0、欠落0、取得済み混入0、ID・国名・住所一致を機械検証しPASSした。
+- `js/data.js`、`js/day-meta.js`、本番Day割当・順序、START / GOAL、Backup、localStorage、Migration、UI、World Map、`dataVersion: "1.1"`は変更していない。
+- Status: ANALYSIS ONLY / PM REVIEW PENDING。
+
+## Route Re-optimization v0.2 Analysis (2026-10-04)
+
+- v0.1の83.34km案をPMレビューし、効率維持と日別負荷平準化を複数目的としてA / B / Cの3案を作成した。
+- 最新Backupの取得済み51件を除外し、未取得106件だけをDay4〜Day10へ配置した。Day1〜Day3実績、取得履歴、Walk Log、actualDayActivitiesは変更していない。
+- OSM routed-footの徒歩距離・時間行列を使い、1件移動、2〜4件の近接cluster移動、交換を探索した。
+- 最終21ルートは行列2-opt順とOSM trip順を連続routeで比較し、短い順序を採用した。
+- Candidate Aは86.64km / 1158分 / 最大195分 / 最大16件、Candidate Bは88.13km / 1176分 / 最大189分 / 最大17件、Candidate Cは88.13km / 1176分 / 最大189分 / 最大19件となった。
+- 全案で200分超0日、20件以上0日。1件5分仮定の参考負荷Rangeはv0.1の99分からA 47分、B 31分、C 24分へ縮小した。
+- 総距離、最大徒歩時間、件数、参考実利用負荷、ルートの自然さからCandidate BをPM Recommendationとした。自動採用はしていない。
+- 各案で未取得106件の重複0、欠落0、取得済み混入0、正式ID・国名・名称・住所・Master Day一致、Afghanistan別枠管理を機械検証しPASSした。
+- `js/data.js`、`js/day-meta.js`、本番Day割当・訪問順・START / GOAL、Backup、localStorage、Migration、UI、World Map、`dataVersion: "1.1"`は変更していない。
+- Status: ANALYSIS ONLY / PM REVIEW PENDING。
+
+## Route Re-optimization Candidate B' Analysis (2026-10-05)
+
+- Candidate Bを基準に、ベナンとザンビアを飛び地回収候補として通常Dayから分離した。
+- Day4は駅を維持した場合12.45km / 166分、GOALを新富町駅へ変えた場合7.61km / 102分となり、後者はCandidate B比6.24km・83分短縮した。
+- Day5〜Day8はDay構成とSTART / GOALを維持して順序を再最適化した。Candidate Bの採用順と同じ結果になり、距離・時間の追加改善はなかった。
+- Day9はザンビア除外後、Cameroon維持で12.61km / 169分、Cameroon移動で12.47km / 167分となった。
+- CameroonをDay10へ移すとDay10徒歩は15.53km / 208分となり、Day9+Day10合計も1.25km・17分増えるため、Day9維持を推奨した。
+- Day10のCameroon Day9維持案は、徒歩14.14km / 189分、公共交通置換候補7.77km / 103分相当・残存徒歩6.37km / 86分、車15.64km / 32分となった。
+- 公共交通の乗車・待ち・乗換時間は推測せずTBDとした。車は駐車、乗降、渋滞、料金、駐停車可否を含まない走行推定とした。
+- Afghanistanは未確定として徒歩・公共交通・車の全ルート計算から除外した。
+- B'-1（Cameroon Day9）とB'-2（Cameroon Day10）の双方で未取得106件の重複0、欠落0、取得済み混入0、正式情報一致を機械検証した。
+- `js/data.js`、`js/day-meta.js`、Master Day、Backup、localStorage、Migration、UI、World Map、`dataVersion: "1.1"`は変更していない。
+- Status: ANALYSIS ONLY / PM REVIEW PENDING。
+
+## Candidate B' Production Implementation (2026-10-06)
+
+- PM承認に基づき、Candidate B'を今後の正式攻略計画として本番コードへ反映した。
+- 正式157件Masterを維持し、新規`js/route-plan.js`へDay4〜Day10の攻略Dayと訪問順を分離した。Day1〜Day3は従来Master順を維持した。
+- Day4を14件・赤羽橋駅 → 新富町駅、Day5〜8を各17件のCandidate B、Day9を12件・Cameroon維持・北品川GOAL、Day10を9件・公共交通併用Dayとした。
+- ベナンとザンビアを通常ルートから除外して飛び地回収候補とし、検索から既存の当日追加へ進めるようにした。
+- Afghanistanを通常ルート外の未確定別枠とし、`地図要確認`を維持した。
+- Home検索は攻略Dayと正式Dayを区別し、異なる場合は両方を表示するようにした。
+- 最新Backupを使い、取得済み51件、全`acquiredAt`、walkLogs 13件、actualDayActivities 2件、Norway履歴、Day3 Walk Log Hotfixを保持した。
+- Master 157、Candidate B'順序、NEXT、manual NEXT、検索、当日追加、Timeline、Backup / Restore、Migration、World Mapを検証した。
+- 320 / 375 / 390 / 430pxでHome、Day一覧、Day、Route、検索の横overflowなし、browser console errorなしを確認した。
+- 保存schemaを変更していないため`dataVersion: "1.1"`を維持し、Migrationを追加していない。
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
+
+## Candidate B' Recovery Card / Course Order Addendum (2026-10-06)
+
+- PM追加判断に基づき、Homeへ小さな飛び地回収カードを追加した。
+- ベナン・ザンビアの表示は`state.embassies[id].status`から毎回導出し、`0 / 2`、`1 / 2`、`2 / 2 完了`を表示する。専用の保存状態は追加していない。
+- 各飛び地行は既存の大使館追加画面へ接続し、住所、Google Maps、取得状態、当日追加を確認できるようにした。
+- Day4〜Day10は実施順ではなく攻略コース番号と明記した。前Day完了条件やunlockは追加していない。
+- PCブラウザでDay6 → Day4 → Day8を順不同に選択し、各DayのNEXTとRouteが表示されることを確認した。
+- 飛び地進捗`0 / 2 → 1 / 2 → 2 / 2 → 1 / 2`、既存検索・当日追加model、World Map、Backup / Restore再導出を機械検証した。
+- 320 / 375 / 390 / 430pxで飛び地カードの44px touch targetと横overflowなしを確認した。
+- `dataVersion: "1.1"`、正式157件、保存schema、Migration、既存実績を変更していない。
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
+
 ## Current Next Gate
 
+- Candidate B'をGitHub Pagesへ反映し、飛び地回収カード、順不同の攻略コース選択を含む`docs/test-plan-candidate-b-prime.md`のiPhone standalone項目を確認する。
+- iPhone Acceptance完了前はCandidate B'を`RELEASE / STABLE`へ昇格しない。
 - Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
 - Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。
 - Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。
