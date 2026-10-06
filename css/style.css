@@ -344,6 +344,88 @@ h2 {
   line-height: 1;
 }
 
+.recovery-card {
+  margin-bottom: 9px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.recovery-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.recovery-card-heading .eyebrow {
+  margin-bottom: 0;
+  font-size: 10px;
+}
+
+.recovery-card-heading h3,
+.recovery-card-progress {
+  margin: 0;
+}
+
+.recovery-card-heading h3 {
+  color: var(--green-dark);
+  font-size: 16px;
+}
+
+.recovery-card-progress {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.recovery-card-progress strong {
+  font-size: 18px;
+}
+
+.recovery-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.recovery-item {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fcfa;
+  color: var(--ink);
+  text-align: left;
+}
+
+.recovery-item.acquired {
+  border-color: #a8d5bd;
+  background: #edf8f2;
+  color: var(--green-dark);
+}
+
+.recovery-mark {
+  color: var(--green);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.recovery-item strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
 .large-percent {
   margin: 0;
   color: var(--green);
@@ -2472,6 +2554,22 @@ body {
   font-weight: 900;
 }
 
+.route-plan-note {
+  margin: 0 0 10px;
+  padding: 9px 12px;
+  border: 1px solid #b9dfca;
+  border-radius: 8px;
+  background: #edf8f2;
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.route-plan-note[hidden] {
+  display: none;
+}
+
 .route-goal {
   margin-top: 10px;
 }
@@ -2573,6 +2671,37 @@ body {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 13px;
+}
+
+.search-result .search-result-address {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.search-result-actions {
+  display: grid;
+  gap: 6px;
+  min-width: 72px;
+}
+
+.search-result-map {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.search-result-map[aria-disabled="true"] {
+  border-color: var(--line);
+  color: var(--muted);
+  pointer-events: none;
 }
 
 .search-result button {
