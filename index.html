@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-recovery-20261006">
+    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-home-polish-20261006">
   </head>
   <body>
     <div class="app-shell">
@@ -56,7 +56,7 @@
                 <img class="guide-character guide-character-woman" src="assets/guide-woman-clean.png?v=0.7" alt="">
               </div>
             </div>
-            <div class="home-skyline" aria-hidden="true"></div>
+            <img class="home-skyline" src="assets/tokyo-skyline.png?v=0.7" alt="">
           </div>
 
           <section class="home-progress-card" aria-label="全体取得状況">
@@ -66,20 +66,6 @@
             </div>
             <p class="large-percent" id="homePercent">0%</p>
             <div class="progress-track" aria-hidden="true"><div id="homeProgressBar"></div></div>
-          </section>
-
-          <section class="recovery-card" aria-labelledby="recoveryHeading">
-            <header class="recovery-card-heading">
-              <div>
-                <p class="eyebrow">通常ルート外</p>
-                <h3 id="recoveryHeading">飛び地回収</h3>
-              </div>
-              <p class="recovery-card-progress">
-                <strong id="recoveryProgress">0 / 2</strong>
-                <span id="recoveryComplete" hidden>完了 ✓</span>
-              </p>
-            </header>
-            <div class="recovery-list" id="recoveryList"></div>
           </section>
 
           <nav class="home-menu" aria-label="メインメニュー">
@@ -114,6 +100,16 @@
             <button class="nav-button" data-screen="settings" type="button">
               <span class="nav-icon icon-backup" aria-hidden="true"></span>
               <strong>バックアップ / 復元</strong>
+              <span class="nav-arrow" aria-hidden="true">›</span>
+            </button>
+            <button class="nav-button recovery-menu-entry" id="recoveryMenuEntry" data-recovery-entry type="button">
+              <span class="nav-icon icon-recovery" aria-hidden="true"></span>
+              <span class="recovery-menu-copy">
+                <small>通常ルート外</small>
+                <strong>飛び地回収</strong>
+                <span>ベナン・ザンビア</span>
+              </span>
+              <strong class="recovery-menu-progress" id="recoveryProgress">0 / 2</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
           </nav>
@@ -367,6 +363,6 @@
     <script src="js/log-model.js?v=0.8-walk-log-hotfix"></script>
     <script src="js/backup.js?v=0.7"></script>
     <script src="js/world-map.js?v=0.8"></script>
-    <script src="js/app.js?v=candidate-b-prime-recovery-20261006"></script>
+    <script src="js/app.js?v=candidate-b-prime-home-polish-20261006"></script>
   </body>
 </html>
