@@ -347,9 +347,22 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - Candidate B'の攻略ルート、正式Master、取得状態、Backup / Restore、Migration、`dataVersion: "1.1"`は変更していない。
 - Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち。
 
+## Candidate B' Acceptance Issue Fix (2026-10-08)
+
+- iPhone standalone Acceptance ①〜⑦のPASSを保持し、Day一覧と検索表示の整合Issue修正中としてAcceptanceを一時停止した。
+- Day一覧で基本ルート進捗と当日追加実績を分離し、Day1は13 / 13完了 + 1件、Day2は14 / 14完了 + 4件、Day3は19 / 19完了と表示した。
+- Day4〜9へCandidate B'確定値に基づく推定距離・徒歩移動時間を追加し、Day10は公共交通併用を主表示、徒歩のみ約14.1kmを補助表示にした。
+- 一覧下部へ攻略コース149件、コース外8件（当日追加取得済み5件、飛び地2件、要確認1件）、全157件の内訳を追加した。
+- 検索結果から旧Master Day表示を外し、攻略コースDay、actual activityから一意に導出した当日追加Day、飛び地回収、要確認を表示するようにした。
+- 最新Backup状態でNorway = 当日追加 Day 1・取得済み、Sweden = 当日追加 Day 2・取得済み、Benin / Zambia = 飛び地回収・未取得、Afghanistan = 要確認、Cuba = 攻略コース Day 4・未取得を確認した。
+- Candidate B' Production / Analysis、v0.7 Storage / Migration、v0.8 World Map RegressionをPASSした。320 / 375 / 390 / 430pxで横overflow、Dayカード内部overflow、検索結果overflowがないことを確認した。
+- `js/data.js`、攻略ルート、ユーザーデータ、Backup形式、Migration、`dataVersion: "1.1"`は変更していない。
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦。
+
 ## Current Next Gate
 
-- Candidate B'をGitHub Pagesへ反映し、Homeメニュー末尾のコンパクトな飛び地回収行、上下街並み、順不同の攻略コース選択を含む`docs/test-plan-candidate-b-prime.md`のiPhone standalone項目を確認する。
+- Candidate B' Acceptance Issue FixをGitHub Pagesへ再反映し、Day一覧の157件内訳・当日追加実績・推定徒歩と検索ラベルをiPhoneで再確認する。
+- 変更部分がPASSしたらAcceptance Step ⑧から再開する。Step ①〜⑦のPASSは保持する。
 - iPhone Acceptance完了前はCandidate B'を`RELEASE / STABLE`へ昇格しない。
 - Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
 - Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。

@@ -4,7 +4,7 @@
 
 ### Candidate B' Production Acceptance
 
-Status: OPEN (PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち)
+Status: OPEN (PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦)
 
 v0.1の効率優先案をPMレビューし、総距離改善を維持しながら徒歩時間と訪問件数を平準化するA / B / Cの3案を作成した。Day3終了後の最新Backup `embassy-rally-backup-2026-10-03 2.json`、正式`js/data.js`、v0.1成果物を基準とする。
 
@@ -22,7 +22,11 @@ v0.1の効率優先案をPMレビューし、総距離改善を維持しなが�
 - B'-1 / B'-2双方で未取得106件の重複0、欠落0、取得済み混入0を機械検証した。Afghanistanは未確定としてルート計算から除外した。
 - PMはDay4新富町駅GOAL、ベナン・ザンビアの飛び地回収、Cameroon Day9維持、Day10公共交通併用を正式決定した。
 - 正式Masterは変更せず、`js/route-plan.js`へ今後の攻略計画を分離してProduction反映した。
-- Home検索は攻略Dayと正式Dayを区別し、通常ルート外の大使館は既存の当日追加画面へ誘導する。
+- iPhone Acceptance ①〜⑦はPASSとして保持する。Day一覧と検索表示の整合Issueを修正し、変更部分の実機再確認までAcceptanceを一時停止する。
+- Day一覧は攻略コース149件とコース外8件を分け、当日追加取得済み5件、飛び地2件、要確認1件を合わせて全157件であることを表示する。
+- Day1〜3の基本進捗13 / 13、14 / 14、19 / 19は変更せず、Day1当日追加1件とDay2当日追加4件を別表示する。
+- Day4〜9はCandidate B'確定値の推定距離・徒歩移動時間、Day10は公共交通併用を表示する。徒歩時間は移動のみの目安とする。
+- Home検索は旧Master Dayを表示せず、攻略コースDay、actual activityから一意に導出した当日追加Day、飛び地回収、要確認を表示する。通常ルート外の大使館は既存の当日追加画面へ誘導する。
 - Homeメニューの`バックアップ / 復元`直下へコンパクトな飛び地回収行を追加し、ベナン・ザンビアの取得状態から`0 / 2`〜`2 / 2 完了 ✓`を毎回導出する。専用のlocalStorage / Backup項目は追加しない。
 - コンパクト行から既存の追加画面へ進み、ベナン・ザンビア2件の正式住所、Google Maps、取得状態、当日追加を確認できる。Home上部の大きな回収カードと個別ボタンは使用しない。
 - Day4〜Day10は実施順ではなく攻略コース番号とし、Day6 → Day4 → Day8のような順不同利用を正式仕様とする。前Day完了条件やunlockは追加しない。
@@ -30,7 +34,7 @@ v0.1の効率優先案をPMレビューし、総距離改善を維持しなが�
 - 最新Backupで取得済み51件、全`acquiredAt`、walkLogs 13件、actualDayActivities 2件、Norway履歴、Day3 Walk Log Hotfixを保持した。
 - `js/data.js`、Backup、localStorage schema、Migration、World Map mapping、`dataVersion: "1.1"`は変更していない。
 - 成果物は`docs/route-reoptimization-v0.2/`へ本番データと分離して保存した。v0.1成果物は分析履歴として維持する。
-- PC自動検証、飛び地進捗`0 → 1 → 2 → 1`導出、Day6 → Day4 → Day8の順不同選択、320 / 375 / 390 / 430pxのブラウザ検証はPASSした。Home上下の街並みは元画像と同じ3:1比率で表示し、横overflowと建物上端のクリップがないことを確認した。GitHub Pages反映後のiPhone standalone Acceptanceを残す。
+- PC自動検証、飛び地進捗`0 → 1 → 2 → 1`導出、Day6 → Day4 → Day8の順不同選択、320 / 375 / 390 / 430pxのブラウザ検証はPASSした。Issue修正後もMaster 157、攻略コース149、当日追加実績5、飛び地2、要確認1、検索ラベル、横overflowなしを再確認した。GitHub Pages再反映後の変更部分確認とStep ⑧以降を残す。
 
 ### v0.8 Walk Log Day Hotfix
 

@@ -1,6 +1,6 @@
 # Candidate B' Production Design
 
-Status: **PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち**
+Status: **PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦**
 
 ## 目的
 
@@ -28,6 +28,14 @@ Day1〜Day3の実績と正式157件Masterを維持しながら、Day4〜Day10の
 | 9 | 12 | 都立大学駅 | 北品川駅 | ザンビアなし、Cameroon維持 |
 | 10 | 9 | 用賀駅 | 田園調布駅 | 公共交通併用Day、Cameroonなし |
 
+### Day一覧の表示
+
+- 攻略コース内の件数はDay1〜10合計149件とし、基本進捗を`13 / 13`等で表示する。
+- Day1は`＋当日追加 1件`、Day2は`＋当日追加 4件`を基本進捗と分離して表示する。
+- 一覧下部で、攻略コース149件、コース外8件（当日追加実績5件、飛び地2件、要確認1件）、全157件の関係を示す。
+- Day4〜9は確定した距離と徒歩移動時間を丸めて表示する。徒歩時間はスタンプ取得、信号待ち、休憩、食事、寄り道を含まない。
+- Day10は`公共交通併用`を主表示し、徒歩のみの場合の約14.1kmは補助情報とする。
+
 Day10では具体的なバス系統、停留所、時刻表を固定しない。画面には公共交通併用Dayであることと、実施日にGoogle Mapsで確認する案内だけを表示する。
 
 ### Day番号の意味
@@ -41,7 +49,7 @@ Day10では具体的なバス系統、停留所、時刻表を固定しない。
 ## 飛び地回収
 
 - ベナンとザンビアは正式Masterに残し、通常攻略ルートからだけ除外する。
-- Home検索では`飛び地回収・正式Day 9`と表示する。
+- Home検索では`飛び地回収・取得状態`と表示し、旧Master Dayは表示しない。
 - Homeには小さな飛び地回収カードを表示し、既存の大使館取得状態から`0 / 2`〜`2 / 2 完了`を毎回導出する。
 - 専用のlocalStorage / Backup項目は持たず、Source of Truthは`state.embassies[id].status`とする。
 - カードの各行または検索結果の選択時は既存の当日追加画面へ移動する。
@@ -53,13 +61,14 @@ Day10では具体的なバス系統、停留所、時刻表を固定しない。
 
 - 正式Masterに残す。
 - 通常攻略ルートと飛び地回収候補の双方から除外する。
-- Home検索では`地図要確認・正式Day 10`と表示する。
+- Home検索では`要確認`と表示し、旧Master Dayや推測した攻略Dayは表示しない。
 - `googleMapsQuery`を推測せず、現行の`地図要確認`を維持する。
 
 ## 検索
 
-- 通常攻略ルート内の大使館は`攻略Day X`を表示する。
-- 攻略DayとMaster Dayが異なる場合は`攻略Day X・正式Day Y`を併記する。
+- 通常攻略ルート内の大使館は`攻略コース Day X・取得状態`を表示し、Master Dayは表示しない。
+- 通常攻略ルート外の当日追加は、`actualDayActivities[].addedEmbassies`から追加先Dayを一意に導出できる場合、`当日追加 Day X・取得状態`を表示する。一意に決められない場合は`通常ルート外・取得状態`とする。
+- Norwayは当日追加Day1、Sweden / Spain / Estonia / Turkeyは当日追加Day2として既存actual activityから導出する。国名ごとのDayを表示用にハードコードしない。
 - 通常攻略ルート外の大使館は、当日追加画面へ検索語を引き継ぐ。
 - `actualDayActivities.addedEmbassies[].masterDay`は常に正式Master Dayを保存する。
 

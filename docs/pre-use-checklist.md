@@ -12,7 +12,7 @@ v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptanc
 
 v0.8 Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ちである。新規記録は`＋記録`を開いたDay画面へ紐付け、保存時の`settings.activeDay`は使用しない。
 
-Candidate B'攻略計画はPM承認・Production反映・PC検証を完了し、iPhone standalone確認待ちである。正式157件Masterと保存データは維持し、今後の攻略計画だけを`js/route-plan.js`へ分離した。
+Candidate B'攻略計画はPM承認・Production反映・PC検証を完了した。iPhone standalone Acceptance ①〜⑦はPASSとして保持し、Day一覧と検索表示のIssue修正再確認までPAUSEDである。正式157件Masterと保存データは維持し、今後の攻略計画だけを`js/route-plan.js`へ分離した。
 
 ## 更新前
 
@@ -52,7 +52,7 @@ Candidate B'攻略計画はPM承認・Production反映・PC検証を完了し、
 - 過去のアメリカ画面でも取得済み状態と現在進捗が維持され、Forwardでバーレーンへ進める
 - Homeの`大使館を検索`が見つけやすく、押しやすい
 - 国名・大使館名の部分一致検索と前後空白の除去が動作する
-- 検索結果に大使館名、攻略Day、必要に応じて正式Day、現在の取得状態が表示される
+- 検索結果に大使館名、現在の攻略コースDayまたは当日追加Day、飛び地 / 要確認、現在の取得状態が表示され、旧Master Dayは表示されない
 - 検索結果から正しいDayのRouteへ移動し、対象カードがすぐ見つかる
 - Searchと検索結果RouteがBack / Forward / Homeの履歴に含まれる
 - 検索だけではmanual NEXTが変わらない
@@ -101,12 +101,12 @@ Candidate B'攻略計画はPM承認・Production反映・PC検証を完了し、
 - Day5〜Day8は各17件で、NEXT、手動NEXT、Google Mapsが動作する
 - Day9は12件、ザンビアなし、Cameroonあり、GOAL北品川駅
 - Day10は9件、Cameroonなし、`公共交通併用Day`案内あり
-- ベナンとザンビアをHome検索でき、`飛び地回収・正式Day 9`から当日追加へ進める
+- ベナンとザンビアをHome検索でき、`飛び地回収・取得状態`から当日追加へ進める
 - Homeの飛び地回収カードが現在の取得状態を`0 / 2`〜`2 / 2 完了`で表示する
 - 飛び地行から住所、Google Maps、当日追加へ進める
 - Day6 → Day4 → Day8のように順不同で選択でき、前Day未完了による制限がない
 - 実際の日付と攻略コース番号がReview / Timelineで混同されない
-- 攻略Dayと正式Dayが異なる大使館の検索表示とRoute遷移が正しい
+- Candidate B'通常対象は現在の攻略コースDayを表示し、当日追加実績はactual activityのDayを表示する
 - Afghanistanが通常ルート外で、`地図要確認`のまま
 - Back / Forward / Home、再起動後復元、Backup / Restore、World Map、記録に退行がない
 
@@ -122,7 +122,7 @@ Candidate B'攻略計画はPM承認・Production反映・PC検証を完了し、
 ## 既知Issue
 
 - Walk Log Day HotfixはiPhone standalone確認待ち
-- Candidate B' ProductionはiPhone standalone Acceptance待ち
+- Candidate B' ProductionはIssue修正のiPhone再確認後、Step ⑧からAcceptance再開待ち
 - 既存Walk LogのDay変更UIはFuture Candidate / PM判断
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はv0.8.1 Candidate
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを将来検討する
