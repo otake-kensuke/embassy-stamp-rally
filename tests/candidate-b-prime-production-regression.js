@@ -70,6 +70,22 @@ assert.strictEqual(plan.id, "candidate-b-prime-2026-10-06");
 assert.strictEqual(plan.status, "PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED");
 assert.deepStrictEqual(JSON.parse(JSON.stringify(context.planDays)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 assert.deepStrictEqual(Object.values(planIds).map((ids) => ids.length), [13, 14, 19, 14, 17, 17, 17, 17, 12, 9]);
+assert.deepStrictEqual(
+  Object.fromEntries([4, 5, 6, 7, 8, 9, 10].map((day) => [day, {
+    km: plan.days[day].estimatedWalkingKm,
+    minutes: plan.days[day].estimatedWalkingMinutes
+  }])),
+  {
+    4: { km: 7.61, minutes: 102 },
+    5: { km: 12.3, minutes: 164 },
+    6: { km: 11.34, minutes: 151 },
+    7: { km: 10.81, minutes: 144 },
+    8: { km: 12.6, minutes: 168 },
+    9: { km: 12.61, minutes: 169 },
+    10: { km: 14.14, minutes: 189 }
+  }
+);
+assert.strictEqual(plan.days[10].mode, "public-transit-hybrid");
 
 for (const day of [1, 2, 3]) {
   const masterIds = master
@@ -163,6 +179,32 @@ assert.deepStrictEqual(restored.actualDayActivities, BACKUP.actualDayActivities)
 assert.strictEqual(restored.manualNextId, BACKUP.manualNextId);
 assert.deepStrictEqual(restored.settings, BACKUP.settings);
 
+const additionsById = new Map();
+for (const activity of restored.actualDayActivities) {
+  for (const addition of activity.addedEmbassies) {
+    const rows = additionsById.get(addition.embassyId) || [];
+    rows.push({ plannedDay: activity.plannedDay, addition });
+    additionsById.set(addition.embassyId, rows);
+  }
+}
+const expectedAddedDays = {
+  "embassy-ノルウェー": 1,
+  "embassy-スウェーデン": 2,
+  "embassy-スペイン": 2,
+  "embassy-エストニア": 2,
+  "embassy-トルコ": 2
+};
+assert.strictEqual(additionsById.size, 5);
+for (const [id, day] of Object.entries(expectedAddedDays)) {
+  assert.deepStrictEqual(additionsById.get(id).map((row) => row.plannedDay), [day]);
+  assert.strictEqual(restored.embassies[id].status, "acquired");
+  assert.strictEqual(context.planDayFor(id), null);
+}
+assert.strictEqual(
+  allPlanIds.length + additionsById.size + plan.recoveryCandidateIds.length + plan.unlocatedIds.length,
+  157
+);
+
 const octoberThirdLogs = restored.walkLogs.filter((log) => (log.timestamp || log.createdAt || "").startsWith("2026-10-03"));
 assert.strictEqual(octoberThirdLogs.length, 4);
 assert(octoberThirdLogs.every((log) => log.day === 3));
@@ -202,6 +244,12 @@ const appSource = fs.readFileSync(path.join(ROOT, "js", "app.js"), "utf8");
 assert(html.includes('js/route-plan.js?v=candidate-b-prime-recovery-20261006'));
 assert(html.includes('id="recoveryProgress"'));
 assert(html.includes('id="recoveryMenuEntry"'));
+assert(html.includes('id="dayPlanBreakdownHeading"'));
+assert(html.includes('id="dayPlanEquation"'));
+assert(html.includes('id="dayAddedSummary"'));
+assert(html.includes('id="dayRecoverySummary"'));
+assert(html.includes('id="dayUnlocatedSummary"'));
+assert(html.includes("徒歩時間は移動のみの目安です。"));
 assert(!html.includes('id="recoveryList"'));
 assert(!html.includes('class="recovery-card"'));
 assert(html.indexOf('data-screen="settings"') < html.indexOf('id="recoveryMenuEntry"'));
@@ -210,6 +258,17 @@ assert(html.includes("攻略コースを選択してください。順不同で�
 assert(appSource.includes("function renderRecoveryCard()"));
 assert(appSource.includes('normalized === "飛び地回収"'));
 assert(appSource.includes("function openRecoveryCandidates()"));
+assert(appSource.includes("function uniqueAddedDayForEmbassy(id)"));
+assert(appSource.includes("function routePlanEstimateText(day)"));
+assert(appSource.includes("function renderDayPlanBreakdown()"));
+assert(appSource.includes("function searchResultDetail(embassy)"));
+assert(appSource.includes('return `攻略コース Day ${plannedDay}・${statusLabel(embassy.id)}`'));
+assert(appSource.includes('return `当日追加 Day ${addedDay}・${statusLabel(embassy.id)}`'));
+assert(appSource.includes('return `飛び地回収・${statusLabel(embassy.id)}`'));
+assert(appSource.includes('if (isUnlocatedRouteCandidate(embassy.id)) return "要確認"'));
+assert(!appSource.includes("飛び地回収・正式Day"));
+assert(!appSource.includes("地図要確認・正式Day"));
+assert(!appSource.includes("通常ルート外・正式Day"));
 assert(appSource.includes('mapLink.className = "search-result-map"'));
 assert(appSource.includes('mapLink.target = "_blank"'));
 assert(!appSource.includes("unlockDay"));
