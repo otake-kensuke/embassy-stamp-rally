@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-home-polish-20261006">
+    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-acceptance-fix-20261008">
   </head>
   <body>
     <div class="app-shell">
@@ -190,6 +190,26 @@
             <p>攻略コースを選択してください。順不同で実施できます。</p>
           </header>
           <div class="day-list" id="dayGrid"></div>
+          <p class="day-estimate-note">徒歩時間は移動のみの目安です。</p>
+          <section class="day-plan-breakdown" aria-labelledby="dayPlanBreakdownHeading">
+            <div class="day-plan-breakdown-heading">
+              <h3 id="dayPlanBreakdownHeading">全157件の内訳</h3>
+              <strong id="dayPlanTotal">157件</strong>
+            </div>
+            <p id="dayPlanEquation">攻略コース 149件 ＋ コース外 8件 ＝ 全157件</p>
+            <div class="day-plan-breakdown-row">
+              <span>当日追加実績</span>
+              <strong id="dayAddedSummary">取得済み 0件</strong>
+            </div>
+            <div class="day-plan-breakdown-row">
+              <span>飛び地回収</span>
+              <strong id="dayRecoverySummary">0 / 2</strong>
+            </div>
+            <div class="day-plan-breakdown-row">
+              <span>要確認</span>
+              <strong id="dayUnlocatedSummary">1件：アフガニスタン</strong>
+            </div>
+          </section>
         </section>
 
         <section class="screen" id="dayScreen" aria-labelledby="dayHeading">
@@ -363,6 +383,6 @@
     <script src="js/log-model.js?v=0.8-walk-log-hotfix"></script>
     <script src="js/backup.js?v=0.7"></script>
     <script src="js/world-map.js?v=0.8"></script>
-    <script src="js/app.js?v=candidate-b-prime-home-polish-20261006"></script>
+    <script src="js/app.js?v=candidate-b-prime-acceptance-fix-20261008"></script>
   </body>
 </html>

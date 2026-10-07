@@ -76,7 +76,7 @@ Prototypeの技術検証は完了しています。
 - v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC・iPhone standalone実機検証PASS
 - v0.8 World Map: 既存の取得状態から世界と5地域を色分け表示するVIEWを追加。Natural Earth 110mの145 polygonと12 marker、地域Summary、取得済み一覧、Navigation復元を実装。PC検証・iPhone standalone Acceptance全12項目PASS
 - v0.8 Walk Log Day Hotfix: 新規記録の`walkLog.day`を保存時の`settings.activeDay`ではなく、`＋記録`を開いたDay画面のNavigation snapshotから確定するよう修正。PC Regression PASS、iPhone standalone確認待ち
-- Candidate B' Production: 正式157件Masterを維持したまま、Day4〜Day10の今後の攻略計画を独立レイヤーへ反映。Homeに取得状態から導出する飛び地回収カードを追加し、Day番号を順不同の攻略コース番号として明確化。PC Regression PASS、iPhone standalone確認待ち
+- Candidate B' Production: 正式157件Masterを維持したまま、Day4〜Day10の今後の攻略計画を独立レイヤーへ反映。Day一覧では攻略コース149件とコース外8件の関係、当日追加実績、Day4〜9の推定徒歩、Day10公共交通併用を表示する。検索はMaster Dayではなく攻略コース・actual activity・飛び地・要確認を表示する。PC Regression PASS、iPhone Acceptance Step ⑦後のIssue修正再確認待ち
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
@@ -96,11 +96,13 @@ v0.8実利用で確認されたWalk LogのDay誤紐付けはHotfixを実装し�
 
 **Walk Log Day Hotfix Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち**
 
-**Candidate B' Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち**
+**Candidate B' Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED**
 
-Candidate B'のDay4〜Day10は実施日・実施順ではなく攻略コース番号です。前Dayの完了条件やunlockはなく、Homeから任意の未完了コースを選択できます。ベナン・ザンビアの飛び地回収進捗は専用保存状態を持たず、既存の大使館取得状態から毎回導出します。
+**iPhone standalone Acceptance: PAUSED at Issue Fix after Step ⑦（①〜⑦ PASS保持）**
 
-Next GateはWalk Log Day HotfixとCandidate B'攻略計画のiPhone standalone確認です。Next Version CandidateはGuide Comment / 吹き出しのVisual Polish、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみ、既存Walk LogのDay変更UIです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
+Candidate B'のDay4〜Day10は実施日・実施順ではなく攻略コース番号です。前Dayの完了条件やunlockはなく、Homeから任意の未完了コースを選択できます。Day一覧の13 / 13等は攻略コース内の進捗を示し、当日追加実績とは分離します。ベナン・ザンビアの飛び地回収進捗は専用保存状態を持たず、既存の大使館取得状態から毎回導出します。
+
+Next GateはWalk Log Day HotfixのiPhone standalone確認と、Candidate B' Issue修正のGitHub Pages反映です。Day一覧の157件内訳・推定情報と検索ラベルをiPhoneで再確認後、Step ⑧からAcceptanceを再開します。Next Version CandidateはGuide Comment / 吹き出しのVisual Polish、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみ、既存Walk LogのDay変更UIです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
 
 ## 開発時の確認
 
