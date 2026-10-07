@@ -269,6 +269,79 @@ function renderRecoveryCard() {
   );
 }
 
+function additionsByEmbassy() {
+  const additions = new Map();
+  state.actualDayActivities.forEach((activity) => {
+    activity.addedEmbassies.forEach((addition) => {
+      if (!additions.has(addition.embassyId)) additions.set(addition.embassyId, []);
+      additions.get(addition.embassyId).push({ activity, addition });
+    });
+  });
+  return additions;
+}
+
+function addedEmbassyIdsForDay(day) {
+  const ids = new Set();
+  state.actualDayActivities
+    .filter((activity) => Number(activity.plannedDay) === Number(day))
+    .forEach((activity) => {
+      activity.addedEmbassies.forEach((addition) => ids.add(addition.embassyId));
+    });
+  return [...ids];
+}
+
+function uniqueAddedDayForEmbassy(id) {
+  const days = new Set(
+    (additionsByEmbassy().get(id) || []).map(({ activity }) => Number(activity.plannedDay))
+  );
+  return days.size === 1 ? [...days][0] : null;
+}
+
+function formatWalkingMinutes(minutes) {
+  const roundedMinutes = Math.round(minutes / 5) * 5;
+  const hours = Math.floor(roundedMinutes / 60);
+  const remainder = roundedMinutes % 60;
+  if (!hours) return `${remainder}分`;
+  return remainder ? `${hours}時間${remainder}分` : `${hours}時間`;
+}
+
+function routePlanEstimateText(day) {
+  const plan = CURRENT_ROUTE_PLAN.days[Number(day)];
+  if (!plan) return [];
+  if (plan.mode === "public-transit-hybrid") {
+    return ["公共交通併用", `徒歩のみの場合 約${plan.estimatedWalkingKm.toFixed(1)}km`];
+  }
+  return [
+    `約${plan.estimatedWalkingKm.toFixed(1)}km・徒歩約${formatWalkingMinutes(plan.estimatedWalkingMinutes)}`
+  ];
+}
+
+function renderDayPlanBreakdown() {
+  const plannedIds = new Set(dayNumbers().flatMap((day) => routePlanIdsForDay(day)));
+  const routeTotal = plannedIds.size;
+  const outsideIds = EMBASSY_MASTER
+    .map((embassy) => embassy.id)
+    .filter((id) => !plannedIds.has(id));
+  const recoveryProgress = recoveryCandidateProgress((id) => embassyStatus(id).status);
+  const addedOutsideIds = outsideIds.filter((id) => {
+    return !isRecoveryCandidate(id)
+      && !isUnlocatedRouteCandidate(id)
+      && (additionsByEmbassy().get(id) || []).length > 0;
+  });
+  const acquiredAddedCount = addedOutsideIds
+    .filter((id) => embassyStatus(id).status === "acquired")
+    .length;
+  const addedSummary = acquiredAddedCount === addedOutsideIds.length
+    ? `取得済み ${acquiredAddedCount}件`
+    : `${addedOutsideIds.length}件（取得済み ${acquiredAddedCount}件）`;
+
+  $("#dayPlanTotal").textContent = `${EMBASSY_MASTER.length}件`;
+  $("#dayPlanEquation").textContent = `攻略コース ${routeTotal}件 ＋ コース外 ${outsideIds.length}件 ＝ 全${EMBASSY_MASTER.length}件`;
+  $("#dayAddedSummary").textContent = addedSummary;
+  $("#dayRecoverySummary").textContent = `${recoveryProgress.done} / ${recoveryProgress.total}`;
+  $("#dayUnlocatedSummary").textContent = `${CURRENT_ROUTE_PLAN.unlocatedIds.length}件：アフガニスタン`;
+}
+
 function renderHomeDays() {
   const dayGrid = $("#dayGrid");
   clearChildren(dayGrid);
@@ -289,8 +362,22 @@ function renderHomeDays() {
     const title = document.createElement("strong");
     title.textContent = `Day ${day}`;
     const label = document.createElement("span");
-    label.textContent = `${progress.done} / ${progress.total} 件`;
+    label.className = "day-progress-line";
+    label.textContent = `${progress.done} / ${progress.total} 件${progress.done === progress.total ? " 完了" : ""}`;
     copy.append(title, label);
+    const addedCount = addedEmbassyIdsForDay(day).length;
+    if (addedCount) {
+      const added = document.createElement("span");
+      added.className = "day-added-line";
+      added.textContent = `＋当日追加 ${addedCount}件`;
+      copy.append(added);
+    }
+    routePlanEstimateText(day).forEach((text, index) => {
+      const estimate = document.createElement("span");
+      estimate.className = index === 0 ? "day-course-estimate" : "day-course-estimate day-course-estimate-secondary";
+      estimate.textContent = text;
+      copy.append(estimate);
+    });
     const arrow = document.createElement("span");
     arrow.className = "day-arrow";
     arrow.setAttribute("aria-hidden", "true");
@@ -298,6 +385,7 @@ function renderHomeDays() {
     button.append(number, copy, arrow);
     dayGrid.append(button);
   });
+  renderDayPlanBreakdown();
 }
 
 function mapControl(embassy, className = "route-map-link") {
@@ -557,6 +645,16 @@ function matchingEmbassies(query) {
   });
 }
 
+function searchResultDetail(embassy) {
+  const plannedDay = routePlanDayForEmbassy(embassy.id);
+  if (plannedDay) return `攻略コース Day ${plannedDay}・${statusLabel(embassy.id)}`;
+  if (isRecoveryCandidate(embassy.id)) return `飛び地回収・${statusLabel(embassy.id)}`;
+  if (isUnlocatedRouteCandidate(embassy.id)) return "要確認";
+  const addedDay = uniqueAddedDayForEmbassy(embassy.id);
+  if (addedDay) return `当日追加 Day ${addedDay}・${statusLabel(embassy.id)}`;
+  return `通常ルート外・${statusLabel(embassy.id)}`;
+}
+
 function renderHomeSearchResults() {
   const container = $("#homeEmbassySearchResults");
   const input = $("#homeEmbassySearch");
@@ -588,18 +686,7 @@ function renderHomeSearchResults() {
     const name = document.createElement("strong");
     name.textContent = embassy.embassyName;
     const detail = document.createElement("span");
-    const plannedDay = routePlanDayForEmbassy(embassy.id);
-    if (plannedDay) {
-      detail.textContent = plannedDay === embassy.day
-        ? `攻略Day ${plannedDay}・${statusLabel(embassy.id)}`
-        : `攻略Day ${plannedDay}・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
-    } else if (isRecoveryCandidate(embassy.id)) {
-      detail.textContent = `飛び地回収・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
-    } else if (isUnlocatedRouteCandidate(embassy.id)) {
-      detail.textContent = `地図要確認・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
-    } else {
-      detail.textContent = `通常ルート外・正式Day ${embassy.day}・${statusLabel(embassy.id)}`;
-    }
+    detail.textContent = searchResultDetail(embassy);
     const arrow = document.createElement("span");
     arrow.className = "nav-arrow";
     arrow.setAttribute("aria-hidden", "true");
