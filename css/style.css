@@ -537,6 +537,7 @@ h2 {
 .day-copy {
   display: grid;
   gap: 2px;
+  min-width: 0;
 }
 
 .day-copy strong {
@@ -546,6 +547,77 @@ h2 {
 .day-copy span {
   color: var(--muted);
   font-size: 13px;
+}
+
+.day-copy .day-added-line {
+  color: var(--green);
+  font-weight: 800;
+}
+
+.day-copy .day-course-estimate {
+  color: var(--ink);
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.day-copy .day-course-estimate-secondary {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.day-estimate-note {
+  margin: 10px 2px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.day-plan-breakdown {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.day-plan-breakdown-heading,
+.day-plan-breakdown-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.day-plan-breakdown-heading h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.day-plan-breakdown-heading > strong {
+  color: var(--green);
+  font-size: 17px;
+}
+
+.day-plan-breakdown > p {
+  margin: 6px 0 9px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.day-plan-breakdown-row {
+  padding: 7px 0;
+  border-top: 1px solid #e5eee9;
+  font-size: 13px;
+}
+
+.day-plan-breakdown-row span {
+  color: var(--muted);
+}
+
+.day-plan-breakdown-row strong {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .day-tone-2,
@@ -1411,7 +1483,7 @@ body {
 .day-button {
   grid-template-columns: 38px 1fr 18px;
   gap: 10px;
-  min-height: 58px;
+  min-height: 64px;
   padding: 7px 12px;
 }
 
@@ -2918,6 +2990,16 @@ body {
 
   .topbar-title h1 {
     font-size: 20px;
+  }
+
+  .day-plan-breakdown-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .day-plan-breakdown-row strong {
+    text-align: left;
   }
 
   .day-guide .day-footer-bubble {
