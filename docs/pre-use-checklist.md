@@ -12,7 +12,7 @@ v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptanc
 
 v0.8 Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ちである。新規記録は`＋記録`を開いたDay画面へ紐付け、保存時の`settings.activeDay`は使用しない。
 
-Candidate B'攻略計画はPM承認・Production反映・PC検証を完了した。iPhone standalone Acceptance ①〜⑦はPASSとして保持し、Day一覧と検索表示のIssue修正再確認までPAUSEDである。正式157件Masterと保存データは維持し、今後の攻略計画だけを`js/route-plan.js`へ分離した。
+Candidate B'攻略計画はPC RegressionとiPhone standalone Acceptance全項目を完了し、RELEASE / STABLEとなった。正式157件Masterと保存データは維持し、今後の攻略計画だけを`js/route-plan.js`へ分離している。
 
 ## 更新前
 
@@ -96,6 +96,8 @@ Candidate B'攻略計画はPM承認・Production反映・PC検証を完了した
 
 ## Candidate B' iPhone standalone確認
 
+Status: **PASS / RELEASE / STABLE**
+
 - Homeが51 / 157で、Day1〜Day3が13 / 13、14 / 14、19 / 19のまま
 - Day4は14件、赤羽橋駅 → 新富町駅、NEXTキューバ、ベナンなし
 - Day5〜Day8は各17件で、NEXT、手動NEXT、Google Mapsが動作する
@@ -122,7 +124,6 @@ Candidate B'攻略計画はPM承認・Production反映・PC検証を完了した
 ## 既知Issue
 
 - Walk Log Day HotfixはiPhone standalone確認待ち
-- Candidate B' ProductionはIssue修正のiPhone再確認後、Step ⑧からAcceptance再開待ち
 - 既存Walk LogのDay変更UIはFuture Candidate / PM判断
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はv0.8.1 Candidate
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを将来検討する

@@ -1,6 +1,6 @@
 # Candidate B' Production Test Plan
 
-Status: **PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦**
+Status: **RELEASE / STABLE（PC Regression PASS / iPhone standalone Acceptance PASS）**
 
 ## PC自動検証
 
@@ -66,7 +66,7 @@ node tests/v08-world-map-regression.js
 
 ## iPhone standalone確認項目
 
-進捗: **①〜⑦ PASS保持。Step ⑦後に発見した表示整合Issueの再確認までPAUSED。**
+進捗: **全項目PASS。Step ⑦後に発見した表示整合Issueの修正部分も再確認PASS。**
 
 1. 更新前に最新のJSON Backupを保存する。**PASS**
 2. 更新後もHomeが51 / 157で、Day1〜Day3が13 / 13、14 / 14、19 / 19である。**PASS**
@@ -78,20 +78,20 @@ node tests/v08-world-map-regression.js
 
 ### Issue修正後に先行して再確認
 
-- Day一覧でDay1 13 / 13 + 当日追加1件、Day2 14 / 14 + 当日追加4件、Day3 19 / 19を確認する。
-- Day4〜9の推定距離・徒歩時間、移動のみの注意書き、Day10の公共交通併用主表示を確認する。
-- 一覧下部で攻略コース149、当日追加取得済み5、飛び地2、要確認1、全157件の関係を確認する。
-- Norway / Swedenが当日追加Day1 / Day2、Benin / Zambiaが飛び地回収、Afghanistanが要確認、Candidate B'通常対象が攻略コースDayで表示され、旧Master Dayが出ないことを確認する。
-- 横overflow、文字重なり、タップ領域不足がないことを確認する。
-8. Homeの`バックアップ / 復元`直下にコンパクトな飛び地回収行があり、ベナン・ザンビアと現在値`0 / 2`を表示する。全体取得状況直下に大きな回収カードが残っていない。
-9. 飛び地回収行全体をタップすると既存の追加画面が開き、ベナン・ザンビア2件の取得状態、正式住所、Google Maps、当日追加を確認できる。
-10. テスト可能な状態で取得・取得取消を行い、行の進捗が`0 / 2 → 1 / 2 → 2 / 2 完了 ✓ → 1 / 2`と変わる。Restore後も既存取得状態から再構成される。
-11. Home検索でもベナンとザンビアが`飛び地回収・取得状態`と表示され、旧Master Dayが表示されない。
-12. Day6 → Day4 → Day8の順に選択でき、各コースのNEXT、manual NEXT、Routeが正常である。前Day未完了による制限がない。
-13. 異なる日付でDay6、Day4を実施しても、actual activityの日付と`plannedDay`、Review / Timeline、Walk Logの所属が混同されない。
-14. 攻略コース内の大使館で現在の攻略コースDayが表示され、検索結果からRouteへ正しく遷移する。
-15. Afghanistanが通常ルート外かつ`地図要確認`のままである。
-16. Back / Forward / Home、再起動後復元、Backup / Restore、World Map、日別記録に退行がない。
-17. iPhone縦画面で飛び地回収行とNEXTが見やすく、横スクロールや文字・ボタンの重なりがない。Home Hero / Footerの街並みで建物上端が不自然に切れていない。
+- Day一覧でDay1 13 / 13 + 当日追加1件、Day2 14 / 14 + 当日追加4件、Day3 19 / 19を確認する。**PASS**
+- Day4〜9の推定距離・徒歩時間、移動のみの注意書き、Day10の公共交通併用主表示を確認する。**PASS**
+- 一覧下部で攻略コース149、当日追加取得済み5、飛び地2、要確認1、全157件の関係を確認する。**PASS**
+- Norway / Swedenが当日追加Day1 / Day2、Benin / Zambiaが飛び地回収、Afghanistanが要確認、Candidate B'通常対象が攻略コースDayで表示され、旧Master Dayが出ないことを確認する。**PASS**
+- 横overflow、文字重なり、タップ領域不足がないことを確認する。**PASS**
+8. Homeの`バックアップ / 復元`直下にコンパクトな飛び地回収行があり、ベナン・ザンビアと現在値`0 / 2`を表示する。全体取得状況直下に大きな回収カードが残っていない。**PASS**
+9. 飛び地回収行全体をタップすると既存の追加画面が開き、ベナン・ザンビア2件の取得状態、正式住所、Google Maps、当日追加を確認できる。**PASS**
+10. テスト可能な状態で取得・取得取消を行い、行の進捗が`0 / 2 → 1 / 2 → 2 / 2 完了 ✓ → 1 / 2`と変わる。Restore後も既存取得状態から再構成される。**PASS**
+11. Home検索でもベナンとザンビアが`飛び地回収・取得状態`と表示され、旧Master Dayが表示されない。**PASS**
+12. Day6 → Day4 → Day8の順に選択でき、各コースのNEXT、manual NEXT、Routeが正常である。前Day未完了による制限がない。**PASS**
+13. 異なる日付でDay6、Day4を実施しても、actual activityの日付と`plannedDay`、Review / Timeline、Walk Logの所属が混同されない。**PASS**
+14. 攻略コース内の大使館で現在の攻略コースDayが表示され、検索結果からRouteへ正しく遷移する。**PASS**
+15. Afghanistanが通常ルート外かつ`地図要確認`のままである。**PASS**
+16. Back / Forward / Home、再起動後復元、Backup / Restore、World Map、日別記録に退行がない。**PASS**
+17. iPhone縦画面で飛び地回収行とNEXTが見やすく、横スクロールや文字・ボタンの重なりがない。Home Hero / Footerの街並みで建物上端が不自然に切れていない。**PASS**
 
-iPhone確認完了前は`RELEASE / STABLE`へ昇格しない。
+Final Result: **Candidate B' RELEASE / STABLE**

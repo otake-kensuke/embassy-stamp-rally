@@ -359,11 +359,17 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - `js/data.js`、攻略ルート、ユーザーデータ、Backup形式、Migration、`dataVersion: "1.1"`は変更していない。
 - Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦。
 
+## Candidate B' Release Close (2026-10-08)
+
+- Candidate B'のiPhone standalone Acceptance全項目をPASSした。
+- Step ①〜⑦の既存PASSに加え、Day一覧の基本進捗と当日追加分離、攻略コース149 + コース外8 = 全157件、Day4〜9の推定徒歩、Day10公共交通併用表示を確認した。
+- Norway / Swedenの当日追加Day、Benin / Zambiaの飛び地回収、Afghanistanの要確認、通常対象の攻略コースDayを検索結果で確認した。
+- PC RegressionとiPhone standalone Acceptanceの完了をもってCandidate B'を`RELEASE / STABLE`とした。
+- Release CloseはDocumentationのみ更新し、正式157件Master、取得済み51件、全`acquiredAt`、Day1〜3の過去記録、walkLogs、actualDayActivities、Backup形式、Migration、`dataVersion: "1.1"`は変更していない。
+
 ## Current Next Gate
 
-- Candidate B' Acceptance Issue FixをGitHub Pagesへ再反映し、Day一覧の157件内訳・当日追加実績・推定徒歩と検索ラベルをiPhoneで再確認する。
-- 変更部分がPASSしたらAcceptance Step ⑧から再開する。Step ①〜⑦のPASSは保持する。
-- iPhone Acceptance完了前はCandidate B'を`RELEASE / STABLE`へ昇格しない。
+- Candidate B'は`RELEASE / STABLE`として実地利用を継続する。
 - Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
 - Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。
 - Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。

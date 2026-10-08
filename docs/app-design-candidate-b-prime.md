@@ -1,6 +1,6 @@
 # Candidate B' Production Design
 
-Status: **PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / iPhone Acceptance PAUSED after Step ⑦**
+Status: **RELEASE / STABLE（PC Regression PASS / iPhone standalone Acceptance PASS）**
 
 ## 目的
 
@@ -80,3 +80,10 @@ Day10では具体的なバス系統、停留所、時刻表を固定しない。
 - World Mapは従来どおり正式157件と取得状態だけを参照する。
 - Navigation snapshotは表示状態だけを保持し、永続データを変更しない。
 - 飛び地回収カードは保存対象ではなく、起動時・取得変更時・Restore後に既存状態から再描画する。
+
+## Acceptance
+
+- PC Regressionで正式Master 157件、Candidate B'攻略計画149件、取得済み51件、既存履歴、保存互換性を確認した。
+- iPhone standaloneでDay4〜10、順不同選択、飛び地回収、Day一覧の157件内訳、推定徒歩、検索表示、Navigation、Backup / Restore、World Mapを確認した。
+- Acceptance全項目PASSをもってCandidate B'を`RELEASE / STABLE`とする。
+- Release CloseはDocumentationのみであり、機能、UI、Master、ユーザーデータ、Backup形式、`dataVersion: "1.1"`を変更しない。
