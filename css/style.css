@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   background: var(--cream);
 }
@@ -335,6 +339,24 @@ h2 {
   border-radius: 8px;
   background: var(--white);
   box-shadow: var(--shadow);
+}
+
+.migration-notice {
+  margin: 16px 20px 0;
+  padding: 12px 14px;
+  border: 1px solid #9ccfb5;
+  border-radius: 8px;
+  background: #eef9f2;
+  color: #0f5f3b;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.migration-notice-blocked {
+  border-color: #d89b61;
+  background: #fff4e5;
+  color: #78451e;
 }
 
 .home-progress-card strong {
@@ -2594,6 +2616,55 @@ body {
 
 .route-plan-note[hidden] {
   display: none;
+}
+
+.route-travel-guidance {
+  margin: 12px 0 16px;
+  padding: 14px;
+  border: 1px solid #b8ddcc;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.route-travel-guidance[hidden] {
+  display: none;
+}
+
+.route-travel-guidance h3 {
+  margin: 0 0 10px;
+  color: #0f5f3b;
+  font-size: 1rem;
+}
+
+#routeTravelLinks {
+  display: grid;
+  gap: 8px;
+}
+
+.route-travel-link {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 2px solid #148fd1;
+  border-radius: 8px;
+  color: #087bb8;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+}
+
+.route-travel-link-transit {
+  border-color: #0f7a46;
+  color: #0f6a40;
+  background: #eef9f2;
+}
+
+.route-location-note {
+  color: #9a5c16 !important;
+  font-weight: 700;
 }
 
 .route-goal {

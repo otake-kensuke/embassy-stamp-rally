@@ -250,8 +250,25 @@ Candidate B' Production:
 - 正式Master Day、取得済み51件、`acquiredAt`、walkLogs、actualDayActivities、manual NEXT、Backup形式は変更しない
 - `dataVersion: "1.1"`とMigrationを維持する
 - PC Regression PASS
+- PC RegressionとiPhone standalone Acceptanceを完了した
+- Final Status: RELEASE / STABLE
+
+Candidate C Production:
+
+- Candidate B'を履歴として残し、2026年10月9日の取得済み23件を取得時刻順のDay4実績へ集約する
+- Day5〜10は未取得83件を17 / 23 / 9 / 18 / 10 / 6件へ重複なく再配置する
+- Day6は23件の高負荷コース、Day10は用賀 → 田園調布の徒歩、田園調布 → 後楽園の鉄道、後楽園 → ベナン → 後楽園の徒歩を分離表示する
+- ベナンはDay10、ザンビアはDay8へ通常攻略対象として戻し、旧飛び地回収UIを表示しない
+- AfghanistanはDay4取得済みとしつつ、Masterの`地図要確認`を維持する
+- TurkmenistanはMasterを変更せず、攻略計画レイヤーで`東京都港区元麻布2-8-4`へ補正し、スタンプ取得地点未確認を表示する
+- 2人分の2026年10月9日Backupは独立に完全一致検証し、Day6 activityと同日Walk Logの所属DayだけをDay4へ移す
+- 正しい当日追加16件と履歴16件を保持し、片方の旧Day4 Chile誤追加1件と履歴1件は監査情報へ残して整理する
+- 移行はfingerprint不一致時に保存せず停止し、markerにより二重実行を防ぐ
+- 正式Master 157件、取得済み74件、全`acquiredAt`、Day1〜3実績、Backup形式、World Map mappingを変更しない
+- `dataVersion: "1.1"`を維持する
+- PC Regression PASS
 - Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED
-- iPhone standalone Acceptance: Step ①〜⑦ PASS保持 / Issue修正の再確認までPAUSED
+- GitHub Pages公開、iPhone端末移行、standalone Acceptanceは未実施
 
 現在の状態:
 
@@ -266,19 +283,21 @@ Candidate B' Production:
 - v0.8 World Mapは実装・PC検証・iPhone standalone Acceptance全12項目を完了した
 - 現在の正式安定版はv0.8 RELEASE / STABLE
 - Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ち
-- Candidate B'攻略計画はPM承認・Production反映・PC検証を完了した。iPhone standalone Acceptance ①〜⑦はPASSし、Day一覧と検索表示のIssue修正再確認までPAUSED
+- Candidate B'攻略計画はPC RegressionとiPhone standalone Acceptanceを完了し、`RELEASE / STABLE`
+- Candidate CはPM承認・Production実装・PC検証を完了した。GitHub Pages公開、2端末の移行、iPhone standalone Acceptanceは未実施
 - 使用開始前チェックリストは `docs/pre-use-checklist.md` で管理する
 
 Next Gate:
 
-- Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する
-- Candidate B' Issue修正をGitHub Pagesへ反映し、Day一覧の149 + 8 = 157、当日追加1件 / 4件、Day4〜9の推定徒歩、Day10公共交通併用、Norway / Sweden / Benin / Zambia / Afghanistanの検索表示を再確認する
-- Issue修正PASS後、Acceptance Step ⑧から再開する
-- Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する
+- Candidate C公開前に夫婦それぞれの最新Backupが確認済み状態と一致することを再確認する
+- PMの別承認後にGitHub Pagesへ公開する
+- 端末ごとにCandidate C移行を実行し、74 / 157、Day4 23 / 23、10月9日の記録、当日追加16件を確認する
+- Day5〜10、Day10区間別Google Maps、Turkmenistan補正、検索、World Map、Backup / RestoreをiPhone standaloneでAcceptanceする
+- Walk Log Day HotfixのDay文脈修正も併せてiPhone standaloneで確認する
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行をv0.8.1 Candidateとする
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない
 - 既存Walk LogのDay変更UIは今回追加せず、別IssueとしてPM判断対象にする
-- Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする
+- AfghanistanとTurkmenistanのスタンプ取得地点確定、`prototype/` / `release/`の役割整理は継続Issueとする
 
 ## v0.5 PM決定事項
 

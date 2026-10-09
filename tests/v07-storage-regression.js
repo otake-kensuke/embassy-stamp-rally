@@ -25,6 +25,7 @@ vm.runInContext(fs.readFileSync(path.join(root, "js", "data.js"), "utf8"), conte
 vm.runInContext(fs.readFileSync(path.join(root, "js", "day-meta.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(root, "js", "route-plan.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(root, "js", "guide-comments.js"), "utf8"), context);
+vm.runInContext(fs.readFileSync(path.join(root, "js", "candidate-c-migration.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(root, "js", "storage.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(root, "js", "activity-model.js"), "utf8"), context);
 vm.runInContext(fs.readFileSync(path.join(root, "js", "log-model.js"), "utf8"), context);
@@ -114,9 +115,10 @@ assert.strictEqual(
 const meta = JSON.parse(JSON.stringify(context.meta));
 assert.deepStrictEqual(meta[1], { area: "南麻布・広尾", start: "恵比寿駅", goal: "麻布十番駅" });
 assert.deepStrictEqual(meta[10], {
-  area: "用賀・桜新町・八雲・田園調布",
+  area: "用賀・桜新町・田園調布・後楽園",
   start: "用賀駅",
-  goal: "田園調布駅",
+  goal: "後楽園駅",
+  via: "田園調布駅",
   modeLabel: "公共交通併用Day"
 });
 

@@ -26,7 +26,8 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `js/app.js`: UI、NEXTロジック、画面復元
 - `js/data.js`: 現在のDay1〜10正式データ
 - `js/day-meta.js`: Day1〜10のSTART / GOAL
-- `js/route-plan.js`: Candidate B'の今後の攻略Day・訪問順と飛び地回収区分
+- `js/route-plan.js`: Candidate Cの攻略Day・訪問順、Day10の徒歩 / 鉄道区間、住所補正
+- `js/candidate-c-migration.js`: 確認済み2026-10-09実績をDay6からDay4へ安全に移す移行処理
 - `js/activity-model.js`: 計画ルートと当日実績の分離
 - `js/log-model.js`: 街歩き記録のDay文脈確定・追加・編集・削除
 - `js/guide-comments.js`: 案内役の動的コメント
@@ -38,6 +39,7 @@ GitHub Pagesでは、リポジトリのルートにある `index.html` を公開
 - `tests/fixtures/v063-golden-state.json`: 個人メモを含まない匿名化Migration fixture
 - `tests/v07-storage-regression.js`: v0.7のMigration・保存・Master回帰テスト
 - `tests/v08-world-map-regression.js`: v0.8のmapping・geometry・取得状態回帰テスト
+- `tests/candidate-c-regression.js`: Candidate Cルート、2人分の移行、競合停止、冪等性の回帰テスト
 - `docs/`: 設計、テスト計画、Issue、作業履歴
 - `prototype/`: 単一HTML版
 - `release/`: 配布確認用HTML
@@ -76,7 +78,8 @@ Prototypeの技術検証は完了しています。
 - v0.7.3 Day2実利用フィードバック反映: Homeからの157件検索、検索結果から該当Routeへの移動、Routeから最新状態のDayへ戻る導線、Guide人物位置の微調整を追加。PC・iPhone standalone実機検証PASS
 - v0.8 World Map: 既存の取得状態から世界と5地域を色分け表示するVIEWを追加。Natural Earth 110mの145 polygonと12 marker、地域Summary、取得済み一覧、Navigation復元を実装。PC検証・iPhone standalone Acceptance全12項目PASS
 - v0.8 Walk Log Day Hotfix: 新規記録の`walkLog.day`を保存時の`settings.activeDay`ではなく、`＋記録`を開いたDay画面のNavigation snapshotから確定するよう修正。PC Regression PASS、iPhone standalone確認待ち
-- Candidate B' Production: 正式157件Masterを維持したまま、Day4〜Day10の今後の攻略計画を独立レイヤーへ反映。Day一覧では攻略コース149件とコース外8件の関係、当日追加実績、Day4〜9の推定徒歩、Day10公共交通併用を表示する。検索はMaster Dayではなく攻略コース・actual activity・飛び地・要確認を表示する。PC Regression PASS、iPhone Acceptance Step ⑦後のIssue修正再確認待ち
+- Candidate B' Production: 正式157件Masterと保存データを維持した攻略計画としてPC・iPhone standalone Acceptanceを完了。Final Statusは`RELEASE / STABLE`
+- Candidate C: 2026年10月9日の23件を取得時刻順のDay4実績へ集約し、未取得83件をDay5〜10へ再構成。ベナン・ザンビアを通常コースへ戻し、Day10を徒歩・鉄道・徒歩の区間別案内とした。2人分の確認済みBackupだけを一致検証後に移行する。PC Regression PASS、GitHub Pages公開・iPhone移行前
 
 v0.6.3はiPhone実機確認後、Day1で実運用されました。Day1基本ルート13件と本来Day4のノルウェー大使館を取得し、実運用データは14 / 157です。
 
@@ -96,13 +99,15 @@ v0.8実利用で確認されたWalk LogのDay誤紐付けはHotfixを実装し�
 
 **Walk Log Day Hotfix Status: IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち**
 
-**Candidate B' Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED**
+**Candidate B' Final Status: RELEASE / STABLE（履歴）**
 
-**iPhone standalone Acceptance: PAUSED at Issue Fix after Step ⑦（①〜⑦ PASS保持）**
+**Candidate C Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED**
 
-Candidate B'のDay4〜Day10は実施日・実施順ではなく攻略コース番号です。前Dayの完了条件やunlockはなく、Homeから任意の未完了コースを選択できます。Day一覧の13 / 13等は攻略コース内の進捗を示し、当日追加実績とは分離します。ベナン・ザンビアの飛び地回収進捗は専用保存状態を持たず、既存の大使館取得状態から毎回導出します。
+**GitHub Pages Publish / iPhone Migration / Acceptance: PENDING**
 
-Next GateはWalk Log Day HotfixのiPhone standalone確認と、Candidate B' Issue修正のGitHub Pages反映です。Day一覧の157件内訳・推定情報と検索ラベルをiPhoneで再確認後、Step ⑧からAcceptanceを再開します。Next Version CandidateはGuide Comment / 吹き出しのVisual Polish、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみ、既存Walk LogのDay変更UIです。Afghanistanの地図情報確定と`prototype/` / `release/`の役割整理も継続Issueです。
+Candidate CのDay番号は実施順ではなく攻略コース番号です。Day4は2026年10月9日の23件を取得時刻順に示す実績コースで、距離は未計測です。Day5〜10は未取得83件を重複なく配置し、Day6は23件の高負荷コース、Day10は田園調布駅から後楽園駅への鉄道移動を徒歩時間から分離します。正式Master 157件、取得状態、取得日時、Backup形式、`dataVersion: "1.1"`は維持します。
+
+Next Gateは公開前の2人分Backup再照合、GitHub Pages公開承認、端末ごとのCandidate C移行、iPhone standalone Acceptanceです。Next Version CandidateはGuide Comment / 吹き出しのVisual Polish、取得数増加時のWorld Map世界タブchip一覧の地域別group / 折りたたみ、既存Walk LogのDay変更UIです。AfghanistanとTurkmenistanのスタンプ取得地点確認、`prototype/` / `release/`の役割整理も継続Issueです。
 
 ## 開発時の確認
 
@@ -121,11 +126,14 @@ node -e "const http=require('http'),fs=require('fs'),path=require('path');const 
 - `docs/issues.md`: Open/Closed Issue
 - `docs/app-design-v*.md`: バージョン別設計
 - `docs/test-plan-v*.md`: バージョン別テスト計画
+- `docs/app-design-candidate-c.md`: Candidate C攻略計画・移行設計
+- `docs/test-plan-candidate-c.md`: Candidate CのPC / iPhone検証計画
 - `docs/release-notes-v*.md`: 検証結果
 
 ## 現時点の制約
 
 - 現在の実装データは正式Day1〜10 157件
-- Day10のアフガニスタンはPrimary Source上でMap欄が `要確認` のため、アプリでは `地図要確認` として無効表示します
+- AfghanistanはCandidate CのDay4実績に含まれますが、Primary Source上のMap欄が`要確認`のため、アプリでは`地図要確認`として無効表示します
+- Turkmenistanは攻略計画レイヤーで元麻布2-8-4へ住所補正していますが、公式ラリーのスタンプ取得地点は未確認です
 - 写真、GPS判定、クラウド同期、ログイン、公式API連携、自動ルート最適化は未実装
 - 写真はiPhone写真アプリで管理し、Webアプリ内には保存しません

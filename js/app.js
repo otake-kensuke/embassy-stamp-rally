@@ -17,7 +17,7 @@ let addSearchQuery = "";
 let worldMapRegion = "world";
 
 const $ = (selector) => document.querySelector(selector);
-const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
+const embassyById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, routePlanEmbassyById(embassy.id)]));
 
 function clearChildren(element) {
   while (element.firstChild) element.removeChild(element.firstChild);
@@ -69,13 +69,14 @@ function ensureTodayActivity(day = state.settings.activeDay) {
 
 function addedRouteEntries(activity = displayActivity()) {
   if (!activity) return [];
+  const plannedIds = new Set(routePlanIdsForDay(activity.plannedDay));
   return activity.addedEmbassies
     .map((addition, index) => ({
       addition,
       embassy: embassyById.get(addition.embassyId),
       index
     }))
-    .filter((entry) => entry.embassy);
+    .filter((entry) => entry.embassy && !plannedIds.has(entry.embassy.id));
 }
 
 function routeEmbassies() {
@@ -259,6 +260,9 @@ function renderProgress() {
 
 function renderRecoveryCard() {
   const progress = recoveryCandidateProgress((id) => embassyStatus(id).status);
+  const entry = $("#recoveryMenuEntry");
+  entry.hidden = progress.total === 0;
+  if (!progress.total) return;
   const progressText = progress.complete
     ? `${progress.done} / ${progress.total} 完了 ✓`
     : `${progress.done} / ${progress.total}`;
@@ -282,10 +286,13 @@ function additionsByEmbassy() {
 
 function addedEmbassyIdsForDay(day) {
   const ids = new Set();
+  const plannedIds = new Set(routePlanIdsForDay(day));
   state.actualDayActivities
     .filter((activity) => Number(activity.plannedDay) === Number(day))
     .forEach((activity) => {
-      activity.addedEmbassies.forEach((addition) => ids.add(addition.embassyId));
+      activity.addedEmbassies.forEach((addition) => {
+        if (!plannedIds.has(addition.embassyId)) ids.add(addition.embassyId);
+      });
     });
   return [...ids];
 }
@@ -298,7 +305,7 @@ function uniqueAddedDayForEmbassy(id) {
 }
 
 function formatWalkingMinutes(minutes) {
-  const roundedMinutes = Math.round(minutes / 5) * 5;
+  const roundedMinutes = Math.round(minutes);
   const hours = Math.floor(roundedMinutes / 60);
   const remainder = roundedMinutes % 60;
   if (!hours) return `${remainder}分`;
@@ -308,11 +315,17 @@ function formatWalkingMinutes(minutes) {
 function routePlanEstimateText(day) {
   const plan = CURRENT_ROUTE_PLAN.days[Number(day)];
   if (!plan) return [];
+  if (plan.actualRoute) return ["2026年10月9日実績・距離未計測"];
   if (plan.mode === "public-transit-hybrid") {
-    return ["公共交通併用", `徒歩のみの場合 約${plan.estimatedWalkingKm.toFixed(1)}km`];
+    return ["公共交通併用", `徒歩区間 約${plan.estimatedWalkingKm.toFixed(1)}km（鉄道時間を含まない）`];
   }
+  const range = plan.estimatedWalkingMinutesRange || [];
+  const minutes = range.length === 2
+    ? `${formatWalkingMinutes(range[0])}〜${formatWalkingMinutes(range[1])}`
+    : "";
   return [
-    `約${plan.estimatedWalkingKm.toFixed(1)}km・徒歩約${formatWalkingMinutes(plan.estimatedWalkingMinutes)}`
+    `約${plan.estimatedWalkingKm.toFixed(1)}km${minutes ? `・徒歩${minutes}` : ""}`,
+    ...(plan.loadLabel ? [plan.loadLabel] : [])
   ];
 }
 
@@ -339,7 +352,9 @@ function renderDayPlanBreakdown() {
   $("#dayPlanEquation").textContent = `攻略コース ${routeTotal}件 ＋ コース外 ${outsideIds.length}件 ＝ 全${EMBASSY_MASTER.length}件`;
   $("#dayAddedSummary").textContent = addedSummary;
   $("#dayRecoverySummary").textContent = `${recoveryProgress.done} / ${recoveryProgress.total}`;
-  $("#dayUnlocatedSummary").textContent = `${CURRENT_ROUTE_PLAN.unlocatedIds.length}件：アフガニスタン`;
+  $("#dayRecoveryRow").hidden = recoveryProgress.total === 0;
+  $("#dayUnlocatedRow").hidden = CURRENT_ROUTE_PLAN.unlocatedIds.length === 0;
+  $("#dayUnlocatedSummary").textContent = `${CURRENT_ROUTE_PLAN.unlocatedIds.length}件`;
 }
 
 function renderHomeDays() {
@@ -494,21 +509,26 @@ function renderDay() {
   $("#dayHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
   $("#routeHeading").textContent = `Day ${state.settings.activeDay} 今日のルート`;
   $("#dayEyebrow").textContent = `Day ${state.settings.activeDay}`;
-  const modeSuffix = meta.modeLabel ? `（${meta.modeLabel}）` : "";
-  $("#dayStartGoal").textContent = `START ${meta.start} → GOAL ${meta.goal}${modeSuffix}`;
+  const via = meta.via ? ` → 経由 ${meta.via}` : "";
+  $("#dayStartGoal").textContent = `START ${meta.start}${via} → GOAL ${meta.goal}`;
   $("#routeStart").textContent = meta.start;
   $("#routeGoal").textContent = meta.goal;
-  $("#routePlanNote").hidden = !meta.modeLabel;
-  $("#routePlanNote").textContent = meta.modeLabel
-    ? `${meta.modeLabel}：具体的な交通経路は実施日にGoogle Mapsで確認してください。`
-    : "";
+  const planNotes = {
+    4: "2026年10月9日の取得時刻順による実績コースです。実測距離は記録されていません。",
+    6: "23件の高負荷コースです。取得時間、昼食、休憩を含めて余裕を持って実施してください。",
+    10: "公共交通併用Dayです。田園調布駅から後楽園駅までは鉄道で移動し、鉄道時間は徒歩時間へ加算していません。"
+  };
+  $("#routePlanNote").hidden = !planNotes[state.settings.activeDay];
+  $("#routePlanNote").textContent = planNotes[state.settings.activeDay] || "";
   $("#dayProgress").hidden = showCompletion;
   $("#activeDayContent").hidden = showCompletion;
   $("#completionPanel").hidden = !showCompletion;
 
   if (!showCompletion && current) {
     $("#nextEmbassyName").textContent = current.embassyName;
-    $("#nextAddress").textContent = current.address;
+    $("#nextAddress").textContent = current.routeLocationNote
+      ? `${current.address}（${current.routeLocationNote}）`
+      : current.address;
     const hasMapQuery = Boolean(current.googleMapsQuery);
     $("#mapButton").href = hasMapQuery
       ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(current.googleMapsQuery)}`
@@ -555,6 +575,12 @@ function createRouteCard(embassy, options = {}) {
   address.className = "route-address";
   address.textContent = embassy.address;
   info.append(order, name, statusText, address);
+  if (embassy.routeLocationNote) {
+    const locationNote = document.createElement("p");
+    locationNote.className = "route-location-note";
+    locationNote.textContent = embassy.routeLocationNote;
+    info.append(locationNote);
+  }
   if (options.added) {
     const original = document.createElement("p");
     original.className = "route-original-day";
@@ -623,6 +649,39 @@ function renderRoute() {
     });
   }
   $("#returnToDayButton").textContent = `Day ${state.settings.activeDay}へ戻る`;
+  renderRouteTravelGuidance();
+}
+
+function routeTravelUrl(segment) {
+  const params = new URLSearchParams({
+    api: "1",
+    origin: segment.origin,
+    destination: segment.destination,
+    travelmode: segment.travelMode
+  });
+  const waypoints = segment.embassyIds
+    .map((id) => routePlanEmbassyById(id))
+    .filter((embassy) => embassy && embassy.googleMapsQuery)
+    .map((embassy) => embassy.googleMapsQuery);
+  if (waypoints.length) params.set("waypoints", waypoints.join("|"));
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+
+function renderRouteTravelGuidance() {
+  const guidance = $("#routeTravelGuidance");
+  const links = $("#routeTravelLinks");
+  const segments = routePlanTravelSegmentsForDay(state.settings.activeDay);
+  clearChildren(links);
+  guidance.hidden = segments.length === 0;
+  segments.forEach((segment) => {
+    const link = document.createElement("a");
+    link.className = `route-travel-link route-travel-link-${segment.travelMode}`;
+    link.href = routeTravelUrl(segment);
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = segment.label;
+    links.append(link);
+  });
 }
 
 function statusLabel(id) {
@@ -642,7 +701,7 @@ function matchingEmbassies(query) {
   return EMBASSY_MASTER.filter((embassy) => {
     return embassy.country.toLocaleLowerCase("ja-JP").includes(normalized)
       || embassy.embassyName.toLocaleLowerCase("ja-JP").includes(normalized);
-  });
+  }).map((embassy) => routePlanEmbassyById(embassy.id));
 }
 
 function searchResultDetail(embassy) {
@@ -957,8 +1016,17 @@ function renderWorldMapScreen() {
   WorldMapFeature.render($("#world-mapScreen"), state, worldMapRegion);
 }
 
+function renderMigrationNotice() {
+  const notice = $("#migrationNotice");
+  const migration = LAST_STATE_PREPARATION_NOTICE;
+  notice.hidden = !migration;
+  notice.classList.toggle("migration-notice-blocked", Boolean(migration && migration.status === "blocked"));
+  notice.textContent = migration ? migration.message : "";
+}
+
 function render() {
   renderNavigation();
+  renderMigrationNotice();
   renderProgress();
   renderRecoveryCard();
   renderHomeDays();
@@ -1256,9 +1324,9 @@ $("#importInput").addEventListener("change", async (event) => {
     }
     state = prepared.state;
     state = saveState(state);
-    $("#settingsMessage").textContent = prepared.migrated
-      ? "旧Backupをv1.1へ移行して復元しました。"
-      : "復元しました。";
+    $("#settingsMessage").textContent = prepared.candidateCMigrationApplied
+      ? "Candidate Cへ移行して復元しました。新しいバックアップを作成してください。"
+      : (prepared.migrated ? "旧Backupをv1.1へ移行して復元しました。" : "復元しました。");
     navigationHistory = [];
     navigationIndex = -1;
     const restoredScreen = state.settings.lastScreen === "day" ? "day" : "home";

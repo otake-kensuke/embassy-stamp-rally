@@ -2,6 +2,26 @@
 
 ## Open Issues
 
+### Candidate C Publish / Device Migration Gate
+
+Status: OPEN (PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED)
+
+Candidate Cの攻略計画、2人分の確認済みBackup移行、競合停止、二重実行防止はPC検証済み。GitHub Pagesへの公開、各iPhoneの移行、standalone Acceptanceは未実施。
+
+公開前後のGate:
+
+- 端末ごとに最新Backupを作成し、確認済みfingerprintと一致することを確認する。
+- 一致しない場合は移行と保存を停止し、データを変更しない。
+- 移行後に74 / 157、Day4 23 / 23、当日追加16件、10月9日のWalk Log 4件を確認する。
+- Day5〜10、Day10区間別Google Maps、検索、World Map、Backup / Restoreを実機確認する。
+- 2端末を独立に扱い、一方のBackupを他方へ復元しない。
+
+### Turkmenistan Stamp Location
+
+Status: OPEN (住所補正実装済み / スタンプ取得地点未確認)
+
+Candidate Cでは正式Masterを変更せず、攻略計画レイヤーで`東京都港区元麻布2-8-4`を訪問候補として表示する。Google Maps導線は補正住所を使うが、公式ラリーのスタンプ取得地点は実施前に確認する。
+
 ### v0.8 Walk Log Day Hotfix
 
 Status: OPEN (IMPLEMENTED / PC VERIFIED / iPhone standalone確認待ち)
@@ -45,7 +65,7 @@ Status: OPEN (Future Candidate)
 
 Status: OPEN
 
-Primary Source marks Day10 Afghanistan as `要確認` rather than a normal Google Maps URL. The app does not infer a map query and shows the map button as disabled for this entry.
+Primary Source marks Afghanistan as `要確認` rather than a normal Google Maps URL. Candidate CではDay4取得済み実績に含めるが、アプリはmap queryを推測せず、地図ボタンを無効表示する。
 
 Current behavior:
 

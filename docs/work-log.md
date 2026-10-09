@@ -367,12 +367,32 @@ Note: `v0.6.3` / `v0.6.4 Final Implementation` はDesign Targetへ近づける�
 - PC RegressionとiPhone standalone Acceptanceの完了をもってCandidate B'を`RELEASE / STABLE`とした。
 - Release CloseはDocumentationのみ更新し、正式157件Master、取得済み51件、全`acquiredAt`、Day1〜3の過去記録、walkLogs、actualDayActivities、Backup形式、Migration、`dataVersion: "1.1"`は変更していない。
 
+## Candidate C Production Implementation (2026-10-09)
+
+- PM承認済みCandidate Cを`js/route-plan.js`へ反映し、Candidate B'は履歴として残した。
+- Day1〜3を変更せず、2026年10月9日に取得した23件を取得時刻順のDay4実績コースとした。実測距離はないため計画距離を表示しない。
+- 未取得83件をDay5〜10へ17 / 23 / 9 / 18 / 10 / 6件で配置した。ベナンをDay10、ザンビアをDay8へ戻し、重複・欠落・取得済み混入0を確認した。
+- Day6を23件の高負荷コースとして表示し、Day10を用賀 → 田園調布の徒歩、田園調布 → 後楽園の鉄道、後楽園 → ベナン → 後楽園の徒歩へ分割した。
+- TurkmenistanはMasterを変更せず、攻略計画レイヤーで`東京都港区元麻布2-8-4`へ補正した。スタンプ取得地点未確認の注記を追加した。
+- `js/candidate-c-migration.js`を追加し、2人分の確認済みBackupだけをfingerprint完全一致後に移行するようにした。
+- 移行では取得済み74件、全status / `acquiredAt` / `updatedAt`を維持し、2026年10月9日のDay6 activityとWalk Log 4件の所属DayだけをDay4へ変更する。
+- 正しい当日追加16件と履歴16件を保持し、片方の旧Day4 Chile誤追加1件と履歴1件はmigration auditへ保存して表示対象から除外する。
+- migration markerによる二重実行防止と、fingerprint不一致時の保存停止を実装した。
+- Candidate C回帰テストは匿名fixtureを常時使用し、個人Backup2件はローカルに存在する場合だけ追加監査する。個人Backupとローカル検討資料は`.gitignore`対象とした。
+- PCブラウザで新規0 / 157、移行後74 / 157、Day4 23 / 23、当日追加非重複、Day10区間別案内、320 / 375 / 390 / 430px横overflowなしを確認した。
+- 正式Master 157件の署名、ID、Day1〜3、Backup形式、World Map mapping、`dataVersion: "1.1"`を維持した。
+- GitHubへのpush、GitHub Pages公開、本番端末移行は実施していない。
+- Status: PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED / PUBLISH & IPHONE ACCEPTANCE PENDING。
+
 ## Current Next Gate
 
-- Candidate B'は`RELEASE / STABLE`として実地利用を継続する。
-- Walk Log Day HotfixをGitHub Pagesへ反映し、iPhone standaloneでDay3 / Day9の新規記録Dayを確認する。
-- Hotfix確認後、v0.8 RELEASE / STABLEとして実地利用を継続する。
+- Candidate B'は`RELEASE / STABLE`の履歴として維持する。
+- Candidate C公開直前に夫婦それぞれの最新Backupを再取得し、確認済み状態との一致を確認する。
+- PMの公開承認後にGitHub Pagesへ反映する。
+- 端末ごとにCandidate C移行を実施し、74 / 157、Day4 23 / 23、当日追加16件、10月9日のWalk Log 4件を確認する。
+- Day5〜10、Day10の徒歩 / 鉄道 / 徒歩導線、Turkmenistan補正、検索、World Map、Backup / RestoreをiPhone standaloneでAcceptanceする。
+- Walk Log Day Hotfixも同じAcceptanceで確認する。
 - Guide Comment / 吹き出しVisual Polishはv0.8.1 Candidateとして維持する。
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを検討するが、現時点では変更しない。
 - 既存Walk LogのDay変更UIは別IssueとしてPM判断する。
-- Afghanistanの地図情報確定、`prototype/` / `release/`の役割整理は継続Issueとする。
+- AfghanistanとTurkmenistanのスタンプ取得地点確定、`prototype/` / `release/`の役割整理は継続Issueとする。

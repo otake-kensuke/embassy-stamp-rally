@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>大使館スタンプラリー</title>
-    <link rel="stylesheet" href="css/style.css?v=candidate-b-prime-acceptance-fix-20261008">
+    <link rel="stylesheet" href="css/style.css?v=candidate-c-20261009">
   </head>
   <body>
     <div class="app-shell">
@@ -59,6 +59,8 @@
             <img class="home-skyline" src="assets/tokyo-skyline.png?v=0.7" alt="">
           </div>
 
+          <p class="migration-notice" id="migrationNotice" role="status" hidden></p>
+
           <section class="home-progress-card" aria-label="全体取得状況">
             <div>
               <p class="eyebrow">全体取得状況</p>
@@ -102,7 +104,7 @@
               <strong>バックアップ / 復元</strong>
               <span class="nav-arrow" aria-hidden="true">›</span>
             </button>
-            <button class="nav-button recovery-menu-entry" id="recoveryMenuEntry" data-recovery-entry type="button">
+            <button class="nav-button recovery-menu-entry" id="recoveryMenuEntry" data-recovery-entry type="button" hidden>
               <span class="nav-icon icon-recovery" aria-hidden="true"></span>
               <span class="recovery-menu-copy">
                 <small>通常ルート外</small>
@@ -196,16 +198,16 @@
               <h3 id="dayPlanBreakdownHeading">全157件の内訳</h3>
               <strong id="dayPlanTotal">157件</strong>
             </div>
-            <p id="dayPlanEquation">攻略コース 149件 ＋ コース外 8件 ＝ 全157件</p>
+            <p id="dayPlanEquation">攻略コース 152件 ＋ コース外 5件 ＝ 全157件</p>
             <div class="day-plan-breakdown-row">
               <span>当日追加実績</span>
               <strong id="dayAddedSummary">取得済み 0件</strong>
             </div>
-            <div class="day-plan-breakdown-row">
+            <div class="day-plan-breakdown-row" id="dayRecoveryRow" hidden>
               <span>飛び地回収</span>
               <strong id="dayRecoverySummary">0 / 2</strong>
             </div>
-            <div class="day-plan-breakdown-row">
+            <div class="day-plan-breakdown-row" id="dayUnlocatedRow" hidden>
               <span>要確認</span>
               <strong id="dayUnlocatedSummary">1件：アフガニスタン</strong>
             </div>
@@ -281,6 +283,10 @@
           </header>
           <button class="route-day-button" id="returnToDayButton" type="button">Day 1へ戻る</button>
           <p class="route-plan-note" id="routePlanNote" hidden></p>
+          <section class="route-travel-guidance" id="routeTravelGuidance" aria-labelledby="routeTravelGuidanceHeading" hidden>
+            <h3 id="routeTravelGuidanceHeading">区間別Google Maps</h3>
+            <div id="routeTravelLinks"></div>
+          </section>
           <div class="route-terminal route-start"><span>START</span><strong id="routeStart">恵比寿駅</strong></div>
           <section class="route-section" aria-labelledby="plannedRouteHeading">
             <h3 id="plannedRouteHeading">基本ルート</h3>
@@ -375,14 +381,15 @@
     <p class="toast-message" id="toastMessage" role="status" aria-live="polite" hidden></p>
 
     <script src="js/data.js?v=0.7"></script>
-    <script src="js/day-meta.js?v=candidate-b-prime-20261006"></script>
-    <script src="js/route-plan.js?v=candidate-b-prime-recovery-20261006"></script>
+    <script src="js/day-meta.js?v=candidate-c-20261009"></script>
+    <script src="js/route-plan.js?v=candidate-c-20261009"></script>
     <script src="js/guide-comments.js?v=0.7"></script>
-    <script src="js/storage.js?v=0.7"></script>
+    <script src="js/candidate-c-migration.js?v=candidate-c-20261009"></script>
+    <script src="js/storage.js?v=candidate-c-20261009"></script>
     <script src="js/activity-model.js?v=0.7"></script>
     <script src="js/log-model.js?v=0.8-walk-log-hotfix"></script>
     <script src="js/backup.js?v=0.7"></script>
     <script src="js/world-map.js?v=0.8"></script>
-    <script src="js/app.js?v=candidate-b-prime-acceptance-fix-20261008"></script>
+    <script src="js/app.js?v=candidate-c-20261009"></script>
   </body>
 </html>

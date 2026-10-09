@@ -2,6 +2,7 @@ const STORAGE_KEY = "embassyStampRally.appState";
 const DATA_VERSION = "1.1";
 const LEGACY_DATA_VERSION = "1.0";
 const VALID_STATUSES = new Set(["unvisited", "acquired", "check", "skipped"]);
+let LAST_STATE_PREPARATION_NOTICE = null;
 
 function cloneStateValue(value) {
   return JSON.parse(JSON.stringify(value));
@@ -196,7 +197,7 @@ function validateStateV11(candidate) {
   return "";
 }
 
-function prepareState(candidate) {
+function prepareState(candidate, options = {}) {
   if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) {
     return { state: null, migrated: false, error: "JSONの形式が正しくありません。" };
   }
@@ -216,20 +217,44 @@ function prepareState(candidate) {
     };
   }
 
-  const normalized = normalizeV11State(working);
-  const error = validateStateV11(normalized);
-  return error
-    ? { state: null, migrated, error }
-    : { state: normalized, migrated, error: "" };
+  let normalized = normalizeV11State(working);
+  let error = validateStateV11(normalized);
+  if (error) return { state: null, migrated, error };
+
+  const candidateCMigration = prepareCandidateCMigration(normalized);
+  if (candidateCMigration.status === "blocked" && !options.allowCandidateCConflict) {
+    return {
+      state: null,
+      migrated,
+      candidateCMigration,
+      error: candidateCMigration.message
+    };
+  }
+  if (candidateCMigration.status === "applied") {
+    normalized = normalizeV11State(candidateCMigration.state);
+    error = validateStateV11(normalized);
+    if (error) return { state: null, migrated, candidateCMigration, error };
+  }
+  return {
+    state: normalized,
+    migrated,
+    candidateCMigration,
+    candidateCMigrationApplied: candidateCMigration.status === "applied",
+    error: ""
+  };
 }
 
 function loadState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return createInitialState();
-    const prepared = prepareState(JSON.parse(saved));
+    const prepared = prepareState(JSON.parse(saved), { allowCandidateCConflict: true });
     if (prepared.error) throw new Error(prepared.error);
-    if (prepared.migrated) {
+    LAST_STATE_PREPARATION_NOTICE = prepared.candidateCMigration
+      && ["applied", "blocked"].includes(prepared.candidateCMigration.status)
+      ? prepared.candidateCMigration
+      : null;
+    if (prepared.migrated || prepared.candidateCMigrationApplied) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(prepared.state));
     }
     return prepared.state;
@@ -240,8 +265,12 @@ function loadState() {
 }
 
 function saveState(state) {
-  const prepared = prepareState(state);
+  const prepared = prepareState(state, { allowCandidateCConflict: true });
   if (prepared.error) throw new Error(prepared.error);
+  if (prepared.candidateCMigration && prepared.candidateCMigration.status === "blocked") {
+    LAST_STATE_PREPARATION_NOTICE = prepared.candidateCMigration;
+    return prepared.state;
+  }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(prepared.state));
   return prepared.state;
 }

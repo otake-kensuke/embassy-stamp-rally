@@ -1,153 +1,114 @@
 const CURRENT_ROUTE_PLAN = {
-  id: "candidate-b-prime-2026-10-06",
+  id: "candidate-c-2026-10-09",
   status: "PM APPROVED / PRODUCTION IMPLEMENTED / PC VERIFIED",
-  recoveryCandidateIds: ["embassy-ベナン", "embassy-ザンビア"],
-  unlocatedIds: ["embassy-アフガニスタン"],
+  recoveryCandidateIds: [],
+  unlocatedIds: [],
+  mapUnconfirmedIds: ["embassy-アフガニスタン", "embassy-トルクメニスタン"],
+  addressOverrides: {
+    "embassy-トルクメニスタン": {
+      address: "〒106-0046 東京都港区元麻布2-8-4",
+      googleMapsQuery: "トルクメニスタン大使館 東京都港区元麻布2-8-4",
+      locationNote: "公式ラリーのスタンプ取得地点は要確認"
+    }
+  },
   days: {
     4: {
-      estimatedWalkingKm: 7.61,
-      estimatedWalkingMinutes: 102,
+      actualDate: "2026-10-09",
+      actualRoute: true,
       embassyIds: [
-        "embassy-キューバ",
-        "embassy-ハイチ",
-        "embassy-ホンジュラス",
-        "embassy-パラオ",
-        "embassy-サモア",
-        "embassy-ナミビア",
-        "embassy-エクアドル",
-        "embassy-カザフスタン",
-        "embassy-トンガ",
-        "embassy-ナイジェリア",
-        "embassy-コソボ",
-        "embassy-モーリシャス",
-        "embassy-アルバニア",
-        "embassy-ベネズエラ"
+        "embassy-チリ", "embassy-キューバ", "embassy-トンガ", "embassy-ボリビア",
+        "embassy-グアテマラ", "embassy-ホンジュラス", "embassy-ハイチ", "embassy-フィジー",
+        "embassy-ロシア", "embassy-サモア", "embassy-ナミビア", "embassy-エクアドル",
+        "embassy-パラオ", "embassy-アフガニスタン", "embassy-カザフスタン", "embassy-キルギス",
+        "embassy-オーストラリア", "embassy-イタリア", "embassy-ハンガリー", "embassy-クウェート",
+        "embassy-ジンバブエ", "embassy-スリランカ", "embassy-ウズベキスタン"
       ]
     },
     5: {
-      estimatedWalkingKm: 12.3,
-      estimatedWalkingMinutes: 164,
+      estimatedWalkingKm: 11.6,
+      estimatedWalkingMinutesRange: [155, 174],
       embassyIds: [
-        "embassy-アンゴラ",
-        "embassy-ブルキナファソ",
-        "embassy-ベトナム",
-        "embassy-ブルガリア",
-        "embassy-ラトビア",
-        "embassy-ヨルダン",
-        "embassy-イラク",
-        "embassy-ニュージーランド",
-        "embassy-モンゴル",
-        "embassy-レバノン",
-        "embassy-マレーシア",
-        "embassy-UAE",
-        "embassy-ギニア",
-        "embassy-セネガル",
-        "embassy-エジプト",
-        "embassy-デンマーク",
+        "embassy-アンゴラ", "embassy-ブルキナファソ", "embassy-ベトナム", "embassy-ブルガリア",
+        "embassy-ラトビア", "embassy-ヨルダン", "embassy-イラク", "embassy-ニュージーランド",
+        "embassy-モンゴル", "embassy-レバノン", "embassy-マレーシア", "embassy-UAE",
+        "embassy-ギニア", "embassy-セネガル", "embassy-エジプト", "embassy-デンマーク",
         "embassy-リビア"
       ]
     },
     6: {
-      estimatedWalkingKm: 11.34,
-      estimatedWalkingMinutes: 151,
+      estimatedWalkingKm: 11.3,
+      estimatedWalkingMinutesRange: [151, 170],
+      loadLabel: "23件・高負荷コース",
       embassyIds: [
-        "embassy-グアテマラ",
-        "embassy-ロシア",
-        "embassy-フィジー",
-        "embassy-ボリビア",
-        "embassy-チリ",
-        "embassy-イタリア",
-        "embassy-キルギス",
-        "embassy-シンガポール",
-        "embassy-オーストリア",
-        "embassy-リトアニア",
-        "embassy-サンマリノ",
-        "embassy-中国",
-        "embassy-ポルトガル",
-        "embassy-ラオス",
-        "embassy-コスタリカ",
-        "embassy-ガーナ",
-        "embassy-トルクメニスタン"
+        "embassy-コスタリカ", "embassy-パナマ", "embassy-フィリピン", "embassy-シンガポール",
+        "embassy-オーストリア", "embassy-アルゼンチン", "embassy-トルクメニスタン", "embassy-スロバキア",
+        "embassy-ジャマイカ", "embassy-サンマリノ", "embassy-リトアニア", "embassy-ラオス",
+        "embassy-エルサルバドル", "embassy-ガーナ", "embassy-ルーマニア", "embassy-ギリシャ",
+        "embassy-ウクライナ", "embassy-中国", "embassy-ポルトガル", "embassy-カタール",
+        "embassy-マダガスカル", "embassy-ポーランド", "embassy-アルジェリア"
       ]
     },
     7: {
-      estimatedWalkingKm: 10.81,
-      estimatedWalkingMinutes: 144,
+      estimatedWalkingKm: 8.2,
+      estimatedWalkingMinutesRange: [109, 123],
       embassyIds: [
-        "embassy-クウェート",
-        "embassy-ウズベキスタン",
-        "embassy-スリランカ",
-        "embassy-アルゼンチン",
-        "embassy-ジャマイカ",
-        "embassy-スロバキア",
-        "embassy-マダガスカル",
-        "embassy-カタール",
-        "embassy-ウクライナ",
-        "embassy-ルーマニア",
-        "embassy-ギリシャ",
-        "embassy-エルサルバドル",
-        "embassy-パナマ",
-        "embassy-サウジアラビア",
-        "embassy-マルタ",
-        "embassy-オランダ",
-        "embassy-ウルグアイ"
+        "embassy-サウジアラビア", "embassy-オランダ", "embassy-マルタ", "embassy-ナイジェリア",
+        "embassy-コソボ", "embassy-ウルグアイ", "embassy-モーリシャス", "embassy-アルバニア",
+        "embassy-ベネズエラ"
       ]
     },
     8: {
-      estimatedWalkingKm: 12.6,
-      estimatedWalkingMinutes: 168,
+      estimatedWalkingKm: 12.1,
+      estimatedWalkingMinutesRange: [161, 181],
       embassyIds: [
-        "embassy-フィリピン",
-        "embassy-オーストラリア",
-        "embassy-ハンガリー",
-        "embassy-ジンバブエ",
-        "embassy-エチオピア",
-        "embassy-マラウイ",
-        "embassy-エリトリア",
-        "embassy-タジキスタン",
-        "embassy-インドネシア",
-        "embassy-ベラルーシ",
-        "embassy-北マケドニア",
-        "embassy-マリ",
-        "embassy-コートジボワール",
-        "embassy-タイ",
-        "embassy-コロンビア",
-        "embassy-アルジェリア",
-        "embassy-ポーランド"
+        "embassy-マラウイ", "embassy-エチオピア", "embassy-エリトリア", "embassy-タジキスタン",
+        "embassy-インドネシア", "embassy-ベラルーシ", "embassy-北マケドニア", "embassy-コートジボワール",
+        "embassy-タイ", "embassy-コロンビア", "embassy-マリ", "embassy-ザンビア",
+        "embassy-ボツワナ", "embassy-ジブチ", "embassy-ミャンマー", "embassy-ブルネイ",
+        "embassy-セルビア", "embassy-アイスランド"
       ]
     },
     9: {
-      estimatedWalkingKm: 12.61,
-      estimatedWalkingMinutes: 169,
+      estimatedWalkingKm: 11.5,
+      estimatedWalkingMinutesRange: [153, 172],
       embassyIds: [
-        "embassy-スーダン",
-        "embassy-カメルーン",
-        "embassy-モーリタニア",
-        "embassy-ネパール",
-        "embassy-パプアニューギニア",
-        "embassy-ミクロネシア",
-        "embassy-ボツワナ",
-        "embassy-セルビア",
-        "embassy-アイスランド",
-        "embassy-ブルネイ",
-        "embassy-ジブチ",
-        "embassy-ミャンマー"
+        "embassy-モーリタニア", "embassy-ミクロネシア", "embassy-パプアニューギニア", "embassy-ネパール",
+        "embassy-カメルーン", "embassy-ガボン", "embassy-アゼルバイジャン", "embassy-スーダン",
+        "embassy-トーゴ", "embassy-ケニア"
       ]
     },
     10: {
-      estimatedWalkingKm: 14.14,
-      estimatedWalkingMinutes: 189,
+      estimatedWalkingKm: 11.7,
       mode: "public-transit-hybrid",
       embassyIds: [
-        "embassy-タンザニア",
-        "embassy-モザンビーク",
-        "embassy-ガボン",
-        "embassy-アゼルバイジャン",
-        "embassy-トーゴ",
-        "embassy-ケニア",
-        "embassy-ルワンダ",
-        "embassy-マーシャル諸島",
-        "embassy-コンゴ共和国"
+        "embassy-タンザニア", "embassy-モザンビーク", "embassy-マーシャル諸島",
+        "embassy-ルワンダ", "embassy-コンゴ共和国", "embassy-ベナン"
+      ],
+      travelSegments: [
+        {
+          label: "徒歩 1：用賀駅 → 田園調布駅",
+          travelMode: "walking",
+          origin: "用賀駅",
+          destination: "田園調布駅",
+          embassyIds: [
+            "embassy-タンザニア", "embassy-モザンビーク", "embassy-マーシャル諸島",
+            "embassy-ルワンダ", "embassy-コンゴ共和国"
+          ]
+        },
+        {
+          label: "鉄道：田園調布駅 → 後楽園駅",
+          travelMode: "transit",
+          origin: "田園調布駅",
+          destination: "後楽園駅",
+          embassyIds: []
+        },
+        {
+          label: "徒歩 2：後楽園駅 → ベナン → 後楽園駅",
+          travelMode: "walking",
+          origin: "後楽園駅",
+          destination: "後楽園駅",
+          embassyIds: ["embassy-ベナン"]
+        }
       ]
     }
   }
@@ -168,11 +129,24 @@ function routePlanIdsForDay(day) {
   return [...(CURRENT_ROUTE_PLAN.days[numericDay]?.embassyIds || [])];
 }
 
+function routePlanEmbassyById(id) {
+  const embassy = EMBASSY_MASTER.find((entry) => entry.id === id);
+  if (!embassy) return null;
+  const override = CURRENT_ROUTE_PLAN.addressOverrides[id];
+  return override
+    ? {
+      ...embassy,
+      address: override.address,
+      googleMapsQuery: override.googleMapsQuery,
+      routeLocationNote: override.locationNote
+    }
+    : { ...embassy };
+}
+
 function routePlanEmbassies(day) {
-  const masterById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
   return routePlanIdsForDay(day)
     .map((id, index) => {
-      const embassy = masterById.get(id);
+      const embassy = routePlanEmbassyById(id);
       return embassy ? { ...embassy, routeOrder: index + 1 } : null;
     })
     .filter(Boolean);
@@ -190,9 +164,8 @@ function isRecoveryCandidate(id) {
 }
 
 function recoveryCandidateEmbassies() {
-  const masterById = new Map(EMBASSY_MASTER.map((embassy) => [embassy.id, embassy]));
   return CURRENT_ROUTE_PLAN.recoveryCandidateIds
-    .map((id) => masterById.get(id))
+    .map((id) => routePlanEmbassyById(id))
     .filter(Boolean);
 }
 
@@ -202,10 +175,14 @@ function recoveryCandidateProgress(statusForId) {
   return {
     done,
     total: ids.length,
-    complete: done === ids.length
+    complete: ids.length > 0 && done === ids.length
   };
 }
 
 function isUnlocatedRouteCandidate(id) {
   return CURRENT_ROUTE_PLAN.unlocatedIds.includes(id);
+}
+
+function routePlanTravelSegmentsForDay(day) {
+  return [...(CURRENT_ROUTE_PLAN.days[Number(day)]?.travelSegments || [])];
 }

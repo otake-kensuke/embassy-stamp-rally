@@ -28,6 +28,7 @@ vm.createContext(context);
   "data.js",
   "day-meta.js",
   "route-plan.js",
+  "candidate-c-migration.js",
   "storage.js",
   "activity-model.js",
   "log-model.js"
@@ -49,6 +50,10 @@ const master = JSON.parse(JSON.stringify(context.master));
 const meta = JSON.parse(JSON.stringify(context.meta));
 const plan = JSON.parse(JSON.stringify(context.plan));
 const planIds = JSON.parse(JSON.stringify(context.planIds));
+if (plan.id !== "candidate-b-prime-2026-10-06") {
+  console.log("Candidate B' production regression: SKIP (archived after Candidate C activation)");
+  process.exit(0);
+}
 const masterById = new Map(master.map((embassy) => [embassy.id, embassy]));
 const acquiredBefore = Object.entries(BACKUP.embassies)
   .filter(([, value]) => value.status === "acquired")

@@ -1,4 +1,4 @@
-# v0.8 GitHub Pages反映前後チェックリスト
+# Candidate C GitHub Pages反映前後チェックリスト
 
 ## 現在の状態
 
@@ -13,6 +13,48 @@ v0.8はWorld Mapを本番実装し、PC RegressionとiPhone standalone Acceptanc
 v0.8 Walk Log Day Hotfixは実装・PC検証を完了し、iPhone standalone確認待ちである。新規記録は`＋記録`を開いたDay画面へ紐付け、保存時の`settings.activeDay`は使用しない。
 
 Candidate B'攻略計画はPC RegressionとiPhone standalone Acceptance全項目を完了し、RELEASE / STABLEとなった。正式157件Masterと保存データは維持し、今後の攻略計画だけを`js/route-plan.js`へ分離している。
+
+Candidate CはPM承認・Production実装・PC検証を完了した。2026年10月9日の23件をDay4実績へ集約し、未取得83件をDay5〜10へ再配置している。GitHub Pages公開、2台のiPhone移行、standalone Acceptanceは未実施であり、まだ`RELEASE / STABLE`ではない。
+
+## Candidate C 公開前
+
+- 夫婦それぞれの端末から最新Backupを別々に書き出す
+- BackupをGitHubへアップロードしない
+- 各Backupが74 / 157、未取得83件であることを確認する
+- 2026年10月9日のactivityが更新前はDay6、同日のWalk Log 4件もDay6であることを確認する
+- 正しい当日追加16件とroute-added event 16件があることを確認する
+- 対象端末の旧Day4にChile誤追加がある場合も、勝手に手修正せず確認済み移行へ委ねる
+- Backupに差異がある場合は公開後の操作を進めず、PMレビューへ戻す
+- Candidate B'公開版へ戻せるGit commit / 配布物と、更新前Backupを保持する
+
+## Candidate C iPhone移行
+
+- PMの公開承認後にGitHub Pagesを更新する
+- 1台ずつ開き、`Candidate Cへ移行しました。新しいバックアップを作成してください。`を確認する
+- 競合停止messageが出た場合は操作を続けず、最新Backupを再確認する
+- Homeが74 / 157である
+- Day4が23 / 23で、2026年10月9日実績・距離未計測と表示される
+- Day4の基本23件と当日追加16件が重複表示されない
+- Review / Timelineの2026年10月9日がDay4だけになる
+- 同日のWalk Log 4件の本文、ID、時刻が維持される
+- 対象端末でChileが二重計上されず、取得状態と取得日時が維持される
+- 移行後すぐに新しいBackupを書き出し、更新前Backupとは別名で保管する
+
+## Candidate C ルート確認
+
+- Day5〜10の件数が17 / 23 / 9 / 18 / 10 / 6である
+- Day5が池ノ上駅 → 恵比寿駅、約11.6kmである
+- Day6が六本木一丁目駅 → 恵比寿駅、23件・高負荷コースである
+- Day7が六本木一丁目駅 → 新富町駅、9件でベナンを含まない
+- Day8が品川駅 → 品川駅、18件でザンビアを含む
+- Day9が祐天寺駅 → 都立大学駅、10件である
+- Day10が用賀駅 → 田園調布駅 → 後楽園駅、6件で最後にベナンを含む
+- Day10 Routeで徒歩1、鉄道、徒歩2のGoogle Maps導線が分かれている
+- 鉄道時間が徒歩時間へ含まれていない
+- Turkmenistanが元麻布2-8-4と未確認注記を表示する
+- AfghanistanがDay4取得済みかつ`地図要確認`を維持する
+- NEXT / 次 / その次、manual NEXT、検索、記録、World Map、Backup / Restoreが正常である
+- 320〜430px相当の縦画面で横スクロールと文字・ボタンの重なりがない
 
 ## 更新前
 
@@ -123,9 +165,11 @@ Status: **PASS / RELEASE / STABLE**
 
 ## 既知Issue
 
+- Candidate CはGitHub Pages公開、端末移行、iPhone standalone Acceptance待ち
 - Walk Log Day HotfixはiPhone standalone確認待ち
 - 既存Walk LogのDay変更UIはFuture Candidate / PM判断
 - Guide Comment / 吹き出しの人物との縦間隔、文字サイズ、日本語改行はv0.8.1 Candidate
 - World Map世界タブのchip一覧は、取得数増加時に地域別group / 折りたたみを将来検討する
-- Day10 アフガニスタンはPrimary Source上のMap欄が `要確認`
+- AfghanistanはPrimary Source上でMap欄が`要確認`
+- Turkmenistanは補正住所を実装済みだが、公式ラリーのスタンプ取得地点は未確認
 - `prototype/` と `release/` の役割整理は別途PM判断
